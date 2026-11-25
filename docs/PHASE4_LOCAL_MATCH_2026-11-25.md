@@ -53,3 +53,7 @@ Abrir el RBXLX actualizado en Studio y probar controles, aspecto, cámara, legib
 La política discreta conserva las limitaciones de la referencia a velocidades artificiales elevadas: no se atribuye a las barreras una garantía antitúnel general. El comportamiento local de pausas, permisos de saque y final del partido es política explícita del proyecto, sin certificación del cliente oficial.
 
 El lugar actualizado está en `Roblox Hexball.rbxlx`. La versión previa a fase 4 se conserva en `archive/Roblox-Hexball-before-phase4.rbxlx`.
+
+## Revisión de cierre posterior
+
+El estado actualizado y las correcciones posteriores están en [PHASE4_CLOSURE_2026-11-25.md](PHASE4_CLOSURE_2026-11-25.md). Esa revisión sí ejecuta cliente y servidor juntos con adaptadores locales y amplía las comprobaciones de determinismo. Las limitaciones nativas de Roblox se mantienen.

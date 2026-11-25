@@ -14,6 +14,7 @@ local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
 local MatchRules2D = require(script.Parent:WaitForChild("MatchRules2D"))
 local LocalMatch2D = require(script.Parent:WaitForChild("LocalMatch2D"))
 local localMatch
+local matchId=0
 local LabRegression = require(script.Parent:WaitForChild("LabRegression"))
 local debugState = script.Parent:WaitForChild("DebugState")
 
@@ -206,6 +207,7 @@ local function newState(pairEnabled,crowdEnabled,legacyPhysicsEnabled,startWithK
     crowdMode=crowdEnabled==true
     legacyMode=legacyPhysicsEnabled==true
     state=new
+    matchId+=1
     localMatch=new.coreWorld and LocalMatch2D.attach(new,{startWithKickoff=startWithKickoff==true}) or nil
     matchState=localMatch and localMatch.match or MatchRules2D.newMatch()
     currentInputs={}
@@ -322,11 +324,12 @@ local function snapshot()
     end
     return {
         tick=state.tick, gameTime=state.tick/Physics2D.Config.tickRate,
+        matchId=matchId,
         round=localMatch and localMatch.round or 0,elapsedMatchTicks=localMatch and localMatch.elapsedTicks or 0,winner=matchState.winner,
         matchPhase=matchState.phase,pauseTicksRemaining=matchState.remainingTicks,kickoffTeam=matchState.kickoffTeam,lastGoal=matchState.lastGoal,lastTouch=matchState.lastTouch,
         player={x=p.x,y=p.y,vx=p.vx,vy=p.vy,speed=speed(p),radius=p.radius},
         predictionParams={acceleration=p.acceleration or Physics2D.Config.playerAcceleration,kickAcceleration=p.kickAcceleration or Physics2D.Config.playerKickAcceleration,damping=p.damping or Physics2D.Config.playerDamping,kickDamping=p.kickDamping or Physics2D.Config.playerDamping,maxSpeed=p.maxSpeed},
-        player2={x=p2.x,y=p2.y,vx=p2.vx,vy=p2.vy,speed=speed(p2)},
+        player2={x=p2.x,y=p2.y,vx=p2.vx,vy=p2.vy,speed=speed(p2),radius=p2.radius},
         players=playerSnapshots,playerCount=#playerSnapshots,redCount=redCount,blueCount=blueCount,
         ball={x=b.x,y=b.y,vx=b.vx,vy=b.vy,speed=speed(b),radius=b.radius,collisionGroup=b.collisionGroup,collisionMask=b.collisionMask},
         score={red=state.score.red,blue=state.score.blue},

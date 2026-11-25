@@ -41,7 +41,7 @@ local function waitPause(m)
 end
 local function snapshot(m)
     local row={m.state.tick,m.state.score.red,m.state.score.blue,m.match.phase,m.match.remainingTicks,m.match.kickoffTeam or "",m.round,m.elapsedTicks}
-    for _,d in ipairs(m.state.coreWorld.discs) do table.insert(row,{d.x,d.y,d.vx,d.vy,d.collisionMask}) end
+    for _,d in ipairs(m.state.coreWorld.discs) do table.insert(row,{d.x,d.y,d.vx,d.vy,d.collisionMask,d.kickHeld==true,d.kickArmed==true,d.kickCooldown or 0}) end
     return json(row)
 end
 
@@ -127,11 +127,11 @@ test("goal_line_edges_reverse_and_no_crossing",function()
     equal(crossing(-369,0,-371,0).team,"blue")
 end)
 test("invalid_configuration_fails_before_match_runs",function()
-    for _,options in ipairs({{goalPauseTicks=-1},{kickoffTicks=0/0},{scoreLimit=1.5},{startingTeam="green"}}) do local ok=pcall(function()make(options)end);assert(not ok) end
+    for _,options in ipairs({{goalPauseTicks=-1},{goalPauseTicks=0},{kickoffTicks=0},{kickoffTicks=0/0},{scoreLimit=1.5},{startingTeam="green"}}) do local ok=pcall(function()make(options)end);assert(not ok) end
 end)
 test("5v5_session_12000_ticks_is_finite_and_deterministic",function()
     local function run()
-        local m=make({goalPauseTicks=3,kickoffTicks=2});local goals=0
+        local m=make({goalPauseTicks=3,kickoffTicks=2});local goals=0;local trace={}
         for t=1,12000 do
             if t%500==0 and m.match.phase=="playing" then
                 local b=m.state.ball;b.x,b.y,b.vx,b.vy=t%1000==0 and 369 or -369,0,t%1000==0 and 4 or -4,0
@@ -140,10 +140,15 @@ test("5v5_session_12000_ticks_is_finite_and_deterministic",function()
             for slot=1,10 do inputs[slot]={x=((math.floor(t/31)+slot)%3)-1,y=((math.floor(t/47)+slot*2)%3)-1,kick=t%19<4} end
             local r=m:step(inputs)
             for _,e in ipairs(r.ruleEvents) do if e.kind=="goalScored" then goals+=1 end end
-            for _,d in ipairs(m.state.coreWorld.discs) do assert(d.x==d.x and math.abs(d.x)<1e6 and d.vx==d.vx and math.abs(d.vx)<1e6) end
+            table.insert(trace,snapshot(m))
+            local eventRows={}
+            for _,e in ipairs(r.physicsEvents) do table.insert(eventRows,{e.kind,e.tick,tostring(e.discA or e.discId or e.playerId or ""),tostring(e.discB or e.targetId or e.geometryId or "")}) end
+            for _,e in ipairs(r.ruleEvents) do table.insert(eventRows,{e.kind,e.tick,e.team or e.teamToKick or ""}) end
+            table.insert(trace,json(eventRows))
+            for _,d in ipairs(m.state.coreWorld.discs) do assert(d.x==d.x and math.abs(d.x)<1e6 and d.y==d.y and math.abs(d.y)<1e6 and d.vx==d.vx and math.abs(d.vx)<1e6 and d.vy==d.vy and math.abs(d.vy)<1e6) end
         end
         equal(goals,m.state.score.red+m.state.score.blue);assert(goals>=20);equal(m.state.tick,12000)
-        return snapshot(m)
+        return table.concat(trace,"\n")
     end
     equal(run(),run())
 end)
@@ -197,5 +202,13 @@ test("visual_coordinate_mapping_matches_logical_scale_and_y_direction",function(
     equal(p.x,185);equal(p.y,11);equal(p.z,-32)
     local origin=StadiumRender2D.toWorld(0,0,Profile.Presentation)
     equal(origin.x,0);equal(origin.z,0)
+end)
+test("camera_fits_physical_bounds_in_wide_square_and_tall_viewports",function()
+    for _,viewport in ipairs({{1920,1080},{1024,768},{900,900},{600,1000}}) do
+        local y=StadiumRender2D.cameraHeight(Profile.Presentation,Profile.Bounds,35,viewport[1],viewport[2])
+        local vertical=(y-Profile.Presentation.floorY)*math.tan(math.rad(35)*.5)
+        local horizontal=vertical*viewport[1]/viewport[2]
+        assert(vertical>=110-1e-9 and horizontal>=220-1e-9)
+    end
 end)
 emit(json(results))

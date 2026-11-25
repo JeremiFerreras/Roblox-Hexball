@@ -20,4 +20,12 @@ function Render.toWorld(x,y,presentation)
     local p=presentation
     return {x=p.worldOrigin.x+(x-p.logicalOrigin.x)*p.studsPerUnit,y=p.floorY,z=p.worldOrigin.z+(p.invertLogicalY and -1 or 1)*(y-p.logicalOrigin.y)*p.studsPerUnit}
 end
+function Render.cameraHeight(presentation,bounds,fovDegrees,width,height)
+    assert(fovDegrees>0 and fovDegrees<180,"invalid field of view")
+    local aspect=(width and height and width>0 and height>0) and width/height or 16/9
+    local halfWidth=(bounds.maxX-bounds.minX)*presentation.studsPerUnit*.5+10
+    local halfHeight=(bounds.maxY-bounds.minY)*presentation.studsPerUnit*.5+10
+    local tangent=math.tan(math.rad(fovDegrees)*.5)
+    return presentation.floorY+math.max(halfHeight/tangent,halfWidth/(aspect*tangent))
+end
 return Render

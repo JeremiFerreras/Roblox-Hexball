@@ -26,7 +26,7 @@ local playerVisuals={[1]=playerDisc,[2]=playerDisc2}
 for playerId=3,10 do
     local visual=Instance.new("Part")
     visual.Name="PlayerDisc"..playerId
-    visual.Shape=Enum.PartType.Ball
+    visual.Shape=Enum.PartType.Cylinder
     visual.Size=playerDisc.Size
     visual.Anchored=true
     visual.CanCollide=false
@@ -39,7 +39,7 @@ for playerId=3,10 do
 end
 local predictionGhost=Instance.new("Part")
 predictionGhost.Name="PredictionGhost"
-predictionGhost.Shape=Enum.PartType.Ball
+predictionGhost.Shape=Enum.PartType.Cylinder
 predictionGhost.Size=playerDisc.Size
 predictionGhost.Anchored=true
 predictionGhost.CanCollide=false
@@ -58,6 +58,12 @@ local SCALE=Presentation.studsPerUnit
 local function toWorld(logicalX,logicalY)
     local p=StadiumRender2D.toWorld(logicalX,logicalY,Presentation)
     return Vector3.new(p.x,p.y,p.z)
+end
+local function drawDisc(part,position,radius)
+    local diameter=2*radius*SCALE
+    part.Shape=Enum.PartType.Cylinder
+    part.Size=Vector3.new(1,diameter,diameter)
+    part.CFrame=CFrame.new(position)*CFrame.Angles(0,0,math.pi/2)
 end
 -- Draw the same segment/arc/post coordinates used by the discrete solver.
 local geometryFolder=Instance.new("Folder")
@@ -96,8 +102,18 @@ for _,post in ipairs(ClassicReference230.posts) do
     table.insert(geometryVisuals,{part=part,group=32})
 end
 camera.CameraType=Enum.CameraType.Scriptable
-camera.CFrame=CFrame.new(0,340,0)*CFrame.Angles(-math.pi/2,0,0)
 camera.FieldOfView=35
+local viewportWidth,viewportHeight
+local function fitCamera()
+    local viewport=camera.ViewportSize
+    local width,height=viewport and viewport.X or 0,viewport and viewport.Y or 0
+    if width~=viewportWidth or height~=viewportHeight then
+        viewportWidth,viewportHeight=width,height
+        local y=StadiumRender2D.cameraHeight(Presentation,StadiumProfile2D.Bounds,camera.FieldOfView,width,height)
+        camera.CFrame=CFrame.new(Presentation.worldOrigin.x,y,Presentation.worldOrigin.z)*CFrame.Angles(-math.pi/2,0,0)
+    end
+end
+fitCamera()
 
 local gui=Instance.new("ScreenGui")
 gui.Name="HaxballLabDebug"
@@ -147,7 +163,7 @@ local playArea=StadiumProfile2D.PlayArea
 local goals=StadiumProfile2D.Goals
 local activePhysics=StadiumProfile2D.PhysicsBaseline.active
 local replayPhysics=StadiumProfile2D.PhysicsBaseline.replayCandidate
-calibrationLabel.Text=string.format("REFERENCE %s | HBS %s\nLogical %dx%d | play area %dx%d | goal opening %d | geometry 6P/14S/4D\nVisual %.2f studs/unit only | player values match independent replay candidate\nBall active vs replay Small: invMass %.2f/%.2f, bounce %.2f/%.2f | official comparison pending",meta.name,string.sub(meta.sourceCommit,1,12),bounds.spanWidth,bounds.spanHeight,playArea.width,playArea.height,goals.openingWidth,SCALE,activePhysics.ball.invMass,replayPhysics.ball.invMass,activePhysics.ball.bounce,replayPhysics.ball.bounce)
+calibrationLabel.Text=string.format("CLASSIC | physics/presentation reference Node-Haxball 2.3.0\nLogical %dx%d | goal opening %d | geometry %dP/%dS/%dV/%d posts\nVisual %.2f studs/unit | independent reference; official comparison pending",bounds.spanWidth,bounds.spanHeight,goals.openingWidth,#ClassicReference230.planes,#ClassicReference230.segments,#ClassicReference230.vertices,#ClassicReference230.posts,SCALE)
 calibrationLabel.Parent=gui
 
 local function makeButton(name,text,x,width,y)
@@ -224,7 +240,7 @@ local function readAction(action,fallback)
     return fallback
 end
 snapshotRemote.OnClientEvent:Connect(function(s)
-    local reset=latest and (s.round~=latest.round or s.tick<latest.tick)
+    local reset=latest and (s.matchId~=latest.matchId or s.round~=latest.round or s.tick<latest.tick)
     previous,latest=reset and s or latest,s
     if reset then
         -- Re-send held movement after a reset; drop delayed controls from the old round.
@@ -246,6 +262,7 @@ local function renderLine(part,a,b,color,visible)
 end
 
 RunService.RenderStepped:Connect(function(dt)
+    fitCamera()
     snapshotAge+=dt
     local move=readAction(moveAction,Vector2.zero)
     if typeof(move)~="Vector2" then move=Vector2.zero end
@@ -278,7 +295,7 @@ RunService.RenderStepped:Connect(function(dt)
         predictedContact=PredictionLab2D.firstContact(predictedState.path,latest.player.radius or 15,targets)
         local lead=math.sqrt((predictedState.x-latest.player.x)^2+(predictedState.y-latest.player.y)^2)
         local forecast=predictedContact and string.format("%s %s in %d ticks",predictedContact.kind=="ball" and "BALL" or "PLAYER",tostring(predictedContact.targetId),predictedContact.tick) or "no predicted contact"
-        predictionGhost.Position=toWorld(predictedState.x,predictedState.y)
+        drawDisc(predictionGhost,toWorld(predictedState.x,predictedState.y),latest.player.radius or 15)
         predictionGhost.Transparency=0.38
         predictionLabel.Text=string.format("SIMULATED INPUT DELAY %d ms | horizon %d ticks\nGhost lead %.2f units | ball gap %.2f\nForecast: %s | server touch now: %s",syntheticInputDelayMs,predictionTicks,lead,latest.separation,forecast,tostring(latest.touchingBall))
     else
@@ -294,9 +311,9 @@ RunService.RenderStepped:Connect(function(dt)
     local p1=toWorld(lerp("player","x"),lerp("player","y"))
     local p2=toWorld(lerp("player2","x"),lerp("player2","y"))
     local ball=toWorld(lerp("ball","x"),lerp("ball","y"))
-    ballDisc.Position=ball
-    playerDisc.Position=p1
-    playerDisc2.Position=p2
+    drawDisc(ballDisc,ball,latest.ball.radius or 10)
+    drawDisc(playerDisc,p1,latest.player.radius or 15)
+    drawDisc(playerDisc2,p2,latest.player2.radius or 15)
     local extraDiscMode=latest.pairMode or latest.crowdMode
     if latest.players and #latest.players>0 then
         for slot,disc in ipairs(latest.players) do
@@ -305,7 +322,7 @@ RunService.RenderStepped:Connect(function(dt)
             local py=previousDisc and (previousDisc.y+(disc.y-previousDisc.y)*alpha) or disc.y
             local visual=playerVisuals[slot]
             if visual then
-                visual.Position=toWorld(px,py)
+                drawDisc(visual,toWorld(px,py),disc.radius or 15)
                 visual.Transparency=0
                 visual.Color=disc.team=="red" and Color3.fromRGB(238,90,80) or Color3.fromRGB(75,155,255)
             end

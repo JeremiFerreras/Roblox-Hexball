@@ -93,5 +93,10 @@
     "visual_coordinate_mapping_matches_logical_scale_and_y_direction",
     true,
     "PASS"
+  ],
+  [
+    "camera_fits_physical_bounds_in_wide_square_and_tall_viewports",
+    true,
+    "PASS"
   ]
 ]

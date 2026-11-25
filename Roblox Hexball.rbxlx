@@ -116,14 +116,14 @@ zNLfaoZA///+//PAj5CH</BinaryString><SharedString name="Materials">SpZ11y+qjCSXFt
 						<X>0</X><Y>0</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><float name="Reflectance">0</float><float name="RightParamA">-0.5</float><float name="RightParamB">0.5</float><token name="RightSurface">0</token><token name="RightSurfaceInput">0</token><int name="RootPriority">0</int><Vector3 name="RotVelocity">
 						<X>0</X><Y>0</Y><Z>0</Z></Vector3><float name="TopParamA">-0.5</float><float name="TopParamB">0.5</float><token name="TopSurface">0</token><token name="TopSurfaceInput">0</token><float name="Transparency">0</float><Vector3 name="Velocity">
 						<X>0</X><Y>0</Y><Z>0</Z></Vector3><Vector3 name="size">
-						<X>7.5</X><Y>1</Y><Z>7.5</Z></Vector3><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">PlayerDisc</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009b0</UniqueId></Properties></Item><Item class="Part" referent="RBXD55AEEA765E847589E0B7BDD99A1E2E1"><Properties>
+						<X>1</X><Y>15</Y><Z>15</Z></Vector3><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">PlayerDisc</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009b0</UniqueId></Properties></Item><Item class="Part" referent="RBXD55AEEA765E847589E0B7BDD99A1E2E1"><Properties>
 					<token name="shape">2</token><token name="formFactorRaw">1</token><bool name="Anchored">true</bool><bool name="AudioCanCollide">true</bool><float name="BackParamA">-0.5</float><float name="BackParamB">0.5</float><token name="BackSurface">0</token><token name="BackSurfaceInput">0</token><float name="BottomParamA">-0.5</float><float name="BottomParamB">0.5</float><token name="BottomSurface">0</token><token name="BottomSurfaceInput">0</token><CoordinateFrame name="CFrame">
 						<X>0</X><Y>11</Y><Z>0</Z><R00>-4.37113883e-08</R00><R01>-1</R01><R02>0</R02><R10>1</R10><R11>-4.37113883e-08</R11><R12>-0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><bool name="CanCollide">false</bool><bool name="CanQuery">false</bool><bool name="CanTouch">false</bool><bool name="CastShadow">true</bool><string name="CollisionGroup">Default</string><int name="CollisionGroupId">0</int><Color3uint8 name="Color3uint8">4294638330</Color3uint8><PhysicalProperties name="CustomPhysicalProperties">
 						<CustomPhysics>false</CustomPhysics></PhysicalProperties><bool name="EnableFluidForces">true</bool><float name="FrontParamA">-0.5</float><float name="FrontParamB">0.5</float><token name="FrontSurface">0</token><token name="FrontSurfaceInput">0</token><float name="LeftParamA">-0.5</float><float name="LeftParamB">0.5</float><token name="LeftSurface">0</token><token name="LeftSurfaceInput">0</token><bool name="Locked">false</bool><bool name="Massless">false</bool><token name="Material">272</token><string name="MaterialVariantSerialized" /><CoordinateFrame name="PivotOffset">
 						<X>0</X><Y>0</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><float name="Reflectance">0</float><float name="RightParamA">-0.5</float><float name="RightParamB">0.5</float><token name="RightSurface">0</token><token name="RightSurfaceInput">0</token><int name="RootPriority">0</int><Vector3 name="RotVelocity">
 						<X>0</X><Y>0</Y><Z>0</Z></Vector3><float name="TopParamA">-0.5</float><float name="TopParamB">0.5</float><token name="TopSurface">0</token><token name="TopSurfaceInput">0</token><float name="Transparency">0</float><Vector3 name="Velocity">
 						<X>0</X><Y>0</Y><Z>0</Z></Vector3><Vector3 name="size">
-						<X>5</X><Y>1</Y><Z>5</Z></Vector3><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">BallDisc</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009b1</UniqueId></Properties></Item><Item class="Part" referent="RBXAEBD0679664245A88498C5600D108603"><Properties>
+						<X>1</X><Y>10</Y><Z>10</Z></Vector3><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">BallDisc</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009b1</UniqueId></Properties></Item><Item class="Part" referent="RBXAEBD0679664245A88498C5600D108603"><Properties>
 					<token name="shape">1</token><token name="formFactorRaw">1</token><bool name="Anchored">true</bool><bool name="AudioCanCollide">true</bool><float name="BackParamA">-0.5</float><float name="BackParamB">0.5</float><token name="BackSurface">0</token><token name="BackSurfaceInput">0</token><float name="BottomParamA">-0.5</float><float name="BottomParamB">0.5</float><token name="BottomSurface">4</token><token name="BottomSurfaceInput">0</token><CoordinateFrame name="CFrame">
 						<X>0</X><Y>0</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><bool name="CanCollide">false</bool><bool name="CanQuery">false</bool><bool name="CanTouch">false</bool><bool name="CastShadow">true</bool><string name="CollisionGroup">Default</string><int name="CollisionGroupId">0</int><Color3uint8 name="Color3uint8">4294958150</Color3uint8><PhysicalProperties name="CustomPhysicalProperties">
 						<CustomPhysics>false</CustomPhysics></PhysicalProperties><bool name="EnableFluidForces">true</bool><float name="FrontParamA">-0.5</float><float name="FrontParamB">0.5</float><token name="FrontSurface">0</token><token name="FrontSurfaceInput">0</token><float name="LeftParamA">-0.5</float><float name="LeftParamB">0.5</float><token name="LeftSurface">0</token><token name="LeftSurfaceInput">0</token><bool name="Locked">false</bool><bool name="Massless">false</bool><token name="Material">288</token><string name="MaterialVariantSerialized" /><CoordinateFrame name="PivotOffset">
@@ -137,7 +137,7 @@ zNLfaoZA///+//PAj5CH</BinaryString><SharedString name="Materials">SpZ11y+qjCSXFt
 						<X>0</X><Y>0</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><float name="Reflectance">0</float><float name="RightParamA">-0.5</float><float name="RightParamB">0.5</float><token name="RightSurface">0</token><token name="RightSurfaceInput">0</token><int name="RootPriority">0</int><Vector3 name="RotVelocity">
 						<X>0</X><Y>0</Y><Z>0</Z></Vector3><float name="TopParamA">-0.5</float><float name="TopParamB">0.5</float><token name="TopSurface">3</token><token name="TopSurfaceInput">0</token><float name="Transparency">1</float><Vector3 name="Velocity">
 						<X>0</X><Y>0</Y><Z>0</Z></Vector3><Vector3 name="size">
-						<X>7.5</X><Y>1</Y><Z>7.5</Z></Vector3><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">PlayerDisc2</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e761600001435</UniqueId></Properties></Item><Item class="Part" referent="RBX855C86EBE2C447619E00AA44F632D680"><Properties>
+						<X>1</X><Y>15</Y><Z>15</Z></Vector3><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">PlayerDisc2</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e761600001435</UniqueId></Properties></Item><Item class="Part" referent="RBX855C86EBE2C447619E00AA44F632D680"><Properties>
 					<token name="shape">1</token><token name="formFactorRaw">1</token><bool name="Anchored">true</bool><bool name="AudioCanCollide">true</bool><float name="BackParamA">-0.5</float><float name="BackParamB">0.5</float><token name="BackSurface">0</token><token name="BackSurfaceInput">0</token><float name="BottomParamA">-0.5</float><float name="BottomParamB">0.5</float><token name="BottomSurface">4</token><token name="BottomSurfaceInput">0</token><CoordinateFrame name="CFrame">
 						<X>0</X><Y>0</Y><Z>0</Z><R00>1</R00><R01>0</R01><R02>0</R02><R10>0</R10><R11>1</R11><R12>0</R12><R20>0</R20><R21>0</R21><R22>1</R22></CoordinateFrame><bool name="CanCollide">false</bool><bool name="CanQuery">false</bool><bool name="CanTouch">false</bool><bool name="CastShadow">true</bool><string name="CollisionGroup">Default</string><int name="CollisionGroupId">0</int><Color3uint8 name="Color3uint8">4282843010</Color3uint8><PhysicalProperties name="CustomPhysicalProperties">
 						<CustomPhysics>false</CustomPhysics></PhysicalProperties><bool name="EnableFluidForces">true</bool><float name="FrontParamA">-0.5</float><float name="FrontParamB">0.5</float><token name="FrontSurface">0</token><token name="FrontSurfaceInput">0</token><float name="LeftParamA">-0.5</float><float name="LeftParamB">0.5</float><token name="LeftSurface">0</token><token name="LeftSurfaceInput">0</token><bool name="Locked">false</bool><bool name="Massless">false</bool><token name="Material">288</token><string name="MaterialVariantSerialized" /><CoordinateFrame name="PivotOffset">
@@ -299,7 +299,7 @@ local playerVisuals={[1]=playerDisc,[2]=playerDisc2}
 for playerId=3,10 do
     local visual=Instance.new("Part")
     visual.Name="PlayerDisc"..playerId
-    visual.Shape=Enum.PartType.Ball
+    visual.Shape=Enum.PartType.Cylinder
     visual.Size=playerDisc.Size
     visual.Anchored=true
     visual.CanCollide=false
@@ -312,7 +312,7 @@ for playerId=3,10 do
 end
 local predictionGhost=Instance.new("Part")
 predictionGhost.Name="PredictionGhost"
-predictionGhost.Shape=Enum.PartType.Ball
+predictionGhost.Shape=Enum.PartType.Cylinder
 predictionGhost.Size=playerDisc.Size
 predictionGhost.Anchored=true
 predictionGhost.CanCollide=false
@@ -331,6 +331,12 @@ local SCALE=Presentation.studsPerUnit
 local function toWorld(logicalX,logicalY)
     local p=StadiumRender2D.toWorld(logicalX,logicalY,Presentation)
     return Vector3.new(p.x,p.y,p.z)
+end
+local function drawDisc(part,position,radius)
+    local diameter=2*radius*SCALE
+    part.Shape=Enum.PartType.Cylinder
+    part.Size=Vector3.new(1,diameter,diameter)
+    part.CFrame=CFrame.new(position)*CFrame.Angles(0,0,math.pi/2)
 end
 -- Draw the same segment/arc/post coordinates used by the discrete solver.
 local geometryFolder=Instance.new("Folder")
@@ -369,8 +375,18 @@ for _,post in ipairs(ClassicReference230.posts) do
     table.insert(geometryVisuals,{part=part,group=32})
 end
 camera.CameraType=Enum.CameraType.Scriptable
-camera.CFrame=CFrame.new(0,340,0)*CFrame.Angles(-math.pi/2,0,0)
 camera.FieldOfView=35
+local viewportWidth,viewportHeight
+local function fitCamera()
+    local viewport=camera.ViewportSize
+    local width,height=viewport and viewport.X or 0,viewport and viewport.Y or 0
+    if width~=viewportWidth or height~=viewportHeight then
+        viewportWidth,viewportHeight=width,height
+        local y=StadiumRender2D.cameraHeight(Presentation,StadiumProfile2D.Bounds,camera.FieldOfView,width,height)
+        camera.CFrame=CFrame.new(Presentation.worldOrigin.x,y,Presentation.worldOrigin.z)*CFrame.Angles(-math.pi/2,0,0)
+    end
+end
+fitCamera()
 
 local gui=Instance.new("ScreenGui")
 gui.Name="HaxballLabDebug"
@@ -420,7 +436,7 @@ local playArea=StadiumProfile2D.PlayArea
 local goals=StadiumProfile2D.Goals
 local activePhysics=StadiumProfile2D.PhysicsBaseline.active
 local replayPhysics=StadiumProfile2D.PhysicsBaseline.replayCandidate
-calibrationLabel.Text=string.format("REFERENCE %s | HBS %s\nLogical %dx%d | play area %dx%d | goal opening %d | geometry 6P/14S/4D\nVisual %.2f studs/unit only | player values match independent replay candidate\nBall active vs replay Small: invMass %.2f/%.2f, bounce %.2f/%.2f | official comparison pending",meta.name,string.sub(meta.sourceCommit,1,12),bounds.spanWidth,bounds.spanHeight,playArea.width,playArea.height,goals.openingWidth,SCALE,activePhysics.ball.invMass,replayPhysics.ball.invMass,activePhysics.ball.bounce,replayPhysics.ball.bounce)
+calibrationLabel.Text=string.format("CLASSIC | physics/presentation reference Node-Haxball 2.3.0\nLogical %dx%d | goal opening %d | geometry %dP/%dS/%dV/%d posts\nVisual %.2f studs/unit | independent reference; official comparison pending",bounds.spanWidth,bounds.spanHeight,goals.openingWidth,#ClassicReference230.planes,#ClassicReference230.segments,#ClassicReference230.vertices,#ClassicReference230.posts,SCALE)
 calibrationLabel.Parent=gui
 
 local function makeButton(name,text,x,width,y)
@@ -497,7 +513,7 @@ local function readAction(action,fallback)
     return fallback
 end
 snapshotRemote.OnClientEvent:Connect(function(s)
-    local reset=latest and (s.round~=latest.round or s.tick&lt;latest.tick)
+    local reset=latest and (s.matchId~=latest.matchId or s.round~=latest.round or s.tick&lt;latest.tick)
     previous,latest=reset and s or latest,s
     if reset then
         -- Re-send held movement after a reset; drop delayed controls from the old round.
@@ -519,6 +535,7 @@ local function renderLine(part,a,b,color,visible)
 end
 
 RunService.RenderStepped:Connect(function(dt)
+    fitCamera()
     snapshotAge+=dt
     local move=readAction(moveAction,Vector2.zero)
     if typeof(move)~="Vector2" then move=Vector2.zero end
@@ -551,7 +568,7 @@ RunService.RenderStepped:Connect(function(dt)
         predictedContact=PredictionLab2D.firstContact(predictedState.path,latest.player.radius or 15,targets)
         local lead=math.sqrt((predictedState.x-latest.player.x)^2+(predictedState.y-latest.player.y)^2)
         local forecast=predictedContact and string.format("%s %s in %d ticks",predictedContact.kind=="ball" and "BALL" or "PLAYER",tostring(predictedContact.targetId),predictedContact.tick) or "no predicted contact"
-        predictionGhost.Position=toWorld(predictedState.x,predictedState.y)
+        drawDisc(predictionGhost,toWorld(predictedState.x,predictedState.y),latest.player.radius or 15)
         predictionGhost.Transparency=0.38
         predictionLabel.Text=string.format("SIMULATED INPUT DELAY %d ms | horizon %d ticks\nGhost lead %.2f units | ball gap %.2f\nForecast: %s | server touch now: %s",syntheticInputDelayMs,predictionTicks,lead,latest.separation,forecast,tostring(latest.touchingBall))
     else
@@ -567,9 +584,9 @@ RunService.RenderStepped:Connect(function(dt)
     local p1=toWorld(lerp("player","x"),lerp("player","y"))
     local p2=toWorld(lerp("player2","x"),lerp("player2","y"))
     local ball=toWorld(lerp("ball","x"),lerp("ball","y"))
-    ballDisc.Position=ball
-    playerDisc.Position=p1
-    playerDisc2.Position=p2
+    drawDisc(ballDisc,ball,latest.ball.radius or 10)
+    drawDisc(playerDisc,p1,latest.player.radius or 15)
+    drawDisc(playerDisc2,p2,latest.player2.radius or 15)
     local extraDiscMode=latest.pairMode or latest.crowdMode
     if latest.players and #latest.players&gt;0 then
         for slot,disc in ipairs(latest.players) do
@@ -578,7 +595,7 @@ RunService.RenderStepped:Connect(function(dt)
             local py=previousDisc and (previousDisc.y+(disc.y-previousDisc.y)*alpha) or disc.y
             local visual=playerVisuals[slot]
             if visual then
-                visual.Position=toWorld(px,py)
+                drawDisc(visual,toWorld(px,py),disc.radius or 15)
                 visual.Transparency=0
                 visual.Color=disc.team=="red" and Color3.fromRGB(238,90,80) or Color3.fromRGB(75,155,255)
             end
@@ -923,6 +940,14 @@ end
 function Render.toWorld(x,y,presentation)
     local p=presentation
     return {x=p.worldOrigin.x+(x-p.logicalOrigin.x)*p.studsPerUnit,y=p.floorY,z=p.worldOrigin.z+(p.invertLogicalY and -1 or 1)*(y-p.logicalOrigin.y)*p.studsPerUnit}
+end
+function Render.cameraHeight(presentation,bounds,fovDegrees,width,height)
+    assert(fovDegrees&gt;0 and fovDegrees&lt;180,"invalid field of view")
+    local aspect=(width and height and width&gt;0 and height&gt;0) and width/height or 16/9
+    local halfWidth=(bounds.maxX-bounds.minX)*presentation.studsPerUnit*.5+10
+    local halfHeight=(bounds.maxY-bounds.minY)*presentation.studsPerUnit*.5+10
+    local tangent=math.tan(math.rad(fovDegrees)*.5)
+    return presentation.floorY+math.max(halfHeight/tangent,halfWidth/(aspect*tangent))
 end
 return Render
 </ProtectedString></Properties></Item></Item><Item class="Folder" referent="RBX992D247A70304E5491C3ACB58F6F0A49"><Properties>
@@ -1378,6 +1403,7 @@ local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
 local MatchRules2D = require(script.Parent:WaitForChild("MatchRules2D"))
 local LocalMatch2D = require(script.Parent:WaitForChild("LocalMatch2D"))
 local localMatch
+local matchId=0
 local LabRegression = require(script.Parent:WaitForChild("LabRegression"))
 local debugState = script.Parent:WaitForChild("DebugState")
 
@@ -1570,6 +1596,7 @@ local function newState(pairEnabled,crowdEnabled,legacyPhysicsEnabled,startWithK
     crowdMode=crowdEnabled==true
     legacyMode=legacyPhysicsEnabled==true
     state=new
+    matchId+=1
     localMatch=new.coreWorld and LocalMatch2D.attach(new,{startWithKickoff=startWithKickoff==true}) or nil
     matchState=localMatch and localMatch.match or MatchRules2D.newMatch()
     currentInputs={}
@@ -1686,11 +1713,12 @@ local function snapshot()
     end
     return {
         tick=state.tick, gameTime=state.tick/Physics2D.Config.tickRate,
+        matchId=matchId,
         round=localMatch and localMatch.round or 0,elapsedMatchTicks=localMatch and localMatch.elapsedTicks or 0,winner=matchState.winner,
         matchPhase=matchState.phase,pauseTicksRemaining=matchState.remainingTicks,kickoffTeam=matchState.kickoffTeam,lastGoal=matchState.lastGoal,lastTouch=matchState.lastTouch,
         player={x=p.x,y=p.y,vx=p.vx,vy=p.vy,speed=speed(p),radius=p.radius},
         predictionParams={acceleration=p.acceleration or Physics2D.Config.playerAcceleration,kickAcceleration=p.kickAcceleration or Physics2D.Config.playerKickAcceleration,damping=p.damping or Physics2D.Config.playerDamping,kickDamping=p.kickDamping or Physics2D.Config.playerDamping,maxSpeed=p.maxSpeed},
-        player2={x=p2.x,y=p2.y,vx=p2.vx,vy=p2.vy,speed=speed(p2)},
+        player2={x=p2.x,y=p2.y,vx=p2.vx,vy=p2.vy,speed=speed(p2),radius=p2.radius},
         players=playerSnapshots,playerCount=#playerSnapshots,redCount=redCount,blueCount=blueCount,
         ball={x=b.x,y=b.y,vx=b.vx,vy=b.vy,speed=speed(b),radius=b.radius,collisionGroup=b.collisionGroup,collisionMask=b.collisionMask},
         score={red=state.score.red,blue=state.score.blue},
@@ -3389,6 +3417,7 @@ function Match.attach(state, options)
     self.goalPauseTicks=duration(options.goalPauseTicks,Rules.GoalPauseTicks)
     self.kickoffTicks=duration(options.kickoffTicks,Rules.KickoffTicks)
     self.scoreLimit=duration(options.scoreLimit,0)
+    assert(self.goalPauseTicks&gt;0 and self.kickoffTicks&gt;0,"pause and kickoff durations must be at least one tick")
     self.startingTeam=options.startingTeam or "red"
     assert(self.startingTeam=="red" or self.startingTeam=="blue", "starting team must be red or blue")
     if options.startWithKickoff~=false then self:restart(self.startingTeam) else self.round=1 end

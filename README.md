@@ -46,3 +46,5 @@ Ver [instrucciones](tests/offline/README.md) e [informe de validación](docs/PHY
 ## Partido local
 
 La fase 4 incorpora un controlador de partido, pruebas de goles y saques y geometría visual compartida. [Informe y comprobaciones pendientes](docs/PHASE4_LOCAL_MATCH_2026-11-25.md).
+
+[Estado de cierre funcional de fase 4](docs/PHASE4_CLOSURE_2026-11-25.md): aprobado en el entorno offline, pendiente de aceptación nativa en Studio.

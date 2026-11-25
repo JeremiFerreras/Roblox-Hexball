@@ -18,5 +18,20 @@
     "debug_snapshot_adapter_remains_operational",
     true,
     "PASS"
+  ],
+  [
+    "invalid_inputs_and_unauthorized_commands_do_not_change_match",
+    true,
+    "PASS"
+  ],
+  [
+    "ten_control_slots_and_extra_spectator_are_assigned_consistently",
+    true,
+    "PASS"
+  ],
+  [
+    "leaving_player_cannot_keep_controlling_reused_slot",
+    true,
+    "PASS"
   ]
 ]

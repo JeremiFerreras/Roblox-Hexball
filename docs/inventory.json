@@ -103,7 +103,7 @@
     },
     {
       "path": "src/ReplicatedStorage/HaxballLab/LabClient/init.server.luau",
-      "sha256": "3a0c358d0276abb33ce08cdd7d2f4190f1258990989e3018fd4a2768eb70a21c",
+      "sha256": "e0bb07677e690a368bf3cbfe8772cf348b9e02de39982c64aa1c571de3b43459",
       "className": "Script"
     },
     {
@@ -118,7 +118,7 @@
     },
     {
       "path": "src/ReplicatedStorage/HaxballLab/StadiumRender2D/init.luau",
-      "sha256": "cb96202f14a89a12761a8d280e2a670fdf30edbae945caef650beca2bd70a27e",
+      "sha256": "5150853a419c5d994f8ac2e17a1de40f17a7a21087319185eeab1b720a90143b",
       "className": "ModuleScript"
     },
     {
@@ -143,12 +143,12 @@
     },
     {
       "path": "src/ServerScriptService/HaxballLab/LabServer/init.server.luau",
-      "sha256": "3ceb7f60d842d0c6430ca2bfb2fbd633ebb97cf5482ddf08e785bfd343c21026",
+      "sha256": "ac08b226bcb768cb9e369166194665dd203937cdfb71bca28e5b3a75c4a8f76d",
       "className": "Script"
     },
     {
       "path": "src/ServerScriptService/HaxballLab/LocalMatch2D/init.luau",
-      "sha256": "49b3ff7d77425b430fd25a625ff2fb02ff1f526a838b76916aaa833241272d21",
+      "sha256": "6363a85118bb6a734260bcf10a57d31b09c891d1a3fe54ef9734ee85385154f9",
       "className": "ModuleScript"
     },
     {

@@ -24,3 +24,7 @@ La referencia es Node-Haxball, una implementación independiente; no es una capt
 ## Partido local (fase 4)
 
 `npm test` también ejecuta `local-match.mjs` (19 pruebas del controlador y geometría), `server-adapter.mjs` (4 comprobaciones del servidor real con servicios simulados) y compila todos los scripts con `compile.mjs`. Los resultados están en `local-match-results.json` y `server-adapter-results.json`. Ver `docs/PHASE4_LOCAL_MATCH_2026-11-25.md`. El módulo numérico compartido vive en ReplicatedStorage; el generador de referencia actualiza esa copia.
+
+## Cierre funcional
+
+`client-adapter.mjs` ejecuta cliente y servidor reales juntos con vectores, propiedades, reloj y señales locales: no renderiza ni emula Roblox completo. La suite incluye 20 pruebas locales, 7 del servidor y 10 del cliente, además de las regresiones físicas. La prueba larga compara estados y eventos por tick. Ver `docs/PHASE4_CLOSURE_2026-11-25.md`.

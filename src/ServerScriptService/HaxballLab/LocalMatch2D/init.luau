@@ -27,6 +27,7 @@ function Match.attach(state, options)
     self.goalPauseTicks=duration(options.goalPauseTicks,Rules.GoalPauseTicks)
     self.kickoffTicks=duration(options.kickoffTicks,Rules.KickoffTicks)
     self.scoreLimit=duration(options.scoreLimit,0)
+    assert(self.goalPauseTicks>0 and self.kickoffTicks>0,"pause and kickoff durations must be at least one tick")
     self.startingTeam=options.startingTeam or "red"
     assert(self.startingTeam=="red" or self.startingTeam=="blue", "starting team must be red or blue")
     if options.startWithKickoff~=false then self:restart(self.startingTeam) else self.round=1 end
