@@ -1,0 +1,19 @@
+{
+  "name": "roblox-hexball-offline-physics",
+  "version": "1.0.0",
+  "description": "Pinned Luau/Node-Haxball differential physics tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "node regression.mjs && node compare.mjs",
+    "export-reference": "node reference.mjs --export"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "luau-web": "1.5.1",
+    "node-haxball": "2.3.0"
+  },
+  "private": true
+}

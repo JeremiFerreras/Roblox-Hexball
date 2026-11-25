@@ -133,10 +133,12 @@
     "ServerScriptService/HaxballLab/LabRegression",
     "ServerScriptService/HaxballLab/PhysicsCore2D",
     "ServerScriptService/HaxballLab/ClassicStadium2D",
-    "ServerScriptService/HaxballLab/MatchRules2D"
+    "ServerScriptService/HaxballLab/MatchRules2D",
+    "ServerScriptService/HaxballLab/ClassicReference230"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,

@@ -1,6 +1,6 @@
 # Roblox Hexball
 
-Proyecto extraído de `Roblox Hexball.rbxlx`. El archivo original se conserva intacto.
+Proyecto extraído de `Roblox Hexball.rbxlx`. La versión previa a los cambios físicos está conservada en `archive/Roblox-Hexball-before-physics.rbxlx`.
 
 ## Estructura editable
 
@@ -37,4 +37,8 @@ Para volver a extraer desde el archivo original (sobrescribe archivos coincident
 python tools/place.py export
 ```
 
-Se han extraído 123 instancias y 12 scripts sin modificar la lógica. La comprobación es estructural; no sustituye ejecutar el juego en Roblox Studio. Los recursos externos se conservan por su ID, no se descargan.
+El proyecto actual contiene 124 instancias y 13 scripts/módulos. La validación y los cambios físicos están documentados en `docs/PHYSICS_OFFLINE_2026-11-25.md`. La comprobación es estructural; no sustituye ejecutar el juego en Roblox Studio. Los recursos externos se conservan por su ID, no se descargan.
+
+## Pruebas físicas fuera de Studio
+
+Ver [instrucciones](tests/offline/README.md) e [informe de validación](docs/PHYSICS_OFFLINE_2026-11-25.md).

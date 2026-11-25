@@ -1,0 +1,1282 @@
+{
+  "oracle": "node-haxball@2.3.0",
+  "runtime": "luau-web@1.5.1",
+  "scope": "isolated engine, not Studio or official client",
+  "cases": [
+    {
+      "name": "horizontal",
+      "ticks": 120,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "diagonal",
+      "ticks": 120,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "reverse",
+      "ticks": 120,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "heldKickMovement",
+      "ticks": 120,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "discImpact",
+      "ticks": 120,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 62.69648217974134,
+        "firstDivergence": 4,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "singleKick",
+      "ticks": 30,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "heldKick",
+      "ticks": 30,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "repeatedKick",
+      "ticks": 30,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "plane_v1",
+      "ticks": 60,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 2.220446049250313e-16,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "plane_v8",
+      "ticks": 60,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 1.9800000000000182,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "plane_v50",
+      "ticks": 60,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 18.181818181819494,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "plane_v500",
+      "ticks": 60,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 242.18750000003456,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_8_55",
+      "ticks": 180,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 109.44994022733539,
+        "firstDivergence": 16,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_-30_45",
+      "ticks": 180,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 138.71503601807606,
+        "firstDivergence": 4,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_40_50",
+      "ticks": 180,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 315.78528403308036,
+        "firstDivergence": 4,
+        "kicks": 0,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_0",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 0.9384386877935071,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_1",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 1.140084224402493,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_2",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 1.3421076584800318,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_3",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 1.5444943074932809,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_4",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 1.747230238086516,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_5",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 1.8355710566171695,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_6",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 2.097958967478405,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_7",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 2.387578503448978,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_8",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 2.5642530041458826,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_9",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 2.7418926157016585,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_10",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 3.0045642947665954,
+        "firstDivergence": 1,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_11",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 46.49434462240096,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_12",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 26.63786341678636,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_13",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 3.033041347549897,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_14",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 113.87036468447849,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_15",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 77.64159069590121,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_16",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 44.37043336307762,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_17",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 3.7050602347070765,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_18",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 56.38726338009573,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_19",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 117.49160399316506,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_20",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 227.35121688733213,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_21",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 19.921536447288723,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_22",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 98.8855160891558,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "seededImpact_23",
+      "ticks": 90,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 176.15804655922494,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_0",
+      "ticks": 600,
+      "oracleKicks": 2,
+      "baseline": {
+        "maxError": 20.451894898956255,
+        "firstDivergence": 202,
+        "kicks": 2,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 2,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_1",
+      "ticks": 600,
+      "oracleKicks": 6,
+      "baseline": {
+        "maxError": 213.33972676065179,
+        "firstDivergence": 16,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 6,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_2",
+      "ticks": 600,
+      "oracleKicks": 5,
+      "baseline": {
+        "maxError": 401.9210924322575,
+        "firstDivergence": 11,
+        "kicks": 2,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 5,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_3",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 131.34812523505494,
+        "firstDivergence": 241,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_4",
+      "ticks": 600,
+      "oracleKicks": 2,
+      "baseline": {
+        "maxError": 121.34888901727865,
+        "firstDivergence": 6,
+        "kicks": 3,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 2,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_5",
+      "ticks": 600,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 87.64542088015054,
+        "firstDivergence": 6,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_6",
+      "ticks": 600,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 90.3605646474953,
+        "firstDivergence": 5,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_7",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 272.9990055346852,
+        "firstDivergence": 4,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_8",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 620.3397136590875,
+        "firstDivergence": 4,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_9",
+      "ticks": 600,
+      "oracleKicks": 3,
+      "baseline": {
+        "maxError": 544.2139083730071,
+        "firstDivergence": 3,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 3,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_10",
+      "ticks": 600,
+      "oracleKicks": 5,
+      "baseline": {
+        "maxError": 159.5190482449092,
+        "firstDivergence": 3,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 5,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_11",
+      "ticks": 600,
+      "oracleKicks": 2,
+      "baseline": {
+        "maxError": 436.49943830875293,
+        "firstDivergence": 3,
+        "kicks": 2,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 2,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_12",
+      "ticks": 600,
+      "oracleKicks": 2,
+      "baseline": {
+        "maxError": 518.7873354158854,
+        "firstDivergence": 3,
+        "kicks": 3,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 2,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_13",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 162.69955154160493,
+        "firstDivergence": 3,
+        "kicks": 1,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_14",
+      "ticks": 600,
+      "oracleKicks": 3,
+      "baseline": {
+        "maxError": 462.7601584405395,
+        "firstDivergence": 2,
+        "kicks": 2,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 3,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_15",
+      "ticks": 600,
+      "oracleKicks": 4,
+      "baseline": {
+        "maxError": 222.00257740590308,
+        "firstDivergence": 2,
+        "kicks": 4,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 4,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_16",
+      "ticks": 600,
+      "oracleKicks": 3,
+      "baseline": {
+        "maxError": 207.02293502366985,
+        "firstDivergence": 21,
+        "kicks": 3,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 3,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_17",
+      "ticks": 600,
+      "oracleKicks": 2,
+      "baseline": {
+        "maxError": 397.3505155353092,
+        "firstDivergence": 2,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 2,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_18",
+      "ticks": 600,
+      "oracleKicks": 3,
+      "baseline": {
+        "maxError": 0.3766394293966613,
+        "firstDivergence": 21,
+        "kicks": 3,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 3,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_19",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 643.8523386859192,
+        "firstDivergence": 2,
+        "kicks": 3,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_20",
+      "ticks": 600,
+      "oracleKicks": 2,
+      "baseline": {
+        "maxError": 626.4573644604953,
+        "firstDivergence": 2,
+        "kicks": 2,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 2,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_21",
+      "ticks": 600,
+      "oracleKicks": 3,
+      "baseline": {
+        "maxError": 284.645255205203,
+        "firstDivergence": 2,
+        "kicks": 1,
+        "goalMismatches": 2
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 3,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_22",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 567.3146916678293,
+        "firstDivergence": 2,
+        "kicks": 2,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_23",
+      "ticks": 600,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 250.54921026447198,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_24",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 543.670691220821,
+        "firstDivergence": 2,
+        "kicks": 1,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_25",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 558.3700654282483,
+        "firstDivergence": 2,
+        "kicks": 4,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_26",
+      "ticks": 600,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 229.49431276361366,
+        "firstDivergence": 2,
+        "kicks": 0,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_27",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 70.48752840955889,
+        "firstDivergence": 1,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_28",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 211.00025114308815,
+        "firstDivergence": 2,
+        "kicks": 1,
+        "goalMismatches": 1
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_29",
+      "ticks": 600,
+      "oracleKicks": 4,
+      "baseline": {
+        "maxError": 296.74138234351847,
+        "firstDivergence": 1,
+        "kicks": 3,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 4,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_30",
+      "ticks": 600,
+      "oracleKicks": 3,
+      "baseline": {
+        "maxError": 229.71720073620304,
+        "firstDivergence": 1,
+        "kicks": 5,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 3,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "Classic_stress_31",
+      "ticks": 600,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 121.3334736247098,
+        "firstDivergence": 11,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "kick_range_25",
+      "ticks": 10,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "kick_range_28.999999",
+      "ticks": 10,
+      "oracleKicks": 1,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 1,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "kick_range_29",
+      "ticks": 10,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    },
+    {
+      "name": "kick_range_29.000001",
+      "ticks": 10,
+      "oracleKicks": 0,
+      "baseline": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      },
+      "reference": {
+        "maxError": 0,
+        "firstDivergence": null,
+        "kicks": 0,
+        "goalMismatches": 0
+      }
+    }
+  ]
+}

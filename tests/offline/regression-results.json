@@ -1,0 +1,237 @@
+[
+  [
+    "horizontal_free_acceleration_120_ticks",
+    true,
+    "samples=120 maxPositionError=1.42e-13 maxVelocityError=0 finalSpeed=2.382103867"
+  ],
+  [
+    "diagonal_normalization_120_ticks",
+    true,
+    "samples=120 maxStateError=2.34e-13 finalSpeed=2.382103867"
+  ],
+  [
+    "release_damping_30_ticks",
+    true,
+    "samples=30 positionError=0 velocityError=0"
+  ],
+  [
+    "ball_damping_120_ticks",
+    true,
+    "samples=120 positionError=0 velocityError=0"
+  ],
+  [
+    "kick_range_and_impulse",
+    true,
+    "accepted=true ballVx=5.000000000 playerVx=0.000000000"
+  ],
+  [
+    "fast_player_ball_crossing",
+    true,
+    "substeps=50 contacts=1 contactSubstep=8 penetration=1.000000 impulse=100.000000000"
+  ],
+  [
+    "fast_diagonal_player_ball_contact",
+    true,
+    "substeps=71 normal=(-0.707107,-0.707107) penetration=0.301059 impulse=141.421356"
+  ],
+  [
+    "multiple_ball_wall_bounces_in_one_tick",
+    true,
+    "bounces=2 substeps=128 x=-172.500000000 vx=742.500000000 xError=0 vError=0"
+  ],
+  [
+    "swept_player_pair_crossing",
+    true,
+    "swept=true toi=0.312500000 impulse=240.000000000"
+  ],
+  [
+    "symmetric_two_player_ball_collision",
+    true,
+    "tick=4 impulses=(5.095877544,5.095776637) impulseError=0.000101 residual=3.16e-05 velocitySymmetryError=0.000151"
+  ],
+  [
+    "three_disc_overlap_resolution",
+    true,
+    "firstTickResidual=0.000564330325"
+  ],
+  [
+    "coincident_player_centers",
+    true,
+    "positions=(-15.000000000,15.000000000) separation=30.000000000"
+  ],
+  [
+    "core_fixed_tick_integration_order",
+    true,
+    "tick=1 x=0.100000000000 vx=0.096000000000"
+  ],
+  [
+    "core_diagonal_input_normalization",
+    true,
+    "vx=0.070710678119 vy=0.070710678119"
+  ],
+  [
+    "core_disc_collision_product_restitution",
+    true,
+    "vx=(-0.250000000000,0.250000000000) contactEvents=1"
+  ],
+  [
+    "core_collision_masks_exclude_pair",
+    true,
+    "contacts=0 positions=(-8.000,8.000)"
+  ],
+  [
+    "core_kick_edge_only_once",
+    true,
+    "ballVx=5.000->5.000 kickEventFirst=true repeated=false"
+  ],
+  [
+    "core_ten_player_classic_world_600_ticks",
+    true,
+    "ticks=600 players=10 red=5 blue=5 discs=15 events=595 maxSubsteps=1 finite=true"
+  ],
+  [
+    "core_dense_ten_disc_overlap_relaxes",
+    true,
+    "ticks=120 initialMaxOverlap=28.428640 finalMaxOverlap=3.55e-15 finite=true"
+  ],
+  [
+    "core_replay_deterministic",
+    true,
+    "ticks=240 discs=2 exact=true"
+  ],
+  [
+    "core_boundary_clamp_and_bounce",
+    true,
+    "x=35.000 vx=-10.000"
+  ],
+  [
+    "core_kick_windup_uses_kick_damping",
+    true,
+    "x=0.070 vx=0.035"
+  ],
+  [
+    "core_successful_kick_restores_normal_acceleration",
+    true,
+    "playerX=-19.950 playerVx=0.090 ballVx=5.000 postKickOverlapCorrection=0.050"
+  ],
+  [
+    "core_insertion_order_is_preserved",
+    true,
+    "ids=9,1,5"
+  ],
+  [
+    "core_segment_endpoint_cap",
+    true,
+    "endpointDistance=10.000000000 event=segmentContact"
+  ],
+  [
+    "core_static_plane_contact",
+    true,
+    "x=-10.000 vx=1.250 planeEvent=planeContact"
+  ],
+  [
+    "core_static_segment_contact",
+    true,
+    "y=10.000 vy=0.500 segmentEvent=segmentContact"
+  ],
+  [
+    "core_curved_segment_uses_arc_radius",
+    true,
+    "arcRadius=11.125000000 outwardSpeed=0.250000000 event=segmentContact"
+  ],
+  [
+    "classic_stadium_geometry_and_ball_only_boundary",
+    true,
+    "planes=6 segments=14 posts=4 ballY=160.000 playerY=185.000 ballArea=true outerPlayer=true"
+  ],
+  [
+    "classic_goal_mouth_ball_hits_net_without_tunneling",
+    true,
+    "contactTick=3 contactX=389.264925 contactVx=-0.970299 finalX=387.334030 finalVx=-0.950990 contactSubsteps=4"
+  ],
+  [
+    "classic_field_trace_detects_goal_crossing",
+    true,
+    "goal=true side=right team=red y=0.000"
+  ],
+  [
+    "classic_goalpost_collides_with_player",
+    true,
+    "playerPostDistance=23.000000000 bounced=true"
+  ],
+  [
+    "goal_crossing_awards_opposite_team_and_interpolates",
+    true,
+    "right=right/red y=0.000 left=left/blue outside=false"
+  ],
+  [
+    "goal_pause_resets_ball_and_ten_player_positions",
+    true,
+    "phase=playing redScore=1 pauseComplete=true resetAllTen=true"
+  ],
+  [
+    "kickoff_countdown_locks_until_complete",
+    true,
+    "phase=playing countdownComplete=true wrongTeamRejected=true correctTeamAccepted=true"
+  ],
+  [
+    "micro_prediction_uses_fixed_tick_player_kinematics",
+    true,
+    "ticks=2 x=0.296000 vx=0.188160"
+  ],
+  [
+    "micro_prediction_forecasts_ball_contact_without_applying_it",
+    true,
+    "forecast=ball tick=2 predictedX=-22.000"
+  ],
+  [
+    "last_touch_records_physical_actor_and_overwrites_in_event_order",
+    true,
+    "actor=7 team=blue tick=10 kind=kick invalidRejected=true"
+  ],
+  [
+    "kickoff_rejects_wrong_team_kick_only",
+    true,
+    "opponentKickInputBlocked=true assignedKickAllowed=true movementPreserved=true redBallCollision=true blueBallCollision=true"
+  ],
+  [
+    "core_rejects_nonfinite_specs",
+    true,
+    "NaN spec rejected=true"
+  ],
+  [
+    "classic_reference_profile_is_frozen_and_complete",
+    true,
+    "commit=4b9724f49fe0ff87ad3f111eb91b208020d96d73 geometry=6/14/4 bounds=840x400 playable=740x340"
+  ],
+  [
+    "classic_kickoff_collision_masks_select_reference_arc",
+    true,
+    "redKOActive=true blueDuringRedHasBall=true blueKOActive=true redDuringBlueHasBall=true"
+  ],
+  [
+    "classic_pinned_hbs_geometry_values",
+    true,
+    "frozen HBS values checked: properties, planes, net arcs, kickoff arcs, posts and goal lines; redArc=-180 blueArc=180"
+  ],
+  [
+    "classic_collision_matrix_matches_hbs_flags",
+    true,
+    "red/blue-ball, red-blue, player-wall/post, ball-wall/post and kickoff off/on compatibility verified; postMask=63"
+  ],
+  [
+    "classic_wall_and_post_ball_response",
+    true,
+    "postDistance=18.000000 ballVx=0.500000 wallY=160.000000 wallVy=-1.000000 postContact=true wallContact=true"
+  ],
+  [
+    "classic_kickoff_arc_contacts_both_teams_and_deactivates",
+    true,
+    "redOn=classic:kickoff:circleRedKO redMask=47 blueOn=classic:kickoff:circleBlueKO blueMask=55 offHits=nil/nil"
+  ],
+  [
+    "classic_goal_line_edge_and_duplicate_guard",
+    true,
+    "insideY=63.9 scores=true outsideRejected=true reverseRejected=true duplicateRejected=true"
+  ]
+]

@@ -5,6 +5,7 @@ local Core = {}
 
 local DEFAULTS = {
     tickRate = 60,
+    solverMode = "adaptive", -- Explicit compatibility option: haxballDiscrete. 
     playerAcceleration = 0.1,
     playerKickAcceleration = 0.07,
     playerDamping = 0.96,
@@ -40,6 +41,7 @@ function Core.newWorld(config)
     assert(finite(settings.fieldHalfWidth) and settings.fieldHalfWidth > 0, "fieldHalfWidth must be positive")
     assert(finite(settings.fieldHalfHeight) and settings.fieldHalfHeight > 0, "fieldHalfHeight must be positive")
     assert(finite(settings.maxSubsteps) and settings.maxSubsteps>=1 and settings.maxSubsteps<=256 and math.floor(settings.maxSubsteps)==settings.maxSubsteps, "maxSubsteps must be an integer from 1 to 256")
+    assert(settings.solverMode == "adaptive" or settings.solverMode == "haxballDiscrete", "unknown solverMode")
     return {
         tick = 0,
         config = settings,
@@ -49,6 +51,7 @@ function Core.newWorld(config)
         planes = {},
         segments = {},
         geometryById = {},
+        referenceGeometry = nil,
         useBounds = settings.useBounds ~= false,
         lastSubsteps = 0,
         motionSegments = {},
@@ -276,11 +279,12 @@ local function resolveBoundsForDisc(world, disc, events, eventKeys)
     end
 end
 
-local function resolveDiscPair(a, b)
+local function resolveDiscPair(a, b, reference)
     local dx, dy = a.x-b.x, a.y-b.y
     local d2 = dx*dx+dy*dy
     local radii = a.radius+b.radius
     if d2 > radii*radii then return nil end
+    if d2 == 0 and reference then return nil end
 
     local distance, nx, ny
     if d2 > 1e-16 then
@@ -400,11 +404,79 @@ local function resolveStaticGeometryForDisc(world, disc, events, eventKeys)
     end
 end
 
+-- Exact ordered static contact policy for the pinned Node-Haxball 2.3.0
+-- compatibility profile. Geometry is numeric reference data, not Roblox objects.
+function Core.setReferenceGeometry(world, geometry)
+    assert(world.config.solverMode == "haxballDiscrete", "reference geometry requires discrete mode")
+    world.referenceGeometry=geometry
+end
+
+local function resolveReferenceGeometry(world, d, events)
+    local geo=world.referenceGeometry
+    if not geo or not d.enabled or d.invMass==0 then return end
+    local function response(g,nx,ny,penetration,kind)
+        d.x+=nx*penetration; d.y+=ny*penetration
+        local vn=d.vx*nx+d.vy*ny
+        if vn<0 then
+            local change=vn*(d.bCoef*g.bCoef+1)
+            d.vx-=nx*change; d.vy-=ny*change
+            table.insert(events,{kind=kind,tick=world.tick+1,discId=d.id,geometryId=g.id})
+        end
+    end
+    for _,g in ipairs(geo.planes) do
+        if collisionAllowed(d,g) then
+            local p=g.offset-(g.normalX*d.x+g.normalY*d.y)+d.radius
+            if p>0 then response(g,g.normalX,g.normalY,p,"planeContact") end
+        end
+    end
+    for _,g in ipairs(geo.segments) do
+        if not collisionAllowed(d,g) then continue end
+        local nx,ny,distance
+        if g.curveF then
+            nx=d.x-g.centerX;ny=d.y-g.centerY
+            local inside=g.v1NormalX*nx+g.v1NormalY*ny>0 and g.v0NormalX*nx+g.v0NormalY*ny>0
+            if inside==(g.curveF<=0) then continue end
+            local length=math.sqrt(nx*nx+ny*ny)
+            if length==0 then continue end
+            distance=length-g.arcRadius;nx/=length;ny/=length
+        else
+            local sx,sy=g.x2-g.x1,g.y2-g.y1
+            if (d.x-g.x1)*sx+(d.y-g.y1)*sy<=0 or (d.x-g.x2)*sx+(d.y-g.y2)*sy>=0 then continue end
+            nx,ny=g.normalX,g.normalY
+            distance=nx*(d.x-g.x2)+ny*(d.y-g.y2)
+        end
+        local bias=g.bias or 0
+        if bias==0 then
+            if distance<0 then distance=-distance;nx=-nx;ny=-ny end
+        else
+            if bias<0 then bias=-bias;distance=-distance;nx=-nx;ny=-ny end
+            if distance < -bias then continue end
+        end
+        if distance<d.radius then response(g,nx,ny,d.radius-distance,"segmentContact") end
+    end
+    for _,g in ipairs(geo.vertices) do
+        if collisionAllowed(d,g) then
+            local nx,ny=d.x-g.x,d.y-g.y
+            local distance2=nx*nx+ny*ny
+            if distance2>0 and distance2<=d.radius*d.radius then
+                local length=math.sqrt(distance2)
+                response(g,nx/length,ny/length,d.radius-length,"vertexContact")
+            end
+        end
+    end
+end
+
 function Core.stepWorld(world, inputs)
     assert(type(world) == "table" and type(world.discs) == "table", "invalid world")
     inputs = inputs or {}
     local events,eventKeys = {},{}
     world.motionSegments={}
+    local traceStarts={}
+    if world.config.solverMode=="haxballDiscrete" then
+        for _,disc in ipairs(world.discs) do
+            if disc.traceMotion then traceStarts[disc.id]={x=disc.x,y=disc.y} end
+        end
+    end
     applyInputAndKick(world, inputs, events)
 
     local maxSpeed,minRadius=0,math.huge
@@ -419,6 +491,8 @@ function Core.stepWorld(world, inputs)
         local maxDistance=math.max(0.5,minRadius*0.5)
         substeps=math.clamp(math.ceil(maxSpeed/maxDistance),1,world.config.maxSubsteps)
     end
+    local reference = world.config.solverMode == "haxballDiscrete"
+    if reference then substeps=1 end
     world.lastSubsteps=substeps
 
     -- Adaptive microsteps reduce discrete tunneling while preserving one input,
@@ -435,6 +509,16 @@ function Core.stepWorld(world, inputs)
             end
         end
 
+        -- The reference advances every position, damps velocities, then resolves contacts.
+        if reference then
+            for _,disc in ipairs(world.discs) do
+                if disc.enabled and disc.invMass>0 then
+                    local damping=(disc.kind=="player" and disc.kickArmed) and disc.kickDamping or disc.damping
+                    disc.vx=(disc.vx+disc.gravityX)*damping
+                    disc.vy=(disc.vy+disc.gravityY)*damping
+                end
+            end
+        end
         -- Preserve declared solver order inside each microstep.
         for i=1,#world.discs do
             local a=world.discs[i]
@@ -442,7 +526,7 @@ function Core.stepWorld(world, inputs)
                 for j=i+1,#world.discs do
                     local b=world.discs[j]
                     if b.enabled and (a.invMass>0 or b.invMass>0) and collisionAllowed(a,b) then
-                        local contact=resolveDiscPair(a,b)
+                        local contact=resolveDiscPair(a,b,reference)
                         if contact then
                             local key="pair:"..idKey(a.id)..":"..idKey(b.id)
                             local existing=eventKeys[key]
@@ -461,12 +545,17 @@ function Core.stepWorld(world, inputs)
                     end
                 end
                 resolveBoundsForDisc(world,a,events,eventKeys)
-                resolveStaticGeometryForDisc(world,a,events,eventKeys)
+                if reference and world.referenceGeometry then
+                    resolveReferenceGeometry(world,a,events)
+                else
+                    resolveStaticGeometryForDisc(world,a,events,eventKeys)
+                end
             end
         end
     end
 
-    -- Retain the reference's per-tick velocity update after position and contacts.
+    -- Adaptive mode retains its historical post-contact velocity update.
+    if not reference then
     for _,disc in ipairs(world.discs) do
         if disc.enabled and disc.invMass>0 then
             local damping=(disc.kind=="player" and disc.kickArmed) and disc.kickDamping or disc.damping
@@ -475,6 +564,15 @@ function Core.stepWorld(world, inputs)
         end
     end
 
+    end
+    if reference then
+        -- Goal crossing uses the completed, corrected tick, like the reference.
+        world.motionSegments={}
+        for _,disc in ipairs(world.discs) do
+            local start=traceStarts[disc.id]
+            if start then table.insert(world.motionSegments,{discId=disc.id,x0=start.x,y0=start.y,x1=disc.x,y1=disc.y,substep=1,substeps=1}) end
+        end
+    end
     world.tick += 1
     world.events = events
     return world, events, substeps

@@ -1,0 +1,9 @@
+import {read,runLuau,moduleSource,coreSource} from './runtime.mjs';
+import fs from 'node:fs';
+let profile=moduleSource('src/ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau');
+function withoutRequires(p){return '(function()\n'+read(p).replaceAll('require(script.Parent:WaitForChild("ClassicReference230"))','ClassicReference230').replaceAll('require(game:GetService("ReplicatedStorage").HaxballLab.StadiumReference2D)', 'StadiumProfile2D').split('\n').filter(l=>!l.includes('require(')&&!l.startsWith('local ReplicatedStorage')).join('\n')+'\nend)()'}
+let physics=read('src/ServerScriptService/HaxballLab/Physics2D/init.luau').split('\n').filter(l=>!l.includes('require(')&&!l.startsWith('local ReplicatedStorage')).join('\n').replace('local Physics2D = {}','local Physics2D = {MatchCore=Core}');
+const code=`local Core=${coreSource()} local Profile=${profile} local StadiumProfile2D=Profile local ClassicReference230=${moduleSource('src/ServerScriptService/HaxballLab/ClassicReference230/init.luau')} local ClassicStadium2D=${withoutRequires('src/ServerScriptService/HaxballLab/ClassicStadium2D/init.luau')} local MatchRules2D=${withoutRequires('src/ServerScriptService/HaxballLab/MatchRules2D/init.luau')} local PredictionLab2D=${moduleSource('src/ReplicatedStorage/HaxballLab/PredictionLab2D/init.luau')} local P=(function() ${physics} end)() local suite=${withoutRequires('src/ServerScriptService/HaxballLab/LabRegression/init.luau')} local report=suite.Run(P) local rows={} for _,t in ipairs(report.tests) do table.insert(rows,{t.name,t.passed,t.detail}) end emit(json(rows))`;
+const rows=await runLuau(code);fs.writeFileSync(new URL('regression-results.json',import.meta.url),JSON.stringify(rows,null,2));console.log(rows.filter(x=>!x[1]));console.log(rows.filter(x=>x[1]).length+'/'+rows.length);
+
+if(rows.some(x=>!x[1]))process.exitCode=1;

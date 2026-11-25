@@ -163,6 +163,7 @@ local function makeCoreState()
         fieldHalfWidth=Physics2D.Config.fieldHalfWidth,
         fieldHalfHeight=Physics2D.Config.fieldHalfHeight,
         useBounds=false,
+        solverMode="haxballDiscrete",
     })
     -- Preserve stadium order: ball, static posts, then ten player discs.
     local ball=PhysicsCore2D.addDisc(world,{
@@ -489,7 +490,7 @@ RunService.Heartbeat:Connect(function(dt)
                     local count=event.count or 1
                     if event.discId=="ball" then stepInfo.ballWallBounces+=count
                     elseif type(event.discId)=="number" then stepInfo.playerWallBounces+=count end
-                elseif event.kind=="planeContact" or event.kind=="segmentContact" then
+                elseif event.kind=="planeContact" or event.kind=="segmentContact" or event.kind=="vertexContact" then
                     if event.discId=="ball" then stepInfo.ballWallBounces+=1
                     elseif type(event.discId)=="number" then stepInfo.playerWallBounces+=1 end
                 elseif event.kind=="discContact" then
