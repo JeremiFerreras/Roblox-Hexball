@@ -12,6 +12,8 @@ local PhysicsCore2D = Physics2D.MatchCore
 local ClassicStadium2D = require(script.Parent:WaitForChild("ClassicStadium2D"))
 local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
 local MatchRules2D = require(script.Parent:WaitForChild("MatchRules2D"))
+local LocalMatch2D = require(script.Parent:WaitForChild("LocalMatch2D"))
+local localMatch
 local LabRegression = require(script.Parent:WaitForChild("LabRegression"))
 local debugState = script.Parent:WaitForChild("DebugState")
 
@@ -140,7 +142,6 @@ end
 inputRemote.OnServerEvent:Connect(function(player,x,y,kick)
     local slot=playerUserSlots[player.UserId]
     if not slot then return end
-    if state.coreWorld and matchState.phase~="playing" then return end
     if pairMode or crowdMode or legacyMode then
         if player~=controlledPlayer then return end
         local value=allocateInput(1,x,y,kick)
@@ -197,7 +198,7 @@ local function makeCoreState()
     return {tick=0,player=players[1],player2=players[6],players=players,ball=ball,score=legacy.score,coreWorld=world,stadiumGeometry=stadiumGeometry,spawnPoints=spawnPoints,playerCollisionMasks=playerCollisionMasks}
 end
 
-local function newState(pairEnabled,crowdEnabled,legacyPhysicsEnabled)
+local function newState(pairEnabled,crowdEnabled,legacyPhysicsEnabled,startWithKickoff)
     local useLegacy=pairEnabled==true or crowdEnabled==true or legacyPhysicsEnabled==true
     local new=useLegacy and Physics2D.newState() or makeCoreState()
     if not new.coreWorld then new.player.ownerUserId=controlledPlayer and controlledPlayer.UserId or nil end
@@ -205,7 +206,8 @@ local function newState(pairEnabled,crowdEnabled,legacyPhysicsEnabled)
     crowdMode=crowdEnabled==true
     legacyMode=legacyPhysicsEnabled==true
     state=new
-    matchState=MatchRules2D.newMatch()
+    localMatch=new.coreWorld and LocalMatch2D.attach(new,{startWithKickoff=startWithKickoff==true}) or nil
+    matchState=localMatch and localMatch.match or MatchRules2D.newMatch()
     currentInputs={}
     for slot=1,10 do currentInputs[slot]={x=0,y=0,kick=false} end
     currentInput=currentInputs[1]
@@ -219,11 +221,11 @@ local function newState(pairEnabled,crowdEnabled,legacyPhysicsEnabled)
     touchingCrowdPairs={}
     return new
 end
-newState(false,false,false)
+newState(false,false,false,true)
 commandRemote.OnServerEvent:Connect(function(player,command)
     if player~=controlledPlayer then return end
     if command=="reset" then
-        newState(false)
+        newState(false,false,false,true)
         logEvent("scenarioReset",{scenario="default"})
     elseif command=="setupKick" then
         local new=newState(false)
@@ -320,6 +322,7 @@ local function snapshot()
     end
     return {
         tick=state.tick, gameTime=state.tick/Physics2D.Config.tickRate,
+        round=localMatch and localMatch.round or 0,elapsedMatchTicks=localMatch and localMatch.elapsedTicks or 0,winner=matchState.winner,
         matchPhase=matchState.phase,pauseTicksRemaining=matchState.remainingTicks,kickoffTeam=matchState.kickoffTeam,lastGoal=matchState.lastGoal,lastTouch=matchState.lastTouch,
         player={x=p.x,y=p.y,vx=p.vx,vy=p.vy,speed=speed(p),radius=p.radius},
         predictionParams={acceleration=p.acceleration or Physics2D.Config.playerAcceleration,kickAcceleration=p.kickAcceleration or Physics2D.Config.playerKickAcceleration,damping=p.damping or Physics2D.Config.playerDamping,kickDamping=p.kickDamping or Physics2D.Config.playerDamping,maxSpeed=p.maxSpeed},
@@ -455,25 +458,15 @@ RunService.Heartbeat:Connect(function(dt)
             metrics.crowdWorstResidualPenetration=math.max(metrics.crowdWorstResidualPenetration,maxResidual)
             touchingPlayers=touchingCrowdPairs["player1-player2"]==true
         elseif state.coreWorld then
-            local coreInputs,kickAttempts={},{}
-            local pausedAtStart=matchState.phase=="goalPause"
-            local kickoffAtStart=matchState.phase=="kickoff"
-            local inputsLocked=pausedAtStart or kickoffAtStart
+            local result=localMatch:step(currentInputs)
+            local coreInputs,kickAttempts=result.inputs,{}
             for slot=1,10 do
-                local input=inputsLocked and {x=0,y=0,kick=false} or (currentInputs[slot] or {x=0,y=0,kick=false})
-                if not inputsLocked then
-                    input=MatchRules2D.filterKickoffInput(matchState,state.players[slot].team,input)
-                end
-                coreInputs[slot]=input
-                if not inputsLocked and input.kick and not lastCoreKickInputs[slot] then table.insert(kickAttempts,slot) end
-                lastCoreKickInputs[slot]=inputsLocked and false or input.kick
+                local input=coreInputs[slot] or {}
+                if input.kick and not lastCoreKickInputs[slot] then table.insert(kickAttempts,slot) end
+                lastCoreKickInputs[slot]=input.kick==true
             end
-            for slot,actor in ipairs(state.players) do
-                actor.collisionMask=MatchRules2D.kickoffCollisionMask(matchState,actor.team,state.playerCollisionMasks[slot],ClassicStadium2D.Groups.ball)
-            end
-            local _,coreEvents,coreSubsteps=PhysicsCore2D.stepWorld(state.coreWorld,coreInputs)
-            state.tick=state.coreWorld.tick
-            local stepInfo={substeps=coreSubsteps or 1,ballWallBounces=0,playerWallBounces=0,playerBallContacts=0,lastPlayerBallContact=nil}
+            local coreEvents,coreSubsteps=result.physicsEvents,result.substeps
+            local stepInfo={substeps=coreSubsteps,ballWallBounces=0,playerWallBounces=0,playerBallContacts=0,lastPlayerBallContact=nil}
             local acceptedKicks,currentTouches,contactsByPlayer={},{},{}
             for _,event in ipairs(coreEvents) do
                 if event.kind=="kick" then
@@ -481,11 +474,6 @@ RunService.Heartbeat:Connect(function(dt)
                     metrics.successfulKicks+=1
                     metrics.lastKickSuccessTick=state.tick
                     logEvent("kickApplied",{playerId=event.playerId,targetId=event.targetId,normalX=event.normalX,normalY=event.normalY},state.tick)
-                    local kicker=state.players[event.playerId]
-                    if kicker then MatchRules2D.recordTouch(matchState,event.playerId,kicker.team,state.tick,"kick") end
-                    if kicker and MatchRules2D.completeKickoff(matchState,kicker.team) then
-                        logEvent("kickoffTaken",{playerId=event.playerId,team=kicker.team},state.tick)
-                    end
                 elseif event.kind=="boundaryContact" then
                     local count=event.count or 1
                     if event.discId=="ball" then stepInfo.ballWallBounces+=count
@@ -505,8 +493,6 @@ RunService.Heartbeat:Connect(function(dt)
                         stepInfo.lastPlayerBallContact=contact
                         contactsByPlayer[playerId]=contact
                         currentTouches[playerId]=true
-                        local toucher=state.players[playerId]
-                        if toucher then MatchRules2D.recordTouch(matchState,playerId,toucher.team,state.tick,"contact") end
                     elseif type(event.discA)=="number" and type(event.discB)=="number" then
                         metrics.playerContacts+=1
                         metrics.lastPlayerContactTick=state.tick
@@ -533,34 +519,11 @@ RunService.Heartbeat:Connect(function(dt)
                 end
                 touchingCoreBall[slot]=touching
             end
-            if pausedAtStart then
-                if MatchRules2D.advancePause(matchState) then
-                    MatchRules2D.resetKickoff(b,state.players,state.spawnPoints)
-                    local teamToKick=matchState.lastGoal and (matchState.lastGoal.team=="red" and "blue" or "red") or "red"
-                    MatchRules2D.beginKickoff(matchState,teamToKick)
-                    touchingCoreBall={}
-                    touchingBall=false
-                    logEvent("kickoffReset",{teamToKick=teamToKick,lockTicks=matchState.remainingTicks},state.tick)
-                end
-            elseif kickoffAtStart then
-                if MatchRules2D.advanceKickoff(matchState) then
-                    local teamToKick=matchState.kickoffTeam
-                    MatchRules2D.resume(matchState)
-                    logEvent("kickoffComplete",{teamToKick=teamToKick},state.tick)
-                end
-            else
-                local goal=MatchRules2D.findGoalCrossing(state.coreWorld.motionSegments,"ball")
-                if goal then
-                    goal.tick=state.tick
-                    MatchRules2D.beginGoalPause(matchState,state.score,goal,b,state.players)
-                    currentInputs={}
-                    for slot=1,10 do currentInputs[slot]={x=0,y=0,kick=false} end
-                    currentInput=currentInputs[1]
-                    lastCoreKickInputs={}
-                    touchingCoreBall={}
-                    touchingBall=false
-                    logEvent("goalScored",{team=goal.team,side=goal.side,x=goal.x,y=goal.y,substep=goal.substep,substeps=goal.substeps,fraction=goal.fraction},state.tick)
-                end
+            for _,event in ipairs(result.ruleEvents) do
+                logEvent(event.kind,table.clone(event),event.tick)
+            end
+            if result.roundChanged or result.phase=="goalPause" then
+                touchingCoreBall={};touchingBall=false;lastCoreKickInputs={}
             end
             physicsStepInfo=stepInfo
             if speedRunRemaining>0 then

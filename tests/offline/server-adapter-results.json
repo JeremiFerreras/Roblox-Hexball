@@ -1,0 +1,22 @@
+[
+  [
+    "real_LabServer_initializes_and_publishes_5v5_countdown",
+    true,
+    "PASS"
+  ],
+  [
+    "real_input_during_countdown_is_not_lost",
+    true,
+    "PASS"
+  ],
+  [
+    "real_server_goal_pause_reset_and_snapshots",
+    true,
+    "PASS"
+  ],
+  [
+    "debug_snapshot_adapter_remains_operational",
+    true,
+    "PASS"
+  ]
+]

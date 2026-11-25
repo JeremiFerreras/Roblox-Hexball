@@ -51,13 +51,49 @@ predictionGhost.Color=Color3.fromRGB(255,220,70)
 predictionGhost.Transparency=1
 predictionGhost.Parent=field
 
+local ClassicReference230=require(lab:WaitForChild("ClassicReference230"))
+local StadiumRender2D=require(lab:WaitForChild("StadiumRender2D"))
 local Presentation=StadiumProfile2D.Presentation
 local SCALE=Presentation.studsPerUnit
 local function toWorld(logicalX,logicalY)
-    local origin=Presentation.logicalOrigin
-    local worldOrigin=Presentation.worldOrigin
-    local visualY=Presentation.invertLogicalY and -1 or 1
-    return Vector3.new(worldOrigin.x+(logicalX-origin.x)*SCALE,Presentation.floorY,worldOrigin.z+visualY*(logicalY-origin.y)*SCALE)
+    local p=StadiumRender2D.toWorld(logicalX,logicalY,Presentation)
+    return Vector3.new(p.x,p.y,p.z)
+end
+-- Draw the same segment/arc/post coordinates used by the discrete solver.
+local geometryFolder=Instance.new("Folder")
+geometryFolder.Name="ClassicPhysicalOutline"
+geometryFolder.Parent=field
+local geometryVisuals={}
+local function visualPart(name)
+    local part=Instance.new("Part")
+    part.Name=name;part.Anchored=true;part.CanCollide=false;part.CanTouch=false;part.CanQuery=false;part.CastShadow=false
+    part.Color=Color3.fromRGB(220,230,235)
+    part.Parent=geometryFolder
+    return part
+end
+for _,segment in ipairs(ClassicReference230.segments) do
+    local points=StadiumRender2D.segmentPoints(segment)
+    for i=1,#points-1 do
+        local a,b=toWorld(points[i].x,points[i].y),toWorld(points[i+1].x,points[i+1].y)
+        local part=visualPart(segment.id..":"..i)
+        part.Size=Vector3.new(.18,.18,(b-a).Magnitude)
+        part.CFrame=CFrame.lookAt((a+b)*.5,b)
+        table.insert(geometryVisuals,{part=part,group=segment.collisionGroup})
+    end
+end
+for _,logicalY in ipairs({-170,170}) do
+    local a,b=toWorld(-370,logicalY),toWorld(370,logicalY)
+    local part=visualPart("BallAreaLine"..logicalY)
+    part.Size=Vector3.new(.18,.18,(b-a).Magnitude)
+    part.CFrame=CFrame.lookAt((a+b)*.5,b)
+    table.insert(geometryVisuals,{part=part,group=32})
+end
+for _,post in ipairs(ClassicReference230.posts) do
+    local part=visualPart(post.id)
+    part.Shape=Enum.PartType.Ball
+    part.Size=Vector3.new(post.radius*2*SCALE,post.radius*2*SCALE,post.radius*2*SCALE)
+    part.Position=toWorld(post.x,post.y)
+    table.insert(geometryVisuals,{part=part,group=32})
 end
 camera.CameraType=Enum.CameraType.Scriptable
 camera.CFrame=CFrame.new(0,340,0)*CFrame.Angles(-math.pi/2,0,0)
@@ -188,7 +224,13 @@ local function readAction(action,fallback)
     return fallback
 end
 snapshotRemote.OnClientEvent:Connect(function(s)
-    previous,latest=latest,s
+    local reset=latest and (s.round~=latest.round or s.tick<latest.tick)
+    previous,latest=reset and s or latest,s
+    if reset then
+        -- Re-send held movement after a reset; drop delayed controls from the old round.
+        table.clear(delayedInputQueue)
+        lastSentX,lastSentY,lastSentKick=nil,nil,nil
+    end
     snapshotAge=0
 end)
 
@@ -252,6 +294,7 @@ RunService.RenderStepped:Connect(function(dt)
     local p1=toWorld(lerp("player","x"),lerp("player","y"))
     local p2=toWorld(lerp("player2","x"),lerp("player2","y"))
     local ball=toWorld(lerp("ball","x"),lerp("ball","y"))
+    ballDisc.Position=ball
     playerDisc.Position=p1
     playerDisc2.Position=p2
     local extraDiscMode=latest.pairMode or latest.crowdMode
@@ -280,6 +323,10 @@ RunService.RenderStepped:Connect(function(dt)
     renderLine(pairDebugLine,p1,p2,latest.touchingPlayers and Color3.fromRGB(70,255,130) or Color3.fromRGB(80,220,255),extraDiscMode)
     renderLine(ballP2DebugLine,p2,ball,latest.touchingPlayer2Ball and Color3.fromRGB(70,255,130) or Color3.fromRGB(255,110,90),latest.crowdMode)
 
+    for _,visual in ipairs(geometryVisuals) do
+        local visible=latest.coreMode and (visual.group==32 or latest.kickoffTeam and bit32.band(visual.group,latest.kickoffTeam=="red" and 8 or 16)~=0)
+        visual.part.Transparency=visible and 0 or 1
+    end
     local m=latest.metrics
     local lastTouchLine=latest.lastTouch and string.format("Last: %s #%d (%s)",string.upper(latest.lastTouch.team),latest.lastTouch.playerId,latest.lastTouch.kind) or "Last: -" 
     local p2Line=(latest.players and #latest.players>0) and string.format("Roster: %d | RED %d / BLUE %d | %s",latest.playerCount,latest.redCount,latest.blueCount,lastTouchLine) or ((latest.pairMode or latest.crowdMode) and string.format("P2: (%.2f, %.2f) speed %.2f | %s",latest.player2.x,latest.player2.y,latest.player2.speed,lastTouchLine) or ("P2: inactive | "..lastTouchLine))
@@ -287,6 +334,7 @@ RunService.RenderStepped:Connect(function(dt)
     local contactLine=latest.crowdMode and string.format("Separations P1-P2 %.2f | P1-ball %.2f | P2-ball %.2f",latest.playerSeparation,latest.separation,latest.player2BallSeparation) or (latest.pairMode and string.format("P1-P2: %.2f | contacts: %d",latest.playerSeparation,m.playerContacts) or string.format("P1-ball: %.2f | contacts: %d | ball walls: %d",latest.separation,m.ballContacts,m.ballWallBounces))
     local diagnosticsLine=latest.crowdMode and string.format("3D %d contacts | peak overlap %.3f | residual %.4f/max %.4f | iter %d/%d",m.crowdContacts,m.crowdPeakPenetration,m.crowdLastResidualPenetration,m.crowdWorstResidualPenetration,m.crowdLastSolverIterations,m.crowdMaxSolverIterations) or string.format("Max penetration %.3f | correction %.3f | impulse %.3f | substeps %d/%d | suite %s",m.maxPlayerPenetration,m.maxPlayerCorrection,m.lastPlayerImpulse,m.lastCollisionSubsteps,m.maxCollisionSubsteps,m.regressionRan and string.format("%d/%d",m.regressionPassed,m.regressionTotal) or "pendiente")
     local matchStatus=latest.matchPhase=="goalPause" and string.format("GOAL PAUSE %d",latest.pauseTicksRemaining) or (latest.matchPhase=="kickoff" and string.format("KICKOFF %s %d",string.upper(latest.kickoffTeam or "-"),latest.pauseTicksRemaining) or (latest.kickoffTeam and ("WAIT KICK "..string.upper(latest.kickoffTeam)) or "PLAYING"))
+    if latest.matchPhase=="finished" then matchStatus="FINISHED "..string.upper(latest.winner or "-") end
     local matchLine=string.format("Score RED %d - %d BLUE | %s",latest.score.red,latest.score.blue,matchStatus)
     label.Text=string.format(
         "Haxball lab | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",

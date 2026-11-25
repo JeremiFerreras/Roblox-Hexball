@@ -20,3 +20,7 @@ Los scripts no abren salas ni conexiones de red. Importan el API del paquete dir
 Los escenarios Classic fuerzan el estado `playing` cada tick para aislar física y cruce de goles: NO validan la duración de pausas, resets ni transición completa del partido. El runner usa el campo interno `c` de la versión fijada para ello. Los inputs son digitales. No certifica analogía de mandos, tasas configurables de patada, mapas con joints, recursos, presentación, temporización real ni red.
 
 La referencia es Node-Haxball, una implementación independiente; no es una captura del cliente oficial. El modo discreto prioriza reproducir su secuencia, incluidas sus limitaciones de detección a alta velocidad. No promete las garantías antitúnel del modo adaptativo.
+
+## Partido local (fase 4)
+
+`npm test` también ejecuta `local-match.mjs` (19 pruebas del controlador y geometría), `server-adapter.mjs` (4 comprobaciones del servidor real con servicios simulados) y compila todos los scripts con `compile.mjs`. Los resultados están en `local-match-results.json` y `server-adapter-results.json`. Ver `docs/PHASE4_LOCAL_MATCH_2026-11-25.md`. El módulo numérico compartido vive en ReplicatedStorage; el generador de referencia actualiza esa copia.

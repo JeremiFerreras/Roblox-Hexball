@@ -4,7 +4,7 @@
   "description": "Pinned Luau/Node-Haxball differential physics tests",
   "main": "index.js",
   "scripts": {
-    "test": "node regression.mjs && node compare.mjs",
+    "test": "node compile.mjs && node regression.mjs && node compare.mjs && node local-match.mjs && node server-adapter.mjs",
     "export-reference": "node reference.mjs --export"
   },
   "keywords": [],

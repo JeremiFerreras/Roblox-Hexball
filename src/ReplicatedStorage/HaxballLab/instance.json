@@ -130,10 +130,14 @@
     "ReplicatedStorage/HaxballLab/Remotes",
     "ReplicatedStorage/HaxballLab/LabClient",
     "ReplicatedStorage/HaxballLab/PredictionLab2D",
-    "ReplicatedStorage/HaxballLab/StadiumReference2D"
+    "ReplicatedStorage/HaxballLab/StadiumReference2D",
+    "ReplicatedStorage/HaxballLab/ClassicReference230",
+    "ReplicatedStorage/HaxballLab/StadiumRender2D"
   ],
   "layout": [
     false,
+    true,
+    true,
     true,
     true,
     true,

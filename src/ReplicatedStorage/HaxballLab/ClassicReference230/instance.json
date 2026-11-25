@@ -1,0 +1,36 @@
+{
+  "attributes": {
+    "class": "ModuleScript",
+    "referent": "RBXPhase4ClassicReference230"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": null,
+      "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "ClassicReference230",
+          "children": []
+        },
+        {
+          "tag": "ProtectedString",
+          "attributes": {
+            "name": "Source"
+          },
+          "text": null,
+          "children": [],
+          "sourceFile": "init.luau"
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

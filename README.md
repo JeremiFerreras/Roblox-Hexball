@@ -37,8 +37,12 @@ Para volver a extraer desde el archivo original (sobrescribe archivos coincident
 python tools/place.py export
 ```
 
-El proyecto actual contiene 124 instancias y 13 scripts/módulos. La validación y los cambios físicos están documentados en `docs/PHYSICS_OFFLINE_2026-11-25.md`. La comprobación es estructural; no sustituye ejecutar el juego en Roblox Studio. Los recursos externos se conservan por su ID, no se descargan.
+El proyecto actual contiene 127 instancias y 16 scripts/módulos. La validación y los cambios físicos están documentados en `docs/PHYSICS_OFFLINE_2026-11-25.md`. La comprobación es estructural; no sustituye ejecutar el juego en Roblox Studio. Los recursos externos se conservan por su ID, no se descargan.
 
 ## Pruebas físicas fuera de Studio
 
 Ver [instrucciones](tests/offline/README.md) e [informe de validación](docs/PHYSICS_OFFLINE_2026-11-25.md).
+
+## Partido local
+
+La fase 4 incorpora un controlador de partido, pruebas de goles y saques y geometría visual compartida. [Informe y comprobaciones pendientes](docs/PHASE4_LOCAL_MATCH_2026-11-25.md).
