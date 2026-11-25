@@ -1,0 +1,25 @@
+{
+  "status":"PARTIAL_TRACE_FROM_EXISTING_CAPTURE",
+  "source":"ORACLE_FULL_TICK_TELEMETRY.json scenarioIndex=3 and PHASE3_MICROBENCHMARK_RESULTS.json",
+  "officialClientCertification":false,
+  "oracleReexecutionThisSession":false,
+  "tick":4,
+  "timeSeconds":0.06666666666666667,
+  "stateBeforeTick4":{
+    "ball":{"x":118.804,"y":148.505,"vx":38.81196,"vy":48.51495,"radius":10,"invMass":1,"damping":0.99,"bCoef":0.5},
+    "logicalTickStartSeconds":0.05,
+    "playersInterference":"None geometrically; all captured players are distant and stationary"
+  },
+  "geometryCandidate":{
+    "hbsPlaneIndexZeroBased":5,
+    "name":"ball-area top inferred from geometry; internal plane ID mapping unverified",
+    "normal":{"x":0,"y":-1},"dist":-170,"tangentCenterY":160,
+    "oracleCallbackPlaneId":1,"planeIdMapping":"UNKNOWN"
+  },
+  "oracleAfterTick4":{"x":157.61596,"y":160,"vx":38.4238404,"vy":0},
+  "physicsCoreAfterTick4":{"x":157.61596,"y":143.206363,"vx":38.4238404,"vy":-24.01490025},
+  "corePrecontactState":"not separately captured in the supplied per-tick diff; do not infer identical within-tick impact state beyond shared tick-3 end state",
+  "coreResolutionFormula":"v_n<0: v += n * (-(1 + disc.bCoef*plane.bCoef)*v_n); then later substeps continue; damping occurs after substeps",
+  "oracleResolutionInternals":"not exposed by public collision callback; reconstructed Node/Nago source pass described in PHASE3_CONTACT_SOLVER_ANALYSIS.md",
+  "missing":"oracle normal/penetration/impulse; exact selected internal plane; contact substep timing; isolated matched pre-contact state; independently captured post-resolution pre-tick-end state"
+}

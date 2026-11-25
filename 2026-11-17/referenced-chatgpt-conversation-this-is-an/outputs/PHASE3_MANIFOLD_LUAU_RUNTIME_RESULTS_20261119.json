@@ -1,0 +1,24 @@
+{
+  "schemaVersion":1,
+  "runtime":{"name":"Luau standalone CLI","version":"0.747","sourceCommit":"c87565b8b0db5d5d5bfd2b8b00ad6573e5d06d9f","releaseAsset":"luau-windows.zip","assetBytes":3271719,"assetSHA256Expected":"16bbd26575e9a6a3ecd2bd5fc772a81f3232520b56a40a86f2b47fec576d7cc7","assetSHA256Actual":"16bbd26575e9a6a3ecd2bd5fc772a81f3232520b56a40a86f2b47fec576d7cc7","executable":"%TEMP%\\codex-luau-0.747-phase3\\bin\\luau.exe","executableSHA256":"ff0acf7d2df9d38e30c85ee9fe698efd756a920496c84ea848b74d0e2082e958","versionFlag":"--version unsupported; release tag/commit and verified asset hash used"},
+  "execution":{"source":"PHASE3_CONTACT_MANIFOLD_PGS_PROTOTYPE_20261119.luau","runner":"PHASE3_MANIFOLD_LUAU_TEST_RUNNER_20261119.luau","actualLuauModuleRequired":true,"translatedSolverUsed":false,"runExitCodes":[0,0],"deterministicOutput":true,"runOutputSHA256":["753752cf45b5a6a2c446d7b6e965c0ee42c04ec081181149e7133e1538eaf109","753752cf45b5a6a2c446d7b6e965c0ee42c04ec081181149e7133e1538eaf109"],"analyzeExitCode":0,"analyzeOutput":""},
+  "tests":[
+    {"id":"isolated_normal","status":"PASS","post":{"vx":0,"vy":-5},"impulse":{"floor":15},"residual":0},
+    {"id":"orthogonal_corner","status":"PASS","post":{"vx":0,"vy":0},"impulse":{"right":20,"top":20},"residual":0},
+    {"id":"opposing_normals","status":"PASS","post":{"vx":0,"vy":0},"impulse":{"net":0,"outer":20},"residual":0},
+    {"id":"nearly_opposing_normals","status":"EXPECTED_FAILURE","reason":"constraint-residual","iterations":16,"residual":0.009999850001048461,"candidatePost":{"vx":2.8449465006019636e-16,"vy":-9.999850001049996},"impulse":{"net":0.14999895000452965,"outer":20.149998875005036},"inputPreserved":{"vx":20,"vy":-10}},
+    {"id":"duplicate_same_surface","status":"PASS","post":{"vx":-10,"vy":0},"impulse":{"wall":30},"uniqueConstraints":1},
+    {"id":"redundant_same_direction","status":"PASS","post":{"vx":0,"vy":0},"impulse":{"a":20,"b":0}},
+    {"id":"nonconvergent_iteration_limit","status":"EXPECTED_FAILURE","reason":"constraint-residual","iterations":1,"residual":0.3169872981077809,"candidatePost":{"vx":0.3169872981077805,"vy":-0.18301270189221963},"impulse":{"a":0,"b":0,"c":1.3660254037844388},"inputPreserved":{"vx":1,"vy":1}},
+    {"id":"invalid_nan","status":"EXPECTED_REJECTION","reason":"invalid-body-state"},
+    {"id":"invalid_zero_normal","status":"EXPECTED_REJECTION","reason":"invalid-normal-or-inverse-mass"},
+    {"id":"conflicting_duplicate_id","status":"EXPECTED_REJECTION","reason":"duplicate-surface-conflicting-normal"},
+    {"id":"iteration_cap_validation","status":"EXPECTED_REJECTION","reason":"invalid-solver-input"},
+    {"id":"invalid_infinity","status":"EXPECTED_REJECTION","reason":"invalid-body-state"},
+    {"id":"nonfinite_target","status":"EXPECTED_REJECTION","reason":"nonfinite-target","inputPreserved":{"vx":1e308,"vy":0}},
+    {"id":"determinism_permutation","status":"PASS","post":{"vx":0,"vy":0},"sameSortedImpulses":true}
+  ],
+  "jsArchiveComparison":{"source":"PHASE3_MANIFOLD_PGS_MATH_RESULTS_20261119.json","sameExpectedOutcomes":true,"nonconvergentMaxAbsoluteDelta":4.44e-16,"interpretation":"floating-point operation-order rounding; no behavioral discrepancy"},
+  "failuresAndFixes":[{"failure":"first Luau test-runner execution exited 1 after result assertions; printer indexed a missing body field on determinism record","fix":"record body/post for that row","rerun":"exit 0"},{"failure":"successful PGS result exposed reason=constraint-residual due Lua and/or nil idiom","fix":"use (not ok) and reason or nil","rerun":"successful rows now have empty reason"}],
+  "notValidated":["PGS integration with TOI","Roblox Studio execution","stadium physics","corner and wall/net regressions","C_v10","S3 tick 4","goal net","high speed","full A-F","S1/S2","Node equivalence"]
+}

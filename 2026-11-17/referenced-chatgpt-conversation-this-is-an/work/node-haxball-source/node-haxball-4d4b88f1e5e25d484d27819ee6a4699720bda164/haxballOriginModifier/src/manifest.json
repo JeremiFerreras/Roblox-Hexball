@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "abc Modified Haxball Client - Request Origin Modifier",
+  "version": "1.0",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.moo-hoo.com/*"],
+      "js": ["main.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "host_permissions": [
+    "https://*.haxball.com/*",
+    "wss://*.haxball.com/*",
+    "https://*.glitch.me/*",
+    "wss://*.glitch.me/*",
+    "https://*.infinityfreeapp.com/*",
+    "wss://*.infinityfreeapp.com/*",
+    "https://*.onrender.com/*",
+    "wss://*.onrender.com/*",
+    "http://*.localhost:*/*",
+    "ws://*.localhost:*/*",
+    "https://192.168.1.100:*/*",
+    "wss://192.168.1.100:*/*",
+    "https://*.moo-hoo.com/*",
+    "wss://*.moo-hoo.com/*"
+  ],
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ]
+}

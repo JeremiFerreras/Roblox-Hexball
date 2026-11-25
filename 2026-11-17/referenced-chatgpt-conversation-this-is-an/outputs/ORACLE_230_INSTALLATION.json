@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "result": "INSTALLED_AND_EXECUTED_EXACT_2.3.0",
+  "timestampUtc": "2026-11-18",
+  "isolation": {
+    "root": "%TEMP%\\codex-haxball-oracle-230-20261118",
+    "projectDependenciesModified": false,
+    "globalInstall": false,
+    "pathChanged": false
+  },
+  "runtime": {
+    "nodeVersion": "v24.22.3",
+    "npmVersion": "11.19.1",
+    "nodePortableZipSha256": "e612af99f626ab415ea225af6bce5c971feb448cb5cae250bb1c3fa50c5f7d9f"
+  },
+  "source": {
+    "haxballGymCommitClaimed": "1781914b79ccad18a65367d66de4645412405bce",
+    "zipHasGitMetadata": false,
+    "commitTreeVerified": false,
+    "oracle": "headless-bot/nh_oracle.js",
+    "lockfile": "headless-bot/package-lock.json"
+  },
+  "install": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "lockRecords": 55,
+    "installedRecords": 54,
+    "installHookReviewed": "node-datachannel@0.25.0",
+    "executedInstallStep": "Only reviewed prebuild-install -r napi; no fallback compile",
+    "nativeBinaryPresent": true
+  },
+  "package": {
+    "name": "node-haxball",
+    "version": "2.3.0",
+    "tarballSha256": "d37c62e81f3f3c932eb5bb3b760e7d1e39347c686a4d9212c2f30633fc3183d9",
+    "integrity": "sha512-fSxZFWuDSckKK1JBKVRATXcnXR5lZV4ae3Jf6yr+FxxKE86Yore/xidVR1Sq+ZgrERtHSe0rtcgWo3uauJKlgw=="
+  },
+  "lockfileSha256": "25a0592f990abf94340600078074f32b2ff6fd95b1794a7b3ec939f2a95288f3",
+  "verifiedProcessVersion": "2.3.0",
+  "issues": [
+    "PowerShell/curl TLS failed SEC_E_NO_CREDENTIALS (0x8009030E); official ZIP downloaded with Node fetch and SHA checked.",
+    "Initial prebuild failed EPERM using default Roaming npm cache; resolved using cache inside isolated Temp."
+  ]
+}

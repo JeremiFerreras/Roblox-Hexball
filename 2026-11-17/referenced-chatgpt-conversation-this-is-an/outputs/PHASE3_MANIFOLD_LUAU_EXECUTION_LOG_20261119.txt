@@ -1,0 +1,42 @@
+Luau standalone execution log
+version=0.747
+sourceCommit=c87565b8b0db5d5d5bfd2b8b00ad6573e5d06d9f
+binary=C:\Users\User\AppData\Local\Temp\codex-luau-0.747-phase3\bin\luau.exe
+binarySHA256=ff0acf7d2df9d38e30c85ee9fe698efd756a920496c84ea848b74d0e2082e958
+run1ExitCode=0
+run1OutputSHA256=753752cf45b5a6a2c446d7b6e965c0ee42c04ec081181149e7133e1538eaf109
+run2ExitCode=0
+run2OutputSHA256=753752cf45b5a6a2c446d7b6e965c0ee42c04ec081181149e7133e1538eaf109
+identical=True
+
+RUN 1
+isolated_normal|PASS|0|-5|0||floor:15
+orthogonal_corner|PASS|0|0|0||right:20,top:20
+opposing_normals|PASS|0|0|0||net:0,outer:20
+nearly_opposing_normals|EXPECTED_FAILURE|2.8449465006019636e-16|-9.999850001049996|0.009999850001048461|constraint-residual|net:0.14999895000452965,outer:20.149998875005036
+duplicate_same_surface|PASS|-10|0|0||wall:30
+redundant_same_direction|PASS|0|0|0||a:20,b:0
+nonconvergent_iteration_limit|EXPECTED_FAILURE|0.3169872981077805|-0.18301270189221963|0.3169872981077809|constraint-residual|a:0,b:0,c:1.3660254037844388
+invalid_nan|EXPECTED_REJECTION|0|0||invalid-body-state|
+invalid_zero_normal|EXPECTED_REJECTION|1|0||invalid-normal-or-inverse-mass|
+conflicting_duplicate_id|EXPECTED_REJECTION|10|0||duplicate-surface-conflicting-normal|
+iteration_cap_validation|EXPECTED_REJECTION|1|0||invalid-solver-input|
+invalid_infinity|EXPECTED_REJECTION|0|0||invalid-body-state|
+nonfinite_target|EXPECTED_REJECTION|1e+308|0||nonfinite-target|
+determinism_permutation|PASS|0|0|0||right:20,top:20
+
+RUN 2
+isolated_normal|PASS|0|-5|0||floor:15
+orthogonal_corner|PASS|0|0|0||right:20,top:20
+opposing_normals|PASS|0|0|0||net:0,outer:20
+nearly_opposing_normals|EXPECTED_FAILURE|2.8449465006019636e-16|-9.999850001049996|0.009999850001048461|constraint-residual|net:0.14999895000452965,outer:20.149998875005036
+duplicate_same_surface|PASS|-10|0|0||wall:30
+redundant_same_direction|PASS|0|0|0||a:20,b:0
+nonconvergent_iteration_limit|EXPECTED_FAILURE|0.3169872981077805|-0.18301270189221963|0.3169872981077809|constraint-residual|a:0,b:0,c:1.3660254037844388
+invalid_nan|EXPECTED_REJECTION|0|0||invalid-body-state|
+invalid_zero_normal|EXPECTED_REJECTION|1|0||invalid-normal-or-inverse-mass|
+conflicting_duplicate_id|EXPECTED_REJECTION|10|0||duplicate-surface-conflicting-normal|
+iteration_cap_validation|EXPECTED_REJECTION|1|0||invalid-solver-input|
+invalid_infinity|EXPECTED_REJECTION|0|0||invalid-body-state|
+nonfinite_target|EXPECTED_REJECTION|1e+308|0||nonfinite-target|
+determinism_permutation|PASS|0|0|0||right:20,top:20

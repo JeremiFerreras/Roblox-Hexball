@@ -1,0 +1,13 @@
+{
+ "status":"RECOVERED_AND_RERUN",
+ "node":{"version":"v24.22.3","path":"%TEMP%\\codex-haxball-oracle-230-20261118\\portable-node\\node-v24.22.3-win-x64\\node.exe"},
+ "npm":"11.19.1 portable",
+ "package":{"name":"node-haxball","declaredVersion":"2.3.0","moduleResolvedFrom":"%TEMP%\\codex-haxball-oracle-230-20261118\\oracle-install\\node_modules\\node-haxball\\src\\index.js","tarballSha256PreviouslyVerified":"d37c62e81f3f3c932eb5bb3b760e7d1e39347c686a4d9212c2f30633fc3183d9","integrity":"sha512-fSxZFWuDSckKK1JBKVRATXcnXR5lZV4ae3Jf6yr+FxxKE86Yore/xidVR1Sq+ZgrERtHSe0rtcgWo3uauJKlgw==","lockfileSha256":"25a0592f990abf94340600078074f32b2ff6fd95b1794a7b3ec939f2a95288f3"},
+ "harness":"oracle-install/run-oracle-twice.mjs -> nh_oracle.js",
+ "runs":[{"exitCode":0,"bytes":38693,"sha256":"7d612957764a076d506f53c4dd8d7fd39381e3db261cb399a812f6eb7d110e37"},{"exitCode":0,"bytes":38693,"sha256":"7d612957764a076d506f53c4dd8d7fd39381e3db261cb399a812f6eb7d110e37"}],
+ "byteIdentical":true,
+ "classicScenarioTicks":[180,180,180],"classicTicksTotal":540,
+ "telemetryContinuity":"Existing verified instrumented capture has frames 1..180 per scenario, 0 missing and 0 duplicate; full telemetry was not regenerated in this rerun.",
+ "testsAF":"NOT_RUN; basic runner does not expose matched instant solver states for PhysicsCore2D",
+ "officialClientCertification":false
+}

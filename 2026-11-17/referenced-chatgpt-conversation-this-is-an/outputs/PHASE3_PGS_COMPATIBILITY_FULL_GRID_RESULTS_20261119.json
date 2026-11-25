@@ -1,0 +1,412 @@
+{
+  "schemaVersion": 1,
+  "runtime": "Luau 0.747 standalone; unchanged PGS module and validated trace clone",
+  "repetitions": 2,
+  "sha256": {
+    "raw": "37d89d64746e7c08611f96939a127505a2b038106af6c5c5428a909a904e370c",
+    "repeat": "37d89d64746e7c08611f96939a127505a2b038106af6c5c5428a909a904e370c",
+    "byteIdentical": true
+  },
+  "inputGrid": {
+    "cases": 11520,
+    "anglesDeg": [
+      90,
+      120,
+      150,
+      170,
+      175,
+      179,
+      179.94,
+      180
+    ],
+    "velocities": [
+      [
+        20,
+        0
+      ],
+      [
+        20,
+        -10
+      ],
+      [
+        0,
+        -10
+      ]
+    ],
+    "restitutions": [
+      0,
+      0.5,
+      1
+    ],
+    "constraintCounts": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "orders": [
+      "canonical",
+      "reverseIds"
+    ],
+    "budgets": [
+      16,
+      32,
+      64,
+      128
+    ],
+    "relaxations": [
+      0.5,
+      0.8,
+      1,
+      1.2,
+      1.5
+    ]
+  },
+  "totals": {
+    "pgsSuccess": 9276,
+    "pgsFailure": 2244,
+    "LcpUsingPgsEffectiveTargetsFeasible": 11520,
+    "LcpUsingPerContactRestitutionFeasible": 11040,
+    "LcpUsingPerContactRestitutionIncompatible": 480,
+    "pgsFailureWhileItsEffectiveLcpIsFeasible": 2244,
+    "pgsSuccessWhileRequestedLcpIsIncompatible": 432,
+    "pgsSuccessViolatingRequestedTargetKkt": 3944,
+    "pgsSuccessSatisfyingRequestedTargetKkt": 5332,
+    "maxSuccessfulVelocityErrorToEffectiveOracle": 1.1309699311982295E-08
+  },
+  "byAngleAndCount": [
+    {
+      "angleDeg": 90.0,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 90.0,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 24,
+      "pgsSuccess": 336,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 90.0,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 51,
+      "pgsSuccess": 309,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 90.0,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 78,
+      "pgsSuccess": 282,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 120.0,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 120.0,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 48,
+      "pgsSuccess": 312,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 120.0,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 54,
+      "pgsSuccess": 306,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 120.0,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 48,
+      "pgsSuccess": 312,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 150.0,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 150.0,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 102,
+      "pgsSuccess": 258,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 150.0,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 42,
+      "pgsSuccess": 318,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 150.0,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 45,
+      "pgsSuccess": 315,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 170.0,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 170.0,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 258,
+      "pgsSuccess": 102,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 170.0,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 45,
+      "pgsSuccess": 315,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 170.0,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 60,
+      "pgsSuccess": 300,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 175.0,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 175.0,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 264,
+      "pgsSuccess": 96,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 175.0,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 48,
+      "pgsSuccess": 312,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 175.0,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 60,
+      "pgsSuccess": 300,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.0,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.0,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 294,
+      "pgsSuccess": 66,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.0,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 78,
+      "pgsSuccess": 282,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.0,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 87,
+      "pgsSuccess": 273,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.94,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.94,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 294,
+      "pgsSuccess": 66,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.94,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 78,
+      "pgsSuccess": 282,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 179.94,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 93,
+      "pgsSuccess": 267,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 180.0,
+      "constraints": 1,
+      "cases": 360,
+      "desiredIncompatible": 0,
+      "pgsFailed": 0,
+      "pgsSuccess": 360,
+      "falseSuccess": 0
+    },
+    {
+      "angleDeg": 180.0,
+      "constraints": 2,
+      "cases": 360,
+      "desiredIncompatible": 160,
+      "pgsFailed": 12,
+      "pgsSuccess": 348,
+      "falseSuccess": 152
+    },
+    {
+      "angleDeg": 180.0,
+      "constraints": 3,
+      "cases": 360,
+      "desiredIncompatible": 160,
+      "pgsFailed": 30,
+      "pgsSuccess": 330,
+      "falseSuccess": 148
+    },
+    {
+      "angleDeg": 180.0,
+      "constraints": 4,
+      "cases": 360,
+      "desiredIncompatible": 160,
+      "pgsFailed": 51,
+      "pgsSuccess": 309,
+      "falseSuccess": 132
+    }
+  ],
+  "nearOpposedFocus": [
+    {
+      "angleDeg": 179.94,
+      "dotProduct": -0.9999994516886945,
+      "constraints": 2,
+      "restitution": 0.5,
+      "desiredClassification": "feasible",
+      "desiredQ": [
+        20.0,
+        -30.01569151105783
+      ],
+      "effectiveClassification": "feasible",
+      "pgsOk": false,
+      "pgsResidual": 0.010448580123202952,
+      "pgsCandidateVelocity": [
+        -0.010448580123202952,
+        -9.977655402153843
+      ],
+      "desiredKktResidual": 10.005230503685944
+    },
+    {
+      "angleDeg": 179.94,
+      "dotProduct": -0.9999994516886945,
+      "constraints": 2,
+      "restitution": 0.5,
+      "desiredClassification": "feasible",
+      "desiredQ": [
+        20.0,
+        -30.01569151105783
+      ],
+      "effectiveClassification": "feasible",
+      "pgsOk": false,
+      "pgsResidual": 0.010448574394128766,
+      "pgsCandidateVelocity": [
+        9.194034422677078E-17,
+        -9.977655402153843
+      ],
+      "desiredKktResidual": 10.015679078080073
+    }
+  ],
+  "limitations": [
+    "This is a mathematical 2D normal-constraint sweep; no TOI, physical collision detection or Roblox Studio test.",
+    "PGS multi-contact mode replaces all restitution targets by zero; both LCP classifications are reported separately.",
+    "The active-set oracle is independent of PGS and enumerates the small systems exhaustively."
+  ]
+}

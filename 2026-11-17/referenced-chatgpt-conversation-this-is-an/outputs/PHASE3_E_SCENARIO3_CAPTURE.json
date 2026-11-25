@@ -1,0 +1,10 @@
+{
+ "schemaVersion":1,"scenarioIndex":3,"calls":180,"frames":"1..180","traceBoundary":"immediately before and after E$ per runSteps(1)",
+ "tick4":{
+  "before":{"ball":{"x":118.804,"y":148.505,"vx":38.81196,"vy":48.51495,"radius":10,"bCoef":0.5},"planeCandidate":{"index":5,"normal":{"x":0,"y":-1},"offset":-170,"bCoef":null}},
+  "after":{"ball":{"x":157.61596,"y":160,"vx":38.4238404,"vy":0,"radius":10,"bCoef":0.5}},
+  "callback":"onCollisionDiscVsPlane at frame 4; public callback reports planeId=1",
+  "limit":"These are E$ boundary snapshots. They do not expose the instant of collision or before/after individual solver operations. null bCoef means unavailable/undefined in runtime snapshot, not numeric zero."
+ },
+ "fullTraceFile":"PHASE3_E_WRAPPER_CALL_TRACE.json"
+}

@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "capture": "PhysicsCore2D four-variant in-memory diagnostic; Core rows rounded to 6 decimals",
+  "oracle": {
+    "version": "Node-HaxBall 2.3.0",
+    "tick": 4,
+    "source": "Previously validated PHASE3_SCENARIO3_INTERNAL_CONTACT_TRACE_20261119.json; historical capture reused, not rerun"
+  },
+  "node": {
+    "tick4Final": {
+      "x": 157.61596,
+      "y": 160,
+      "vx": 38.4238404,
+      "vy": 0
+    },
+    "contacts": [
+      {
+        "phase": "pre",
+        "planeIndex": 1,
+        "planeGeometry": "outer top",
+        "disc": {
+          "x": 157.61596,
+          "y": 197.01995,
+          "vx": 38.4238404,
+          "vy": 48.0298005,
+          "radius": 10,
+          "bCoef": 0.5
+        },
+        "plane": {
+          "normalX": 0,
+          "normalY": -1,
+          "offset": -200,
+          "bCoef": 0
+        },
+        "penetration": 7.01995,
+        "normalSpeedBefore": -48.0298005
+      },
+      {
+        "phase": "post",
+        "planeIndex": 1,
+        "planeGeometry": "outer top",
+        "disc": {
+          "x": 157.61596,
+          "y": 190,
+          "vx": 38.4238404,
+          "vy": 0,
+          "radius": 10,
+          "bCoef": 0.5
+        },
+        "normalSpeedAfter": 0
+      },
+      {
+        "phase": "pre",
+        "planeIndex": 5,
+        "planeGeometry": "ball-area top",
+        "disc": {
+          "x": 157.61596,
+          "y": 190,
+          "vx": 38.4238404,
+          "vy": 0,
+          "radius": 10,
+          "bCoef": 0.5
+        },
+        "plane": {
+          "normalX": 0,
+          "normalY": -1,
+          "offset": -170,
+          "bCoef": 1
+        },
+        "penetration": 30,
+        "normalSpeedBefore": 0
+      },
+      {
+        "phase": "post",
+        "planeIndex": 5,
+        "planeGeometry": "ball-area top",
+        "disc": {
+          "x": 157.61596,
+          "y": 160,
+          "vx": 38.4238404,
+          "vy": 0,
+          "radius": 10,
+          "bCoef": 0.5
+        },
+        "normalSpeedAfter": 0
+      }
+    ]
+  },
+  "coreVariants": {
+    "A": {
+      "rows": [
+        [
+          3,
+          118.804,
+          148.505,
+          38.81196,
+          48.51495,
+          []
+        ],
+        [
+          4,
+          157.61596,
+          143.206363,
+          38.42384,
+          -24.014901,
+          [
+            [
+              "planeContact",
+              "classic:ballArea:top",
+              "ball",
+              "",
+              "",
+              3.432677,
+              72.772425,
+              0,
+              -1.000001
+            ]
+          ]
+        ],
+        [
+          5,
+          196.0398,
+          119.191463,
+          38.039602,
+          -23.774752,
+          []
+        ]
+      ],
+      "tick4Contacts": [
+        [
+          "planeContact",
+          "classic:ballArea:top",
+          "ball",
+          "",
+          "",
+          3.432677,
+          72.772425,
+          0,
+          -1.000001
+        ]
+      ]
+    },
+    "B": {
+      "rows": [
+        [
+          3,
+          118.804,
+          148.505,
+          38.81196,
+          48.51495,
+          []
+        ],
+        [
+          4,
+          157.61596,
+          143.206363,
+          38.42384,
+          -24.014901,
+          [
+            [
+              "planeContact",
+              "classic:ballArea:top",
+              "ball",
+              "",
+              "",
+              3.432677,
+              72.772425,
+              0,
+              -1.000001
+            ]
+          ]
+        ],
+        [
+          5,
+          196.0398,
+          119.191463,
+          38.039602,
+          -23.774752,
+          []
+        ]
+      ],
+      "tick4Contacts": [
+        [
+          "planeContact",
+          "classic:ballArea:top",
+          "ball",
+          "",
+          "",
+          3.432677,
+          72.772425,
+          0,
+          -1.000001
+        ]
+      ]
+    },
+    "C": {
+      "rows": [
+        [
+          3,
+          118.804,
+          148.505,
+          38.81196,
+          48.51495,
+          []
+        ],
+        [
+          4,
+          157.61596,
+          143.206363,
+          38.42384,
+          -24.014901,
+          [
+            [
+              "planeContact",
+              "classic:ballArea:top",
+              "ball",
+              "",
+              "",
+              3.432677,
+              72.772425,
+              0,
+              -1.000001
+            ]
+          ]
+        ],
+        [
+          5,
+          196.0398,
+          119.191463,
+          38.039602,
+          -23.774752,
+          []
+        ]
+      ],
+      "tick4Contacts": [
+        [
+          "planeContact",
+          "classic:ballArea:top",
+          "ball",
+          "",
+          "",
+          3.432677,
+          72.772425,
+          0,
+          -1.000001
+        ]
+      ]
+    },
+    "D": {
+      "rows": [
+        [
+          3,
+          118.804,
+          148.505,
+          38.81196,
+          48.51495,
+          []
+        ],
+        [
+          4,
+          157.61596,
+          143.206363,
+          38.42384,
+          -24.014901,
+          [
+            [
+              "planeContact",
+              "classic:ballArea:top",
+              "ball",
+              "",
+              "",
+              3.432677,
+              72.772425,
+              0,
+              -1.000001
+            ]
+          ]
+        ],
+        [
+          5,
+          196.0398,
+          119.191463,
+          38.039602,
+          -23.774752,
+          []
+        ]
+      ],
+      "tick4Contacts": [
+        [
+          "planeContact",
+          "classic:ballArea:top",
+          "ball",
+          "",
+          "",
+          3.432677,
+          72.772425,
+          0,
+          -1.000001
+        ]
+      ]
+    }
+  },
+  "interpretation": "Node's first normal-velocity change is the exterior-plane resolution at internal plane index 1; Core's adaptive substeps contact ball-area top first. All four Core variants have the same tick4 state/contact. Changing plane order alone cannot cause an outer-plane collision when the current substep position never penetrates it."
+}

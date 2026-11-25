@@ -1,0 +1,468 @@
+{
+  "evidenceClass": "MEDIDO from user JSON; tick/gameTime semantics partly DESCONOCIDO",
+  "source": {
+    "file": "telemetry_1794955691342.json",
+    "sha256": "1d443f29beb708698ef2825b1efdf0856701df78dba54175079747be967c6a82",
+    "bytes": 7616356,
+    "metadata": {
+      "stadium": "Big",
+      "scoreLimit": 3,
+      "timeLimit": 3,
+      "recordedAt": "2026-11-17T22:42:16.254Z"
+    },
+    "tickKeys": [
+      "tick",
+      "gameTime",
+      "ball",
+      "players"
+    ],
+    "playerKeys": [
+      "playerId",
+      "name",
+      "team",
+      "x",
+      "y",
+      "xspeed",
+      "yspeed"
+    ],
+    "ballKeys": [
+      "x",
+      "y"
+    ]
+  },
+  "integrity": {
+    "samples": 21912,
+    "tickRange": [
+      1,
+      21912
+    ],
+    "uniqueTicks": 21912,
+    "duplicates": 0,
+    "gaps": 0,
+    "missing": {},
+    "nonNumeric": {},
+    "events": 78,
+    "eventTypes": {
+      "playerKick": 61,
+      "goal": 8,
+      "positionReset": 8,
+      "gameStop": 1
+    },
+    "playerIds": [
+      1
+    ],
+    "teamChanges": [
+      {
+        "fromTick": 437,
+        "toTick": 438,
+        "fromTeam": 2,
+        "toTeam": 1
+      },
+      {
+        "fromTick": 2045,
+        "toTick": 2046,
+        "fromTeam": 1,
+        "toTeam": 2
+      },
+      {
+        "fromTick": 14139,
+        "toTick": 14140,
+        "fromTeam": 2,
+        "toTeam": 1
+      },
+      {
+        "fromTick": 15473,
+        "toTick": 15474,
+        "fromTeam": 1,
+        "toTeam": 2
+      },
+      {
+        "fromTick": 16840,
+        "toTick": 16841,
+        "fromTeam": 2,
+        "toTeam": 1
+      }
+    ],
+    "gameTimeRange": [
+      0,
+      233.45000000007792
+    ]
+  },
+  "sampling": {
+    "deltaGameTimeSeconds": {
+      "0": 16627,
+      "0.033333": 666,
+      "0.016667": 646,
+      "0.05": 3859,
+      "0.066667": 113
+    },
+    "zeroIntervals": 16627,
+    "zeroPercent": 75.88425904796678,
+    "exactRepeats": {
+      "player": 7937,
+      "ball": 16758,
+      "both": 7848
+    },
+    "withinZeroIntervals": {
+      "playerUnchanged": 7805,
+      "playerChanged": 8822,
+      "ballUnchanged": 16193,
+      "ballChanged": 434
+    },
+    "repeatRunLength": {
+      "n": 5833,
+      "min": 2,
+      "p10": 2,
+      "median": 2,
+      "p90": 3,
+      "p95": 3,
+      "max": 259,
+      "mean": 2.3454483113320763
+    },
+    "finding": "No strict alternating duplicate pattern: equal-time pairs often change player state or ball position. This proves gameTime does not uniquely identify a captured state; producer cause remains unknown."
+  },
+  "positionVelocity": {
+    "positiveDtPairs": 5284,
+    "displacementMagnitude": {
+      "n": 5284,
+      "min": 0,
+      "p10": 1.2870508925446378,
+      "median": 5.093623464686039,
+      "p90": 7.363287309347639,
+      "p95": 7.490000000000009,
+      "max": 10,
+      "mean": 4.6879736859864645
+    },
+    "meanVectorErrorOfDeltaPositionPerSecondVsEndpointVelocity": {
+      "n": 5284,
+      "min": 0,
+      "p10": 38.202942949461956,
+      "median": 116.30690112791362,
+      "p90": 144.1099999998827,
+      "p95": 146.05499999988083,
+      "max": 432.9462212850704,
+      "mean": 103.47226110192975
+    },
+    "bestFitVelocityScale": 40.00613118523726,
+    "method": "(position[i]-position[i-1])/delta gameTime compared to mean endpoint velocity; no alternative unit assumption."
+  },
+  "extreme": {
+    "maxRecordedSpeed": 688.298061089816,
+    "sample": {
+      "tick": 13471,
+      "gameTime": 163.73333333335577,
+      "x": 277.5,
+      "y": 0,
+      "xspeed": 662.97,
+      "yspeed": -185
+    }
+  },
+  "correlation": {
+    "telemetryStadium": "Big",
+    "replayStadium": "Small",
+    "telemetrySamples": 21912,
+    "replayFrames": 12368,
+    "telemetryDuration": 233.45000000007792,
+    "replayEndTimeMs": 206133.33333333334,
+    "sameMatch": false,
+    "reason": "Different stadiums and duration/cadence."
+  },
+  "limits": [
+    "Producer source code absent.",
+    "Equal gameTime can coexist with changed states; exact polling/timer reason is unknown.",
+    "No per-tick inputs, so movement phases cannot be isolated.",
+    "Velocity/position mismatch cannot calibrate physics until units and sample timing are known."
+  ],
+  "positionDiscontinuities": {
+    "threshold": 50,
+    "count": 13,
+    "resetAssociated": 8,
+    "teamChangeAssociated": 5,
+    "rows": [
+      {
+        "fromTick": 437,
+        "toTick": 438,
+        "distance": 512.4070121495216,
+        "teamChange": true,
+        "positionReset": false,
+        "fromTeam": 2,
+        "toTeam": 1,
+        "from": {
+          "x": 91.75,
+          "y": 25.94
+        },
+        "to": {
+          "x": -420,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 1174,
+        "toTick": 1175,
+        "distance": 632.0889558440331,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 1,
+        "toTeam": 1,
+        "from": {
+          "x": 326.91,
+          "y": 185
+        },
+        "to": {
+          "x": -277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 1.1368683772161603e-13
+      },
+      {
+        "fromTick": 2045,
+        "toTick": 2046,
+        "distance": 511.015588999005,
+        "teamChange": true,
+        "positionReset": false,
+        "fromTeam": 1,
+        "toTeam": 2,
+        "from": {
+          "x": -91.01,
+          "y": -2.39
+        },
+        "to": {
+          "x": 420,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 6855,
+        "toTick": 6856,
+        "distance": 158.42082091694894,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 2,
+        "toTeam": 2,
+        "from": {
+          "x": 227.64,
+          "y": 150.37
+        },
+        "to": {
+          "x": 277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 1.4210854715202004e-14
+      },
+      {
+        "fromTick": 10224,
+        "toTick": 10225,
+        "distance": 212.8439862904282,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 2,
+        "toTeam": 2,
+        "from": {
+          "x": 382.75,
+          "y": 185
+        },
+        "to": {
+          "x": 277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 13470,
+        "toTick": 13471,
+        "distance": 688.298061089816,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 2,
+        "toTeam": 2,
+        "from": {
+          "x": -385.47,
+          "y": 185
+        },
+        "to": {
+          "x": 277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 14139,
+        "toTick": 14140,
+        "distance": 468.65399795584796,
+        "teamChange": true,
+        "positionReset": false,
+        "fromTeam": 2,
+        "toTeam": 1,
+        "from": {
+          "x": 41.33,
+          "y": 82.53
+        },
+        "to": {
+          "x": -420,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 14862,
+        "toTick": 14863,
+        "distance": 362.52935660439965,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 1,
+        "toTeam": 1,
+        "from": {
+          "x": 46.62,
+          "y": 162.4
+        },
+        "to": {
+          "x": -277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 15473,
+        "toTick": 15474,
+        "distance": 511.6118554138479,
+        "teamChange": true,
+        "positionReset": false,
+        "fromTeam": 1,
+        "toTeam": 2,
+        "from": {
+          "x": -90.85,
+          "y": 27.91
+        },
+        "to": {
+          "x": 420,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 16187,
+        "toTick": 16188,
+        "distance": 494.36483784751516,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 2,
+        "toTeam": 2,
+        "from": {
+          "x": -192.02,
+          "y": 154.75
+        },
+        "to": {
+          "x": 277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 16840,
+        "toTick": 16841,
+        "distance": 510.95310283821556,
+        "teamChange": true,
+        "positionReset": false,
+        "fromTeam": 2,
+        "toTeam": 1,
+        "from": {
+          "x": 89.18,
+          "y": 42.53
+        },
+        "to": {
+          "x": -420,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      },
+      {
+        "fromTick": 17658,
+        "toTick": 17659,
+        "distance": 99.65866244336215,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 1,
+        "toTeam": 1,
+        "from": {
+          "x": -258.19,
+          "y": 97.77
+        },
+        "to": {
+          "x": -277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 3.552713678800501e-15
+      },
+      {
+        "fromTick": 21512,
+        "toTick": 21513,
+        "distance": 145.35914591108465,
+        "teamChange": false,
+        "positionReset": true,
+        "fromTeam": 1,
+        "toTeam": 1,
+        "from": {
+          "x": -135.92,
+          "y": 32.93
+        },
+        "to": {
+          "x": -277.5,
+          "y": 0
+        },
+        "velocityEqualsPositionDeltaWithin002": true,
+        "velocityDeltaError": 0
+      }
+    ],
+    "velocityDeltaMatchCount": 13,
+    "inference": "All 13 discontinuity destination velocities equal the per-sample position delta within 0.02 while gameTime delta is zero. This strongly suggests these extreme xspeed/yspeed values are capture-derived or reset artifacts, not usable instantaneous physical velocities; producer code is unavailable."
+  },
+  "resetEvents": [
+    {
+      "type": "positionReset",
+      "tick": 1174
+    },
+    {
+      "type": "positionReset",
+      "tick": 6855
+    },
+    {
+      "type": "positionReset",
+      "tick": 10224
+    },
+    {
+      "type": "positionReset",
+      "tick": 13470
+    },
+    {
+      "type": "positionReset",
+      "tick": 14862
+    },
+    {
+      "type": "positionReset",
+      "tick": 16187
+    },
+    {
+      "type": "positionReset",
+      "tick": 17658
+    },
+    {
+      "type": "positionReset",
+      "tick": 21512
+    }
+  ],
+  "conclusionUpdate": "Direct recomputation finds 13 >50-unit jumps (8 position resets and 5 team-change spawns). The earlier telemetry_analysis.json reported zero candidate jumps; that preliminary metric is inconsistent and is superseded by this audit. These are discontinuities, not movement samples."
+}

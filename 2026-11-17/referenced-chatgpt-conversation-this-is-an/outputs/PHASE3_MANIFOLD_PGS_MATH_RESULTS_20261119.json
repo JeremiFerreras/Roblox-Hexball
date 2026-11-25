@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "runtime": "functions.exec V8; independent JavaScript translation of the PGS equations, not Luau execution",
+  "luauRuntimeFound": false,
+  "studioExecuteLuau": "failed: target not reachable; no OnInvoke handler responded; no retry",
+  "scope": "synthetic normal constraints only; no TOI or stadium integration",
+  "deterministicPermutationCheck": true,
+  "tests": [
+    {"id":"isolated_normal","status":"PASS","pre":{"vx":0,"vy":10},"post":{"vx":0,"vy":-5},"impulse":15,"residual":0},
+    {"id":"orthogonal_corner","status":"PASS","pre":{"vx":20,"vy":20},"post":{"vx":0,"vy":0},"impulses":{"right":20,"top":20},"residual":0},
+    {"id":"opposing_normals","status":"PASS","pre":{"vx":20,"vy":0},"post":{"vx":0,"vy":0},"impulses":{"outer":20,"net":0},"residual":0},
+    {"id":"duplicate_same_surface","status":"PASS","deduplicated":true,"post":{"vx":-10,"vy":0},"impulse":30},
+    {"id":"redundant_same_direction","status":"PASS","post":{"vx":0,"vy":0},"impulses":{"surface_a":20,"surface_b":0}},
+    {"id":"nonconvergent_iteration_limit","status":"EXPECTED_FAILURE","reason":"constraint-residual","residual":0.3169872981077806,"iterations":1,"inputStatePreserved":true},
+    {"id":"invalid_nan","status":"EXPECTED_REJECTION","reason":"invalid-body-state"},
+    {"id":"invalid_zero_normal","status":"EXPECTED_REJECTION","reason":"invalid-normal-or-inverse-mass"},
+    {"id":"conflicting_duplicate_id","status":"EXPECTED_REJECTION","reason":"duplicate-surface-conflicting-normal"},
+    {"id":"determinism_permutation","status":"PASS","sameCanonicalResult":true}
+  ],
+  "implementationAudit": {
+    "stableOrdering": "bodyId, surfaceId, then normal components",
+    "accumulatedImpulse": "projected nonnegative lambda per unique constraint",
+    "duplicatePolicy": "same body/surface and equivalent normal deduplicates; conflicting normal rejects",
+    "redundantDifferentSurface": "retained; projected solve assigns zero incremental impulse when already satisfied",
+    "restitution": "single-contact target frozen from pre-solve normal velocity; multi-contact target zero",
+    "residual": "KKT gap against fixed target",
+    "nonfiniteChecks": "body, input normal/restitution, target, lambda and iterative velocity",
+    "failureMutation": "body velocity is committed only on convergence"
+  },
+  "notExecuted": ["Luau module itself","Studio physics","TOI integration","corner regression","wall-net regression","C_v10","S3 tick 4","goal net","high speed","A-F","S1","S2"]
+}

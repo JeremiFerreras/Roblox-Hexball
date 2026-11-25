@@ -1,0 +1,109 @@
+{
+  "replay": {
+    "sha256": "60a184ca3e33f763424960e407bc7d898cbf13a0a5e54eb85f811661e4d478d5",
+    "header": {
+      "magic": "HBR2",
+      "version": 3,
+      "frames": 12368
+    },
+    "readAllVersion": 3,
+    "totalFrames": 12368,
+    "stadium": {
+      "name": "Small",
+      "width": 420,
+      "height": 200
+    },
+    "initialPlayers": [
+      {
+        "playerId": 1,
+        "name": "Zeozato",
+        "team": 1,
+        "disc": {
+          "radius": 15,
+          "invMass": 0.5,
+          "damping": 0.96,
+          "bCoef": 0.5,
+          "cGroup": 4,
+          "cMask": 39
+        }
+      }
+    ]
+  },
+  "reconstruction": {
+    "classification": "reconstructed by independent Node-Haxball, not verified as official Haxball truth",
+    "framesCaptured": 12368,
+    "firstFrame": 1,
+    "lastFrame": 12368,
+    "duplicates": 0,
+    "gaps": 0,
+    "parseErrors": 0,
+    "eventJsonlRecords": 2770,
+    "callbackEvents": {
+      "onPlayerInputChange": 590,
+      "onCollisionDiscVsSegment": 833,
+      "onPlayerTeamChange": 5,
+      "onCollisionDiscVsDisc": 940,
+      "onCollisionDiscVsPlane": 364,
+      "onPlayerBallKick": 28,
+      "onTeamGoal": 5,
+      "onPositionsReset": 4,
+      "onGameEnd": 1
+    },
+    "readAllOperations": {
+      "3": 590,
+      "7": 1,
+      "12": 5,
+      "17": 69
+    },
+    "operationType": {
+      "SendAnnouncement": 0,
+      "SendChatIndicator": 1,
+      "CheckConsistency": 2,
+      "SendInput": 3,
+      "SendChat": 4,
+      "JoinRoom": 5,
+      "KickBanPlayer": 6,
+      "StartGame": 7,
+      "StopGame": 8,
+      "PauseResumeGame": 9,
+      "SetGamePlayLimit": 10,
+      "SetStadium": 11,
+      "SetPlayerTeam": 12,
+      "SetTeamsLock": 13,
+      "SetPlayerAdmin": 14,
+      "AutoTeams": 15,
+      "SetPlayerSync": 16,
+      "Ping": 17,
+      "SetAvatar": 18,
+      "SetTeamColors": 19,
+      "ReorderPlayers": 20,
+      "SetKickRateLimit": 21,
+      "SetHeadlessAvatar": 22,
+      "SetDiscProperties": 23,
+      "CustomEvent": 24,
+      "BinaryCustomEvent": 25,
+      "SetPlayerIdentity": 26
+    },
+    "playerDiskFrames": 12368,
+    "ballCandidateFrames": 12368,
+    "disksPerFrameRange": [
+      6,
+      6
+    ],
+    "integrity": {
+      "ticksBytes": 24438988,
+      "ticksSha256": "09f682072e04e51cf8f5af2a48924a710b7ab9eeb8a4b3791110776b7d690956",
+      "eventsBytes": 279247,
+      "metadataSha256": "e16f3daa1611b534f68574df9ea30886f17ce99315b5d5a2616d83a76ae97c24"
+    },
+    "note": "Rows are deep-cloned compact numeric snapshots from onGameTick; disc properties are mapped from Node-Haxball internal disc fields and are not an official-schema guarantee."
+  },
+  "telemetryComparison": {
+    "telemetryStadium": "Big",
+    "replayStadium": "Small",
+    "telemetryDurationSeconds": 233.45000000007792,
+    "replayDurationSeconds": 206.13333333333333,
+    "correlated": false,
+    "reason": "stadium and duration differ; separate sessions"
+  }
+}

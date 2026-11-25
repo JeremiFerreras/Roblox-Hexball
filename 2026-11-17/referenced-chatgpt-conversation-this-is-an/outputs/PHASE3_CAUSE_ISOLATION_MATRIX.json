@@ -1,0 +1,14 @@
+{
+ "schemaVersion":1,
+ "candidates":[
+  {"cause":"contact geometry is the Classic ball-area top at y=170, center tangent y=160","status":"STRONGLY_SUPPORTED","evidence":"HBS plane n=(0,-1), dist=-170; radius 10; Oracle tick4 center y=160; other top/bottom plane is far away","test":"static geometric correspondence from supplied telemetry","remaining":"internal Node planeId mapping not proven"},
+  {"cause":"Node callback planeId=1 directly identifies HBS plane array entry","status":"UNKNOWN","evidence":"callback ID is 1; no mapping table found; HBS candidate zero-based index 5","test":"none","remaining":"inspect version-specific ID allocator/callback arguments and instrument mapping"},
+  {"cause":"same geometric normal/offset used by both engines","status":"STRONGLY_SUPPORTED","evidence":"HBS and Studio profile candidate both n=(0,-1), offset/dist=-170 in logical coordinates","test":"source/telemetry comparison","remaining":"effective converted Node structure not captured at callback"},
+  {"cause":"different effective bCoef explains vy=0","status":"POSSIBLE","evidence":"Core uses ball 0.5 * plane 1 and outputs reflected normal velocity; HBS ball-area plane omits bCoef; Node public capture does not expose effective plane bCoef","test":"none isolated","remaining":"do not assign omitted HBS field a default without source proof"},
+  {"cause":"active-profile outer-plane bCoef mismatch explains first tick4 contact","status":"REJECTED","evidence":"first contact geometrically at y=160 on ball-area top, not outer y=200; outer mismatch 0.1 vs HBS 0 is real but not this first surface","test":"geometric bounds check"},
+  {"cause":"different solver chronology contributes to scenario3 difference","status":"POSSIBLE","evidence":"source audit shows one-pass Nago versus adaptive Core substeps; may affect within-tick contact state","test":"source comparison only","remaining":"isolated same-state benchmark"},
+  {"cause":"different normal orientation causes observed response","status":"REJECTED_FOR_CANDIDATE_GEOMETRY","evidence":"both candidate HBS and Core normals are (0,-1)","test":"definition comparison","remaining":"verify Node conversion/selected plane"},
+  {"cause":"player collision/interference","status":"REJECTED","evidence":"prior controls report same ball path with 0,2,6 players; tick4 players are distant" ,"test":"prior recorded controls"},
+  {"cause":"official Haxball client behavior established","status":"UNKNOWN","evidence":"oracle is independent Node-HaxBall reconstruction","test":"none"}
+ ]
+}

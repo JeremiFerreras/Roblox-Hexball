@@ -1,0 +1,53 @@
+{
+  "status": "BLOCKED_EXACT_VERSION_NOT_AVAILABLE_LOCALLY",
+  "requestedVersion": "2.3.0",
+  "lockfile": {
+    "lockfileVersion": 3,
+    "version": "2.3.0",
+    "resolved": "https://registry.npmjs.org/node-haxball/-/node-haxball-2.3.0.tgz",
+    "integrity": "sha512-fSxZFWuDSckKK1JBKVRATXcnXR5lZV4ae3Jf6yr+FxxKE86Yore/xidVR1Sq+ZgrERtHSe0rtcgWo3uauJKlgw=="
+  },
+  "oracleMethod": "Room.sandbox; select default stadium by name; join/team players; startGame; copy gameState; set physicsState.discs[0].I velocity; call gs.runSteps(1) once per captured position.",
+  "localEnvironment": {
+    "nodeVersion": "v24.22.3",
+    "requireResolveNodeHaxball": false,
+    "availableSourceVersion": "2.3.1",
+    "sourceMatchesRequestedVersion": false,
+    "runtimeDependenciesFound": {
+      "pako": false,
+      "json5": false,
+      "nodeDatachannel": false,
+      "ws": false,
+      "nodeFetch": false
+    },
+    "nodeModulesDirectoriesFound": 0
+  },
+  "execution": {
+    "replayOfOracle": false,
+    "reason": "The exact 2.3.0 package/tarball is not present locally. The only source copy is 2.3.1; require.resolve(node-haxball) fails and its runtime dependencies are absent. Download/install was not attempted under the local-only constraints.",
+    "whatWasAudited": "Existing fixture, oracle source and stored Studio comparison only; no new 2.3.0 trajectory was generated."
+  },
+  "claimBoundary": "Fixture is a Node-Haxball reference, not a fresh reproduction and not a direct official-client measurement.",
+  "stadiumComparison": {
+    "haxballGymVendoredClassic": {
+      "path": "HaxballGym-master/haxballgym/haxballgym/stadiums/classic.hbs",
+      "sha256": "bca8d6dee0ceb78c3beaf0b44b390f92fe540b18f714b61dc48fd577b39850ea",
+      "bytes": 2817,
+      "width": 420,
+      "height": 200,
+      "spawnDistance": 277.5,
+      "planes": 6,
+      "segments": 14,
+      "postDiscs": 4
+    },
+    "studioFrozenProfile": {
+      "commit": "4b9724f49fe0ff87ad3f111eb91b208020d96d73",
+      "spawnDistance": 170,
+      "planes": 6,
+      "segments": 14,
+      "posts": 4
+    },
+    "oracleDefaultClassicSerializedInFixture": false,
+    "interpretation": "Geometry counts agree, but spawnDistance metadata differs and the exact Node-Haxball default stadium serialization is absent. This prevents asserting identical full initial setup."
+  }
+}

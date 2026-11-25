@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "instrumentedOutputSha256": "74e7e0f832a6e91d17765f1419199374209c5ebe7156ae26bc80355d67765ca8",
+    "package": "node-haxball 2.3.0",
+    "instrumentedApiSha256": "7BA2315DBE8DF0F35645B7D289E69F8550108E4AAC4B89F6B9F6FA6904CEBD9F",
+    "baselineOutputSha256": "74e7e0f832a6e91d17765f1419199374209c5ebe7156ae26bc80355d67765ca8"
+  },
+  "scenario": 3,
+  "tick": 4,
+  "meaning": "Observed plane branch pre/post snapshots. HBS runtime plane index passed as callback planeId.",
+  "operations": [
+    {
+      "phase": "pre",
+      "scenario": 3,
+      "tick": 4,
+      "discIndex": 0,
+      "planeIndex": 1,
+      "disc": {
+        "x": 157.61596,
+        "y": 197.01995,
+        "vx": 38.423840399999996,
+        "vy": 48.0298005,
+        "radius": 10,
+        "bCoef": 0.5,
+        "invMass": 1
+      },
+      "plane": {
+        "normalX": 0,
+        "normalY": -1,
+        "offset": -200,
+        "bCoef": 0
+      },
+      "penetration": 7.019949999999994,
+      "normalSpeedBefore": -48.0298005
+    },
+    {
+      "phase": "post",
+      "scenario": 3,
+      "tick": 4,
+      "discIndex": 0,
+      "planeIndex": 1,
+      "disc": {
+        "x": 157.61596,
+        "y": 190,
+        "vx": 38.423840399999996,
+        "vy": 0,
+        "radius": 10,
+        "bCoef": 0.5,
+        "invMass": 1
+      },
+      "plane": {
+        "normalX": 0,
+        "normalY": -1,
+        "offset": -200,
+        "bCoef": 0
+      },
+      "normalImpulseTerm": -48.0298005,
+      "normalSpeedAfter": 0
+    },
+    {
+      "phase": "pre",
+      "scenario": 3,
+      "tick": 4,
+      "discIndex": 0,
+      "planeIndex": 5,
+      "disc": {
+        "x": 157.61596,
+        "y": 190,
+        "vx": 38.423840399999996,
+        "vy": 0,
+        "radius": 10,
+        "bCoef": 0.5,
+        "invMass": 1
+      },
+      "plane": {
+        "normalX": 0,
+        "normalY": -1,
+        "offset": -170,
+        "bCoef": 1
+      },
+      "penetration": 30,
+      "normalSpeedBefore": 0
+    },
+    {
+      "phase": "post",
+      "scenario": 3,
+      "tick": 4,
+      "discIndex": 0,
+      "planeIndex": 5,
+      "disc": {
+        "x": 157.61596,
+        "y": 160,
+        "vx": 38.423840399999996,
+        "vy": 0,
+        "radius": 10,
+        "bCoef": 0.5,
+        "invMass": 1
+      },
+      "plane": {
+        "normalX": 0,
+        "normalY": -1,
+        "offset": -170,
+        "bCoef": 1
+      },
+      "normalImpulseTerm": 0,
+      "normalSpeedAfter": 0
+    }
+  ]
+}

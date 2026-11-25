@@ -1,0 +1,1427 @@
+{
+  "schemaVersion": 1,
+  "scope": "Tick 4 only; exact post-tick-3 state from preserved S3. One ball and the two relevant planes; no player/post/segment contacts. Substep count or temporary plane-array order are the only run variants.",
+  "fixture": {
+    "tick": 4,
+    "seed": {
+      "y": 148.5049999999999,
+      "radius": 10,
+      "tick": 3,
+      "x": 118.80399999999997,
+      "vx": 38.81196,
+      "vy": 48.51495
+    },
+    "geometry": [
+      {
+        "id": "classic:ballArea:top",
+        "normalX": 0,
+        "normalY": -1,
+        "offset": -170,
+        "bCoef": 1,
+        "collisionGroup": 32,
+        "collisionMask": 1
+      },
+      {
+        "id": "classic:outer:top",
+        "normalX": 0,
+        "normalY": -1,
+        "offset": -200,
+        "bCoef": 0.1,
+        "collisionGroup": 32,
+        "collisionMask": 63
+      }
+    ],
+    "ball": {
+      "radius": 10,
+      "invMass": 1,
+      "bCoef": 0.5,
+      "damping": 0.99,
+      "collisionGroup": 1,
+      "collisionMask": 63
+    }
+  },
+  "variants": {
+    "substeps_1": {
+      "state": {
+        "y": 160,
+        "x": 157.61595999999997,
+        "vx": 38.423840399999996,
+        "vy": -24.01490025
+      },
+      "events": {
+        "1": {
+          "normalY": -1,
+          "normalX": 0,
+          "discId": "ball",
+          "tick": 4,
+          "penetration": 37.01994999999991,
+          "kind": "planeContact",
+          "impulse": 72.772425,
+          "geometryId": "classic:ballArea:top"
+        }
+      },
+      "requestedSubsteps": 1,
+      "planeOrder": {
+        "1": "classic:ballArea:top",
+        "2": "classic:outer:top"
+      },
+      "properties": {
+        "damping": 0.99,
+        "ballBCoef": 0.5,
+        "outerTopBCoef": 0.1,
+        "innerTopBCoef": 1
+      },
+      "substeps": 1,
+      "timeline": [
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "tick_start",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "after_input",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "phase": "substep_count",
+          "y": 148.5049999999999,
+          "dtPerSubstep": 1,
+          "substep": 0,
+          "tick": 4,
+          "x": 118.80399999999997,
+          "substeps": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 197.0199499999999,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": 37.01994999999991,
+            "outerTopPenetration": 7.019949999999909,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "offset": -170,
+          "normalX": 0,
+          "positionCorrection": {
+            "y": -37.01994999999991,
+            "x": 0
+          },
+          "planeOrder": 1,
+          "phase": "plane_contact",
+          "normalY": -1,
+          "post": {
+            "y": 160,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "bCoef": 1,
+          "penetration": 37.01994999999991,
+          "substep": 1,
+          "pre": {
+            "y": 197.0199499999999,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": 48.51495
+          },
+          "tick": 4,
+          "deltaVelocity": {
+            "y": -72.772425,
+            "x": 0
+          },
+          "planeId": "classic:ballArea:top"
+        },
+        {
+          "damping": 0.99,
+          "phase": "after_tick_damping",
+          "y": 160,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "before": {
+            "y": 160,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "substep": 1,
+          "vx": 38.423840399999996,
+          "vy": -24.01490025
+        }
+      ]
+    },
+    "substeps_2": {
+      "state": {
+        "y": 147.8712625,
+        "x": 157.61595999999997,
+        "vx": 38.423840399999996,
+        "vy": -24.01490025
+      },
+      "events": {
+        "1": {
+          "normalY": -1,
+          "normalX": 0,
+          "discId": "ball",
+          "tick": 4,
+          "penetration": 12.76247499999991,
+          "kind": "planeContact",
+          "impulse": 72.772425,
+          "geometryId": "classic:ballArea:top"
+        }
+      },
+      "requestedSubsteps": 2,
+      "planeOrder": {
+        "1": "classic:ballArea:top",
+        "2": "classic:outer:top"
+      },
+      "properties": {
+        "damping": 0.99,
+        "ballBCoef": 0.5,
+        "outerTopBCoef": 0.1,
+        "innerTopBCoef": 1
+      },
+      "substeps": 2,
+      "timeline": [
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "tick_start",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "after_input",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "phase": "substep_count",
+          "y": 148.5049999999999,
+          "dtPerSubstep": 0.5,
+          "substep": 0,
+          "tick": 4,
+          "x": 118.80399999999997,
+          "substeps": 2,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 172.7624749999999,
+          "x": 138.20997999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": 12.76247499999991,
+            "outerTopPenetration": -17.23752500000009,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "offset": -170,
+          "normalX": 0,
+          "positionCorrection": {
+            "y": -12.76247499999991,
+            "x": 0
+          },
+          "planeOrder": 1,
+          "phase": "plane_contact",
+          "normalY": -1,
+          "post": {
+            "y": 160,
+            "x": 138.20997999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "bCoef": 1,
+          "penetration": 12.76247499999991,
+          "substep": 1,
+          "pre": {
+            "y": 172.7624749999999,
+            "x": 138.20997999999997,
+            "vx": 38.81196,
+            "vy": 48.51495
+          },
+          "tick": 4,
+          "deltaVelocity": {
+            "y": -72.772425,
+            "x": 0
+          },
+          "planeId": "classic:ballArea:top"
+        },
+        {
+          "y": 160,
+          "x": 138.20997999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 147.8712625,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -12.1287375,
+            "outerTopPenetration": -42.1287375,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "damping": 0.99,
+          "phase": "after_tick_damping",
+          "y": 147.8712625,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "before": {
+            "y": 147.8712625,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "substep": 2,
+          "vx": 38.423840399999996,
+          "vy": -24.01490025
+        }
+      ]
+    },
+    "substeps_4": {
+      "state": {
+        "y": 141.80689375,
+        "x": 157.61595999999997,
+        "vx": 38.423840399999996,
+        "vy": -24.01490025
+      },
+      "events": {
+        "1": {
+          "normalY": -1,
+          "normalX": 0,
+          "discId": "ball",
+          "tick": 4,
+          "penetration": 0.6337374999999099,
+          "kind": "planeContact",
+          "impulse": 72.772425,
+          "geometryId": "classic:ballArea:top"
+        }
+      },
+      "requestedSubsteps": 4,
+      "planeOrder": {
+        "1": "classic:ballArea:top",
+        "2": "classic:outer:top"
+      },
+      "properties": {
+        "damping": 0.99,
+        "ballBCoef": 0.5,
+        "outerTopBCoef": 0.1,
+        "innerTopBCoef": 1
+      },
+      "substeps": 4,
+      "timeline": [
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "tick_start",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "after_input",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "phase": "substep_count",
+          "y": 148.5049999999999,
+          "dtPerSubstep": 0.25,
+          "substep": 0,
+          "tick": 4,
+          "x": 118.80399999999997,
+          "substeps": 4,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 160.6337374999999,
+          "x": 128.50698999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": 0.6337374999999099,
+            "outerTopPenetration": -29.36626250000009,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "offset": -170,
+          "normalX": 0,
+          "positionCorrection": {
+            "y": -0.6337374999999099,
+            "x": 0
+          },
+          "planeOrder": 1,
+          "phase": "plane_contact",
+          "normalY": -1,
+          "post": {
+            "y": 160,
+            "x": 128.50698999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "bCoef": 1,
+          "penetration": 0.6337374999999099,
+          "substep": 1,
+          "pre": {
+            "y": 160.6337374999999,
+            "x": 128.50698999999997,
+            "vx": 38.81196,
+            "vy": 48.51495
+          },
+          "tick": 4,
+          "deltaVelocity": {
+            "y": -72.772425,
+            "x": 0
+          },
+          "planeId": "classic:ballArea:top"
+        },
+        {
+          "y": 160,
+          "x": 128.50698999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 153.93563125,
+          "x": 138.20997999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -6.06436875,
+            "outerTopPenetration": -36.06436875,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 153.93563125,
+          "x": 138.20997999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 3,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 147.8712625,
+          "x": 147.91296999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 3,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -12.1287375,
+            "outerTopPenetration": -42.1287375,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 147.8712625,
+          "x": 147.91296999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 4,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 141.80689375,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 4,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -18.19310625,
+            "outerTopPenetration": -48.19310625,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "damping": 0.99,
+          "phase": "after_tick_damping",
+          "y": 141.80689375,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "before": {
+            "y": 141.80689375,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "substep": 4,
+          "vx": 38.423840399999996,
+          "vy": -24.01490025
+        }
+      ]
+    },
+    "substeps_8": {
+      "state": {
+        "y": 141.80689375000009,
+        "x": 157.61595999999997,
+        "vx": 38.423840399999996,
+        "vy": -24.01490025
+      },
+      "events": {
+        "1": {
+          "normalY": -1,
+          "normalX": 0,
+          "discId": "ball",
+          "tick": 4,
+          "penetration": 0.6337374999999099,
+          "kind": "planeContact",
+          "impulse": 72.772425,
+          "geometryId": "classic:ballArea:top"
+        }
+      },
+      "requestedSubsteps": 8,
+      "planeOrder": {
+        "1": "classic:ballArea:top",
+        "2": "classic:outer:top"
+      },
+      "properties": {
+        "damping": 0.99,
+        "ballBCoef": 0.5,
+        "outerTopBCoef": 0.1,
+        "innerTopBCoef": 1
+      },
+      "substeps": 8,
+      "timeline": [
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "tick_start",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "after_input",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "phase": "substep_count",
+          "y": 148.5049999999999,
+          "dtPerSubstep": 0.125,
+          "substep": 0,
+          "tick": 4,
+          "x": 118.80399999999997,
+          "substeps": 8,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 154.5693687499999,
+          "x": 123.65549499999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -5.43063125000009,
+            "outerTopPenetration": -35.43063125000009,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 154.5693687499999,
+          "x": 123.65549499999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 160.6337374999999,
+          "x": 128.50698999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": 0.6337374999999099,
+            "outerTopPenetration": -29.36626250000009,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "offset": -170,
+          "normalX": 0,
+          "positionCorrection": {
+            "y": -0.6337374999999099,
+            "x": 0
+          },
+          "planeOrder": 1,
+          "phase": "plane_contact",
+          "normalY": -1,
+          "post": {
+            "y": 160,
+            "x": 128.50698999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "bCoef": 1,
+          "penetration": 0.6337374999999099,
+          "substep": 2,
+          "pre": {
+            "y": 160.6337374999999,
+            "x": 128.50698999999997,
+            "vx": 38.81196,
+            "vy": 48.51495
+          },
+          "tick": 4,
+          "deltaVelocity": {
+            "y": -72.772425,
+            "x": 0
+          },
+          "planeId": "classic:ballArea:top"
+        },
+        {
+          "y": 160,
+          "x": 128.50698999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 3,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 156.96781562500001,
+          "x": 133.35848499999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 3,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -3.0321843749999857,
+            "outerTopPenetration": -33.032184374999986,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 156.96781562500001,
+          "x": 133.35848499999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 4,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 153.93563125000003,
+          "x": 138.20997999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 4,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -6.064368749999971,
+            "outerTopPenetration": -36.06436874999997,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 153.93563125000003,
+          "x": 138.20997999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 5,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 150.90344687500004,
+          "x": 143.06147499999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 5,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -9.096553124999957,
+            "outerTopPenetration": -39.09655312499996,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 150.90344687500004,
+          "x": 143.06147499999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 6,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 147.87126250000006,
+          "x": 147.91296999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 6,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -12.128737499999943,
+            "outerTopPenetration": -42.12873749999994,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 147.87126250000006,
+          "x": 147.91296999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 7,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 144.83907812500007,
+          "x": 152.76446499999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 7,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -15.160921874999929,
+            "outerTopPenetration": -45.16092187499993,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 144.83907812500007,
+          "x": 152.76446499999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 8,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 141.80689375000009,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 8,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -18.193106249999914,
+            "outerTopPenetration": -48.193106249999914,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "damping": 0.99,
+          "phase": "after_tick_damping",
+          "y": 141.80689375000009,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "before": {
+            "y": 141.80689375000009,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "substep": 8,
+          "vx": 38.423840399999996,
+          "vy": -24.01490025
+        }
+      ]
+    },
+    "substeps_13": {
+      "state": {
+        "y": 143.2063634615385,
+        "x": 157.61596000000003,
+        "vx": 38.423840399999996,
+        "vy": -24.01490025
+      },
+      "events": {
+        "1": {
+          "normalY": -1,
+          "normalX": 0,
+          "discId": "ball",
+          "tick": 4,
+          "penetration": 3.432676923076798,
+          "kind": "planeContact",
+          "impulse": 72.772425,
+          "geometryId": "classic:ballArea:top"
+        }
+      },
+      "requestedSubsteps": 13,
+      "planeOrder": {
+        "1": "classic:ballArea:top",
+        "2": "classic:outer:top"
+      },
+      "properties": {
+        "damping": 0.99,
+        "ballBCoef": 0.5,
+        "outerTopBCoef": 0.1,
+        "innerTopBCoef": 1
+      },
+      "substeps": 13,
+      "timeline": [
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "tick_start",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "after_input",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "phase": "substep_count",
+          "y": 148.5049999999999,
+          "dtPerSubstep": 0.07692307692307693,
+          "substep": 0,
+          "tick": 4,
+          "x": 118.80399999999997,
+          "substeps": 13,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 152.23691923076913,
+          "x": 121.78953538461536,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -7.763080769230868,
+            "outerTopPenetration": -37.76308076923087,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 152.23691923076913,
+          "x": 121.78953538461536,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 155.96883846153835,
+          "x": 124.77507076923075,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 2,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -4.031161538461646,
+            "outerTopPenetration": -34.031161538461646,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 155.96883846153835,
+          "x": 124.77507076923075,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 3,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 159.70075769230758,
+          "x": 127.76060615384614,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 3,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -0.299242307692424,
+            "outerTopPenetration": -30.299242307692424,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 159.70075769230758,
+          "x": 127.76060615384614,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 4,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 163.4326769230768,
+          "x": 130.74614153846153,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 4,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": 3.432676923076798,
+            "outerTopPenetration": -26.567323076923202,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "offset": -170,
+          "normalX": 0,
+          "positionCorrection": {
+            "y": -3.432676923076798,
+            "x": 0
+          },
+          "planeOrder": 1,
+          "phase": "plane_contact",
+          "normalY": -1,
+          "post": {
+            "y": 160,
+            "x": 130.74614153846153,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "bCoef": 1,
+          "penetration": 3.432676923076798,
+          "substep": 4,
+          "pre": {
+            "y": 163.4326769230768,
+            "x": 130.74614153846153,
+            "vx": 38.81196,
+            "vy": 48.51495
+          },
+          "tick": 4,
+          "deltaVelocity": {
+            "y": -72.772425,
+            "x": 0
+          },
+          "planeId": "classic:ballArea:top"
+        },
+        {
+          "y": 160,
+          "x": 130.74614153846153,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 5,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 158.1340403846154,
+          "x": 133.73167692307692,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 5,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -1.865959615384611,
+            "outerTopPenetration": -31.86595961538461,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 158.1340403846154,
+          "x": 133.73167692307692,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 6,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 156.26808076923078,
+          "x": 136.7172123076923,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 6,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -3.731919230769222,
+            "outerTopPenetration": -33.73191923076922,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 156.26808076923078,
+          "x": 136.7172123076923,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 7,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 154.40212115384617,
+          "x": 139.7027476923077,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 7,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -5.597878846153833,
+            "outerTopPenetration": -35.59787884615383,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 154.40212115384617,
+          "x": 139.7027476923077,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 8,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 152.53616153846156,
+          "x": 142.68828307692308,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 8,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -7.463838461538444,
+            "outerTopPenetration": -37.463838461538444,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 152.53616153846156,
+          "x": 142.68828307692308,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 9,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 150.67020192307695,
+          "x": 145.67381846153847,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 9,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -9.329798076923055,
+            "outerTopPenetration": -39.329798076923055,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 150.67020192307695,
+          "x": 145.67381846153847,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 10,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 148.80424230769233,
+          "x": 148.65935384615386,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 10,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -11.195757692307666,
+            "outerTopPenetration": -41.195757692307666,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 148.80424230769233,
+          "x": 148.65935384615386,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 11,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 146.93828269230772,
+          "x": 151.64488923076925,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 11,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -13.061717307692277,
+            "outerTopPenetration": -43.06171730769228,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 146.93828269230772,
+          "x": 151.64488923076925,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 12,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 145.0723230769231,
+          "x": 154.63042461538464,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 12,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -14.927676923076888,
+            "outerTopPenetration": -44.92767692307689,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "y": 145.0723230769231,
+          "x": 154.63042461538464,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 13,
+          "vx": 38.81196,
+          "vy": -24.257475
+        },
+        {
+          "y": 143.2063634615385,
+          "x": 157.61596000000003,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 13,
+          "vx": 38.81196,
+          "vy": -24.257475,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": -16.7936365384615,
+            "outerTopPenetration": -46.7936365384615,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "damping": 0.99,
+          "phase": "after_tick_damping",
+          "y": 143.2063634615385,
+          "x": 157.61596000000003,
+          "tick": 4,
+          "before": {
+            "y": 143.2063634615385,
+            "x": 157.61596000000003,
+            "vx": 38.81196,
+            "vy": -24.257475
+          },
+          "substep": 13,
+          "vx": 38.423840399999996,
+          "vy": -24.01490025
+        }
+      ]
+    },
+    "one_step_NodeObservedOrder_currentProperties": {
+      "state": {
+        "y": 160,
+        "x": 157.61595999999997,
+        "vx": 38.423840399999996,
+        "vy": -2.4014900249999998
+      },
+      "events": {
+        "1": {
+          "normalY": -1,
+          "normalX": 0,
+          "discId": "ball",
+          "tick": 4,
+          "penetration": 7.019949999999909,
+          "kind": "planeContact",
+          "impulse": 50.9406975,
+          "geometryId": "classic:outer:top"
+        },
+        "2": {
+          "normalY": -1,
+          "normalX": 0,
+          "discId": "ball",
+          "tick": 4,
+          "penetration": 30,
+          "kind": "planeContact",
+          "impulse": 0,
+          "geometryId": "classic:ballArea:top"
+        }
+      },
+      "requestedSubsteps": 1,
+      "planeOrder": {
+        "1": "classic:outer:top",
+        "2": "classic:ballArea:top"
+      },
+      "properties": {
+        "damping": 0.99,
+        "ballBCoef": 0.5,
+        "outerTopBCoef": 0.1,
+        "innerTopBCoef": 1
+      },
+      "substeps": 1,
+      "timeline": [
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "tick_start",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "after_input",
+          "substep": 0,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "phase": "substep_count",
+          "y": 148.5049999999999,
+          "dtPerSubstep": 1,
+          "substep": 0,
+          "tick": 4,
+          "x": 118.80399999999997,
+          "substeps": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 148.5049999999999,
+          "x": 118.80399999999997,
+          "tick": 4,
+          "phase": "substep_start",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495
+        },
+        {
+          "y": 197.0199499999999,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "phase": "after_substep_motion",
+          "substep": 1,
+          "vx": 38.81196,
+          "vy": 48.51495,
+          "derivedPlaneProximity": {
+            "ballAreaTopPenetration": 37.01994999999991,
+            "outerTopPenetration": 7.019949999999909,
+            "source": "derived from observed y, radius 10, plane offsets -170/-200 and normal (0,-1)"
+          }
+        },
+        {
+          "offset": -200,
+          "normalX": 0,
+          "positionCorrection": {
+            "y": -7.019949999999909,
+            "x": 0
+          },
+          "planeOrder": 1,
+          "phase": "plane_contact",
+          "normalY": -1,
+          "post": {
+            "y": 190,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -2.4257475
+          },
+          "bCoef": 0.1,
+          "penetration": 7.019949999999909,
+          "substep": 1,
+          "pre": {
+            "y": 197.0199499999999,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": 48.51495
+          },
+          "tick": 4,
+          "deltaVelocity": {
+            "y": -50.9406975,
+            "x": 0
+          },
+          "planeId": "classic:outer:top"
+        },
+        {
+          "offset": -170,
+          "normalX": 0,
+          "positionCorrection": {
+            "y": -30,
+            "x": 0
+          },
+          "planeOrder": 2,
+          "phase": "plane_contact",
+          "normalY": -1,
+          "post": {
+            "y": 160,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -2.4257475
+          },
+          "bCoef": 1,
+          "penetration": 30,
+          "substep": 1,
+          "pre": {
+            "y": 190,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -2.4257475
+          },
+          "tick": 4,
+          "deltaVelocity": {
+            "y": 0,
+            "x": 0
+          },
+          "planeId": "classic:ballArea:top"
+        },
+        {
+          "damping": 0.99,
+          "phase": "after_tick_damping",
+          "y": 160,
+          "x": 157.61595999999997,
+          "tick": 4,
+          "before": {
+            "y": 160,
+            "x": 157.61595999999997,
+            "vx": 38.81196,
+            "vy": -2.4257475
+          },
+          "substep": 1,
+          "vx": 38.423840399999996,
+          "vy": -2.4014900249999998
+        }
+      ]
+    }
+  },
+  "validation": {
+    "twoFullHarnessRunsEquivalent": true,
+    "instrumentationVsProductiveCoreSameForCurrent13StepResult": true,
+    "geometryAndPhysicalPropertiesHeldConstant": true,
+    "onlySubstepCountVariedInSweep": true,
+    "NodeObservedPlaneArrayOrderTemporaryInFinalVariant": true
+  }
+}

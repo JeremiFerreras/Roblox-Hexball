@@ -1,0 +1,542 @@
+{
+  "schemaVersion": 1,
+  "versions": {
+    "studioCore": "live PhysicsCore2D in Edit, in-memory worlds",
+    "nodeHaxball": "2.3.0"
+  },
+  "setup": "One-ball, one-plane transient cases. Node uses cloned Classic physicsState with plane arrays reduced to the selected existing plane; PhysicsCore uses Core.newWorld/addDisc/addPlane. Same initial values, radius 10, ball bCoef .5, damping .99. Core applies adaptive substeps; Node E$ one solver pass.",
+  "cases": [
+    {
+      "id": "A_perpendicular",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 149,
+        "radius": 10,
+        "x": 100,
+        "vy": 50,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -24.75,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 10,
+        "y": 142.5,
+        "x": 100,
+        "vy": -24.75,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -17.5,
+        "x": 0,
+        "vy": 0.0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "B_oblique",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 149,
+        "radius": 10,
+        "x": 100,
+        "vy": 50,
+        "vx": 20
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 120,
+        "vy": -24.75,
+        "vx": 19.8
+      },
+      "physicsCore2D": {
+        "substeps": 11,
+        "y": 141.8181818182,
+        "x": 119.9999999999,
+        "vy": -24.75,
+        "vx": 19.8
+      },
+      "deltaCoreMinusNode": {
+        "y": -18.181818181799997,
+        "x": -1.000017846308765E-10,
+        "vy": 0.0,
+        "vx": 0.0
+      }
+    },
+    {
+      "id": "C_v10",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 150,
+        "radius": 10,
+        "x": 100,
+        "vy": 10,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 0,
+        "x": 100,
+        "vy": 9.9,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 2,
+        "y": 160,
+        "x": 100,
+        "vy": 9.9,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": 0,
+        "x": 0,
+        "vy": 0.0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "C_v20",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 150,
+        "radius": 10,
+        "x": 100,
+        "vy": 20,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -9.900000000000002,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 4,
+        "y": 157.5,
+        "x": 100,
+        "vy": -9.9,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -2.5,
+        "x": 0,
+        "vy": 1.7763568394002505E-15,
+        "vx": 0
+      }
+    },
+    {
+      "id": "C_v40",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 150,
+        "radius": 10,
+        "x": 100,
+        "vy": 40,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -19.800000000000004,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 8,
+        "y": 147.5,
+        "x": 100,
+        "vy": -19.8,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -12.5,
+        "x": 0,
+        "vy": 3.552713678800501E-15,
+        "vx": 0
+      }
+    },
+    {
+      "id": "C_v50",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 150,
+        "radius": 10,
+        "x": 100,
+        "vy": 50,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -24.75,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 10,
+        "y": 142.5,
+        "x": 100,
+        "vy": -24.75,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -17.5,
+        "x": 0,
+        "vy": 0.0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "D_y140",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 140,
+        "radius": 10,
+        "x": 100,
+        "vy": 20,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 0,
+        "x": 100,
+        "vy": 19.8,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 4,
+        "y": 160,
+        "x": 100,
+        "vy": 19.8,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": 0,
+        "x": 0,
+        "vy": 0.0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "D_y148.5",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 148.5,
+        "radius": 10,
+        "x": 100,
+        "vy": 20,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -9.900000000000002,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 4,
+        "y": 157.5,
+        "x": 100,
+        "vy": -9.9,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -2.5,
+        "x": 0,
+        "vy": 1.7763568394002505E-15,
+        "vx": 0
+      }
+    },
+    {
+      "id": "D_y155",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 155,
+        "radius": 10,
+        "x": 100,
+        "vy": 20,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -9.900000000000002,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 4,
+        "y": 155,
+        "x": 100,
+        "vy": -9.9,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -5,
+        "x": 0,
+        "vy": 1.7763568394002505E-15,
+        "vx": 0
+      }
+    },
+    {
+      "id": "E_planeB0",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 0
+      },
+      "initial": {
+        "y": 149,
+        "radius": 10,
+        "x": 100,
+        "vy": 50,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": 0,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 10,
+        "y": 160,
+        "x": 100,
+        "vy": 0,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": 0,
+        "x": 0,
+        "vy": 0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "E_planeB0.5",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 0.5
+      },
+      "initial": {
+        "y": 149,
+        "radius": 10,
+        "x": 100,
+        "vy": 50,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -12.375,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 10,
+        "y": 151.25,
+        "x": 100,
+        "vy": -12.375,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -8.75,
+        "x": 0,
+        "vy": 0.0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "E_planeB1",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 149,
+        "radius": 10,
+        "x": 100,
+        "vy": 50,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": -24.75,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 10,
+        "y": 142.5,
+        "x": 100,
+        "vy": -24.75,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -17.5,
+        "x": 0,
+        "vy": 0.0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "E_outerB0",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -200,
+        "bCoef": 0
+      },
+      "initial": {
+        "y": 190,
+        "radius": 10,
+        "x": 100,
+        "vy": 20,
+        "vx": 0
+      },
+      "node": {
+        "y": 190,
+        "callbackCount": 1,
+        "x": 100,
+        "vy": 0,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 4,
+        "y": 190,
+        "x": 100,
+        "vy": 0,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": 0,
+        "x": 0,
+        "vy": 0,
+        "vx": 0
+      }
+    },
+    {
+      "id": "F_opposite",
+      "geometry": {
+        "normal": {
+          "x": 0,
+          "y": -1
+        },
+        "offset": -170,
+        "bCoef": 1
+      },
+      "initial": {
+        "y": 180,
+        "radius": 10,
+        "x": 100,
+        "vy": -20,
+        "vx": 0
+      },
+      "node": {
+        "y": 160,
+        "callbackCount": 0,
+        "x": 100,
+        "vy": -19.8,
+        "vx": 0
+      },
+      "physicsCore2D": {
+        "substeps": 4,
+        "y": 145,
+        "x": 100,
+        "vy": -19.8,
+        "vx": 0
+      },
+      "deltaCoreMinusNode": {
+        "y": -15,
+        "x": 0,
+        "vy": 0.0,
+        "vx": 0
+      }
+    }
+  ]
+}

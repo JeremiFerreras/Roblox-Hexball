@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "generated": "2026-11-19",
+  "algorithm": "SHA-256",
+  "runtime": {
+    "name": "Official standalone Luau",
+    "version": "0.747",
+    "executableSha256": "ff0acf7d2df9d38e30c85ee9fe698efd756a920496c84ea848b74d0e2082e958",
+    "analyzeExitCode": 0
+  },
+  "execution": {
+    "runs": 2,
+    "rawAndRepeatByteIdentical": true,
+    "outputSha256": "ebb054278db31dff314e3767829b4495f9b8d545dcf9128b61e0e31cc8c98967",
+    "cases": 11520
+  },
+  "referenceNode": {
+    "package": "node-haxball",
+    "version": "2.3.0",
+    "tarballSha256": "d37c62e81f3f3c932eb5bb3b760e7d1e39347c686a4d9212c2f30633fc3183d9",
+    "sourceFiles": [
+      {
+        "file": "src\\api.js",
+        "sha256": "c7214def0fafab88eaab8ddc217c28af322d4d4c176fa3e259e56ba492b656b9"
+      },
+      {
+        "file": "package.json",
+        "sha256": "2395f5afddc025a4852bb6a8a7deb6d4d6c0984ebe7ebf768403b888a6ab2cb9"
+      }
+    ],
+    "fixtureSha256": "74e7e0f832a6e91d17765f1419199374209c5ebe7156ae26bc80355d67765ca8"
+  },
+  "outputs": [
+    {
+      "file": "PHASE3_PGS_D_ISOLATED_20261119.luau",
+      "sha256": "dfbfa762b70ab014598c00a10ed9728d0a158876978d3c18de4b83e89309d942",
+      "bytes": 8486
+    },
+    {
+      "file": "PHASE3_PGS_D_FULL_GRID_HARNESS_20261119.luau",
+      "sha256": "d6615e29157b42e63be75181a9cef4596c68fd25003f26f479ea71399ab17663",
+      "bytes": 8381
+    },
+    {
+      "file": "PHASE3_PGS_D_RESULTS_SUMMARIZER_20261119.ps1",
+      "sha256": "e0416071f88d7818803f389f4cfb07b4ad8438103156187c02680c1c9431990f",
+      "bytes": 6945
+    },
+    {
+      "file": "PHASE3_PGS_D_FULL_GRID_RAW_20261119.txt",
+      "sha256": "ebb054278db31dff314e3767829b4495f9b8d545dcf9128b61e0e31cc8c98967",
+      "bytes": 3777517
+    },
+    {
+      "file": "PHASE3_PGS_D_FULL_GRID_REPEAT_20261119.txt",
+      "sha256": "ebb054278db31dff314e3767829b4495f9b8d545dcf9128b61e0e31cc8c98967",
+      "bytes": 3777517
+    },
+    {
+      "file": "PHASE3_PGS_D_FULL_GRID_RESULTS_20261119.json",
+      "sha256": "9c8ebd0621dd77b4ce201c11e87440cc6cf6d14719c7c6f9a9d80e9781f23767",
+      "bytes": 7547
+    },
+    {
+      "file": "PHASE3_PGS_D_GRID_COMPARISON_20261119.md",
+      "sha256": "db867a1f5d1acd7cce848efbd445eb515647459e757cfb14d9dd352792217552",
+      "bytes": 10534
+    },
+    {
+      "file": "PHASE3_NODE230_BCOEF_MATERIAL_AUDIT_20261119.md",
+      "sha256": "caf3e5d3ed570ca4d8bba473d0a6358c543c568d4555ec4d583e8fbe7d7e58d9",
+      "bytes": 5641
+    }
+  ]
+}

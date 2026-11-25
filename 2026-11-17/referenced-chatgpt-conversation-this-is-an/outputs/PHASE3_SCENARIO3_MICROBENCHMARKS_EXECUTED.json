@@ -1,0 +1,9 @@
+{
+ "status":"A_F_NOT_EXECUTED",
+ "oracle230Recovery":"SUCCESS; 2 runs byte-identical and expected fixture hash verified",
+ "reason":"Recovered nh_oracle.js is a trajectory replay harness. It does not construct matched one-plane cases or capture resolution-stage states in both Node-HaxBall and live PhysicsCore2D. A valid cross-engine benchmark needs a temporary Node harness plus in-memory Studio Core harness and synchronized conditions; no such pair was available in this recovery pass.",
+ "cases":{
+  "A_perpendicular":{"status":"NOT_RUN"},"B_oblique":{"status":"NOT_RUN"},"C_velocity_sweep":{"status":"NOT_RUN"},"D_distance_sweep":{"status":"NOT_RUN"},"E_bcoef_restitution":{"status":"NOT_RUN"},"F_opposite_side":{"status":"NOT_RUN"}},
+ "recoveredReplay":{"ticks":[180,180,180],"total":540,"runsByteIdentical":true,"sha256":"7d612957764a076d506f53c4dd8d7fd39381e3db261cb399a812f6eb7d110e37"},
+ "noPhysicalMeasurementsFabricated":true
+}

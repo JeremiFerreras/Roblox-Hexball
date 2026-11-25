@@ -1,0 +1,86 @@
+{
+  "status": "BLOCKED_NO_NEW_2_3_0_CAPTURE",
+  "sourceFixture": {
+    "class": "NODE_HAXBALL_REFERENCE",
+    "file": "outputs/hbr-extractor/results/analysis/nh_ball_trajectories.json",
+    "sha256": "7d612957764a076d506f53c4dd8d7fd39381e3db261cb399a812f6eb7d110e37",
+    "scenarios": 3,
+    "states": 540,
+    "fields": [
+      "scenario",
+      "stadium",
+      "n_red",
+      "n_blue",
+      "ball_vel",
+      "ticks",
+      "ball_traj positions"
+    ]
+  },
+  "newOracleCapture": {
+    "captured": false,
+    "reason": "Node-Haxball 2.3.0 and npm unavailable locally.",
+    "notCaptured": [
+      "per-tick player state",
+      "per-tick ball velocity",
+      "disc properties",
+      "input stream",
+      "kick/contact callbacks",
+      "goal/reset/game-state events",
+      "serialized default stadium"
+    ]
+  },
+  "perScenario": [
+    {
+      "index": 1,
+      "stadium": "classic",
+      "velocity": [
+        8,
+        55
+      ],
+      "steps": 180,
+      "positionSamples": 180,
+      "playerCounts": {
+        "red": 1,
+        "blue": 1
+      },
+      "capturedPlayerStates": 0,
+      "capturedVelocityStates": 0,
+      "capturedEvents": 0
+    },
+    {
+      "index": 2,
+      "stadium": "classic",
+      "velocity": [
+        -30,
+        45
+      ],
+      "steps": 180,
+      "positionSamples": 180,
+      "playerCounts": {
+        "red": 1,
+        "blue": 1
+      },
+      "capturedPlayerStates": 0,
+      "capturedVelocityStates": 0,
+      "capturedEvents": 0
+    },
+    {
+      "index": 3,
+      "stadium": "classic",
+      "velocity": [
+        40,
+        50
+      ],
+      "steps": 180,
+      "positionSamples": 180,
+      "playerCounts": {
+        "red": 3,
+        "blue": 3
+      },
+      "capturedPlayerStates": 0,
+      "capturedVelocityStates": 0,
+      "capturedEvents": 0
+    }
+  ],
+  "interpretation": "Reports actual data coverage and missing fields; does not fabricate expanded telemetry from positions."
+}

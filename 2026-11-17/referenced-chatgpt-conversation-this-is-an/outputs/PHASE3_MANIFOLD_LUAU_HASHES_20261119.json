@@ -1,0 +1,13 @@
+{
+  "algorithm":"SHA-256",
+  "artifacts":[
+    {"file":"PHASE3_CONTACT_MANIFOLD_PGS_PROTOTYPE_20261119.luau","bytes":4781,"sha256":"e60bca54d712e943422b98ce6da8bb53da8b6601cdf1844bc5ef88beb41020a4"},
+    {"file":"PHASE3_MANIFOLD_LUAU_TEST_RUNNER_20261119.luau","bytes":5264,"sha256":"cb3bcb9f647aeef3716f19dcee6a1f1febf6fc4237c347196f965c92643bb9d0"},
+    {"file":"PHASE3_MANIFOLD_LUAU_EXECUTION_LOG_20261119.txt","bytes":2522,"sha256":"098ea0b5bda5889cfb5dc6fbb920da7c52354fcaa4b6edde27a165437cf87998"},
+    {"file":"PHASE3_MANIFOLD_LUAU_RUNTIME_DIAGNOSTIC_20261119.md","bytes":1977,"sha256":"d31ac7a6a855e7bd096f312e133863dc3889e40ef85baaed4eb6a37f651ed6ca"},
+    {"file":"PHASE3_MANIFOLD_LUAU_TO_JS_COMPARISON_20261119.md","bytes":3010,"sha256":"d20280e43d81511f8a9f633e6a43ab690a305163a3d95291c388d0d8c22ffb37"},
+    {"file":"PHASE3_MANIFOLD_LUAU_TOI_NEXT_STAGE_PLAN_20261119.md","bytes":1711,"sha256":"35e3a3ad2b1532a3f55c957bb6fcd8ce2a6c5644b36b4f6921e282b04f7c86d6"},
+    {"file":"PHASE3_MANIFOLD_LUAU_RUNTIME_RESULTS_20261119.json","bytes":3818,"sha256":"45b1e18881fa998ec95fd7177d702fb8fc3a36dcd21c1395f847154d9e5885b9"}
+  ],
+  "officialLuauAsset":{"version":"0.747","asset":"luau-windows.zip","sha256":"16bbd26575e9a6a3ecd2bd5fc772a81f3232520b56a40a86f2b47fec576d7cc7","executableSHA256":"ff0acf7d2df9d38e30c85ee9fe698efd756a920496c84ea848b74d0e2082e958"}
+}

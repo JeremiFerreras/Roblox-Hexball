@@ -1,0 +1,506 @@
+{
+  "evidenceClass": "RECONSTRUIDO; callback counts MEDIDOS from event JSONL",
+  "totals": {
+    "discVsDisc": 940,
+    "discVsSegment": 833,
+    "discVsPlane": 364,
+    "discVsVertex": 0
+  },
+  "discPairCounts": {
+    "0-5": 865,
+    "0-3": 4,
+    "3-5": 4,
+    "2-5": 3,
+    "0-4": 6,
+    "4-5": 2,
+    "0-1": 20,
+    "1-5": 34,
+    "0-2": 2
+  },
+  "categories": {
+    "ballPlayer": 865,
+    "ballStadiumDiscs": 32,
+    "playerStadiumDiscs": 43,
+    "playerPlayer": "not observable; only one active player"
+  },
+  "segments": {
+    "count": 833,
+    "byDiscId": {
+      "0": 76,
+      "5": 757
+    },
+    "byGeometryId": {
+      "0": 16,
+      "1": 3,
+      "3": 44,
+      "4": 3,
+      "7": 30,
+      "8": 494,
+      "9": 233,
+      "10": 1,
+      "11": 3,
+      "12": 2,
+      "13": 4
+    },
+    "exampleArgs": [
+      5,
+      1,
+      8
+    ]
+  },
+  "planes": {
+    "count": 364,
+    "byDiscId": {
+      "0": 28,
+      "5": 336
+    },
+    "byGeometryId": {
+      "1": 205,
+      "2": 130,
+      "3": 1,
+      "4": 18,
+      "5": 10
+    },
+    "exampleArgs": [
+      0,
+      null,
+      4
+    ]
+  },
+  "vertices": {
+    "count": 0
+  },
+  "discIdentity": {
+    "0": "ball by radius/group metadata",
+    "5": "sole player disc playerId=1",
+    "1to4": "stadium discs"
+  },
+  "payload": {
+    "discVsDisc": "[discIdA,playerIdA|null,discIdB,playerIdB|null]",
+    "segmentPlane": "[discId,playerId|null,geometryIndex]",
+    "notProvided": [
+      "normal",
+      "penetration",
+      "impulse",
+      "force",
+      "solver iteration"
+    ]
+  },
+  "limits": [
+    "Repeated callbacks may describe persistent contacts, not distinct impacts.",
+    "No player-player evidence.",
+    "Geometry IDs need stadium array mapping; no normals or forces."
+  ],
+  "frameNeighborhoodVelocityChanges": {
+    "classification": "MEDIDO on reconstructed states; not an isolated impulse",
+    "method": "velocity at frame f-1 compared with frame f+1 around callback f; repeated callbacks may reuse overlapping windows",
+    "categories": {
+      "player-segment": {
+        "n": 757,
+        "examples": [
+          {
+            "frame": 165,
+            "discId": 5,
+            "velocityBefore": {
+              "x": -2.030285423800491,
+              "y": -0.48067512279674846
+            },
+            "velocityAfter": {
+              "x": -0.4034961051562398,
+              "y": 0.6738618354346934
+            },
+            "deltaVelocityMagnitude": 1.9948431204426416
+          },
+          {
+            "frame": 167,
+            "discId": 5,
+            "velocityBefore": {
+              "x": -0.4034961051562398,
+              "y": 0.6738618354346934
+            },
+            "velocityAfter": {
+              "x": -0.43521990373450326,
+              "y": 0.5443997698654446
+            },
+            "deltaVelocityMagnitude": 0.13329225715581045
+          },
+          {
+            "frame": 168,
+            "discId": 5,
+            "velocityBefore": {
+              "x": -0.4552385119438987,
+              "y": 0.579025111023397
+            },
+            "velocityAfter": {
+              "x": -0.41593626828028446,
+              "y": 0.5121525019342822
+            },
+            "deltaVelocityMagnitude": 0.07756682411559514
+          }
+        ],
+        "deltaVelocityMagnitude": {
+          "min": 0,
+          "median": 0.028670370098371718,
+          "p90": 0.12346424864784859,
+          "max": 2.5144987536104235,
+          "mean": 0.06794861668424092
+        },
+        "deltaSpeed": {
+          "min": -2.2749834152684834,
+          "median": 0.0029681104450891282,
+          "p90": 0.09368642583322173,
+          "max": 0.18284460462124275,
+          "mean": -0.011402049166830172
+        }
+      },
+      "ball-player": {
+        "n": 865,
+        "examples": [
+          {
+            "frame": 1062,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 0,
+              "y": 0
+            },
+            "velocityAfter": {
+              "x": 0.2861899649517032,
+              "y": -1.2617163934088946
+            },
+            "deltaVelocityMagnitude": 1.2937669625693051
+          },
+          {
+            "frame": 1075,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 0.2562368236062211,
+              "y": -1.1296629530443238
+            },
+            "velocityAfter": {
+              "x": 0.23975178860360083,
+              "y": -1.338217451357303
+            },
+            "deltaVelocityMagnitude": 0.20920500745827303
+          },
+          {
+            "frame": 1077,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 0.23975178860360083,
+              "y": -1.338217451357303
+            },
+            "velocityAfter": {
+              "x": 0.2325602575017392,
+              "y": -1.3429864522413117
+            },
+            "deltaVelocityMagnitude": 0.008629107081310245
+          }
+        ],
+        "deltaVelocityMagnitude": {
+          "min": 0.0004893494519706008,
+          "median": 0.020912424141818035,
+          "p90": 0.08172125927815213,
+          "max": 3.5004617715978856,
+          "mean": 0.08367603025294577
+        },
+        "deltaSpeed": {
+          "min": -2.4011390561950483,
+          "median": 0.008863347077787687,
+          "p90": 0.037134996161226175,
+          "max": 1.847432353923064,
+          "mean": 0.01891837359086636
+        }
+      },
+      "ball-plane": {
+        "n": 28,
+        "examples": [
+          {
+            "frame": 1148,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 0.08525749496594434,
+              "y": -1.0800301156610241
+            },
+            "velocityAfter": {
+              "x": 0.08356087081612205,
+              "y": 0.5292687581796849
+            },
+            "deltaVelocityMagnitude": 1.6092997681844363
+          },
+          {
+            "frame": 1405,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 0.2504301042311979,
+              "y": 1.4799215320737735
+            },
+            "velocityAfter": {
+              "x": 0.26666017325547603,
+              "y": -0.7341765319230764
+            },
+            "deltaVelocityMagnitude": 2.214157549077105
+          },
+          {
+            "frame": 2196,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 2.246255501831821,
+              "y": 3.2226853029341527
+            },
+            "velocityAfter": {
+              "x": 2.2015550173453677,
+              "y": -1.5792769327028817
+            },
+            "deltaVelocityMagnitude": 4.802170284964659
+          }
+        ],
+        "deltaVelocityMagnitude": {
+          "min": 0.16800281141085258,
+          "median": 3.481526651037314,
+          "p90": 7.109840468007039,
+          "max": 9.192226116286227,
+          "mean": 3.4535378096188607
+        },
+        "deltaSpeed": {
+          "min": -3.059822144475103,
+          "median": -0.7198570888753653,
+          "p90": -0.019962638167722146,
+          "max": 4.334369155483885,
+          "mean": -0.5644123912585826
+        }
+      },
+      "ball-segment": {
+        "n": 76,
+        "examples": [
+          {
+            "frame": 1735,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 1.3546818791010509,
+              "y": 0.07045729158222291
+            },
+            "velocityAfter": {
+              "x": -0.6638618548534698,
+              "y": 0.06905519147973668
+            },
+            "deltaVelocityMagnitude": 2.018544220910643
+          },
+          {
+            "frame": 2121,
+            "discId": 0,
+            "velocityBefore": {
+              "x": -1.430772253029054,
+              "y": 0.8980721284130699
+            },
+            "velocityAfter": {
+              "x": 0.3760482992794556,
+              "y": 0.8028708138535644
+            },
+            "deltaVelocityMagnitude": 1.8093268910117613
+          },
+          {
+            "frame": 2387,
+            "discId": 0,
+            "velocityBefore": {
+              "x": 2.075912334682667,
+              "y": 0.4760895521100483
+            },
+            "velocityAfter": {
+              "x": -1.017300839611241,
+              "y": 0.4666153700230583
+            },
+            "deltaVelocityMagnitude": 3.0932276834645736
+          }
+        ],
+        "deltaVelocityMagnitude": {
+          "min": 0.002569751357367341,
+          "median": 0.013134485323662294,
+          "p90": 2.018544220910643,
+          "max": 5.55992930507832,
+          "mean": 0.6392299567014375
+        },
+        "deltaSpeed": {
+          "min": -4.848577890339253,
+          "median": -0.005146572209106082,
+          "p90": 0.004925606096712221,
+          "max": 1.380591036811706,
+          "mean": -0.22597000941381779
+        }
+      },
+      "ball-other-disc": {
+        "n": 32,
+        "examples": [
+          {
+            "frame": 2121,
+            "discId": 0,
+            "velocityBefore": {
+              "x": -1.430772253029054,
+              "y": 0.8980721284130699
+            },
+            "velocityAfter": {
+              "x": 0.3760482992794556,
+              "y": 0.8028708138535644
+            },
+            "deltaVelocityMagnitude": 1.8093268910117613
+          },
+          {
+            "frame": 2122,
+            "discId": 0,
+            "velocityBefore": {
+              "x": -1.4255471038816467,
+              "y": 0.9258283990564533
+            },
+            "velocityAfter": {
+              "x": 0.6627714669337275,
+              "y": 0.5267738100393026
+            },
+            "deltaVelocityMagnitude": 2.126104187999265
+          },
+          {
+            "frame": 5388,
+            "discId": 0,
+            "velocityBefore": {
+              "x": -2.1024972172309364,
+              "y": 1.0439686893390476
+            },
+            "velocityAfter": {
+              "x": -0.1297811634080961,
+              "y": 1.6698801050609182
+            },
+            "deltaVelocityMagnitude": 2.0696313027545066
+          }
+        ],
+        "deltaVelocityMagnitude": {
+          "min": 0.002569751357367341,
+          "median": 0.17042915286926075,
+          "p90": 1.8093268910117613,
+          "max": 5.275841210910849,
+          "mean": 0.7972732637432428
+        },
+        "deltaSpeed": {
+          "min": -2.2466416551221764,
+          "median": -0.11118846855006037,
+          "p90": 0.008302691574635403,
+          "max": 3.9694385417883447,
+          "mean": -0.23470734582433844
+        }
+      },
+      "player-other-disc": {
+        "n": 43,
+        "examples": [
+          {
+            "frame": 2144,
+            "discId": 5,
+            "velocityBefore": {
+              "x": 0.3151023827462024,
+              "y": 0.9930415477071632
+            },
+            "velocityAfter": {
+              "x": 0.7859238210775659,
+              "y": 0.12993256118439545
+            },
+            "deltaVelocityMagnitude": 0.983173407598463
+          },
+          {
+            "frame": 2531,
+            "discId": 5,
+            "velocityBefore": {
+              "x": -0.8028191547346962,
+              "y": -1.1091779659254064
+            },
+            "velocityAfter": {
+              "x": -1.1178390051891924,
+              "y": -0.042785410829765835
+            },
+            "deltaVelocityMagnitude": 1.1119490041111517
+          },
+          {
+            "frame": 3322,
+            "discId": 5,
+            "velocityBefore": {
+              "x": 1.7439608805501463,
+              "y": 0.5703403547005023
+            },
+            "velocityAfter": {
+              "x": 1.5602455528403678,
+              "y": -0.5647032485431775
+            },
+            "deltaVelocityMagnitude": 1.1498153342602053
+          }
+        ],
+        "deltaVelocityMagnitude": {
+          "min": 0.016017240479327864,
+          "median": 0.06798718305278907,
+          "p90": 1.2478250207750765,
+          "max": 2.1300381616908575,
+          "mean": 0.36967447296762185
+        },
+        "deltaSpeed": {
+          "min": -0.8835652584501095,
+          "median": -0.043885625800545586,
+          "p90": 0.06446676027283021,
+          "max": 0.06751984131469427,
+          "mean": -0.11548489964222954
+        }
+      },
+      "player-plane": {
+        "n": 336,
+        "examples": [
+          {
+            "frame": 4497,
+            "discId": 5,
+            "velocityBefore": {
+              "x": -2.3706146117109324,
+              "y": 0
+            },
+            "velocityAfter": {
+              "x": 0,
+              "y": 0
+            },
+            "deltaVelocityMagnitude": 2.3706146117109324
+          },
+          {
+            "frame": 5922,
+            "discId": 5,
+            "velocityBefore": {
+              "x": 1.6580402815865387,
+              "y": 1.6260212512609948
+            },
+            "velocityAfter": {
+              "x": 1.661099135458215,
+              "y": 0
+            },
+            "deltaVelocityMagnitude": 1.626024128400123
+          },
+          {
+            "frame": 5923,
+            "discId": 5,
+            "velocityBefore": {
+              "x": 1.6596009213169858,
+              "y": 1.6288626522044636
+            },
+            "velocityAfter": {
+              "x": 1.6625374210337949,
+              "y": 0
+            },
+            "deltaVelocityMagnitude": 1.628865299150653
+          }
+        ],
+        "deltaVelocityMagnitude": {
+          "min": 0,
+          "median": 0.000009678378197541804,
+          "p90": 0.0022985680277725073,
+          "max": 2.3706146117109324,
+          "mean": 0.044919844722919204
+        },
+        "deltaSpeed": {
+          "min": -2.3706146117109324,
+          "median": 0.000006981881173206972,
+          "p90": 0.0016581630218204246,
+          "max": 0.11328286464654624,
+          "mean": -0.02913800681264894
+        }
+      }
+    }
+  }
+}

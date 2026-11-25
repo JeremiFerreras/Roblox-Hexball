@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "node": {
+    "version": "2.3.0",
+    "fixtureSha256": "7d612957764a076d506f53c4dd8d7fd39381e3db261cb399a812f6eb7d110e37",
+    "baselineOutputSha256": "74e7e0f832a6e91d17765f1419199374209c5ebe7156ae26bc80355d67765ca8",
+    "instrumentedOutputSha256": "74e7e0f832a6e91d17765f1419199374209c5ebe7156ae26bc80355d67765ca8",
+    "canonicalStateSha256Baseline": "c8d80b14ab068cc103fb992d76472df7a09c2fba03e30ed2be578ee149c42d8d",
+    "canonicalStateSha256Instrumented": "c8d80b14ab068cc103fb992d76472df7a09c2fba03e30ed2be578ee149c42d8d",
+    "repeatBaseline": true,
+    "repeatInstrumented": true,
+    "physicalOutputByteIdentical": true,
+    "temporalTraceDeterministic": true,
+    "contactTraceDeterministic": true
+  },
+  "core": {
+    "source": "Studio live PhysicsCore2D; transient source clones for probes",
+    "passiveInstrumentationEquivalent": true,
+    "repeatFullSerializationEqual": true,
+    "substepCounts": [
+      13,
+      8,
+      4,
+      2,
+      1
+    ],
+    "sourceAndGeometryHashes": "Source and fixture geometry are recorded separately; this SHA-256 covers the canonical full-precision Core state/trace JSON, not source code bytes."
+  },
+  "integrity": {
+    "canonicalization": "Recursive lexicographic key order, array order retained, full-precision JavaScript-number serialization, no rounded values.",
+    "canonicalCoreStatesFile": "PHASE3_TEMPORAL_CORE_CANONICAL_STATES_20261119.json",
+    "canonicalCoreStatesSha256": "2317843aa3a1be19c0a0a28598054ab97bdc8abe9ca961ca676c3d4836d6a82c",
+    "experimentResultsSha256": "0b8d8bc477cd6ecf389f74be089395f0fb1f809e8c50fa763c41d89b238ee43b",
+    "nodeTemporalTraceFileSha256": "e2d68ba80e565435e072029bc68b19d6ebeffaf02d8b2ce554159a516f6a1f37",
+    "coreTemporalExperimentFileSha256": "0b8d8bc477cd6ecf389f74be089395f0fb1f809e8c50fa763c41d89b238ee43b"
+  }
+}

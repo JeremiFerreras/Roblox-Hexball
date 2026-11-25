@@ -1,0 +1,15 @@
+{
+ "status":"NOT_RUN_IN_THIS_SESSION",
+ "reason":"Node-HaxBall 2.3.0 isolated executable installation and runnable fixture are not present in this workspace; the only checked-in source package is 2.3.1. No A-F outcomes are claimed.",
+ "cases":{
+  "A_perpendicular":{"status":"NOT_RUN","reason":"requires matched isolated harness in both engines"},
+  "B_oblique":{"status":"NOT_RUN"},
+  "C_velocity_sweep":{"status":"NOT_RUN"},
+  "D_initial_distance_sweep":{"status":"NOT_RUN"},
+  "E_bcoef_restitution_damping_ab":{"status":"NOT_RUN"},
+  "F_opposite_side":{"status":"NOT_RUN","reason":"HBS one-sided plane semantics need confirmation before interpreting reverse-side collision"}
+ },
+ "existing_scenario3_observation":{"tick":4,"oracle":{"x":157.61596,"y":160,"vx":38.4238404,"vy":0},"core":{"x":157.61596,"y":143.206363,"vx":38.4238404,"vy":-24.01490025},"priorDeterminismEvidence":"two byte-identical runs recorded in ORACLE_230_REPRODUCIBILITY.md; not repeated here"},
+ "controlledConditions":"No A-F result exists. Prior scenario is multi-player stadium fixture, but prior controls found the same ball path with 0/2/6 players.",
+ "units":"Haxball logical stadium units; logical tick 1/60 s"
+}
