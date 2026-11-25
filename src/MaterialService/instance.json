@@ -1,0 +1,419 @@
+{
+  "attributes": {
+    "class": "MaterialService",
+    "referent": "RBX63A8035A3C01465FB5795D817AD8EE60"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "AsphaltName"
+          },
+          "text": "Asphalt",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "BasaltName"
+          },
+          "text": "Basalt",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "BrickName"
+          },
+          "text": "Brick",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "CardboardName"
+          },
+          "text": "Cardboard",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "CarpetName"
+          },
+          "text": "Carpet",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "CeramicTilesName"
+          },
+          "text": "CeramicTiles",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "ClayRoofTilesName"
+          },
+          "text": "ClayRoofTiles",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "CobblestoneName"
+          },
+          "text": "Cobblestone",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "ConcreteName"
+          },
+          "text": "Concrete",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "CorrodedMetalName"
+          },
+          "text": "CorrodedMetal",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "CrackedLavaName"
+          },
+          "text": "CrackedLava",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "DiamondPlateName"
+          },
+          "text": "DiamondPlate",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "FabricName"
+          },
+          "text": "Fabric",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "FoilName"
+          },
+          "text": "Foil",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "GlacierName"
+          },
+          "text": "Glacier",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "GraniteName"
+          },
+          "text": "Granite",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "GrassName"
+          },
+          "text": "Grass",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "GroundName"
+          },
+          "text": "Ground",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "IceName"
+          },
+          "text": "Ice",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "LeafyGrassName"
+          },
+          "text": "LeafyGrass",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "LeatherName"
+          },
+          "text": "Leather",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "LimestoneName"
+          },
+          "text": "Limestone",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "MarbleName"
+          },
+          "text": "Marble",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "MetalName"
+          },
+          "text": "Metal",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "MudName"
+          },
+          "text": "Mud",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "PavementName"
+          },
+          "text": "Pavement",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "PebbleName"
+          },
+          "text": "Pebble",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "PlasterName"
+          },
+          "text": "Plaster",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "PlasticName"
+          },
+          "text": "Plastic",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "RockName"
+          },
+          "text": "Rock",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "RoofShinglesName"
+          },
+          "text": "RoofShingles",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "RubberName"
+          },
+          "text": "Rubber",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "SaltName"
+          },
+          "text": "Salt",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "SandName"
+          },
+          "text": "Sand",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "SandstoneName"
+          },
+          "text": "Sandstone",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "SlateName"
+          },
+          "text": "Slate",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "SmoothPlasticName"
+          },
+          "text": "SmoothPlastic",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "SnowName"
+          },
+          "text": "Snow",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Use2022MaterialsXml"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "WoodName"
+          },
+          "text": "Wood",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "WoodPlanksName"
+          },
+          "text": "WoodPlanks",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "MaterialService",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000389",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

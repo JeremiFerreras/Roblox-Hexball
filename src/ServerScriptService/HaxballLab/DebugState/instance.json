@@ -1,0 +1,91 @@
+{
+  "attributes": {
+    "class": "BindableFunction",
+    "referent": "RBX7FEC71678A8E4B0A894AEC02BB196B2B"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "DebugState",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "2a8c184ef8e375f00b0e761600000f94",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

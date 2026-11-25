@@ -1,0 +1,300 @@
+{
+  "attributes": {
+    "class": "SoundService",
+    "referent": "RBX64A350FD2E054FAD86E5F5AAF84E6176"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AcousticSimulationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AmbientReverb"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AudioApiByDefault"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "CharacterSoundsUseNewApi"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "DefaultListenerLocation"
+          },
+          "text": "3",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DiffractionEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "DistanceFactor"
+          },
+          "text": "3.32999992",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "DopplerScale"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "IsNewExpForAudioApiByDefault"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "CoordinateFrame",
+          "attributes": {
+            "name": "ListenerCFrame"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R00",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R01",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R02",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R10",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R11",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R12",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R20",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R21",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R22",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "ListenerObject"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ListenerType"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "OcclusionEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "RespectFilteringEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "ReverbEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "RolloffScale"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "VolumetricAudio"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "SoundService",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e29500000036d",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

@@ -1,0 +1,366 @@
+{
+  "attributes": {
+    "class": "AvatarAccessoryRules",
+    "referent": "RBX393A1062EF0640E4B3CE0EE957570C5E"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AccessoryMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "BackAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "CustomAccessoryMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomBackAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomBackAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomFaceAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomFaceAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomFrontAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomFrontAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomHairAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomHairAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomHeadAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomHeadAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomNeckAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomNeckAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomShoulderAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomShoulderAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomWaistAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomWaistAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "EnableEmissives"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "EnableSound"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "EnableSpawnEffects"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "EnableVFX"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "FaceAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "FrontAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "HairAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "HeadAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "LimitBounds"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LimitMethod"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "NeckAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "ShoulderAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "WaistAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarAccessoryRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "5a9239d8f0ae460b0b0fc61e00000407",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

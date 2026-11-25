@@ -1,0 +1,112 @@
+{
+  "attributes": {
+    "class": "AvatarRules",
+    "referent": "RBXC15A811700324EF7A2E58DA09B28964B"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t",
+      "children": [
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AvatarType"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "DefaultAvatarRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "5a9239d8f0ae460b0b0fc61e00000403",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [
+    "AvatarSettings/DefaultAvatarRules/AvatarBodyRules",
+    "AvatarSettings/DefaultAvatarRules/AvatarCollisionRules",
+    "AvatarSettings/DefaultAvatarRules/AvatarAnimationRules",
+    "AvatarSettings/DefaultAvatarRules/AvatarAccessoryRules",
+    "AvatarSettings/DefaultAvatarRules/AvatarClothingRules",
+    "AvatarSettings/DefaultAvatarRules/AvatarAbilityRules"
+  ],
+  "layout": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ]
+}

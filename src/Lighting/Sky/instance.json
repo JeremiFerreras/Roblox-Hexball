@@ -1,0 +1,270 @@
+{
+  "attributes": {
+    "class": "Sky",
+    "referent": "RBXC2D8065CDAE649899E174A25CEF87F06"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t",
+      "children": [
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CelestialBodiesShown"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "MoonAngularSize"
+          },
+          "text": "11",
+          "children": []
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "MoonTextureContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6444320592",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "SkyboxBackContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6444884337",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "SkyboxDownContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6444884785",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "SkyboxFrontContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6444884337",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "SkyboxLeftContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6444884337",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "SkyboxOrientation"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "SkyboxRightContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6444884337",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "SkyboxUpContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6412503613",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "StarCount"
+          },
+          "text": "3000",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "SunAngularSize"
+          },
+          "text": "11",
+          "children": []
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "SunTextureContent"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6196665106",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Sky",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "332039975",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e2950000003fa",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

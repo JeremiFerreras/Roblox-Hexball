@@ -1,0 +1,341 @@
+{
+  "attributes": {
+    "class": "Camera",
+    "referent": "RBXE8EBA3EF9F8E4E2C9F6878E71314B79B"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t",
+      "children": [
+        {
+          "tag": "CoordinateFrame",
+          "attributes": {
+            "name": "CFrame"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "-32.7624016",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "34.4810028",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "-145.33815",
+              "children": []
+            },
+            {
+              "tag": "R00",
+              "attributes": {},
+              "text": "-0.411149085",
+              "children": []
+            },
+            {
+              "tag": "R01",
+              "attributes": {},
+              "text": "-0.656100333",
+              "children": []
+            },
+            {
+              "tag": "R02",
+              "attributes": {},
+              "text": "0.632841825",
+              "children": []
+            },
+            {
+              "tag": "R10",
+              "attributes": {},
+              "text": "-0",
+              "children": []
+            },
+            {
+              "tag": "R11",
+              "attributes": {},
+              "text": "0.694234252",
+              "children": []
+            },
+            {
+              "tag": "R12",
+              "attributes": {},
+              "text": "0.719749093",
+              "children": []
+            },
+            {
+              "tag": "R20",
+              "attributes": {},
+              "text": "-0.911568105",
+              "children": []
+            },
+            {
+              "tag": "R21",
+              "attributes": {},
+              "text": "0.295924187",
+              "children": []
+            },
+            {
+              "tag": "R22",
+              "attributes": {},
+              "text": "-0.285433799",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "CameraSubject"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "CameraType"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FieldOfView"
+          },
+          "text": "70",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "FieldOfViewMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "CoordinateFrame",
+          "attributes": {
+            "name": "Focus"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "-34.0280724",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "33.0415192",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "-144.767288",
+              "children": []
+            },
+            {
+              "tag": "R00",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R01",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R02",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R10",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R11",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R12",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R20",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R21",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R22",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "HeadLocked"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "HeadScale"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "OrthographicMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "OrthographicSize"
+          },
+          "text": "35",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ProjectionType"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "VRTiltAndRollEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "ViewStretch"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Camera",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e2950000003e9",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

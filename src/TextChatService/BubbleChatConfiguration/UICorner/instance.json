@@ -1,0 +1,175 @@
+{
+  "attributes": {
+    "class": "UICorner",
+    "referent": "RBXDBA7B7E857CF4CC4AB57CF96C87D487B"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "BottomLeftRadius"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "12",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "BottomRightRadius"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "12",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "TopLeftRadius"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "12",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "TopRightRadius"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "12",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "UICorner",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000404",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

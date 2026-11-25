@@ -1,0 +1,139 @@
+{
+  "attributes": {
+    "class": "Script",
+    "referent": "RBXCDEE500B849A4FE692DA55F12C7202FC"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "ProtectedString",
+          "attributes": {
+            "name": "Source"
+          },
+          "text": null,
+          "children": [],
+          "sourceFile": "init.server.luau"
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Disabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "LinkedSource"
+          },
+          "text": null,
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RunContext"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "ScriptGuid"
+          },
+          "text": "{C39200C5-BEA9-440C-9C20-AEE94113C61C}",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "LabClient",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "2a8c184ef8e375f00b0e7616000009b8",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

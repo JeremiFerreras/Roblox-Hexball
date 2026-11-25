@@ -1,0 +1,177 @@
+{
+  "attributes": {
+    "class": "AvatarCollisionRules",
+    "referent": "RBXA47889DE574C49E089BCCCA92222DC46"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "BodyPartsCollidableOnDeath"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "CollisionMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "HitboxSize"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "2",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "5.5",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LegacyCollisionMode"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "SingleColliderSize"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "2",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "3",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "TouchAndQueryDetectionMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarCollisionRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "5a9239d8f0ae460b0b0fc61e00000405",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

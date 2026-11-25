@@ -1,0 +1,365 @@
+{
+  "attributes": {
+    "class": "Lighting",
+    "referent": "RBX6741D5F9E948405F8CFAF9E7CD363615"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "Ambient"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Brightness"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "ColorShift_Bottom"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "ColorShift_Top"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "EnvironmentDiffuseScale"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "EnvironmentSpecularScale"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "ExposureCompensation"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ExtendLightRangeTo120"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "FogColor"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0.752941251",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0.752941251",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0.752941251",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FogEnd"
+          },
+          "text": "100000",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FogStart"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "GeographicLatitude"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "GlobalShadows"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LightAttenuationMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LightingStyle"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "OutdoorAmbient"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0.274509817",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0.274509817",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0.274509817",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Outlines"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "PrioritizeLightingQuality"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "ShadowSoftness"
+          },
+          "text": "0.200000003",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Technology"
+          },
+          "text": "3",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "TimeOfDay"
+          },
+          "text": "14:30:00",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": "AgAAACYAAABSQlhfTGlnaHRpbmdUZWNobm9sb2d5VW5pZmllZE1pZ3JhdGlvbgMBIAAAAFJC\nWF9PcmlnaW5hbFRlY2hub2xvZ3lPbkZpbGVMb2FkBAMAAAA=",
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Lighting",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e2950000003e1",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [
+    "Lighting/Sky",
+    "Lighting/SunRays",
+    "Lighting/Atmosphere",
+    "Lighting/Bloom",
+    "Lighting/DepthOfField"
+  ],
+  "layout": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+  ]
+}

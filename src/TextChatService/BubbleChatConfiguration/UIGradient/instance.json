@@ -1,0 +1,168 @@
+{
+  "attributes": {
+    "class": "UIGradient",
+    "referent": "RBX9D6CAA0CDC6747DE93052A15DD1182AD"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "ColorSequence",
+          "attributes": {
+            "name": "Color"
+          },
+          "text": "0 1 1 1 0 1 1 1 1 0 ",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Enabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "Vector2",
+          "attributes": {
+            "name": "Offset"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Rotation"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Scale"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "TileMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "NumberSequence",
+          "attributes": {
+            "name": "Transparency"
+          },
+          "text": "0 0 0 1 0 0 ",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Type"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "UIGradient",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000402",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

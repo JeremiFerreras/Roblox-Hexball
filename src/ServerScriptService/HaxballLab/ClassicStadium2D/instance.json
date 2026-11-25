@@ -1,0 +1,123 @@
+{
+  "attributes": {
+    "class": "ModuleScript",
+    "referent": "RBX655FFABD3C674C10818D776CAB07C03A"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "LinkedSource"
+          },
+          "text": null,
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "ProtectedString",
+          "attributes": {
+            "name": "Source"
+          },
+          "text": null,
+          "children": [],
+          "sourceFile": "init.luau"
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "ScriptGuid"
+          },
+          "text": "{5F7D781C-D567-4F5B-9293-97AC04E2C592}",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "ClassicStadium2D",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "49939cb28d5917e30b0f7c200000234c",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

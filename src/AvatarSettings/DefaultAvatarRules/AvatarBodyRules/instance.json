@@ -1,0 +1,451 @@
+{
+  "attributes": {
+    "class": "AvatarBodyRules",
+    "referent": "RBX832D26B409E54BBA998EA7933231782D"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AppearanceMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AvatarType"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "BuildMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomBodyBundleId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "CustomBodyType"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomBodyTypeScale"
+          },
+          "text": "0 1 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomBuildBodyType"
+          },
+          "text": "0 1 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomBuildHead"
+          },
+          "text": "0.95 1 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomBuildHeight"
+          },
+          "text": "0.9 1.05 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomBuildProportions"
+          },
+          "text": "0 1 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomBuildWidth"
+          },
+          "text": "0.7 1 ",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomEyebrowEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomEyebrowId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomEyelashEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomEyelashId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomFaceEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomFaceId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomHeadEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomHeadId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomHeadScale"
+          },
+          "text": "0.95 1 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomHeight"
+          },
+          "text": "5.5 5.5 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomHeightScale"
+          },
+          "text": "0.9 1.05 ",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomLeftArmEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomLeftArmId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomLeftLegEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomLeftLegId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomMoodEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomMoodId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomProportionsScale"
+          },
+          "text": "0 1 ",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomRightArmEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomRightArmId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomRightLegEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomRightLegId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomTorsoEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomTorsoId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomWidthScale"
+          },
+          "text": "0.7 1 ",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "CustomWorldHeight"
+          },
+          "text": "5.5 5.5 ",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "HeadOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "KeepPlayerHead"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "LeftArmOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "LeftLegOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "RightArmOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "RightLegOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ScaleMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "TorsoOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarBodyRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "5a9239d8f0ae460b0b0fc61e00000404",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

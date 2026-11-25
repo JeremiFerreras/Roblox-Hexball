@@ -1,0 +1,347 @@
+{
+  "attributes": {
+    "class": "AvatarAnimationRules",
+    "referent": "RBXD0E2515306C74F6EBB8C26A711395BA0"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AnimationClipsMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AnimationPacksMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "ClimbAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomClimbAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomClimbAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomFallAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomFallAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomIdleAlt1AnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomIdleAlt1AnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomIdleAlt2AnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomIdleAlt2AnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomIdleAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomIdleAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomJumpAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomJumpAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomRunAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomRunAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomSwimAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomSwimAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomSwimIdleAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomSwimIdleAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomWalkAnimationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomWalkAnimationId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "FallAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "IdleAltAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "IdleAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "JumpAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "MoodAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "RunAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SwimAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SwimIdleAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "WalkAnimationOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarAnimationRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "5a9239d8f0ae460b0b0fc61e00000406",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

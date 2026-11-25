@@ -1,0 +1,147 @@
+{
+  "attributes": {
+    "class": "PlayerEmulatorService",
+    "referent": "RBX9003AC5D9C7D4047B624D2BCB5008E12"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomPoliciesEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "EmulatedCountryCode"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "EmulatedGameLocale"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "PlayerEmulationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "PseudolocalizationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedEmulatedPolicyInfo"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "TextElongationFactor"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "PlayerEmulatorService",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e29500000038d",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

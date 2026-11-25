@@ -1,0 +1,140 @@
+{
+  "attributes": {
+    "class": "Folder",
+    "referent": "RBXD2E9B60052EA4928968F13145C883E1D"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "ExplorerIconContent"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "IconTint"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Remotes",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "2a8c184ef8e375f00b0e76160000099f",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [
+    "ReplicatedStorage/HaxballLab/Remotes/Input",
+    "ReplicatedStorage/HaxballLab/Remotes/Snapshot",
+    "ReplicatedStorage/HaxballLab/Remotes/DebugCommand"
+  ],
+  "layout": [
+    false,
+    true,
+    true,
+    true
+  ]
+}

@@ -1,0 +1,808 @@
+{
+  "attributes": {
+    "class": "Terrain",
+    "referent": "RBX78CDB1E0D1BC41FDBB099294DC46A080"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t",
+      "children": [
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AcquisitionMethod"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Decoration"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "GrassLength"
+          },
+          "text": "0.699999988",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "MaterialColors"
+          },
+          "text": "AAAAAAAAb34+WFlWmJiYimFJz8unrJRsY2Rm3eTl6/3/lHxfeXBiS0pKjIJo/xhDUFRUhoZ2\nzNLfaoZA///+//PAj5CH",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Materials"
+          },
+          "text": "SpZ11y+qjCSXFtgZmELrVA==",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "PhysicsGrid"
+          },
+          "text": "AgMAAAAAAAAAAAAAAAA=",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SmoothGrid"
+          },
+          "text": "AQU=",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "SmoothVoxelsUpgraded"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "AssetContentMap",
+          "attributes": {
+            "name": "VoxelGridAssetContentMap"
+          },
+          "text": "[]",
+          "children": []
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "WaterColor"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0.0470588282",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0.329411775",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0.360784322",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "WaterReflectance"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "WaterTransparency"
+          },
+          "text": "0.300000012",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "WaterWaveSize"
+          },
+          "text": "0.150000006",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "WaterWaveSpeed"
+          },
+          "text": "10",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Anchored"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AudioCanCollide"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "BackParamA"
+          },
+          "text": "-0.5",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "BackParamB"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "BackSurface"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "BackSurfaceInput"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "BottomParamA"
+          },
+          "text": "-0.5",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "BottomParamB"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "BottomSurface"
+          },
+          "text": "4",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "BottomSurfaceInput"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "CoordinateFrame",
+          "attributes": {
+            "name": "CFrame"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R00",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R01",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R02",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R10",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R11",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R12",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R20",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R21",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R22",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CanCollide"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CanQuery"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CanTouch"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CastShadow"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "CollisionGroup"
+          },
+          "text": "Default",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "CollisionGroupId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Color3uint8",
+          "attributes": {
+            "name": "Color3uint8"
+          },
+          "text": "4288914085",
+          "children": []
+        },
+        {
+          "tag": "PhysicalProperties",
+          "attributes": {
+            "name": "CustomPhysicalProperties"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "CustomPhysics",
+              "attributes": {},
+              "text": "false",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "EnableFluidForces"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FrontParamA"
+          },
+          "text": "-0.5",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FrontParamB"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "FrontSurface"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "FrontSurfaceInput"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "LeftParamA"
+          },
+          "text": "-0.5",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "LeftParamB"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LeftSurface"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LeftSurfaceInput"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Locked"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Massless"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Material"
+          },
+          "text": "256",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "MaterialVariantSerialized"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "CoordinateFrame",
+          "attributes": {
+            "name": "PivotOffset"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R00",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R01",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R02",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R10",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R11",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R12",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R20",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R21",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R22",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Reflectance"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "RightParamA"
+          },
+          "text": "-0.5",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "RightParamB"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RightSurface"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RightSurfaceInput"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "RootPriority"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "RotVelocity"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "TopParamA"
+          },
+          "text": "-0.5",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "TopParamB"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "TopSurface"
+          },
+          "text": "3",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "TopSurfaceInput"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Transparency"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "Velocity"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "size"
+          },
+          "text": "\n\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "2044",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "252",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "2044",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Terrain",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e2950000003ec",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

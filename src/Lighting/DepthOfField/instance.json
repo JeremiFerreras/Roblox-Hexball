@@ -1,0 +1,131 @@
+{
+  "attributes": {
+    "class": "DepthOfFieldEffect",
+    "referent": "RBXD3300B88CEF047439A453A0856C14BB4"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t",
+      "children": [
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FarIntensity"
+          },
+          "text": "0.100000001",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FocusDistance"
+          },
+          "text": "0.0500000007",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "InFocusRadius"
+          },
+          "text": "30",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "NearIntensity"
+          },
+          "text": "0.75",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Enabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "DepthOfField",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e2950000003fe",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

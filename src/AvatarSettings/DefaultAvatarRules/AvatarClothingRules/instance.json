@@ -1,0 +1,422 @@
+{
+  "attributes": {
+    "class": "AvatarClothingRules",
+    "referent": "RBX17F4E620AD434809A8D18847664A5001"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "ClassicPantsOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "ClassicShirtOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "ClassicTShirtOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ClothingMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomClassicPantsAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomClassicPantsAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomClassicShirtsAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomClassicShirtsAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomClassicTShirtsAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomClassicTShirtsAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "CustomClothingMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomDressSkirtAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomDressSkirtAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomJacketAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomJacketAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomLeftShoesAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomLeftShoesAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomPantsAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomPantsAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomRightShoesAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomRightShoesAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomShirtAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomShirtAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomShortsAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomShortsAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomSweaterAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomSweaterAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CustomTShirtAccessoryEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "CustomTShirtAccessoryId"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "DressSkirtAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "JacketAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "LeftShoeAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "LimitBounds"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "PantsAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "RightShoeAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "ShirtAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "ShortsAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SweaterAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "TShirtAccessoryOverride"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarClothingRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "5a9239d8f0ae460b0b0fc61e00000408",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

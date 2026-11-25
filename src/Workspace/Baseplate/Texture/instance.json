@@ -1,0 +1,373 @@
+{
+  "attributes": {
+    "class": "Texture",
+    "referent": "RBX796D0316D8114FD4BD6C01166AB33AFF"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "OffsetStudsU"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "OffsetStudsV"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "StudsPerTileU"
+          },
+          "text": "8",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "StudsPerTileV"
+          },
+          "text": "8",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AutoLocalize"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "Color3"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "EmissiveMaskContent"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "EmissiveStrength"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "Color3",
+          "attributes": {
+            "name": "EmissiveTint"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "R",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "G",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "B",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "MetalnessMapContent"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "NormalMapContent"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ResampleMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Rotation"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "RoughnessMapContent"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "TextureContent"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "uri",
+              "attributes": {},
+              "text": "rbxassetid://6372755229",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "TexturePackContent"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "TexturePackMetadata"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Transparency"
+          },
+          "text": "0.800000012",
+          "children": []
+        },
+        {
+          "tag": "Vector2",
+          "attributes": {
+            "name": "UVOffset"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Vector2",
+          "attributes": {
+            "name": "UVScale"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "ZIndex"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Face"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Texture",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e2950000003eb",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

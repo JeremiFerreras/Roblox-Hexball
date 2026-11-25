@@ -1,0 +1,352 @@
+{
+  "attributes": {
+    "class": "StarterPlayer",
+    "referent": "RBXD7120E3AE9454EB7AA463F4F671E152F"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AllowCustomAnimations"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AutoJumpEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AvatarJointUpgrade_SerializedRollout"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "CameraMaxZoomDistance"
+          },
+          "text": "128",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "CameraMinZoomDistance"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "CameraMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CharacterBreakJointsOnDeath"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "CharacterJumpHeight"
+          },
+          "text": "7.19999981",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "CharacterJumpPower"
+          },
+          "text": "50",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "CharacterMaxSlopeAngle"
+          },
+          "text": "89",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CharacterUseJumpPower"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "CharacterWalkSpeed"
+          },
+          "text": "16",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "ClassicDeath"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CreateDefaultPlayerModule"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "DevCameraOcclusionMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "DevComputerCameraMovementMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "DevComputerMovementMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "DevTouchCameraMovementMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "DevTouchMovementMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "EnableDynamicHeads"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "EnableMouseLockOption"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "GameSettingsAvatar"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "GameSettingsR15Collision"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "HealthDisplayDistance"
+          },
+          "text": "100",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "LoadCharacterAppearance"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LoadCharacterLayeredClothing"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LuaCharacterController"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "NameDisplayDistance"
+          },
+          "text": "100",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "PlaceAvatarRules"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "PlayerModuleStatus"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "UseImprovedCharacterEvents"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "UserEmotesEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "StarterPlayer",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000392",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [
+    "StarterPlayer/StarterPlayerScripts",
+    "StarterPlayer/StarterCharacterScripts"
+  ],
+  "layout": [
+    false,
+    true,
+    true
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "attributes": {
+    "class": "Players",
+    "referent": "RBX007294F1E928498AB677643DAAFEC0E6"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "BanningEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "CharacterAutoLoads"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "MaxPlayersInternal"
+          },
+          "text": "30",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "PreferredPlayersInternal"
+          },
+          "text": "30",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "RespawnTime"
+          },
+          "text": "3",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "UseStrafingAnimations"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Players",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000383",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

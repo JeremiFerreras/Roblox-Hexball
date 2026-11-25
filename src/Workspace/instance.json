@@ -1,0 +1,898 @@
+{
+  "attributes": {
+    "class": "Workspace",
+    "referent": "RBX035A94458B2F463299A4B36C721007D3"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "AirDensity"
+          },
+          "text": "0.00120000006",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "AirTurbulenceIntensity"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AllowThirdPartySales"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AuthorityMode"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "AvatarUnificationMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ClientAnimatorThrottling"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "CurrentCamera"
+          },
+          "text": "RBXE8EBA3EF9F8E4E2C9F6878E71314B79B",
+          "children": []
+        },
+        {
+          "tag": "double",
+          "attributes": {
+            "name": "DistributedGameTime"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "EnableSLIMAvatars"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ExpandedTerrain"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "ExplicitAutoJoints"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "FallHeightEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FallenPartsDestroyHeight"
+          },
+          "text": "-500",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "FluidForces"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "GlobalWind"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Gravity"
+          },
+          "text": "196.199997",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "IKControlConstraintSupport"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ImprovedPhysicsReplication"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "InputSinkEnabled"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LayeredClothingCacheOptimizations"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LuauTypeCheckMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "MapTVRemoteToGamepadKeycodes"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "MeshPartHeadsAndAccessories"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "MeshStreamingAndImprovedLods"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ModelStreamingBehavior"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "NextGenerationPhysicsSolver"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "NextGenerationReplication"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ParticlesUseDynamicWind"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "PathfindingUseImprovedSearch"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "PhysicsSteppingMethod"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "PlayerCharacterDestroyBehavior"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "PlayerScriptsUseInputActionSystem"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "PredictiveStreamingMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RejectCharacterDeletions"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RenderingCacheOptimizations"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ReplicateInstanceDestroySetting"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ReplicationFrequency"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ReplicationThroughput"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Retargeting"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "SandboxedInstanceMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "SignalBehavior2"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "StreamOutBehavior"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "StreamingAdaptiveRadius"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "StreamingEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "StreamingIntegrityMode"
+          },
+          "text": "3",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "StreamingMinRadius"
+          },
+          "text": "64",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "StreamingTargetRadius"
+          },
+          "text": "1024",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "TerrainWeldsFixed"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "TouchEventsUseCollisionGroups"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "TouchesUseCollisionGroups"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "UseFixedSimulation"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "UseNewLuauTypeSolver"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ValidateEnabledProximityPrompt"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AutoSimulate"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "CollisionGroupData"
+          },
+          "text": "AQEABP////8HRGVmYXVsdA==",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "GravityDirection"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "-1",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "SimulationRate"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Wind"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "WindDirection"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "ExplorerIconContent"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "LevelOfDetail"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "CoordinateFrame",
+          "attributes": {
+            "name": "ModelMeshCFrame"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R00",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R01",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R02",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R10",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R11",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "R12",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R20",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R21",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "R22",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "ModelMeshData"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "ModelMeshSize"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ModelStreamingMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "NeedsPivotMigration"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "PrimaryPart"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "ScaleFactor"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "SlimHash"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "OptionalCoordinateFrame",
+          "attributes": {
+            "name": "WorldPivotData"
+          },
+          "text": "\n\t\t\t\t",
+          "children": [
+            {
+              "tag": "CFrame",
+              "attributes": {},
+              "text": "\n\t\t\t\t\t",
+              "children": [
+                {
+                  "tag": "X",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "Y",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "Z",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "R00",
+                  "attributes": {},
+                  "text": "1",
+                  "children": []
+                },
+                {
+                  "tag": "R01",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "R02",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "R10",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "R11",
+                  "attributes": {},
+                  "text": "1",
+                  "children": []
+                },
+                {
+                  "tag": "R12",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "R20",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "R21",
+                  "attributes": {},
+                  "text": "0",
+                  "children": []
+                },
+                {
+                  "tag": "R22",
+                  "attributes": {},
+                  "text": "1",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Workspace",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000002",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [
+    "Workspace/Camera",
+    "Workspace/Baseplate",
+    "Workspace/Terrain",
+    "Workspace/SpawnLocation",
+    "Workspace/HaxballLab"
+  ],
+  "layout": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+  ]
+}

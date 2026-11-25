@@ -1,0 +1,314 @@
+{
+  "attributes": {
+    "class": "InputBinding",
+    "referent": "RBXECB930FBC65C4F9C8C04F3081C2D171F"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Backward"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "ClampMagnitudeToOne"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "NumberRange",
+          "attributes": {
+            "name": "Deadzone"
+          },
+          "text": "0.1 1 ",
+          "children": []
+        },
+        {
+          "tag": "Content",
+          "attributes": {
+            "name": "DisplayImage"
+          },
+          "text": "\n\t\t\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "DisplayName"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Down"
+          },
+          "text": "115",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Forward"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "KeyCode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Left"
+          },
+          "text": "97",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "PointerIndex"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "PressedThreshold"
+          },
+          "text": "0.5",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "PrimaryModifier"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "ReleasedThreshold"
+          },
+          "text": "0.200000003",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "ResponseCurve"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Right"
+          },
+          "text": "100",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Scale"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "SecondaryModifier"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Type"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "UIButton"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "UIModifier"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Up"
+          },
+          "text": "119",
+          "children": []
+        },
+        {
+          "tag": "Vector2",
+          "attributes": {
+            "name": "Vector2Scale"
+          },
+          "text": "\n\t\t\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "Vector3Scale"
+          },
+          "text": "\n\t\t\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "KeyboardWASD",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "2a8c184ef8e375f00b0e7616000009a5",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

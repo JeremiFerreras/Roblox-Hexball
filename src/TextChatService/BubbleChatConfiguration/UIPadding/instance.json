@@ -1,0 +1,175 @@
+{
+  "attributes": {
+    "class": "UIPadding",
+    "referent": "RBX06D9B203BC1346CAB965F41E834D96BA"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t\t\t",
+      "children": [
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "PaddingBottom"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "8",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "PaddingLeft"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "8",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "PaddingRight"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "8",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "UDim",
+          "attributes": {
+            "name": "PaddingTop"
+          },
+          "text": "\n\t\t\t\t\t\t",
+          "children": [
+            {
+              "tag": "S",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "O",
+              "attributes": {},
+              "text": "8",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "UIPadding",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000405",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

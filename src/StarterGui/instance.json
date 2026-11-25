@@ -1,0 +1,155 @@
+{
+  "attributes": {
+    "class": "StarterGui",
+    "referent": "RBXBB13BFDE0BF44A9680598583E57AC687"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n\t\t\t",
+      "children": [
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ClipsDescendantsSupportsRotation"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "ResetPlayerGuiOnSpawn"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RtlTextSupport"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ScreenOrientation"
+          },
+          "text": "4",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "ShowDevelopmentGui"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "StudioDefaultStyleSheet"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "StudioInsertWidgetLayerCollectorAutoLinkStyleSheet"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "VirtualCursorMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "StarterGui",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "696819431a01660b0b0e295000000394",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}
