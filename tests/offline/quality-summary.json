@@ -1,0 +1,59 @@
+{
+  "runtime": "v24.22.3",
+  "oracle": "node-haxball@2.3.0",
+  "luau": "luau-web@1.5.1",
+  "scope": "offline adapters; not Roblox Studio or an independent human review",
+  "suites": {
+    "regression-results.json": {
+      "passed": 47,
+      "total": 47
+    },
+    "results.json": {
+      "passed": 75,
+      "total": 75
+    },
+    "local-match-results.json": {
+      "passed": 20,
+      "total": 20
+    },
+    "server-adapter-results.json": {
+      "passed": 10,
+      "total": 10
+    },
+    "client-adapter-results.json": {
+      "passed": 10,
+      "total": 10
+    },
+    "audit-test-results.json": {
+      "passed": 11,
+      "total": 11
+    },
+    "fuzz-results.json": {
+      "passed": 64,
+      "total": 64
+    },
+    "mutation-results.json": {
+      "passed": 12,
+      "total": 12
+    }
+  },
+  "sourceSha256": {
+    "ReplicatedStorage/HaxballLab/ClassicReference230/init.luau": "1a2ead05e49d71b4e1cd50fde61e0f477cf155b8dd0b7ec8ddaa93728fdf0dc8",
+    "ReplicatedStorage/HaxballLab/LabClient/init.server.luau": "ddc3e783693f0a80c6d3e843cdf7eb0d9b5158b973d5a57b7486bacf73c6b679",
+    "ReplicatedStorage/HaxballLab/PredictionLab2D/init.luau": "09d3661b403149898bb5bd5244f6e8743c52c1701535c79dc5d3830ff95b4bc9",
+    "ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau": "4fcdf8ec9ef6d9c1d0034dc64d98f51f1f8b1a15631196d6d73a4b1197766c45",
+    "ReplicatedStorage/HaxballLab/StadiumRender2D/init.luau": "1962924a3e7dc4a84e760b02a43f8b7175a41025569f8b7512c5c450011a5c4d",
+    "ReplicatedStorage/Shared/Hello/init.luau": "68de9377a853c5dd3863901c12e8f29802b9d6d3dd01b99e44a8d332755cca8f",
+    "ServerScriptService/HaxballLab/ClassicReference230/init.luau": "8460e99ab1c4fa504c3c2ba97b34e1203eaed5f2c43b679f3e8d132b201e2f12",
+    "ServerScriptService/HaxballLab/ClassicStadium2D/init.luau": "808a0efe68d2ab5b4091614cfb7734a55b076163e628be7307b4f609b5f2aa39",
+    "ServerScriptService/HaxballLab/LabRegression/init.luau": "92f6197ceda7994cbb15bc1ec6be21098cac2cd9d001d0fd226471136a9c03c7",
+    "ServerScriptService/HaxballLab/LabServer/init.server.luau": "02eeb37830fc3715a53a12ac2b9e951463aec6b12dde2459d3f0c3bbb966d011",
+    "ServerScriptService/HaxballLab/LocalMatch2D/init.luau": "0d19aa90f1ed79da9a2386829e2d436b6e094f136abf6d2702a1d96ad1348f7a",
+    "ServerScriptService/HaxballLab/MatchRules2D/init.luau": "038b4982badcae27b45b2f40c500b1f8643d144025d98c7c0e9bac9d8920cfec",
+    "ServerScriptService/HaxballLab/Physics2D/init.luau": "1c6a57dd641ef84a1bc3cb54390ab940e62863b3084df7d6d6223d6f39461de4",
+    "ServerScriptService/HaxballLab/PhysicsCore2D/init.luau": "929dbe59b7de2c845d363a4cdaf21b4ec362e398de62a87f2bd86ce46da9f9db",
+    "ServerScriptService/Server/init.server.luau": "9ba8acb76e80f7d3c792b569cf64d73a163856025b0ebbdccb56facdf845df92",
+    "StarterPlayer/StarterPlayerScripts/Client/init.client.luau": "136dfb79a37a69dff7af66ef2cc6a1f3a628980fdb9d5d8fa9110418d1fcce98"
+  },
+  "lockfileSha256": "ace0eabab7ee2ac5adeeb9efc1f8c0762a6591202d4b793a56fc5d8690e0a2ed"
+}

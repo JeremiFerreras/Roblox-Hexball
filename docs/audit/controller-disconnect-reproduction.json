@@ -1,0 +1,12 @@
+{
+  "test": "departing_controller_does_not_clear_another_players_held_input",
+  "beforeFix": {
+    "passed": false,
+    "detail": "[string \"offline\"]:3978: leaving controller erased slot one input"
+  },
+  "afterFix": {
+    "passed": true,
+    "detail": "PASS"
+  },
+  "reproduceOldBug": "HEX_MUTATION=controller_disconnect_clears_other_slot node server-adapter.mjs (in-memory source mutation; see npm run test:quality for portable execution)"
+}

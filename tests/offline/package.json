@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "node compile.mjs && node regression.mjs && node compare.mjs && node local-match.mjs && node server-adapter.mjs && node client-adapter.mjs",
-    "export-reference": "node reference.mjs --export"
+    "export-reference": "node reference.mjs --export",
+    "test:quality": "node audit-tests.mjs && node fuzz.mjs && node mutation-check.mjs && node quality-summary.mjs",
+    "format:check": "prettier --check \"*.mjs\" package.json",
+    "format:check:luau": "stylua --check --syntax Luau ../../src/ServerScriptService/HaxballLab/LocalMatch2D/init.luau ../../src/ServerScriptService/HaxballLab/MatchRules2D/init.luau ../../src/ServerScriptService/HaxballLab/PhysicsCore2D/init.luau ../../src/ServerScriptService/HaxballLab/LabServer/init.server.luau ../../src/ServerScriptService/HaxballLab/ClassicStadium2D/init.luau ../../src/ReplicatedStorage/HaxballLab/LabClient/init.server.luau ../../src/ReplicatedStorage/HaxballLab/StadiumRender2D/init.luau client-adapter-setup.luau client-adapter-tests.luau compare-runner.luau fuzz-tests.luau json-array.luau local-match-tests.luau"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +18,9 @@
     "luau-web": "1.5.1",
     "node-haxball": "2.3.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@johnnymorganz/stylua-bin": "2.6.0",
+    "prettier": "3.10.1"
+  }
 }

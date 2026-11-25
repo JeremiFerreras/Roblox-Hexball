@@ -1,0 +1,322 @@
+[
+  [
+    "random_match_seed_1",
+    true,
+    "seed=1 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_2",
+    true,
+    "seed=2 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_3",
+    true,
+    "seed=3 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_4",
+    true,
+    "seed=4 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_5",
+    true,
+    "seed=5 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_6",
+    true,
+    "seed=6 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_7",
+    true,
+    "seed=7 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_8",
+    true,
+    "seed=8 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_9",
+    true,
+    "seed=9 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_10",
+    true,
+    "seed=10 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_11",
+    true,
+    "seed=11 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_12",
+    true,
+    "seed=12 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_13",
+    true,
+    "seed=13 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_14",
+    true,
+    "seed=14 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_15",
+    true,
+    "seed=15 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_16",
+    true,
+    "seed=16 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_17",
+    true,
+    "seed=17 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_18",
+    true,
+    "seed=18 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_19",
+    true,
+    "seed=19 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_20",
+    true,
+    "seed=20 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_21",
+    true,
+    "seed=21 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_22",
+    true,
+    "seed=22 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_23",
+    true,
+    "seed=23 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_24",
+    true,
+    "seed=24 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_25",
+    true,
+    "seed=25 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_26",
+    true,
+    "seed=26 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_27",
+    true,
+    "seed=27 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_28",
+    true,
+    "seed=28 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_29",
+    true,
+    "seed=29 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_30",
+    true,
+    "seed=30 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_31",
+    true,
+    "seed=31 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_32",
+    true,
+    "seed=32 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_33",
+    true,
+    "seed=33 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_34",
+    true,
+    "seed=34 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_35",
+    true,
+    "seed=35 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_36",
+    true,
+    "seed=36 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_37",
+    true,
+    "seed=37 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_38",
+    true,
+    "seed=38 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_39",
+    true,
+    "seed=39 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_40",
+    true,
+    "seed=40 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_41",
+    true,
+    "seed=41 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_42",
+    true,
+    "seed=42 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_43",
+    true,
+    "seed=43 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_44",
+    true,
+    "seed=44 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_45",
+    true,
+    "seed=45 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_46",
+    true,
+    "seed=46 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_47",
+    true,
+    "seed=47 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_48",
+    true,
+    "seed=48 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_49",
+    true,
+    "seed=49 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_50",
+    true,
+    "seed=50 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_51",
+    true,
+    "seed=51 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_52",
+    true,
+    "seed=52 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_53",
+    true,
+    "seed=53 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_54",
+    true,
+    "seed=54 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_55",
+    true,
+    "seed=55 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_56",
+    true,
+    "seed=56 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_57",
+    true,
+    "seed=57 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_58",
+    true,
+    "seed=58 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_59",
+    true,
+    "seed=59 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_60",
+    true,
+    "seed=60 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_61",
+    true,
+    "seed=61 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_62",
+    true,
+    "seed=62 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_63",
+    true,
+    "seed=63 ticks=1800 goals=9 restarts=2"
+  ],
+  [
+    "random_match_seed_64",
+    true,
+    "seed=64 ticks=1800 goals=9 restarts=2"
+  ]
+]

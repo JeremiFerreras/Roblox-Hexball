@@ -1,6 +1,6 @@
 # Física fuera de Roblox Studio
 
-Requiere Node.js 22+ y Python 3 para reconstruir el lugar. Versiones probadas: Node 24.22.3, luau-web 1.5.1 (Luau en WASM), node-haxball 2.3.0. El código Luau del proyecto se compila y ejecuta directamente; no se traduce su física a JavaScript.
+Entorno verificado: Node.js 24.22.3; otras versiones no se certifican en esta entrega. Se requiere Node.js y Python 3 para reconstruir el lugar. Versiones probadas: Node 24.22.3, luau-web 1.5.1 (Luau en WASM), node-haxball 2.3.0. El código Luau del proyecto se compila y ejecuta directamente; no se traduce su física a JavaScript.
 
 ```sh
 cd tests/offline
@@ -28,3 +28,7 @@ La referencia es Node-Haxball, una implementación independiente; no es una capt
 ## Cierre funcional
 
 `client-adapter.mjs` ejecuta cliente y servidor reales juntos con vectores, propiedades, reloj y señales locales: no renderiza ni emula Roblox completo. La suite incluye 20 pruebas locales, 7 del servidor y 10 del cliente, además de las regresiones físicas. La prueba larga compara estados y eventos por tick. Ver `docs/PHASE4_CLOSURE_2026-11-25.md`.
+
+## Auditoría de calidad
+
+`npm run test:quality` comprueba el runner, ejecuta 64 partidos con semillas reproducibles e introduce 12 fallos deliberados en memoria para exigir que las pruebas los detecten. El cargador `modules.mjs` ejecuta los módulos completos usando el árbol real de dependencias, sin eliminar líneas de código. El comparador exige frames completos y valores finitos. `quality-summary.json` conserva conteos y hashes. Ver `docs/QUALITY_AUDIT_2026-11-25.md`.

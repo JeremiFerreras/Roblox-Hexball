@@ -1,10 +1,10 @@
-import {modules} from './local-match.mjs';
-import {read,runLuau} from './runtime.mjs';
-import fs from 'node:fs';
-import {fileURLToPath} from 'node:url';
-let physics=read('src/ServerScriptService/HaxballLab/Physics2D/init.luau').split('\n').filter(l=>!l.includes('require(')&&!l.startsWith('local ReplicatedStorage')).join('\n').replace('local Physics2D = {}','local Physics2D = {MatchCore=Core}');
-export const serverSetup=modules+`\nlocal P=(function() ${physics} end)()
-local function signal() return {Connect=function(self,fn) self.fn=fn end} end
+import { writeReport } from "./runtime.mjs";
+import { modules } from "./local-match.mjs";
+import { read, runLuau } from "./runtime.mjs";
+import { fileURLToPath } from "node:url";
+export const serverSetup =
+  modules +
+  `\nlocal function signal() return {Connect=function(self,fn) self.fn=fn end} end
 local input,command,heartbeat=signal(),signal(),signal()
 input.OnServerEvent=input;command.OnServerEvent=command
 local debugState={}
@@ -16,11 +16,11 @@ local lab={Remotes={Input=input,Snapshot=snapshots,DebugCommand=command},WaitFor
 local parent={WaitForChild=function(self,name) if name=='DebugState' then return debugState end return name end}
 local game={GetService=function(self,name) if name=='Players' then return players elseif name=='RunService' then return {Heartbeat=heartbeat} elseif name=='ReplicatedStorage' then return {WaitForChild=function() return lab end} end error(name) end}
 local script={Parent=parent}
-local map={Physics2D=P,ClassicStadium2D=Stadium,StadiumReference2D=Profile,MatchRules2D=Rules,LocalMatch2D=LocalMatch,LabRegression={}}
+local map={Physics2D=P,ClassicStadium2D=Stadium,StadiumReference2D=Profile,MatchRules2D=Rules,LocalMatch2D=LocalMatch,LabRegression=Suite}
 local function require(name) assert(map[name],name);return map[name] end
-(function() ${read('src/ServerScriptService/HaxballLab/LabServer/init.server.luau')} end)()
+(function() ${read("src/ServerScriptService/HaxballLab/LabServer/init.server.luau")} end)()
 `;
-export const serverTests=`local result={}
+export const serverTests = `local result={}
 local function check(name,fn) local ok,err=pcall(fn);table.insert(result,{name,ok,ok and 'PASS' or tostring(err)}) end
 check('real_LabServer_initializes_and_publishes_5v5_countdown',function()
  heartbeat.fn(1/60)
@@ -82,7 +82,46 @@ check('leaving_player_cannot_keep_controlling_reused_slot',function()
  assert(snapshots.latest.players[1].ownerUserId==2000)
  assert(snapshots.latest.input.x==1 and snapshots.latest.input.kick==false)
 end)
+check('one_contact_episode_is_counted_once',function()
+ local active=roster[1]
+ -- The current controller is the first remaining player after the original left.
+ command.fn(active,'setupKick')
+ input.fn(roster[#roster],1,0,false)
+ for i=1,40 do heartbeat.fn(1/60) end
+ local detail=debugState.OnInvoke({limit=100})
+ local ticks={} local contacts=0
+ for _,e in ipairs(detail.events) do
+  if e.kind=='playerBallContact' then
+   local key=tostring(e.tick)..':'..tostring(e.playerId or 1)
+   assert(not ticks[key],'duplicate player-ball contact at '..key)
+   ticks[key]=true;contacts+=1
+  end
+ end
+ assert(contacts>0,'fixture did not generate a contact')
+ assert(detail.metrics.ballContacts==contacts,'contact metric does not match contact events')
+end)
+check('departing_controller_does_not_clear_another_players_held_input',function()
+ local active=roster[1]
+ local slotOne=roster[#roster]
+ input.fn(slotOne,1,0,false)
+ table.remove(roster,1);players.PlayerRemoving.fn(active)
+ local state=debugState.OnInvoke('summary').current
+ assert(state.players[1].ownerUserId==slotOne.UserId)
+ assert(state.input.x==1,'leaving controller erased slot one input')
+end)
+check('player_kick_damping_uses_its_own_configuration',function()
+ local value=P.Config.playerKickDamping
+ P.Config.playerKickDamping=.8
+ command.fn(roster[1],'setupKick')
+ local snapshot=debugState.OnInvoke('summary').current
+ assert(snapshot.predictionParams.kickDamping==.8,'kick damping incorrectly coupled to ordinary damping')
+ P.Config.playerKickDamping=value
+ command.fn(roster[1],'reset')
+end)
 emit(json(result))`;
-if(process.argv[1]===fileURLToPath(import.meta.url)) {
-const result=await runLuau(serverSetup+serverTests);fs.writeFileSync(new URL('server-adapter-results.json',import.meta.url),JSON.stringify(result,null,2));console.log(result);if(result.some(x=>!x[1]))process.exitCode=1;
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const result = await runLuau(serverSetup + serverTests);
+  writeReport("server-adapter-results.json", result);
+  console.log(result);
+  if (result.some((x) => !x[1])) process.exitCode = 1;
 }

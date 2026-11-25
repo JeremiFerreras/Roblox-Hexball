@@ -271,371 +271,589 @@ end
 						<BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">Input</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009a0</UniqueId></Properties></Item><Item class="RemoteEvent" referent="RBXA9022207C7814E6D9A5CDB1E203C1DAB"><Properties>
 						<BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">Snapshot</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009a1</UniqueId></Properties></Item><Item class="RemoteEvent" referent="RBXAA59D76E6A864B5D93534E81D0535813"><Properties>
 						<BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">DebugCommand</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e761600000f92</UniqueId></Properties></Item></Item><Item class="Script" referent="RBXCDEE500B849A4FE692DA55F12C7202FC"><Properties>
-					<ProtectedString name="Source">local Players=game:GetService("Players")
-local ReplicatedStorage=game:GetService("ReplicatedStorage")
-local RunService=game:GetService("RunService")
+					<ProtectedString name="Source">local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 
-local player=Players.LocalPlayer
-local camera=workspace.CurrentCamera
-local lab=ReplicatedStorage:WaitForChild("HaxballLab")
-local remotes=lab.Remotes
-local inputRemote=remotes.Input
-local snapshotRemote=remotes.Snapshot
-local commandRemote=remotes.DebugCommand
-local PredictionLab2D=require(lab:WaitForChild("PredictionLab2D"))
-local StadiumProfile2D=require(lab:WaitForChild("StadiumReference2D"))
-local inputContext=ReplicatedStorage:WaitForChild("Inputs"):WaitForChild("HaxballGameplay")
-local moveAction=inputContext:WaitForChild("Move")
-local kickAction=inputContext:WaitForChild("Kick")
-local field=workspace:WaitForChild("HaxballLab")
-local playerDisc=field:WaitForChild("PlayerDisc")
-local playerDisc2=field:WaitForChild("PlayerDisc2")
-local ballDisc=field:WaitForChild("BallDisc")
-local debugLine=field:WaitForChild("DebugLine")
-local pairDebugLine=field:WaitForChild("PairDebugLine")
-local ballP2DebugLine=field:WaitForChild("BallP2DebugLine")
+local player = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+local lab = ReplicatedStorage:WaitForChild("HaxballLab")
+local remotes = lab.Remotes
+local inputRemote = remotes.Input
+local snapshotRemote = remotes.Snapshot
+local commandRemote = remotes.DebugCommand
+local PredictionLab2D = require(lab:WaitForChild("PredictionLab2D"))
+local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
+local inputContext = ReplicatedStorage:WaitForChild("Inputs"):WaitForChild("HaxballGameplay")
+local moveAction = inputContext:WaitForChild("Move")
+local kickAction = inputContext:WaitForChild("Kick")
+local field = workspace:WaitForChild("HaxballLab")
+local playerDisc = field:WaitForChild("PlayerDisc")
+local playerDisc2 = field:WaitForChild("PlayerDisc2")
+local ballDisc = field:WaitForChild("BallDisc")
+local debugLine = field:WaitForChild("DebugLine")
+local pairDebugLine = field:WaitForChild("PairDebugLine")
+local ballP2DebugLine = field:WaitForChild("BallP2DebugLine")
 
-local playerVisuals={[1]=playerDisc,[2]=playerDisc2}
-for playerId=3,10 do
-    local visual=Instance.new("Part")
-    visual.Name="PlayerDisc"..playerId
-    visual.Shape=Enum.PartType.Cylinder
-    visual.Size=playerDisc.Size
-    visual.Anchored=true
-    visual.CanCollide=false
-    visual.CanTouch=false
-    visual.CanQuery=false
-    visual.CastShadow=false
-    visual.Material=playerDisc.Material
-    visual.Parent=field
-    playerVisuals[playerId]=visual
+local playerVisuals = { [1] = playerDisc, [2] = playerDisc2 }
+for playerId = 3, 10 do
+	local visual = Instance.new("Part")
+	visual.Name = "PlayerDisc" .. playerId
+	visual.Shape = Enum.PartType.Cylinder
+	visual.Size = playerDisc.Size
+	visual.Anchored = true
+	visual.CanCollide = false
+	visual.CanTouch = false
+	visual.CanQuery = false
+	visual.CastShadow = false
+	visual.Material = playerDisc.Material
+	visual.Parent = field
+	playerVisuals[playerId] = visual
 end
-local predictionGhost=Instance.new("Part")
-predictionGhost.Name="PredictionGhost"
-predictionGhost.Shape=Enum.PartType.Cylinder
-predictionGhost.Size=playerDisc.Size
-predictionGhost.Anchored=true
-predictionGhost.CanCollide=false
-predictionGhost.CanTouch=false
-predictionGhost.CanQuery=false
-predictionGhost.CastShadow=false
-predictionGhost.Material=Enum.Material.Neon
-predictionGhost.Color=Color3.fromRGB(255,220,70)
-predictionGhost.Transparency=1
-predictionGhost.Parent=field
+local predictionGhost = Instance.new("Part")
+predictionGhost.Name = "PredictionGhost"
+predictionGhost.Shape = Enum.PartType.Cylinder
+predictionGhost.Size = playerDisc.Size
+predictionGhost.Anchored = true
+predictionGhost.CanCollide = false
+predictionGhost.CanTouch = false
+predictionGhost.CanQuery = false
+predictionGhost.CastShadow = false
+predictionGhost.Material = Enum.Material.Neon
+predictionGhost.Color = Color3.fromRGB(255, 220, 70)
+predictionGhost.Transparency = 1
+predictionGhost.Parent = field
 
-local ClassicReference230=require(lab:WaitForChild("ClassicReference230"))
-local StadiumRender2D=require(lab:WaitForChild("StadiumRender2D"))
-local Presentation=StadiumProfile2D.Presentation
-local SCALE=Presentation.studsPerUnit
-local function toWorld(logicalX,logicalY)
-    local p=StadiumRender2D.toWorld(logicalX,logicalY,Presentation)
-    return Vector3.new(p.x,p.y,p.z)
+local ClassicReference230 = require(lab:WaitForChild("ClassicReference230"))
+local StadiumRender2D = require(lab:WaitForChild("StadiumRender2D"))
+local Presentation = StadiumProfile2D.Presentation
+local SCALE = Presentation.studsPerUnit
+local function toWorld(logicalX, logicalY)
+	local p = StadiumRender2D.toWorld(logicalX, logicalY, Presentation)
+	return Vector3.new(p.x, p.y, p.z)
 end
-local function drawDisc(part,position,radius)
-    local diameter=2*radius*SCALE
-    part.Shape=Enum.PartType.Cylinder
-    part.Size=Vector3.new(1,diameter,diameter)
-    part.CFrame=CFrame.new(position)*CFrame.Angles(0,0,math.pi/2)
+local function drawDisc(part, position, radius)
+	local diameter = 2 * radius * SCALE
+	part.Shape = Enum.PartType.Cylinder
+	part.Size = Vector3.new(1, diameter, diameter)
+	part.CFrame = CFrame.new(position) * CFrame.Angles(0, 0, math.pi / 2)
 end
 -- Draw the same segment/arc/post coordinates used by the discrete solver.
-local geometryFolder=Instance.new("Folder")
-geometryFolder.Name="ClassicPhysicalOutline"
-geometryFolder.Parent=field
-local geometryVisuals={}
+local geometryFolder = Instance.new("Folder")
+geometryFolder.Name = "ClassicPhysicalOutline"
+geometryFolder.Parent = field
+local geometryVisuals = {}
 local function visualPart(name)
-    local part=Instance.new("Part")
-    part.Name=name;part.Anchored=true;part.CanCollide=false;part.CanTouch=false;part.CanQuery=false;part.CastShadow=false
-    part.Color=Color3.fromRGB(220,230,235)
-    part.Parent=geometryFolder
-    return part
+	local part = Instance.new("Part")
+	part.Name = name
+	part.Anchored = true
+	part.CanCollide = false
+	part.CanTouch = false
+	part.CanQuery = false
+	part.CastShadow = false
+	part.Color = Color3.fromRGB(220, 230, 235)
+	part.Parent = geometryFolder
+	return part
 end
-for _,segment in ipairs(ClassicReference230.segments) do
-    local points=StadiumRender2D.segmentPoints(segment)
-    for i=1,#points-1 do
-        local a,b=toWorld(points[i].x,points[i].y),toWorld(points[i+1].x,points[i+1].y)
-        local part=visualPart(segment.id..":"..i)
-        part.Size=Vector3.new(.18,.18,(b-a).Magnitude)
-        part.CFrame=CFrame.lookAt((a+b)*.5,b)
-        table.insert(geometryVisuals,{part=part,group=segment.collisionGroup})
-    end
+for _, segment in ipairs(ClassicReference230.segments) do
+	local points = StadiumRender2D.segmentPoints(segment)
+	for i = 1, #points - 1 do
+		local a, b = toWorld(points[i].x, points[i].y), toWorld(points[i + 1].x, points[i + 1].y)
+		local part = visualPart(segment.id .. ":" .. i)
+		part.Size = Vector3.new(0.18, 0.18, (b - a).Magnitude)
+		part.CFrame = CFrame.lookAt((a + b) * 0.5, b)
+		table.insert(geometryVisuals, { part = part, group = segment.collisionGroup })
+	end
 end
-for _,logicalY in ipairs({-170,170}) do
-    local a,b=toWorld(-370,logicalY),toWorld(370,logicalY)
-    local part=visualPart("BallAreaLine"..logicalY)
-    part.Size=Vector3.new(.18,.18,(b-a).Magnitude)
-    part.CFrame=CFrame.lookAt((a+b)*.5,b)
-    table.insert(geometryVisuals,{part=part,group=32})
+for _, logicalY in ipairs({ -170, 170 }) do
+	local a, b = toWorld(-370, logicalY), toWorld(370, logicalY)
+	local part = visualPart("BallAreaLine" .. logicalY)
+	part.Size = Vector3.new(0.18, 0.18, (b - a).Magnitude)
+	part.CFrame = CFrame.lookAt((a + b) * 0.5, b)
+	table.insert(geometryVisuals, { part = part, group = 32 })
 end
-for _,post in ipairs(ClassicReference230.posts) do
-    local part=visualPart(post.id)
-    part.Shape=Enum.PartType.Ball
-    part.Size=Vector3.new(post.radius*2*SCALE,post.radius*2*SCALE,post.radius*2*SCALE)
-    part.Position=toWorld(post.x,post.y)
-    table.insert(geometryVisuals,{part=part,group=32})
+for _, post in ipairs(ClassicReference230.posts) do
+	local part = visualPart(post.id)
+	part.Shape = Enum.PartType.Ball
+	part.Size = Vector3.new(post.radius * 2 * SCALE, post.radius * 2 * SCALE, post.radius * 2 * SCALE)
+	part.Position = toWorld(post.x, post.y)
+	table.insert(geometryVisuals, { part = part, group = 32 })
 end
-camera.CameraType=Enum.CameraType.Scriptable
-camera.FieldOfView=35
-local viewportWidth,viewportHeight
+camera.CameraType = Enum.CameraType.Scriptable
+camera.FieldOfView = 35
+local viewportWidth, viewportHeight
 local function fitCamera()
-    local viewport=camera.ViewportSize
-    local width,height=viewport and viewport.X or 0,viewport and viewport.Y or 0
-    if width~=viewportWidth or height~=viewportHeight then
-        viewportWidth,viewportHeight=width,height
-        local y=StadiumRender2D.cameraHeight(Presentation,StadiumProfile2D.Bounds,camera.FieldOfView,width,height)
-        camera.CFrame=CFrame.new(Presentation.worldOrigin.x,y,Presentation.worldOrigin.z)*CFrame.Angles(-math.pi/2,0,0)
-    end
+	local viewport = camera.ViewportSize
+	local width, height = viewport and viewport.X or 0, viewport and viewport.Y or 0
+	if width ~= viewportWidth or height ~= viewportHeight then
+		viewportWidth, viewportHeight = width, height
+		local y = StadiumRender2D.cameraHeight(Presentation, StadiumProfile2D.Bounds, camera.FieldOfView, width, height)
+		camera.CFrame = CFrame.new(Presentation.worldOrigin.x, y, Presentation.worldOrigin.z)
+			* CFrame.Angles(-math.pi / 2, 0, 0)
+	end
 end
 fitCamera()
 
-local gui=Instance.new("ScreenGui")
-gui.Name="HaxballLabDebug"
-gui.ResetOnSpawn=false
-gui.Parent=player:WaitForChild("PlayerGui")
-local label=Instance.new("TextLabel")
-label.Size=UDim2.fromOffset(500,190)
-label.Position=UDim2.fromOffset(14,14)
-label.BackgroundTransparency=0.18
-label.BackgroundColor3=Color3.fromRGB(15,20,25)
-label.TextColor3=Color3.new(1,1,1)
-label.Font=Enum.Font.Code
-label.TextSize=14
-label.TextXAlignment=Enum.TextXAlignment.Left
-label.TextYAlignment=Enum.TextYAlignment.Top
-label.Text="Haxball lab | WASD move | X kick"
-label.Parent=gui
-local predictionLabel=Instance.new("TextLabel")
-predictionLabel.Name="NetworkPredictionDebug"
-predictionLabel.Size=UDim2.fromOffset(370,72)
-predictionLabel.Position=UDim2.new(1,-384,0,14)
-predictionLabel.BackgroundTransparency=0.18
-predictionLabel.BackgroundColor3=Color3.fromRGB(15,20,25)
-predictionLabel.TextColor3=Color3.fromRGB(255,235,150)
-predictionLabel.Font=Enum.Font.Code
-predictionLabel.TextSize=13
-predictionLabel.TextXAlignment=Enum.TextXAlignment.Left
-predictionLabel.TextYAlignment=Enum.TextYAlignment.Top
-predictionLabel.TextWrapped=true
-predictionLabel.Text="Predicción experimental | input delay 0 ms"
-predictionLabel.Parent=gui
-local calibrationLabel=Instance.new("TextLabel")
-calibrationLabel.Name="StadiumCalibrationDebug"
-calibrationLabel.Size=UDim2.fromOffset(760,82)
-calibrationLabel.Position=UDim2.fromOffset(14,466)
-calibrationLabel.BackgroundTransparency=0.18
-calibrationLabel.BackgroundColor3=Color3.fromRGB(15,20,25)
-calibrationLabel.TextColor3=Color3.fromRGB(190,225,255)
-calibrationLabel.Font=Enum.Font.Code
-calibrationLabel.TextSize=12
-calibrationLabel.TextXAlignment=Enum.TextXAlignment.Left
-calibrationLabel.TextYAlignment=Enum.TextYAlignment.Top
-calibrationLabel.TextWrapped=true
-local meta=StadiumProfile2D.Metadata
-local bounds=StadiumProfile2D.Bounds
-local playArea=StadiumProfile2D.PlayArea
-local goals=StadiumProfile2D.Goals
-local activePhysics=StadiumProfile2D.PhysicsBaseline.active
-local replayPhysics=StadiumProfile2D.PhysicsBaseline.replayCandidate
-calibrationLabel.Text=string.format("CLASSIC | physics/presentation reference Node-Haxball 2.3.0\nLogical %dx%d | goal opening %d | geometry %dP/%dS/%dV/%d posts\nVisual %.2f studs/unit | independent reference; official comparison pending",bounds.spanWidth,bounds.spanHeight,goals.openingWidth,#ClassicReference230.planes,#ClassicReference230.segments,#ClassicReference230.vertices,#ClassicReference230.posts,SCALE)
-calibrationLabel.Parent=gui
+local gui = Instance.new("ScreenGui")
+gui.Name = "HaxballLabDebug"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+local label = Instance.new("TextLabel")
+label.Size = UDim2.fromOffset(500, 190)
+label.Position = UDim2.fromOffset(14, 14)
+label.BackgroundTransparency = 0.18
+label.BackgroundColor3 = Color3.fromRGB(15, 20, 25)
+label.TextColor3 = Color3.new(1, 1, 1)
+label.Font = Enum.Font.Code
+label.TextSize = 14
+label.TextXAlignment = Enum.TextXAlignment.Left
+label.TextYAlignment = Enum.TextYAlignment.Top
+label.Text = "Haxball lab | WASD move | X kick"
+label.Parent = gui
+local predictionLabel = Instance.new("TextLabel")
+predictionLabel.Name = "NetworkPredictionDebug"
+predictionLabel.Size = UDim2.fromOffset(370, 72)
+predictionLabel.Position = UDim2.new(1, -384, 0, 14)
+predictionLabel.BackgroundTransparency = 0.18
+predictionLabel.BackgroundColor3 = Color3.fromRGB(15, 20, 25)
+predictionLabel.TextColor3 = Color3.fromRGB(255, 235, 150)
+predictionLabel.Font = Enum.Font.Code
+predictionLabel.TextSize = 13
+predictionLabel.TextXAlignment = Enum.TextXAlignment.Left
+predictionLabel.TextYAlignment = Enum.TextYAlignment.Top
+predictionLabel.TextWrapped = true
+predictionLabel.Text = "Predicción experimental | input delay 0 ms"
+predictionLabel.Parent = gui
+local calibrationLabel = Instance.new("TextLabel")
+calibrationLabel.Name = "StadiumCalibrationDebug"
+calibrationLabel.Size = UDim2.fromOffset(760, 82)
+calibrationLabel.Position = UDim2.fromOffset(14, 466)
+calibrationLabel.BackgroundTransparency = 0.18
+calibrationLabel.BackgroundColor3 = Color3.fromRGB(15, 20, 25)
+calibrationLabel.TextColor3 = Color3.fromRGB(190, 225, 255)
+calibrationLabel.Font = Enum.Font.Code
+calibrationLabel.TextSize = 12
+calibrationLabel.TextXAlignment = Enum.TextXAlignment.Left
+calibrationLabel.TextYAlignment = Enum.TextYAlignment.Top
+calibrationLabel.TextWrapped = true
+local meta = StadiumProfile2D.Metadata
+local bounds = StadiumProfile2D.Bounds
+local playArea = StadiumProfile2D.PlayArea
+local goals = StadiumProfile2D.Goals
+local activePhysics = StadiumProfile2D.PhysicsBaseline.active
+local replayPhysics = StadiumProfile2D.PhysicsBaseline.replayCandidate
+calibrationLabel.Text = string.format(
+	"CLASSIC | physics/presentation reference Node-Haxball 2.3.0\nLogical %dx%d | goal opening %d | geometry %dP/%dS/%dV/%d posts\nVisual %.2f studs/unit | independent reference; official comparison pending",
+	bounds.spanWidth,
+	bounds.spanHeight,
+	goals.openingWidth,
+	#ClassicReference230.planes,
+	#ClassicReference230.segments,
+	#ClassicReference230.vertices,
+	#ClassicReference230.posts,
+	SCALE
+)
+calibrationLabel.Parent = gui
 
-local function makeButton(name,text,x,width,y)
-    local button=Instance.new("TextButton")
-    button.Name=name
-    button.Size=UDim2.fromOffset(width,30)
-    button.Position=UDim2.fromOffset(x,y)
-    button.BackgroundColor3=Color3.fromRGB(35,55,70)
-    button.TextColor3=Color3.new(1,1,1)
-    button.Font=Enum.Font.GothamMedium
-    button.TextSize=13
-    button.Text=text
-    button.Parent=gui
-    return button
+local function makeButton(name, text, x, width, y)
+	local button = Instance.new("TextButton")
+	button.Name = name
+	button.Size = UDim2.fromOffset(width, 30)
+	button.Position = UDim2.fromOffset(x, y)
+	button.BackgroundColor3 = Color3.fromRGB(35, 55, 70)
+	button.TextColor3 = Color3.new(1, 1, 1)
+	button.Font = Enum.Font.GothamMedium
+	button.TextSize = 13
+	button.Text = text
+	button.Parent = gui
+	return button
 end
-local resetButton=makeButton("ResetScenario","Reiniciar",14,92,212)
-local kickSetupButton=makeButton("KickScenario","Preparar patada",112,122,212)
-local wallSetupButton=makeButton("WallScenario","Probar pared",240,102,212)
-local recordButton=makeButton("RecordingToggle","Pausar registro",348,120,212)
-local headOnButton=makeButton("PairHeadOn","Choque frontal",14,132,248)
-local obliqueButton=makeButton("PairOblique","Choque oblicuo",152,132,248)
-local overlapButton=makeButton("PairOverlap","Centros coincidentes",290,178,248)
-local crowdOverlapButton=makeButton("CrowdOverlap","Trío solapado",14,132,284)
-local crowdApproachButton=makeButton("CrowdApproach","Dos al balón",152,132,284)
-local fastCrossingButton=makeButton("FastCrossing","Cruce rápido",290,132,284)
-local fastBallButton=makeButton("FastBall","Jugador-balón rápido",14,142,320)
-local speedRunButton=makeButton("SpeedRun","Velocidad constante",14,152,356)
-local regressionButton=makeButton("RegressionSuite","Ejecutar pruebas",174,160,356)
-local fastDiagonalButton=makeButton("FastDiagonal","Diagonal rápida",162,132,320)
-local multiWallButton=makeButton("MultiWall","Rebotes múltiples",300,160,320)
-local goalTestButton=makeButton("GoalTest","Tiro a gol",14,120,392)
-local latencyButtons={}
-for index,delayMs in ipairs({0,50,100,150,200,300,500}) do
-    latencyButtons[delayMs]=makeButton("InputDelay"..delayMs,delayMs==0 and "Delay 0" or (tostring(delayMs).." ms"),14+(index-1)*70,66,428)
+local resetButton = makeButton("ResetScenario", "Reiniciar", 14, 92, 212)
+local kickSetupButton = makeButton("KickScenario", "Preparar patada", 112, 122, 212)
+local wallSetupButton = makeButton("WallScenario", "Probar pared", 240, 102, 212)
+local recordButton = makeButton("RecordingToggle", "Pausar registro", 348, 120, 212)
+local headOnButton = makeButton("PairHeadOn", "Choque frontal", 14, 132, 248)
+local obliqueButton = makeButton("PairOblique", "Choque oblicuo", 152, 132, 248)
+local overlapButton = makeButton("PairOverlap", "Centros coincidentes", 290, 178, 248)
+local crowdOverlapButton = makeButton("CrowdOverlap", "Trío solapado", 14, 132, 284)
+local crowdApproachButton = makeButton("CrowdApproach", "Dos al balón", 152, 132, 284)
+local fastCrossingButton = makeButton("FastCrossing", "Cruce rápido", 290, 132, 284)
+local fastBallButton = makeButton("FastBall", "Jugador-balón rápido", 14, 142, 320)
+local speedRunButton = makeButton("SpeedRun", "Velocidad constante", 14, 152, 356)
+local regressionButton = makeButton("RegressionSuite", "Ejecutar pruebas", 174, 160, 356)
+local fastDiagonalButton = makeButton("FastDiagonal", "Diagonal rápida", 162, 132, 320)
+local multiWallButton = makeButton("MultiWall", "Rebotes múltiples", 300, 160, 320)
+local goalTestButton = makeButton("GoalTest", "Tiro a gol", 14, 120, 392)
+local latencyButtons = {}
+for index, delayMs in ipairs({ 0, 50, 100, 150, 200, 300, 500 }) do
+	latencyButtons[delayMs] = makeButton(
+		"InputDelay" .. delayMs,
+		delayMs == 0 and "Delay 0" or (tostring(delayMs) .. " ms"),
+		14 + (index - 1) * 70,
+		66,
+		428
+	)
 end
-resetButton.Activated:Connect(function() commandRemote:FireServer("reset") end)
-kickSetupButton.Activated:Connect(function() commandRemote:FireServer("setupKick") end)
-wallSetupButton.Activated:Connect(function() commandRemote:FireServer("setupWall") end)
-recordButton.Activated:Connect(function() commandRemote:FireServer("toggleRecording") end)
-headOnButton.Activated:Connect(function() commandRemote:FireServer("setupPairHeadOn") end)
-obliqueButton.Activated:Connect(function() commandRemote:FireServer("setupPairOblique") end)
-overlapButton.Activated:Connect(function() commandRemote:FireServer("setupPairOverlap") end)
-crowdOverlapButton.Activated:Connect(function() commandRemote:FireServer("setupCrowdOverlap") end)
-crowdApproachButton.Activated:Connect(function() commandRemote:FireServer("setupCrowdApproach") end)
-fastCrossingButton.Activated:Connect(function() commandRemote:FireServer("setupPairFastCrossing") end)
-fastBallButton.Activated:Connect(function() commandRemote:FireServer("setupBallFastCrossing") end)
-speedRunButton.Activated:Connect(function() commandRemote:FireServer("setupSpeedRun") end)
-regressionButton.Activated:Connect(function() commandRemote:FireServer("runRegressionSuite") end)
-fastDiagonalButton.Activated:Connect(function() commandRemote:FireServer("setupBallFastDiagonal") end)
-multiWallButton.Activated:Connect(function() commandRemote:FireServer("setupMultiWall") end)
-goalTestButton.Activated:Connect(function() commandRemote:FireServer("setupGoalTest") end)
-
-local latest,previous
-local snapshotAge=0
-local lastSentX,lastSentY,lastSentKick=0,0,false
-local syntheticInputDelayMs=0
-local delayedInputQueue={}
-local function setSyntheticInputDelay(delayMs)
-    syntheticInputDelayMs=delayMs
-    table.clear(delayedInputQueue)
-    lastSentX,lastSentY,lastSentKick=nil,nil,nil
-    for value,button in pairs(latencyButtons) do
-        button.BackgroundColor3=value==delayMs and Color3.fromRGB(130,95,30) or Color3.fromRGB(35,55,70)
-    end
-end
-for delayMs,button in pairs(latencyButtons) do
-    button.Activated:Connect(function() setSyntheticInputDelay(delayMs) end)
-end
-local function readAction(action,fallback)
-    local ok,value=pcall(function() return action:GetState() end)
-    if not ok then return fallback end
-    if typeof(value)=="Vector2" or typeof(value)=="boolean" then return value end
-    if type(value)=="table" and value.Value~=nil then return value.Value end
-    return fallback
-end
-snapshotRemote.OnClientEvent:Connect(function(s)
-    local reset=latest and (s.matchId~=latest.matchId or s.round~=latest.round or s.tick&lt;latest.tick)
-    previous,latest=reset and s or latest,s
-    if reset then
-        -- Re-send held movement after a reset; drop delayed controls from the old round.
-        table.clear(delayedInputQueue)
-        lastSentX,lastSentY,lastSentKick=nil,nil,nil
-    end
-    snapshotAge=0
+resetButton.Activated:Connect(function()
+	commandRemote:FireServer("reset")
+end)
+kickSetupButton.Activated:Connect(function()
+	commandRemote:FireServer("setupKick")
+end)
+wallSetupButton.Activated:Connect(function()
+	commandRemote:FireServer("setupWall")
+end)
+recordButton.Activated:Connect(function()
+	commandRemote:FireServer("toggleRecording")
+end)
+headOnButton.Activated:Connect(function()
+	commandRemote:FireServer("setupPairHeadOn")
+end)
+obliqueButton.Activated:Connect(function()
+	commandRemote:FireServer("setupPairOblique")
+end)
+overlapButton.Activated:Connect(function()
+	commandRemote:FireServer("setupPairOverlap")
+end)
+crowdOverlapButton.Activated:Connect(function()
+	commandRemote:FireServer("setupCrowdOverlap")
+end)
+crowdApproachButton.Activated:Connect(function()
+	commandRemote:FireServer("setupCrowdApproach")
+end)
+fastCrossingButton.Activated:Connect(function()
+	commandRemote:FireServer("setupPairFastCrossing")
+end)
+fastBallButton.Activated:Connect(function()
+	commandRemote:FireServer("setupBallFastCrossing")
+end)
+speedRunButton.Activated:Connect(function()
+	commandRemote:FireServer("setupSpeedRun")
+end)
+regressionButton.Activated:Connect(function()
+	commandRemote:FireServer("runRegressionSuite")
+end)
+fastDiagonalButton.Activated:Connect(function()
+	commandRemote:FireServer("setupBallFastDiagonal")
+end)
+multiWallButton.Activated:Connect(function()
+	commandRemote:FireServer("setupMultiWall")
+end)
+goalTestButton.Activated:Connect(function()
+	commandRemote:FireServer("setupGoalTest")
 end)
 
-local function renderLine(part,a,b,color,visible)
-    local delta=b-a
-    local length=delta.Magnitude
-    part.Transparency=visible and 0.2 or 1
-    if visible and length&gt;0.05 then
-        part.Size=Vector3.new(.18,.18,length)
-        part.CFrame=CFrame.lookAt((a+b)*.5,b)
-        part.Color=color
-    end
+local latest, previous
+local snapshotAge = 0
+local lastSentX, lastSentY, lastSentKick = 0, 0, false
+local syntheticInputDelayMs = 0
+local delayedInputQueue = {}
+local function setSyntheticInputDelay(delayMs)
+	syntheticInputDelayMs = delayMs
+	table.clear(delayedInputQueue)
+	lastSentX, lastSentY, lastSentKick = nil, nil, nil
+	for value, button in pairs(latencyButtons) do
+		button.BackgroundColor3 = value == delayMs and Color3.fromRGB(130, 95, 30) or Color3.fromRGB(35, 55, 70)
+	end
+end
+for delayMs, button in pairs(latencyButtons) do
+	button.Activated:Connect(function()
+		setSyntheticInputDelay(delayMs)
+	end)
+end
+local function readAction(action, fallback)
+	local ok, value = pcall(function()
+		return action:GetState()
+	end)
+	if not ok then
+		return fallback
+	end
+	if typeof(value) == "Vector2" or typeof(value) == "boolean" then
+		return value
+	end
+	if type(value) == "table" and value.Value ~= nil then
+		return value.Value
+	end
+	return fallback
+end
+snapshotRemote.OnClientEvent:Connect(function(s)
+	local reset = latest and (s.matchId ~= latest.matchId or s.round ~= latest.round or s.tick &lt; latest.tick)
+	previous, latest = reset and s or latest, s
+	if reset then
+		-- Re-send held movement after a reset; drop delayed controls from the old round.
+		table.clear(delayedInputQueue)
+		lastSentX, lastSentY, lastSentKick = nil, nil, nil
+	end
+	snapshotAge = 0
+end)
+
+local function renderLine(part, a, b, color, visible)
+	local delta = b - a
+	local length = delta.Magnitude
+	part.Transparency = visible and 0.2 or 1
+	if visible and length &gt; 0.05 then
+		part.Size = Vector3.new(0.18, 0.18, length)
+		part.CFrame = CFrame.lookAt((a + b) * 0.5, b)
+		part.Color = color
+	end
 end
 
 RunService.RenderStepped:Connect(function(dt)
-    fitCamera()
-    snapshotAge+=dt
-    local move=readAction(moveAction,Vector2.zero)
-    if typeof(move)~="Vector2" then move=Vector2.zero end
-    local kick=readAction(kickAction,false)==true
-    local now=os.clock()
-    if move.X~=lastSentX or move.Y~=lastSentY or kick~=lastSentKick then
-        lastSentX,lastSentY,lastSentKick=move.X,move.Y,kick
-        local packet={x=move.X,y=move.Y,kick=kick}
-        if syntheticInputDelayMs&lt;=0 then
-            inputRemote:FireServer(packet.x,packet.y,packet.kick)
-        else
-            table.insert(delayedInputQueue,{due=now+syntheticInputDelayMs/1000,packet=packet})
-        end
-    end
-    while delayedInputQueue[1] and delayedInputQueue[1].due&lt;=now do
-        local queued=table.remove(delayedInputQueue,1).packet
-        inputRemote:FireServer(queued.x,queued.y,queued.kick)
-    end
-    if not latest then return end
+	fitCamera()
+	snapshotAge += dt
+	local move = readAction(moveAction, Vector2.zero)
+	if typeof(move) ~= "Vector2" then
+		move = Vector2.zero
+	end
+	local kick = readAction(kickAction, false) == true
+	local now = os.clock()
+	if move.X ~= lastSentX or move.Y ~= lastSentY or kick ~= lastSentKick then
+		lastSentX, lastSentY, lastSentKick = move.X, move.Y, kick
+		local packet = { x = move.X, y = move.Y, kick = kick }
+		if syntheticInputDelayMs &lt;= 0 then
+			inputRemote:FireServer(packet.x, packet.y, packet.kick)
+		else
+			table.insert(delayedInputQueue, { due = now + syntheticInputDelayMs / 1000, packet = packet })
+		end
+	end
+	while delayedInputQueue[1] and delayedInputQueue[1].due &lt;= now do
+		local queued = table.remove(delayedInputQueue, 1).packet
+		inputRemote:FireServer(queued.x, queued.y, queued.kick)
+	end
+	if not latest then
+		return
+	end
 
-    local predictedState,predictedContact
-    local predictionTicks=math.clamp(math.ceil(syntheticInputDelayMs*60/1000),0,24)
-    if syntheticInputDelayMs&gt;0 and latest.coreMode and latest.matchPhase=="playing" and latest.predictionParams then
-        predictedState=PredictionLab2D.predict(latest.player,{x=move.X,y=move.Y,kick=kick},latest.predictionParams,predictionTicks)
-        local targets={}
-        for _,disc in ipairs(latest.players or {}) do
-            if disc.playerId~=1 then table.insert(targets,{id=disc.playerId,kind="player",x=disc.x,y=disc.y,vx=disc.vx,vy=disc.vy,radius=disc.radius}) end
-        end
-        table.insert(targets,{id="ball",kind="ball",x=latest.ball.x,y=latest.ball.y,vx=latest.ball.vx,vy=latest.ball.vy,radius=latest.ball.radius})
-        predictedContact=PredictionLab2D.firstContact(predictedState.path,latest.player.radius or 15,targets)
-        local lead=math.sqrt((predictedState.x-latest.player.x)^2+(predictedState.y-latest.player.y)^2)
-        local forecast=predictedContact and string.format("%s %s in %d ticks",predictedContact.kind=="ball" and "BALL" or "PLAYER",tostring(predictedContact.targetId),predictedContact.tick) or "no predicted contact"
-        drawDisc(predictionGhost,toWorld(predictedState.x,predictedState.y),latest.player.radius or 15)
-        predictionGhost.Transparency=0.38
-        predictionLabel.Text=string.format("SIMULATED INPUT DELAY %d ms | horizon %d ticks\nGhost lead %.2f units | ball gap %.2f\nForecast: %s | server touch now: %s",syntheticInputDelayMs,predictionTicks,lead,latest.separation,forecast,tostring(latest.touchingBall))
-    else
-        predictionGhost.Transparency=1
-        predictionLabel.Text=syntheticInputDelayMs&gt;0 and string.format("Input delay %d ms | prediction active in 5v5 core only",syntheticInputDelayMs) or "Predicción experimental | input delay 0 ms"
-    end
+	local predictedState, predictedContact
+	local predictionTicks = math.clamp(math.ceil(syntheticInputDelayMs * 60 / 1000), 0, 24)
+	if syntheticInputDelayMs &gt; 0 and latest.coreMode and latest.matchPhase == "playing" and latest.predictionParams then
+		predictedState = PredictionLab2D.predict(
+			latest.player,
+			{ x = move.X, y = move.Y, kick = kick },
+			latest.predictionParams,
+			predictionTicks
+		)
+		local targets = {}
+		for _, disc in ipairs(latest.players or {}) do
+			if disc.playerId ~= 1 then
+				table.insert(targets, {
+					id = disc.playerId,
+					kind = "player",
+					x = disc.x,
+					y = disc.y,
+					vx = disc.vx,
+					vy = disc.vy,
+					radius = disc.radius,
+				})
+			end
+		end
+		table.insert(targets, {
+			id = "ball",
+			kind = "ball",
+			x = latest.ball.x,
+			y = latest.ball.y,
+			vx = latest.ball.vx,
+			vy = latest.ball.vy,
+			radius = latest.ball.radius,
+		})
+		predictedContact = PredictionLab2D.firstContact(predictedState.path, latest.player.radius or 15, targets)
+		local lead = math.sqrt((predictedState.x - latest.player.x) ^ 2 + (predictedState.y - latest.player.y) ^ 2)
+		local forecast = predictedContact
+				and string.format(
+					"%s %s in %d ticks",
+					predictedContact.kind == "ball" and "BALL" or "PLAYER",
+					tostring(predictedContact.targetId),
+					predictedContact.tick
+				)
+			or "no predicted contact"
+		drawDisc(predictionGhost, toWorld(predictedState.x, predictedState.y), latest.player.radius or 15)
+		predictionGhost.Transparency = 0.38
+		predictionLabel.Text = string.format(
+			"SIMULATED INPUT DELAY %d ms | horizon %d ticks\nGhost lead %.2f units | ball gap %.2f\nForecast: %s | server touch now: %s",
+			syntheticInputDelayMs,
+			predictionTicks,
+			lead,
+			latest.separation,
+			forecast,
+			tostring(latest.touchingBall)
+		)
+	else
+		predictionGhost.Transparency = 1
+		predictionLabel.Text = syntheticInputDelayMs &gt; 0
+				and string.format("Input delay %d ms | prediction active in 5v5 core only", syntheticInputDelayMs)
+			or "Predicción experimental | input delay 0 ms"
+	end
 
-    local alpha=math.clamp(snapshotAge*60,0,1)
-    local a=previous and previous.tick&lt;latest.tick and previous or latest
-    local function lerp(disc,axis)
-        return a[disc][axis]+(latest[disc][axis]-a[disc][axis])*alpha
-    end
-    local p1=toWorld(lerp("player","x"),lerp("player","y"))
-    local p2=toWorld(lerp("player2","x"),lerp("player2","y"))
-    local ball=toWorld(lerp("ball","x"),lerp("ball","y"))
-    drawDisc(ballDisc,ball,latest.ball.radius or 10)
-    drawDisc(playerDisc,p1,latest.player.radius or 15)
-    drawDisc(playerDisc2,p2,latest.player2.radius or 15)
-    local extraDiscMode=latest.pairMode or latest.crowdMode
-    if latest.players and #latest.players&gt;0 then
-        for slot,disc in ipairs(latest.players) do
-            local previousDisc=a.players and a.players[slot]
-            local px=previousDisc and (previousDisc.x+(disc.x-previousDisc.x)*alpha) or disc.x
-            local py=previousDisc and (previousDisc.y+(disc.y-previousDisc.y)*alpha) or disc.y
-            local visual=playerVisuals[slot]
-            if visual then
-                drawDisc(visual,toWorld(px,py),disc.radius or 15)
-                visual.Transparency=0
-                visual.Color=disc.team=="red" and Color3.fromRGB(238,90,80) or Color3.fromRGB(75,155,255)
-            end
-        end
-        for slot=#latest.players+1,#playerVisuals do
-            if playerVisuals[slot] then playerVisuals[slot].Transparency=1 end
-        end
-    else
-        for slot=2,#playerVisuals do
-            if playerVisuals[slot] then playerVisuals[slot].Transparency=slot==2 and (extraDiscMode and 0 or 1) or 1 end
-        end
-    end
-    ballDisc.Transparency=latest.pairMode and 1 or 0
-    renderLine(debugLine,p1,ball,latest.touchingBall and Color3.fromRGB(70,255,130) or Color3.fromRGB(255,220,70),not latest.pairMode)
-    renderLine(pairDebugLine,p1,p2,latest.touchingPlayers and Color3.fromRGB(70,255,130) or Color3.fromRGB(80,220,255),extraDiscMode)
-    renderLine(ballP2DebugLine,p2,ball,latest.touchingPlayer2Ball and Color3.fromRGB(70,255,130) or Color3.fromRGB(255,110,90),latest.crowdMode)
+	local alpha = math.clamp(snapshotAge * 60, 0, 1)
+	local a = previous and previous.tick &lt; latest.tick and previous or latest
+	local function lerp(disc, axis)
+		return a[disc][axis] + (latest[disc][axis] - a[disc][axis]) * alpha
+	end
+	local p1 = toWorld(lerp("player", "x"), lerp("player", "y"))
+	local p2 = toWorld(lerp("player2", "x"), lerp("player2", "y"))
+	local ball = toWorld(lerp("ball", "x"), lerp("ball", "y"))
+	drawDisc(ballDisc, ball, latest.ball.radius or 10)
+	drawDisc(playerDisc, p1, latest.player.radius or 15)
+	drawDisc(playerDisc2, p2, latest.player2.radius or 15)
+	local extraDiscMode = latest.pairMode or latest.crowdMode
+	if latest.players and #latest.players &gt; 0 then
+		for slot, disc in ipairs(latest.players) do
+			local previousDisc = a.players and a.players[slot]
+			local px = previousDisc and (previousDisc.x + (disc.x - previousDisc.x) * alpha) or disc.x
+			local py = previousDisc and (previousDisc.y + (disc.y - previousDisc.y) * alpha) or disc.y
+			local visual = playerVisuals[slot]
+			if visual then
+				drawDisc(visual, toWorld(px, py), disc.radius or 15)
+				visual.Transparency = 0
+				visual.Color = disc.team == "red" and Color3.fromRGB(238, 90, 80) or Color3.fromRGB(75, 155, 255)
+			end
+		end
+		for slot = #latest.players + 1, #playerVisuals do
+			if playerVisuals[slot] then
+				playerVisuals[slot].Transparency = 1
+			end
+		end
+	else
+		for slot = 2, #playerVisuals do
+			if playerVisuals[slot] then
+				playerVisuals[slot].Transparency = slot == 2 and (extraDiscMode and 0 or 1) or 1
+			end
+		end
+	end
+	ballDisc.Transparency = latest.pairMode and 1 or 0
+	renderLine(
+		debugLine,
+		p1,
+		ball,
+		latest.touchingBall and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(255, 220, 70),
+		not latest.pairMode
+	)
+	renderLine(
+		pairDebugLine,
+		p1,
+		p2,
+		latest.touchingPlayers and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(80, 220, 255),
+		extraDiscMode
+	)
+	renderLine(
+		ballP2DebugLine,
+		p2,
+		ball,
+		latest.touchingPlayer2Ball and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(255, 110, 90),
+		latest.crowdMode
+	)
 
-    for _,visual in ipairs(geometryVisuals) do
-        local visible=latest.coreMode and (visual.group==32 or latest.kickoffTeam and bit32.band(visual.group,latest.kickoffTeam=="red" and 8 or 16)~=0)
-        visual.part.Transparency=visible and 0 or 1
-    end
-    local m=latest.metrics
-    local lastTouchLine=latest.lastTouch and string.format("Last: %s #%d (%s)",string.upper(latest.lastTouch.team),latest.lastTouch.playerId,latest.lastTouch.kind) or "Last: -" 
-    local p2Line=(latest.players and #latest.players&gt;0) and string.format("Roster: %d | RED %d / BLUE %d | %s",latest.playerCount,latest.redCount,latest.blueCount,lastTouchLine) or ((latest.pairMode or latest.crowdMode) and string.format("P2: (%.2f, %.2f) speed %.2f | %s",latest.player2.x,latest.player2.y,latest.player2.speed,lastTouchLine) or ("P2: inactive | "..lastTouchLine))
-    local ballLine=latest.pairMode and "Ball: inactive in player-pair test" or string.format("Ball: (%.2f, %.2f) speed %.2f",latest.ball.x,latest.ball.y,latest.ball.speed)
-    local contactLine=latest.crowdMode and string.format("Separations P1-P2 %.2f | P1-ball %.2f | P2-ball %.2f",latest.playerSeparation,latest.separation,latest.player2BallSeparation) or (latest.pairMode and string.format("P1-P2: %.2f | contacts: %d",latest.playerSeparation,m.playerContacts) or string.format("P1-ball: %.2f | contacts: %d | ball walls: %d",latest.separation,m.ballContacts,m.ballWallBounces))
-    local diagnosticsLine=latest.crowdMode and string.format("3D %d contacts | peak overlap %.3f | residual %.4f/max %.4f | iter %d/%d",m.crowdContacts,m.crowdPeakPenetration,m.crowdLastResidualPenetration,m.crowdWorstResidualPenetration,m.crowdLastSolverIterations,m.crowdMaxSolverIterations) or string.format("Max penetration %.3f | correction %.3f | impulse %.3f | substeps %d/%d | suite %s",m.maxPlayerPenetration,m.maxPlayerCorrection,m.lastPlayerImpulse,m.lastCollisionSubsteps,m.maxCollisionSubsteps,m.regressionRan and string.format("%d/%d",m.regressionPassed,m.regressionTotal) or "pendiente")
-    local matchStatus=latest.matchPhase=="goalPause" and string.format("GOAL PAUSE %d",latest.pauseTicksRemaining) or (latest.matchPhase=="kickoff" and string.format("KICKOFF %s %d",string.upper(latest.kickoffTeam or "-"),latest.pauseTicksRemaining) or (latest.kickoffTeam and ("WAIT KICK "..string.upper(latest.kickoffTeam)) or "PLAYING"))
-    if latest.matchPhase=="finished" then matchStatus="FINISHED "..string.upper(latest.winner or "-") end
-    local matchLine=string.format("Score RED %d - %d BLUE | %s",latest.score.red,latest.score.blue,matchStatus)
-    label.Text=string.format(
-        "Haxball lab | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",
-        latest.tick,latest.gameTime,latest.crowdMode and "THREE-DISC TEST" or (latest.pairMode and "PAIR TEST" or (latest.coreMode and ("CORE v1 | owner "..tostring(latest.ownerUserId or "-")) or (latest.legacyMode and "LEGACY CCD TEST" or ("owner "..tostring(latest.ownerUserId or "-"))))),
-        matchLine,
-        m.kickAttempts,m.successfulKicks,m.lastKickSuccessTick,
-        latest.player.x,latest.player.y,latest.player.speed,
-        p2Line,ballLine,contactLine,diagnosticsLine,
-        latest.recording and "recording" or "paused",latest.historySamples or 0
-    )
-    recordButton.Text=latest.recording and "Pausar registro" or "Reanudar registro"
+	for _, visual in ipairs(geometryVisuals) do
+		local visible = latest.coreMode
+			and (
+				visual.group == 32
+				or latest.kickoffTeam and bit32.band(visual.group, latest.kickoffTeam == "red" and 8 or 16) ~= 0
+			)
+		visual.part.Transparency = visible and 0 or 1
+	end
+	local m = latest.metrics
+	local lastTouchLine = latest.lastTouch
+			and string.format(
+				"Last: %s #%d (%s)",
+				string.upper(latest.lastTouch.team),
+				latest.lastTouch.playerId,
+				latest.lastTouch.kind
+			)
+		or "Last: -"
+	local p2Line = (latest.players and #latest.players &gt; 0)
+			and string.format(
+				"Roster: %d | RED %d / BLUE %d | %s",
+				latest.playerCount,
+				latest.redCount,
+				latest.blueCount,
+				lastTouchLine
+			)
+		or (
+			(latest.pairMode or latest.crowdMode)
+				and string.format(
+					"P2: (%.2f, %.2f) speed %.2f | %s",
+					latest.player2.x,
+					latest.player2.y,
+					latest.player2.speed,
+					lastTouchLine
+				)
+			or ("P2: inactive | " .. lastTouchLine)
+		)
+	local ballLine = latest.pairMode and "Ball: inactive in player-pair test"
+		or string.format("Ball: (%.2f, %.2f) speed %.2f", latest.ball.x, latest.ball.y, latest.ball.speed)
+	local contactLine = latest.crowdMode
+			and string.format(
+				"Separations P1-P2 %.2f | P1-ball %.2f | P2-ball %.2f",
+				latest.playerSeparation,
+				latest.separation,
+				latest.player2BallSeparation
+			)
+		or (
+			latest.pairMode
+				and string.format("P1-P2: %.2f | contacts: %d", latest.playerSeparation, m.playerContacts)
+			or string.format(
+				"P1-ball: %.2f | contacts: %d | ball walls: %d",
+				latest.separation,
+				m.ballContacts,
+				m.ballWallBounces
+			)
+		)
+	local diagnosticsLine = latest.crowdMode
+			and string.format(
+				"3D %d contacts | peak overlap %.3f | residual %.4f/max %.4f | iter %d/%d",
+				m.crowdContacts,
+				m.crowdPeakPenetration,
+				m.crowdLastResidualPenetration,
+				m.crowdWorstResidualPenetration,
+				m.crowdLastSolverIterations,
+				m.crowdMaxSolverIterations
+			)
+		or string.format(
+			"Max penetration %.3f | correction %.3f | impulse %.3f | substeps %d/%d | suite %s",
+			m.maxPlayerPenetration,
+			m.maxPlayerCorrection,
+			m.lastPlayerImpulse,
+			m.lastCollisionSubsteps,
+			m.maxCollisionSubsteps,
+			m.regressionRan and string.format("%d/%d", m.regressionPassed, m.regressionTotal) or "pendiente"
+		)
+	local matchStatus = latest.matchPhase == "goalPause" and string.format("GOAL PAUSE %d", latest.pauseTicksRemaining)
+		or (
+			latest.matchPhase == "kickoff"
+				and string.format("KICKOFF %s %d", string.upper(latest.kickoffTeam or "-"), latest.pauseTicksRemaining)
+			or (latest.kickoffTeam and ("WAIT KICK " .. string.upper(latest.kickoffTeam)) or "PLAYING")
+		)
+	if latest.matchPhase == "finished" then
+		matchStatus = "FINISHED " .. string.upper(latest.winner or "-")
+	end
+	local matchLine = string.format("Score RED %d - %d BLUE | %s", latest.score.red, latest.score.blue, matchStatus)
+	label.Text = string.format(
+		"Haxball lab | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",
+		latest.tick,
+		latest.gameTime,
+		latest.crowdMode and "THREE-DISC TEST"
+			or (
+				latest.pairMode and "PAIR TEST"
+				or (
+					latest.coreMode and ("CORE v1 | owner " .. tostring(latest.ownerUserId or "-"))
+					or (latest.legacyMode and "LEGACY CCD TEST" or ("owner " .. tostring(latest.ownerUserId or "-")))
+				)
+			),
+		matchLine,
+		m.kickAttempts,
+		m.successfulKicks,
+		m.lastKickSuccessTick,
+		latest.player.x,
+		latest.player.y,
+		latest.player.speed,
+		p2Line,
+		ballLine,
+		contactLine,
+		diagnosticsLine,
+		latest.recording and "recording" or "paused",
+		latest.historySamples or 0
+	)
+	recordButton.Text = latest.recording and "Pausar registro" or "Reanudar registro"
 end)
 </ProtectedString><bool name="Disabled">false</bool><Content name="LinkedSource"><null /></Content><token name="RunContext">2</token><string name="ScriptGuid">{C39200C5-BEA9-440C-9C20-AEE94113C61C}</string><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">LabClient</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009b8</UniqueId></Properties></Item><Item class="ModuleScript" referent="RBXB25F76BD7C4A4AC7BE77C67E91496AE3"><Properties>
 					<Content name="LinkedSource"><null /></Content><ProtectedString name="Source">-- Client-only free-motion micro-prediction for isolated latency experiments.
@@ -922,32 +1140,42 @@ return {["source"]="node-haxball@2.3.0, built-in Classic; independent reference,
 </ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXPhase4StadiumRender2D"><Properties><string name="Name">StadiumRender2D</string><ProtectedString name="Source">-- Pure geometry sampling; rendering never participates in the physical simulation.
 local Render = {}
 function Render.segmentPoints(segment, angularStep)
-    angularStep=angularStep or math.pi/48
-    assert(angularStep&gt;0 and angularStep&lt;math.pi,"invalid angular step")
-    if not segment.curveF then return {{x=segment.x1,y=segment.y1},{x=segment.x2,y=segment.y2}} end
-    local angle=math.atan2(segment.y1-segment.centerY,segment.x1-segment.centerX)
-    local sweep=segment.curveF==0 and math.pi or 2*math.atan(1/segment.curveF)
-    local count=math.ceil(math.abs(sweep)/angularStep)
-    local points={}
-    for i=0,count do
-        local a=angle+sweep*i/count
-        table.insert(points,{x=segment.centerX+segment.arcRadius*math.cos(a),y=segment.centerY+segment.arcRadius*math.sin(a)})
-    end
-    -- Keep endpoints exact to avoid visible joins separating through rounding.
-    points[1]={x=segment.x1,y=segment.y1};points[#points]={x=segment.x2,y=segment.y2}
-    return points
+	angularStep = angularStep or math.pi / 48
+	assert(angularStep &gt; 0 and angularStep &lt; math.pi, "invalid angular step")
+	if not segment.curveF then
+		return { { x = segment.x1, y = segment.y1 }, { x = segment.x2, y = segment.y2 } }
+	end
+	local angle = math.atan2(segment.y1 - segment.centerY, segment.x1 - segment.centerX)
+	local sweep = segment.curveF == 0 and math.pi or 2 * math.atan(1 / segment.curveF)
+	local count = math.ceil(math.abs(sweep) / angularStep)
+	local points = {}
+	for i = 0, count do
+		local a = angle + sweep * i / count
+		table.insert(points, {
+			x = segment.centerX + segment.arcRadius * math.cos(a),
+			y = segment.centerY + segment.arcRadius * math.sin(a),
+		})
+	end
+	-- Keep endpoints exact to avoid visible joins separating through rounding.
+	points[1] = { x = segment.x1, y = segment.y1 }
+	points[#points] = { x = segment.x2, y = segment.y2 }
+	return points
 end
-function Render.toWorld(x,y,presentation)
-    local p=presentation
-    return {x=p.worldOrigin.x+(x-p.logicalOrigin.x)*p.studsPerUnit,y=p.floorY,z=p.worldOrigin.z+(p.invertLogicalY and -1 or 1)*(y-p.logicalOrigin.y)*p.studsPerUnit}
+function Render.toWorld(x, y, presentation)
+	local p = presentation
+	return {
+		x = p.worldOrigin.x + (x - p.logicalOrigin.x) * p.studsPerUnit,
+		y = p.floorY,
+		z = p.worldOrigin.z + (p.invertLogicalY and -1 or 1) * (y - p.logicalOrigin.y) * p.studsPerUnit,
+	}
 end
-function Render.cameraHeight(presentation,bounds,fovDegrees,width,height)
-    assert(fovDegrees&gt;0 and fovDegrees&lt;180,"invalid field of view")
-    local aspect=(width and height and width&gt;0 and height&gt;0) and width/height or 16/9
-    local halfWidth=(bounds.maxX-bounds.minX)*presentation.studsPerUnit*.5+10
-    local halfHeight=(bounds.maxY-bounds.minY)*presentation.studsPerUnit*.5+10
-    local tangent=math.tan(math.rad(fovDegrees)*.5)
-    return presentation.floorY+math.max(halfHeight/tangent,halfWidth/(aspect*tangent))
+function Render.cameraHeight(presentation, bounds, fovDegrees, width, height)
+	assert(fovDegrees &gt; 0 and fovDegrees &lt; 180, "invalid field of view")
+	local aspect = (width and height and width &gt; 0 and height &gt; 0) and width / height or 16 / 9
+	local halfWidth = (bounds.maxX - bounds.minX) * presentation.studsPerUnit * 0.5 + 10
+	local halfHeight = (bounds.maxY - bounds.minY) * presentation.studsPerUnit * 0.5 + 10
+	local tangent = math.tan(math.rad(fovDegrees) * 0.5)
+	return presentation.floorY + math.max(halfHeight / tangent, halfWidth / (aspect * tangent))
 end
 return Render
 </ProtectedString></Properties></Item></Item><Item class="Folder" referent="RBX992D247A70304E5491C3ACB58F6F0A49"><Properties>
@@ -1403,7 +1631,7 @@ local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
 local MatchRules2D = require(script.Parent:WaitForChild("MatchRules2D"))
 local LocalMatch2D = require(script.Parent:WaitForChild("LocalMatch2D"))
 local localMatch
-local matchId=0
+local matchId = 0
 local LabRegression = require(script.Parent:WaitForChild("LabRegression"))
 local debugState = script.Parent:WaitForChild("DebugState")
 
@@ -1411,7 +1639,7 @@ Players.CharacterAutoLoads = false
 local state = Physics2D.newState()
 local matchState = MatchRules2D.newMatch()
 local currentInput = { x = 0, y = 0, kick = false }
-local currentInputs = {[1]=currentInput}
+local currentInputs = { [1] = currentInput }
 local lastCoreKickInputs = {}
 local touchingCoreBall = {}
 local playerUserSlots = {}
@@ -1436,586 +1664,957 @@ local touchingBall = false
 local touchingPlayers = false
 local touchingCrowdPairs = {}
 local metrics = {
-    kickAttempts=0, successfulKicks=0, ballContacts=0,
-    ballWallBounces=0, playerWallBounces=0, lastKickSuccessTick=-1,
-    playerContacts=0, maxPlayerPenetration=0, maxPlayerCorrection=0,
-    lastPlayerContactTick=-1, lastPlayerImpulse=0,
-    crowdContacts=0, crowdContactsP1P2=0, crowdContactsP1Ball=0, crowdContactsP2Ball=0,
-    crowdPeakPenetration=0, crowdLastResidualPenetration=0, crowdWorstResidualPenetration=0,
-    crowdLastSolverIterations=0, crowdMaxSolverIterations=0,
-    lastCollisionSubsteps=0, maxCollisionSubsteps=0,
-    regressionRan=false, regressionPassed=0, regressionFailed=0, regressionTotal=0,
+	kickAttempts = 0,
+	successfulKicks = 0,
+	ballContacts = 0,
+	ballWallBounces = 0,
+	playerWallBounces = 0,
+	lastKickSuccessTick = -1,
+	playerContacts = 0,
+	maxPlayerPenetration = 0,
+	maxPlayerCorrection = 0,
+	lastPlayerContactTick = -1,
+	lastPlayerImpulse = 0,
+	crowdContacts = 0,
+	crowdContactsP1P2 = 0,
+	crowdContactsP1Ball = 0,
+	crowdContactsP2Ball = 0,
+	crowdPeakPenetration = 0,
+	crowdLastResidualPenetration = 0,
+	crowdWorstResidualPenetration = 0,
+	crowdLastSolverIterations = 0,
+	crowdMaxSolverIterations = 0,
+	lastCollisionSubsteps = 0,
+	maxCollisionSubsteps = 0,
+	regressionRan = false,
+	regressionPassed = 0,
+	regressionFailed = 0,
+	regressionTotal = 0,
 }
 local function clearHistory()
-    table.clear(historyBuffer)
-    historyWrite, historyCount = 1, 0
+	table.clear(historyBuffer)
+	historyWrite, historyCount = 1, 0
 end
 local function logEvent(kind, data, eventTick)
-    local event = data or {}
-    event.kind = kind
-    event.tick = eventTick or state.tick + 1
-    table.insert(events, event)
-    if #events &gt; eventCapacity then table.remove(events, 1) end
+	local event = data or {}
+	event.kind = kind
+	event.tick = eventTick or state.tick + 1
+	table.insert(events, event)
+	if #events &gt; eventCapacity then
+		table.remove(events, 1)
+	end
 end
 local function clearMetrics()
-    metrics.kickAttempts=0; metrics.successfulKicks=0; metrics.ballContacts=0
-    metrics.ballWallBounces=0; metrics.playerWallBounces=0; metrics.lastKickSuccessTick=-1
-    metrics.playerContacts=0; metrics.maxPlayerPenetration=0; metrics.maxPlayerCorrection=0
-    metrics.lastPlayerContactTick=-1; metrics.lastPlayerImpulse=0
-    metrics.crowdContacts=0; metrics.crowdContactsP1P2=0; metrics.crowdContactsP1Ball=0; metrics.crowdContactsP2Ball=0
-    metrics.crowdPeakPenetration=0; metrics.crowdLastResidualPenetration=0; metrics.crowdWorstResidualPenetration=0
-    metrics.crowdLastSolverIterations=0; metrics.crowdMaxSolverIterations=0
-    metrics.lastCollisionSubsteps=0; metrics.maxCollisionSubsteps=0
-    metrics.regressionRan=false; metrics.regressionPassed=0; metrics.regressionFailed=0; metrics.regressionTotal=0
-    table.clear(events); clearHistory()
-    touchingBall=false; touchingPlayers=false; touchingCrowdPairs={}
+	metrics.kickAttempts = 0
+	metrics.successfulKicks = 0
+	metrics.ballContacts = 0
+	metrics.ballWallBounces = 0
+	metrics.playerWallBounces = 0
+	metrics.lastKickSuccessTick = -1
+	metrics.playerContacts = 0
+	metrics.maxPlayerPenetration = 0
+	metrics.maxPlayerCorrection = 0
+	metrics.lastPlayerContactTick = -1
+	metrics.lastPlayerImpulse = 0
+	metrics.crowdContacts = 0
+	metrics.crowdContactsP1P2 = 0
+	metrics.crowdContactsP1Ball = 0
+	metrics.crowdContactsP2Ball = 0
+	metrics.crowdPeakPenetration = 0
+	metrics.crowdLastResidualPenetration = 0
+	metrics.crowdWorstResidualPenetration = 0
+	metrics.crowdLastSolverIterations = 0
+	metrics.crowdMaxSolverIterations = 0
+	metrics.lastCollisionSubsteps = 0
+	metrics.maxCollisionSubsteps = 0
+	metrics.regressionRan = false
+	metrics.regressionPassed = 0
+	metrics.regressionFailed = 0
+	metrics.regressionTotal = 0
+	table.clear(events)
+	clearHistory()
+	touchingBall = false
+	touchingPlayers = false
+	touchingCrowdPairs = {}
 end
 local function finite(n)
-    return typeof(n)=="number" and n==n and math.abs(n)&lt;1e6
+	return typeof(n) == "number" and n == n and math.abs(n) &lt; 1e6
 end
 
 local function setController(player)
-    if controlledPlayer==nil then controlledPlayer=player end
-    if not playerUserSlots[player.UserId] then
-        for slot=1,10 do
-            if slotUserIds[slot]==nil then
-                playerUserSlots[player.UserId]=slot
-                slotUserIds[slot]=player.UserId
-                if state.players and state.players[slot] then state.players[slot].ownerUserId=player.UserId end
-                break
-            end
-        end
-    end
-    if player.Character then player.Character:Destroy() end
+	if controlledPlayer == nil then
+		controlledPlayer = player
+	end
+	if not playerUserSlots[player.UserId] then
+		for slot = 1, 10 do
+			if slotUserIds[slot] == nil then
+				playerUserSlots[player.UserId] = slot
+				slotUserIds[slot] = player.UserId
+				if state.players and state.players[slot] then
+					state.players[slot].ownerUserId = player.UserId
+				end
+				break
+			end
+		end
+	end
+	if player.Character then
+		player.Character:Destroy()
+	end
 end
 Players.PlayerAdded:Connect(setController)
-for _,player in Players:GetPlayers() do setController(player) end
+for _, player in Players:GetPlayers() do
+	setController(player)
+end
 Players.PlayerRemoving:Connect(function(player)
-    local slot=playerUserSlots[player.UserId]
-    if slot then
-        playerUserSlots[player.UserId]=nil
-        slotUserIds[slot]=nil
-        currentInputs[slot]={x=0,y=0,kick=false}
-        lastCoreKickInputs[slot]=nil
-        touchingCoreBall[slot]=nil
-        if state.players and state.players[slot] then state.players[slot].ownerUserId=nil end
-    end
-    if player==controlledPlayer then
-        controlledPlayer=nil
-        for _,candidate in Players:GetPlayers() do
-            if candidate~=player then controlledPlayer=candidate;break end
-        end
-        currentInput={x=0,y=0,kick=false}
-        currentInputs[1]=currentInput
-        lastKick=false
-        if state.players then
-            local newSlot=controlledPlayer and playerUserSlots[controlledPlayer.UserId]
-            if newSlot and state.players[newSlot] then state.players[newSlot].ownerUserId=controlledPlayer.UserId end
-        elseif state.player then
-            state.player.ownerUserId=controlledPlayer and controlledPlayer.UserId or nil
-        end
-    end
+	local slot = playerUserSlots[player.UserId]
+	if slot then
+		playerUserSlots[player.UserId] = nil
+		slotUserIds[slot] = nil
+		currentInputs[slot] = { x = 0, y = 0, kick = false }
+		lastCoreKickInputs[slot] = nil
+		touchingCoreBall[slot] = nil
+		if state.players and state.players[slot] then
+			state.players[slot].ownerUserId = nil
+		end
+	end
+	if player == controlledPlayer then
+		controlledPlayer = nil
+		for _, candidate in Players:GetPlayers() do
+			if candidate ~= player then
+				controlledPlayer = candidate
+				break
+			end
+		end
+		currentInput = { x = 0, y = 0, kick = false }
+		if state.coreWorld then
+			-- Removing the controller must not clear input owned by a different slot.
+			currentInput = currentInputs[1] or currentInput
+		else
+			currentInputs[1] = currentInput
+		end
+		lastKick = false
+		if state.players then
+			local newSlot = controlledPlayer and playerUserSlots[controlledPlayer.UserId]
+			if newSlot and state.players[newSlot] then
+				state.players[newSlot].ownerUserId = controlledPlayer.UserId
+			end
+		elseif state.player then
+			state.player.ownerUserId = controlledPlayer and controlledPlayer.UserId or nil
+		end
+	end
 end)
 
-local function allocateInput(playerSlot,x,y,kick)
-    if not finite(x) or not finite(y) then return nil end
-    local magnitude=math.sqrt(x*x+y*y)
-    if magnitude&gt;1 then x,y=x/magnitude,y/magnitude end
-    local value={x=x,y=y,kick=kick==true}
-    local old=currentInputs[playerSlot] or {x=0,y=0,kick=false}
-    if x~=old.x or y~=old.y or value.kick~=old.kick then
-        logEvent("input",{playerId=playerSlot,x=x,y=y,kick=value.kick})
-    end
-    currentInputs[playerSlot]=value
-    return value
+local function allocateInput(playerSlot, x, y, kick)
+	if not finite(x) or not finite(y) then
+		return nil
+	end
+	local magnitude = math.sqrt(x * x + y * y)
+	if magnitude &gt; 1 then
+		x, y = x / magnitude, y / magnitude
+	end
+	local value = { x = x, y = y, kick = kick == true }
+	local old = currentInputs[playerSlot] or { x = 0, y = 0, kick = false }
+	if x ~= old.x or y ~= old.y or value.kick ~= old.kick then
+		logEvent("input", { playerId = playerSlot, x = x, y = y, kick = value.kick })
+	end
+	currentInputs[playerSlot] = value
+	return value
 end
-inputRemote.OnServerEvent:Connect(function(player,x,y,kick)
-    local slot=playerUserSlots[player.UserId]
-    if not slot then return end
-    if pairMode or crowdMode or legacyMode then
-        if player~=controlledPlayer then return end
-        local value=allocateInput(1,x,y,kick)
-        if value then currentInput=value end
-        if value and x*x+y*y&gt;0.01 then
-            local magnitude=math.sqrt(x*x+y*y)
-            facingX,facingY=x/magnitude,y/magnitude
-        end
-        return
-    end
-    local value=allocateInput(slot,x,y,kick)
-    if value and slot==1 then currentInput=value end
+inputRemote.OnServerEvent:Connect(function(player, x, y, kick)
+	local slot = playerUserSlots[player.UserId]
+	if not slot then
+		return
+	end
+	if pairMode or crowdMode or legacyMode then
+		if player ~= controlledPlayer then
+			return
+		end
+		local value = allocateInput(1, x, y, kick)
+		if value then
+			currentInput = value
+		end
+		if value and x * x + y * y &gt; 0.01 then
+			local magnitude = math.sqrt(x * x + y * y)
+			facingX, facingY = x / magnitude, y / magnitude
+		end
+		return
+	end
+	local value = allocateInput(slot, x, y, kick)
+	if value and slot == 1 then
+		currentInput = value
+	end
 end)
 
-local function speed(d) return math.sqrt(d.vx*d.vx+d.vy*d.vy) end
+local function speed(d)
+	return math.sqrt(d.vx * d.vx + d.vy * d.vy)
+end
 local function makeCoreState()
-    local legacy=Physics2D.newState()
-    local world=PhysicsCore2D.newWorld({
-        tickRate=Physics2D.Config.tickRate,
-        fieldHalfWidth=Physics2D.Config.fieldHalfWidth,
-        fieldHalfHeight=Physics2D.Config.fieldHalfHeight,
-        useBounds=false,
-        solverMode="haxballDiscrete",
-    })
-    -- Preserve stadium order: ball, static posts, then ten player discs.
-    local ball=PhysicsCore2D.addDisc(world,{
-        id="ball",kind="ball",x=0,y=0,radius=Physics2D.Config.ballRadius,
-        invMass=Physics2D.Config.ballInvMass,damping=Physics2D.Config.ballDamping,traceMotion=true,
-        bCoef=Physics2D.Config.ballBounce,kickable=true,
-        collisionGroup=ClassicStadium2D.Groups.ball,
-    })
-    local stadiumGeometry=ClassicStadium2D.install(PhysicsCore2D,world)
-    local spawnPoints = table.clone(StadiumProfile2D.SpawnPoints)
-    local players={}
-    local playerCollisionMasks={}
-    for slot=1,10 do
-        local position=spawnPoints[slot]
-        local disc=PhysicsCore2D.addDisc(world,{
-            id=slot,kind="player",team=slot&lt;=5 and "red" or "blue",
-            x=position.x,y=position.y,radius=Physics2D.Config.playerRadius,
-            invMass=Physics2D.Config.playerInvMass,damping=Physics2D.Config.playerDamping,
-            kickDamping=Physics2D.Config.playerDamping,bCoef=Physics2D.Config.playerBounce,
-            acceleration=Physics2D.Config.playerAcceleration,
-            kickAcceleration=Physics2D.Config.playerKickAcceleration,
-            kickStrength=Physics2D.Config.kickStrength,kickback=Physics2D.Config.kickback,
-            kickRangeExtra=Physics2D.Config.kickRangeExtra,
-            collisionGroup=slot&lt;=5 and ClassicStadium2D.Groups.red or ClassicStadium2D.Groups.blue,
-            collisionMask=StadiumProfile2D.CollisionMasks.player,
-        })
-        disc.ownerUserId=slotUserIds[slot]
-        players[slot]=disc
-        playerCollisionMasks[slot]=disc.collisionMask
-    end
-    return {tick=0,player=players[1],player2=players[6],players=players,ball=ball,score=legacy.score,coreWorld=world,stadiumGeometry=stadiumGeometry,spawnPoints=spawnPoints,playerCollisionMasks=playerCollisionMasks}
+	local legacy = Physics2D.newState()
+	local world = PhysicsCore2D.newWorld({
+		tickRate = Physics2D.Config.tickRate,
+		fieldHalfWidth = Physics2D.Config.fieldHalfWidth,
+		fieldHalfHeight = Physics2D.Config.fieldHalfHeight,
+		useBounds = false,
+		solverMode = "haxballDiscrete",
+	})
+	-- Preserve stadium order: ball, static posts, then ten player discs.
+	local ball = PhysicsCore2D.addDisc(world, {
+		id = "ball",
+		kind = "ball",
+		x = 0,
+		y = 0,
+		radius = Physics2D.Config.ballRadius,
+		invMass = Physics2D.Config.ballInvMass,
+		damping = Physics2D.Config.ballDamping,
+		traceMotion = true,
+		bCoef = Physics2D.Config.ballBounce,
+		kickable = true,
+		collisionGroup = ClassicStadium2D.Groups.ball,
+	})
+	local stadiumGeometry = ClassicStadium2D.install(PhysicsCore2D, world)
+	local spawnPoints = table.clone(StadiumProfile2D.SpawnPoints)
+	local players = {}
+	local playerCollisionMasks = {}
+	for slot = 1, 10 do
+		local position = spawnPoints[slot]
+		local disc = PhysicsCore2D.addDisc(world, {
+			id = slot,
+			kind = "player",
+			team = slot &lt;= 5 and "red" or "blue",
+			x = position.x,
+			y = position.y,
+			radius = Physics2D.Config.playerRadius,
+			invMass = Physics2D.Config.playerInvMass,
+			damping = Physics2D.Config.playerDamping,
+			kickDamping = Physics2D.Config.playerKickDamping,
+			bCoef = Physics2D.Config.playerBounce,
+			acceleration = Physics2D.Config.playerAcceleration,
+			kickAcceleration = Physics2D.Config.playerKickAcceleration,
+			kickStrength = Physics2D.Config.kickStrength,
+			kickback = Physics2D.Config.kickback,
+			kickRangeExtra = Physics2D.Config.kickRangeExtra,
+			collisionGroup = slot &lt;= 5 and ClassicStadium2D.Groups.red or ClassicStadium2D.Groups.blue,
+			collisionMask = StadiumProfile2D.CollisionMasks.player,
+		})
+		disc.ownerUserId = slotUserIds[slot]
+		players[slot] = disc
+		playerCollisionMasks[slot] = disc.collisionMask
+	end
+	return {
+		tick = 0,
+		player = players[1],
+		player2 = players[6],
+		players = players,
+		ball = ball,
+		score = legacy.score,
+		coreWorld = world,
+		stadiumGeometry = stadiumGeometry,
+		spawnPoints = spawnPoints,
+		playerCollisionMasks = playerCollisionMasks,
+	}
 end
 
-local function newState(pairEnabled,crowdEnabled,legacyPhysicsEnabled,startWithKickoff)
-    local useLegacy=pairEnabled==true or crowdEnabled==true or legacyPhysicsEnabled==true
-    local new=useLegacy and Physics2D.newState() or makeCoreState()
-    if not new.coreWorld then new.player.ownerUserId=controlledPlayer and controlledPlayer.UserId or nil end
-    pairMode=pairEnabled==true
-    crowdMode=crowdEnabled==true
-    legacyMode=legacyPhysicsEnabled==true
-    state=new
-    matchId+=1
-    localMatch=new.coreWorld and LocalMatch2D.attach(new,{startWithKickoff=startWithKickoff==true}) or nil
-    matchState=localMatch and localMatch.match or MatchRules2D.newMatch()
-    currentInputs={}
-    for slot=1,10 do currentInputs[slot]={x=0,y=0,kick=false} end
-    currentInput=currentInputs[1]
-    lastCoreKickInputs={}
-    touchingCoreBall={}
-    lastKick=false
-    facingX,facingY=1,0
-    accumulator=0
-    speedRunRemaining=0
-    clearMetrics()
-    touchingCrowdPairs={}
-    return new
+local function newState(pairEnabled, crowdEnabled, legacyPhysicsEnabled, startWithKickoff)
+	local useLegacy = pairEnabled == true or crowdEnabled == true or legacyPhysicsEnabled == true
+	local new = useLegacy and Physics2D.newState() or makeCoreState()
+	if not new.coreWorld then
+		new.player.ownerUserId = controlledPlayer and controlledPlayer.UserId or nil
+	end
+	pairMode = pairEnabled == true
+	crowdMode = crowdEnabled == true
+	legacyMode = legacyPhysicsEnabled == true
+	state = new
+	matchId += 1
+	localMatch = new.coreWorld and LocalMatch2D.attach(new, { startWithKickoff = startWithKickoff == true }) or nil
+	matchState = localMatch and localMatch.match or MatchRules2D.newMatch()
+	currentInputs = {}
+	for slot = 1, 10 do
+		currentInputs[slot] = { x = 0, y = 0, kick = false }
+	end
+	currentInput = currentInputs[1]
+	lastCoreKickInputs = {}
+	touchingCoreBall = {}
+	lastKick = false
+	facingX, facingY = 1, 0
+	accumulator = 0
+	speedRunRemaining = 0
+	clearMetrics()
+	touchingCrowdPairs = {}
+	return new
 end
-newState(false,false,false,true)
-commandRemote.OnServerEvent:Connect(function(player,command)
-    if player~=controlledPlayer then return end
-    if command=="reset" then
-        newState(false,false,false,true)
-        logEvent("scenarioReset",{scenario="default"})
-    elseif command=="setupKick" then
-        local new=newState(false)
-        new.player.x=-27
-        logEvent("scenarioReset",{scenario="kickFromRest",separation=27})
-    elseif command=="setupWall" then
-        local new=newState(false)
-        new.ball.x=0
-        new.ball.y=156
-        new.ball.vy=5
-        logEvent("scenarioReset",{scenario="ballWallBounce",ballY=new.ball.y,ballVy=new.ball.vy})
-    elseif command=="setupGoalTest" then
-        local new=newState(false)
-        new.ball.x=340; new.ball.y=0; new.ball.vx=12
-        logEvent("scenarioReset",{scenario="goalCrossing",ballX=new.ball.x,ballY=new.ball.y,ballVx=new.ball.vx})
-    elseif command=="setupSpeedRun" then
-        local new=newState(false)
-        new.player.x=-200; new.player.y=100
-        currentInput={x=1,y=0,kick=false}
-        currentInputs[1]=currentInput
-        speedRunRemaining=120
-        logEvent("scenarioReset",{scenario="freeAccelerationRun",playerX=-200,playerY=100,inputX=1,inputY=0})
-    elseif command=="setupBallFastCrossing" then
-        local new=newState(false,false,true)
-        new.player.x=-40; new.player.vx=100
-        new.ball.x=0; new.ball.y=0
-        logEvent("scenarioReset",{scenario="fastPlayerBallCrossing",playerX=-40,playerVx=100,ballX=0})
-    elseif command=="setupBallFastDiagonal" then
-        local new=newState(false,false,true)
-        new.player.x=-40; new.player.y=-40; new.player.vx=100; new.player.vy=100
-        new.ball.x=0; new.ball.y=0
-        logEvent("scenarioReset",{scenario="fastDiagonalPlayerBallCrossing",playerX=-40,playerY=-40,playerVx=100,playerVy=100,ballX=0,ballY=0})
-    elseif command=="setupMultiWall" then
-        local new=newState(false,false,true)
-        new.player.y=100
-        new.ball.x=0; new.ball.y=0; new.ball.vx=3000
-        logEvent("scenarioReset",{scenario="multiWallBouncesInTick",ballX=0,ballVx=3000})
-    elseif command=="setupPairHeadOn" then
-        local new=newState(true)
-        new.player.x=-40; new.player.vx=2
-        new.player2.x=40; new.player2.vx=-2
-        logEvent("scenarioReset",{scenario="playerHeadOn",p1x=-40,p1vx=2,p2x=40,p2vx=-2})
-    elseif command=="setupPairFastCrossing" then
-        local new=newState(true)
-        new.player.x=-40; new.player.vx=80
-        new.player2.x=40; new.player2.vx=-80
-        logEvent("scenarioReset",{scenario="fastPairCrossing",p1x=-40,p1vx=80,p2x=40,p2vx=-80})
-    elseif command=="setupPairOblique" then
-        local new=newState(true)
-        new.player.x=-40; new.player.y=-10; new.player.vx=2
-        new.player2.x=0; new.player2.y=15; new.player2.vy=-0.8
-        logEvent("scenarioReset",{scenario="playerOblique",p1x=-40,p1y=-10,p1vx=2,p2x=0,p2y=15,p2vy=-0.8})
-    elseif command=="setupPairOverlap" then
-        local new=newState(true)
-        new.player.x=0; new.player.y=0
-        new.player2.x=0; new.player2.y=0
-        logEvent("scenarioReset",{scenario="playerCoincidentCenters"})
-    elseif command=="setupCrowdOverlap" then
-        local new=newState(false,true)
-        new.player.x=-14; new.player2.x=14
-        new.ball.x=0; new.ball.y=0
-        logEvent("scenarioReset",{scenario="threeDiscOverlap",p1x=-14,p2x=14,ballX=0})
-    elseif command=="setupCrowdApproach" then
-        local new=newState(false,true)
-        new.player.x=-32; new.player.vx=2
-        new.player2.x=32; new.player2.vx=-2
-        new.ball.x=0; new.ball.y=0
-        logEvent("scenarioReset",{scenario="twoPlayersApproachBall",p1x=-32,p1vx=2,p2x=32,p2vx=-2,ballX=0})
-    elseif command=="runRegressionSuite" then
-        local report=LabRegression.Run(Physics2D)
-        metrics.regressionRan=true
-        metrics.regressionPassed=report.passed
-        metrics.regressionFailed=report.failed
-        metrics.regressionTotal=report.total
-        logEvent("regressionSuiteCompleted",{passed=report.passed,failed=report.failed,total=report.total,allPassed=report.allPassed})
-    elseif command=="toggleRecording" then
-        recording=not recording
-        logEvent("recordingChanged",{recording=recording})
-    end
+newState(false, false, false, true)
+commandRemote.OnServerEvent:Connect(function(player, command)
+	if player ~= controlledPlayer then
+		return
+	end
+	if command == "reset" then
+		newState(false, false, false, true)
+		logEvent("scenarioReset", { scenario = "default" })
+	elseif command == "setupKick" then
+		local new = newState(false)
+		new.player.x = -27
+		logEvent("scenarioReset", { scenario = "kickFromRest", separation = 27 })
+	elseif command == "setupWall" then
+		local new = newState(false)
+		new.ball.x = 0
+		new.ball.y = 156
+		new.ball.vy = 5
+		logEvent("scenarioReset", { scenario = "ballWallBounce", ballY = new.ball.y, ballVy = new.ball.vy })
+	elseif command == "setupGoalTest" then
+		local new = newState(false)
+		new.ball.x = 340
+		new.ball.y = 0
+		new.ball.vx = 12
+		logEvent(
+			"scenarioReset",
+			{ scenario = "goalCrossing", ballX = new.ball.x, ballY = new.ball.y, ballVx = new.ball.vx }
+		)
+	elseif command == "setupSpeedRun" then
+		local new = newState(false)
+		new.player.x = -200
+		new.player.y = 100
+		currentInput = { x = 1, y = 0, kick = false }
+		currentInputs[1] = currentInput
+		speedRunRemaining = 120
+		logEvent(
+			"scenarioReset",
+			{ scenario = "freeAccelerationRun", playerX = -200, playerY = 100, inputX = 1, inputY = 0 }
+		)
+	elseif command == "setupBallFastCrossing" then
+		local new = newState(false, false, true)
+		new.player.x = -40
+		new.player.vx = 100
+		new.ball.x = 0
+		new.ball.y = 0
+		logEvent("scenarioReset", { scenario = "fastPlayerBallCrossing", playerX = -40, playerVx = 100, ballX = 0 })
+	elseif command == "setupBallFastDiagonal" then
+		local new = newState(false, false, true)
+		new.player.x = -40
+		new.player.y = -40
+		new.player.vx = 100
+		new.player.vy = 100
+		new.ball.x = 0
+		new.ball.y = 0
+		logEvent("scenarioReset", {
+			scenario = "fastDiagonalPlayerBallCrossing",
+			playerX = -40,
+			playerY = -40,
+			playerVx = 100,
+			playerVy = 100,
+			ballX = 0,
+			ballY = 0,
+		})
+	elseif command == "setupMultiWall" then
+		local new = newState(false, false, true)
+		new.player.y = 100
+		new.ball.x = 0
+		new.ball.y = 0
+		new.ball.vx = 3000
+		logEvent("scenarioReset", { scenario = "multiWallBouncesInTick", ballX = 0, ballVx = 3000 })
+	elseif command == "setupPairHeadOn" then
+		local new = newState(true)
+		new.player.x = -40
+		new.player.vx = 2
+		new.player2.x = 40
+		new.player2.vx = -2
+		logEvent("scenarioReset", { scenario = "playerHeadOn", p1x = -40, p1vx = 2, p2x = 40, p2vx = -2 })
+	elseif command == "setupPairFastCrossing" then
+		local new = newState(true)
+		new.player.x = -40
+		new.player.vx = 80
+		new.player2.x = 40
+		new.player2.vx = -80
+		logEvent("scenarioReset", { scenario = "fastPairCrossing", p1x = -40, p1vx = 80, p2x = 40, p2vx = -80 })
+	elseif command == "setupPairOblique" then
+		local new = newState(true)
+		new.player.x = -40
+		new.player.y = -10
+		new.player.vx = 2
+		new.player2.x = 0
+		new.player2.y = 15
+		new.player2.vy = -0.8
+		logEvent(
+			"scenarioReset",
+			{ scenario = "playerOblique", p1x = -40, p1y = -10, p1vx = 2, p2x = 0, p2y = 15, p2vy = -0.8 }
+		)
+	elseif command == "setupPairOverlap" then
+		local new = newState(true)
+		new.player.x = 0
+		new.player.y = 0
+		new.player2.x = 0
+		new.player2.y = 0
+		logEvent("scenarioReset", { scenario = "playerCoincidentCenters" })
+	elseif command == "setupCrowdOverlap" then
+		local new = newState(false, true)
+		new.player.x = -14
+		new.player2.x = 14
+		new.ball.x = 0
+		new.ball.y = 0
+		logEvent("scenarioReset", { scenario = "threeDiscOverlap", p1x = -14, p2x = 14, ballX = 0 })
+	elseif command == "setupCrowdApproach" then
+		local new = newState(false, true)
+		new.player.x = -32
+		new.player.vx = 2
+		new.player2.x = 32
+		new.player2.vx = -2
+		new.ball.x = 0
+		new.ball.y = 0
+		logEvent(
+			"scenarioReset",
+			{ scenario = "twoPlayersApproachBall", p1x = -32, p1vx = 2, p2x = 32, p2vx = -2, ballX = 0 }
+		)
+	elseif command == "runRegressionSuite" then
+		local report = LabRegression.Run(Physics2D)
+		metrics.regressionRan = true
+		metrics.regressionPassed = report.passed
+		metrics.regressionFailed = report.failed
+		metrics.regressionTotal = report.total
+		logEvent(
+			"regressionSuiteCompleted",
+			{ passed = report.passed, failed = report.failed, total = report.total, allPassed = report.allPassed }
+		)
+	elseif command == "toggleRecording" then
+		recording = not recording
+		logEvent("recordingChanged", { recording = recording })
+	end
 end)
 
 local function snapshot()
-    local p,p2,b=state.player,state.player2,state.ball
-    local dx,dy=p.x-b.x,p.y-b.y
-    local p2dx,p2dy=p.x-p2.x,p.y-p2.y
-    local p2bdx,p2bdy=p2.x-b.x,p2.y-b.y
-    local playerSnapshots={}
-    local redCount,blueCount=0,0
-    if state.players then
-        for slot,disc in ipairs(state.players) do
-            if disc.team=="red" then redCount+=1 elseif disc.team=="blue" then blueCount+=1 end
-            table.insert(playerSnapshots,{playerId=slot,team=disc.team,ownerUserId=disc.ownerUserId,x=disc.x,y=disc.y,vx=disc.vx,vy=disc.vy,speed=speed(disc),radius=disc.radius,collisionGroup=disc.collisionGroup,collisionMask=disc.collisionMask})
-        end
-    end
-    return {
-        tick=state.tick, gameTime=state.tick/Physics2D.Config.tickRate,
-        matchId=matchId,
-        round=localMatch and localMatch.round or 0,elapsedMatchTicks=localMatch and localMatch.elapsedTicks or 0,winner=matchState.winner,
-        matchPhase=matchState.phase,pauseTicksRemaining=matchState.remainingTicks,kickoffTeam=matchState.kickoffTeam,lastGoal=matchState.lastGoal,lastTouch=matchState.lastTouch,
-        player={x=p.x,y=p.y,vx=p.vx,vy=p.vy,speed=speed(p),radius=p.radius},
-        predictionParams={acceleration=p.acceleration or Physics2D.Config.playerAcceleration,kickAcceleration=p.kickAcceleration or Physics2D.Config.playerKickAcceleration,damping=p.damping or Physics2D.Config.playerDamping,kickDamping=p.kickDamping or Physics2D.Config.playerDamping,maxSpeed=p.maxSpeed},
-        player2={x=p2.x,y=p2.y,vx=p2.vx,vy=p2.vy,speed=speed(p2),radius=p2.radius},
-        players=playerSnapshots,playerCount=#playerSnapshots,redCount=redCount,blueCount=blueCount,
-        ball={x=b.x,y=b.y,vx=b.vx,vy=b.vy,speed=speed(b),radius=b.radius,collisionGroup=b.collisionGroup,collisionMask=b.collisionMask},
-        score={red=state.score.red,blue=state.score.blue},
-        ownerUserId=p.ownerUserId,physicsDiscCount=state.coreWorld and #state.coreWorld.discs or 0,
-        input={x=currentInput.x,y=currentInput.y,kick=currentInput.kick},
-        separation=math.sqrt(dx*dx+dy*dy),
-        playerSeparation=math.sqrt(p2dx*p2dx+p2dy*p2dy),
-        player2BallSeparation=math.sqrt(p2bdx*p2bdx+p2bdy*p2bdy),
-        touchingBall=not pairMode and math.sqrt(dx*dx+dy*dy)&lt;=p.radius+b.radius+0.02,
-        touchingPlayer2Ball=crowdMode and math.sqrt(p2bdx*p2bdx+p2bdy*p2bdy)&lt;=p2.radius+b.radius+0.02,
-        touchingPlayers=math.sqrt(p2dx*p2dx+p2dy*p2dy)&lt;=p.radius+p2.radius+0.02,
-        pairMode=pairMode,
-        crowdMode=crowdMode,
-        coreMode=state.coreWorld~=nil,
-        legacyMode=legacyMode,
-        ballActive=not pairMode,
-        metrics=table.clone(metrics),
-        recording=recording,
-        crowdMode=crowdMode,
-        historySamples=historyCount,
-    }
+	local p, p2, b = state.player, state.player2, state.ball
+	local dx, dy = p.x - b.x, p.y - b.y
+	local p2dx, p2dy = p.x - p2.x, p.y - p2.y
+	local p2bdx, p2bdy = p2.x - b.x, p2.y - b.y
+	local playerSnapshots = {}
+	local redCount, blueCount = 0, 0
+	if state.players then
+		for slot, disc in ipairs(state.players) do
+			if disc.team == "red" then
+				redCount += 1
+			elseif disc.team == "blue" then
+				blueCount += 1
+			end
+			table.insert(playerSnapshots, {
+				playerId = slot,
+				team = disc.team,
+				ownerUserId = disc.ownerUserId,
+				x = disc.x,
+				y = disc.y,
+				vx = disc.vx,
+				vy = disc.vy,
+				speed = speed(disc),
+				radius = disc.radius,
+				collisionGroup = disc.collisionGroup,
+				collisionMask = disc.collisionMask,
+			})
+		end
+	end
+	return {
+		tick = state.tick,
+		gameTime = state.tick / Physics2D.Config.tickRate,
+		matchId = matchId,
+		round = localMatch and localMatch.round or 0,
+		elapsedMatchTicks = localMatch and localMatch.elapsedTicks or 0,
+		winner = matchState.winner,
+		matchPhase = matchState.phase,
+		pauseTicksRemaining = matchState.remainingTicks,
+		kickoffTeam = matchState.kickoffTeam,
+		lastGoal = matchState.lastGoal,
+		lastTouch = matchState.lastTouch,
+		player = { x = p.x, y = p.y, vx = p.vx, vy = p.vy, speed = speed(p), radius = p.radius },
+		predictionParams = {
+			acceleration = p.acceleration or Physics2D.Config.playerAcceleration,
+			kickAcceleration = p.kickAcceleration or Physics2D.Config.playerKickAcceleration,
+			damping = p.damping or Physics2D.Config.playerDamping,
+			kickDamping = p.kickDamping or Physics2D.Config.playerDamping,
+			maxSpeed = p.maxSpeed,
+		},
+		player2 = { x = p2.x, y = p2.y, vx = p2.vx, vy = p2.vy, speed = speed(p2), radius = p2.radius },
+		players = playerSnapshots,
+		playerCount = #playerSnapshots,
+		redCount = redCount,
+		blueCount = blueCount,
+		ball = {
+			x = b.x,
+			y = b.y,
+			vx = b.vx,
+			vy = b.vy,
+			speed = speed(b),
+			radius = b.radius,
+			collisionGroup = b.collisionGroup,
+			collisionMask = b.collisionMask,
+		},
+		score = { red = state.score.red, blue = state.score.blue },
+		ownerUserId = p.ownerUserId,
+		physicsDiscCount = state.coreWorld and #state.coreWorld.discs or 0,
+		input = { x = currentInput.x, y = currentInput.y, kick = currentInput.kick },
+		separation = math.sqrt(dx * dx + dy * dy),
+		playerSeparation = math.sqrt(p2dx * p2dx + p2dy * p2dy),
+		player2BallSeparation = math.sqrt(p2bdx * p2bdx + p2bdy * p2bdy),
+		touchingBall = not pairMode and math.sqrt(dx * dx + dy * dy) &lt;= p.radius + b.radius + 0.02,
+		touchingPlayer2Ball = crowdMode and math.sqrt(p2bdx * p2bdx + p2bdy * p2bdy) &lt;= p2.radius + b.radius + 0.02,
+		touchingPlayers = math.sqrt(p2dx * p2dx + p2dy * p2dy) &lt;= p.radius + p2.radius + 0.02,
+		pairMode = pairMode,
+		crowdMode = crowdMode,
+		coreMode = state.coreWorld ~= nil,
+		legacyMode = legacyMode,
+		ballActive = not pairMode,
+		metrics = table.clone(metrics),
+		recording = recording,
+		historySamples = historyCount,
+	}
 end
-debugState.OnInvoke=function(request)
-    local current=snapshot()
-    if request=="regression" then
-        return LabRegression.Run(Physics2D)
-    end
-    if request=="summary" then
-        return {current=current,metrics=table.clone(metrics),eventCount=#events,historyCount=historyCount,recording=recording}
-    end
-    local chronological={}
-    local limit=type(request)=="table" and math.clamp(request.limit or 600,1,1200) or 600
-    local hasAfterTick=type(request)=="table" and type(request.afterTick)=="number"
-    local afterTick=hasAfterTick and request.afterTick or -1
-    local first=historyCount&lt;historyCapacity and 1 or historyWrite
-    local skip=hasAfterTick and 0 or math.max(0,historyCount-limit)
-    for i=skip+1,historyCount do
-        local index=((first+i-2)%historyCapacity)+1
-        local sample=historyBuffer[index]
-        if sample and sample.tick&gt;afterTick then
-            table.insert(chronological,table.clone(sample))
-            if #chronological&gt;=limit then break end
-        end
-    end
-    local eventCopies={}
-    for _,event in events do table.insert(eventCopies,table.clone(event)) end
-    return {current=current,metrics=table.clone(metrics),events=eventCopies,history=chronological,recording=recording}
+debugState.OnInvoke = function(request)
+	local current = snapshot()
+	if request == "regression" then
+		return LabRegression.Run(Physics2D)
+	end
+	if request == "summary" then
+		return {
+			current = current,
+			metrics = table.clone(metrics),
+			eventCount = #events,
+			historyCount = historyCount,
+			recording = recording,
+		}
+	end
+	local chronological = {}
+	local limit = type(request) == "table" and math.clamp(request.limit or 600, 1, 1200) or 600
+	local hasAfterTick = type(request) == "table" and type(request.afterTick) == "number"
+	local afterTick = hasAfterTick and request.afterTick or -1
+	local first = historyCount &lt; historyCapacity and 1 or historyWrite
+	local skip = hasAfterTick and 0 or math.max(0, historyCount - limit)
+	for i = skip + 1, historyCount do
+		local index = ((first + i - 2) % historyCapacity) + 1
+		local sample = historyBuffer[index]
+		if sample and sample.tick &gt; afterTick then
+			table.insert(chronological, table.clone(sample))
+			if #chronological &gt;= limit then
+				break
+			end
+		end
+	end
+	local eventCopies = {}
+	for _, event in events do
+		table.insert(eventCopies, table.clone(event))
+	end
+	return {
+		current = current,
+		metrics = table.clone(metrics),
+		events = eventCopies,
+		history = chronological,
+		recording = recording,
+	}
 end
 
 RunService.Heartbeat:Connect(function(dt)
-    accumulator+=dt
-    local iterations=0
-    while accumulator&gt;=stepDt and iterations&lt;8 do
-        local p,p2,b=state.player,state.player2,state.ball
-        local beforeBallVx,beforeBallVy=b.vx,b.vy
-        local beforePlayerVx,beforePlayerVy=p.vx,p.vy
-        local pairResolution=nil
-        local crowdResiduals=nil
-        local physicsStepInfo=nil
-        local pairBeforeSeparation=math.sqrt((p.x-p2.x)^2+(p.y-p2.y)^2)
+	accumulator += dt
+	local iterations = 0
+	while accumulator &gt;= stepDt and iterations &lt; 8 do
+		local p, p2, b = state.player, state.player2, state.ball
+		local beforeBallVx, beforeBallVy = b.vx, b.vy
+		local beforePlayerVx, beforePlayerVy = p.vx, p.vy
+		local pairResolution = nil
+		local crowdResiduals = nil
+		local physicsStepInfo = nil
+		local pairBeforeSeparation = math.sqrt((p.x - p2.x) ^ 2 + (p.y - p2.y) ^ 2)
 
-        if pairMode then
-            local _,resolution=Physics2D.stepPlayerPair(state)
-            pairResolution=resolution
-            local separation=math.sqrt((p.x-p2.x)^2+(p.y-p2.y)^2)
-            local nowTouching=separation&lt;=p.radius+p2.radius+0.02
-            if resolution then
-                metrics.maxPlayerPenetration=math.max(metrics.maxPlayerPenetration,resolution.penetration)
-                metrics.maxPlayerCorrection=math.max(metrics.maxPlayerCorrection,resolution.correctionA+resolution.correctionB)
-                if resolution and not touchingPlayers and (nowTouching or resolution.swept==true) then
-                    metrics.playerContacts+=1
-                    metrics.lastPlayerContactTick=state.tick
-                    metrics.lastPlayerImpulse=resolution.impulse
-                    logEvent("playerPlayerContact",{
-                        separation=resolution.swept and (p.radius+p2.radius-resolution.penetration) or separation,
-                        postStepSeparation=separation, penetration=resolution.penetration,
-                        correctionA=resolution.correctionA, correctionB=resolution.correctionB,
-                        normalX=resolution.normalX, normalY=resolution.normalY,
-                        normalSpeedBefore=resolution.normalSpeedBefore, impulse=resolution.impulse,
-                        swept=resolution.swept==true, impactFraction=resolution.impactFraction,
-                        p1x=p.x,p1y=p.y,p1vx=p.vx,p1vy=p.vy,
-                        p2x=p2.x,p2y=p2.y,p2vx=p2.vx,p2vy=p2.vy,
-                    },state.tick)
-                end
-            end
-            touchingPlayers=nowTouching
-        elseif crowdMode then
-            local _, impacts, residuals, maxResidual, iterationsUsed = Physics2D.stepThreeBody(state, Physics2D.Config.collisionIterations)
-            crowdResiduals=residuals
-            metrics.crowdLastSolverIterations=iterationsUsed
-            metrics.crowdMaxSolverIterations=math.max(metrics.crowdMaxSolverIterations,iterationsUsed)
-            local pairDefinitions = {
-                {key="player1-player2", a=p, b=p2, metric="crowdContactsP1P2"},
-                {key="player1-ball", a=p, b=b, metric="crowdContactsP1Ball"},
-                {key="player2-ball", a=p2, b=b, metric="crowdContactsP2Ball"},
-            }
-            for _, definition in pairDefinitions do
-                local dx,dy=definition.a.x-definition.b.x,definition.a.y-definition.b.y
-                local separation=math.sqrt(dx*dx+dy*dy)
-                local isTouching=separation&lt;=definition.a.radius+definition.b.radius+0.02
-                local impact=impacts[definition.key]
-                if impact then
-                    metrics.crowdPeakPenetration=math.max(metrics.crowdPeakPenetration,impact.maxPenetration)
-                end
-                if isTouching and not touchingCrowdPairs[definition.key] then
-                    metrics.crowdContacts+=1
-                    metrics[definition.metric]+=1
-                    logEvent("threeDiscContact",{
-                        pair=definition.key,separation=separation,
-                        penetration=impact and impact.maxPenetration or 0,
-                        correctionA=impact and impact.correctionA or 0,
-                        correctionB=impact and impact.correctionB or 0,
-                        normalX=impact and impact.normalX or 0,
-                        normalY=impact and impact.normalY or 0,
-                        normalSpeedBefore=impact and impact.normalSpeedBefore or 0,
-                        impulseTotal=impact and impact.impulseTotal or 0,
-                        peakImpulseIncrement=impact and impact.peakImpulseIncrement or 0,
-                        lastImpulse=impact and impact.lastImpulse or 0,
-                        resolutionCount=impact and impact.resolutionCount or 0,
-                        residualPenetration=residuals[definition.key] or 0,
-                        p1x=p.x,p1y=p.y,p1vx=p.vx,p1vy=p.vy,
-                        p2x=p2.x,p2y=p2.y,p2vx=p2.vx,p2vy=p2.vy,
-                        ballX=b.x,ballY=b.y,ballVx=b.vx,ballVy=b.vy,
-                    },state.tick)
-                end
-                touchingCrowdPairs[definition.key]=isTouching
-            end
-            metrics.crowdLastResidualPenetration=maxResidual
-            metrics.crowdWorstResidualPenetration=math.max(metrics.crowdWorstResidualPenetration,maxResidual)
-            touchingPlayers=touchingCrowdPairs["player1-player2"]==true
-        elseif state.coreWorld then
-            local result=localMatch:step(currentInputs)
-            local coreInputs,kickAttempts=result.inputs,{}
-            for slot=1,10 do
-                local input=coreInputs[slot] or {}
-                if input.kick and not lastCoreKickInputs[slot] then table.insert(kickAttempts,slot) end
-                lastCoreKickInputs[slot]=input.kick==true
-            end
-            local coreEvents,coreSubsteps=result.physicsEvents,result.substeps
-            local stepInfo={substeps=coreSubsteps,ballWallBounces=0,playerWallBounces=0,playerBallContacts=0,lastPlayerBallContact=nil}
-            local acceptedKicks,currentTouches,contactsByPlayer={},{},{}
-            for _,event in ipairs(coreEvents) do
-                if event.kind=="kick" then
-                    acceptedKicks[event.playerId]=true
-                    metrics.successfulKicks+=1
-                    metrics.lastKickSuccessTick=state.tick
-                    logEvent("kickApplied",{playerId=event.playerId,targetId=event.targetId,normalX=event.normalX,normalY=event.normalY},state.tick)
-                elseif event.kind=="boundaryContact" then
-                    local count=event.count or 1
-                    if event.discId=="ball" then stepInfo.ballWallBounces+=count
-                    elseif type(event.discId)=="number" then stepInfo.playerWallBounces+=count end
-                elseif event.kind=="planeContact" or event.kind=="segmentContact" or event.kind=="vertexContact" then
-                    if event.discId=="ball" then stepInfo.ballWallBounces+=1
-                    elseif type(event.discId)=="number" then stepInfo.playerWallBounces+=1 end
-                elseif event.kind=="discContact" then
-                    local playerId
-                    if event.discA=="ball" and type(event.discB)=="number" then playerId=event.discB
-                    elseif event.discB=="ball" and type(event.discA)=="number" then playerId=event.discA end
-                    if playerId then
-                        stepInfo.playerBallContacts+=1
-                        local nx,ny=event.normalX,event.normalY
-                        if event.discA=="ball" then nx,ny=-nx,-ny end
-                        local contact={playerId=playerId,normalX=nx,normalY=ny,penetration=event.penetration,normalSpeedBefore=event.normalSpeedBefore,impulse=event.impulse}
-                        stepInfo.lastPlayerBallContact=contact
-                        contactsByPlayer[playerId]=contact
-                        currentTouches[playerId]=true
-                    elseif type(event.discA)=="number" and type(event.discB)=="number" then
-                        metrics.playerContacts+=1
-                        metrics.lastPlayerContactTick=state.tick
-                        metrics.maxPlayerPenetration=math.max(metrics.maxPlayerPenetration,event.penetration or 0)
-                        metrics.lastPlayerImpulse=event.impulse or 0
-                        logEvent("playerPlayerContact",{playerA=event.discA,playerB=event.discB,normalX=event.normalX,normalY=event.normalY,penetration=event.penetration,normalSpeedBefore=event.normalSpeedBefore,impulse=event.impulse},state.tick)
-                    end
-                end
-            end
-            metrics.kickAttempts+=#kickAttempts
-            for _,slot in ipairs(kickAttempts) do
-                local accepted=acceptedKicks[slot]==true
-                local actor=state.players[slot]
-                local separation=math.sqrt((actor.x-b.x)^2+(actor.y-b.y)^2)
-                logEvent("kickAttempt",{playerId=slot,accepted=accepted,separation=separation,playerX=actor.x,playerY=actor.y,ballX=b.x,ballY=b.y},state.tick)
-            end
-            for slot,actor in ipairs(state.players) do
-                local dx,dy=actor.x-b.x,actor.y-b.y
-                local touching=math.sqrt(dx*dx+dy*dy)&lt;=actor.radius+b.radius+0.02
-                if currentTouches[slot] and not touchingCoreBall[slot] then
-                    metrics.ballContacts+=1
-                    local contact=contactsByPlayer[slot] or {}
-                    logEvent("playerBallContact",{playerId=slot,separation=actor.radius+b.radius-(contact.penetration or 0),normalX=contact.normalX,normalY=contact.normalY,normalSpeedBefore=contact.normalSpeedBefore,impulse=contact.impulse,playerX=actor.x,playerY=actor.y,ballX=b.x,ballY=b.y},state.tick)
-                end
-                touchingCoreBall[slot]=touching
-            end
-            for _,event in ipairs(result.ruleEvents) do
-                logEvent(event.kind,table.clone(event),event.tick)
-            end
-            if result.roundChanged or result.phase=="goalPause" then
-                touchingCoreBall={};touchingBall=false;lastCoreKickInputs={}
-            end
-            physicsStepInfo=stepInfo
-            if speedRunRemaining&gt;0 then
-                speedRunRemaining-=1
-                if speedRunRemaining==0 then
-                    currentInput={x=0,y=0,kick=false}
-                    currentInputs[1]=currentInput
-                    logEvent("speedRunFinished",{ticks=120,playerX=p.x,playerVx=p.vx,playerSpeed=speed(p)},state.tick)
-                end
-            end
-            metrics.lastCollisionSubsteps=stepInfo.substeps
-            metrics.maxCollisionSubsteps=math.max(metrics.maxCollisionSubsteps,stepInfo.substeps)
-            if stepInfo.ballWallBounces&gt;0 then
-                metrics.ballWallBounces+=stepInfo.ballWallBounces
-                logEvent("ballBoundaryBounce",{count=stepInfo.ballWallBounces,x=b.x,y=b.y,vx=b.vx,vy=b.vy,substeps=stepInfo.substeps},state.tick)
-            end
-            if stepInfo.playerWallBounces&gt;0 then
-                metrics.playerWallBounces+=stepInfo.playerWallBounces
-                logEvent("playerBoundaryBounce",{count=stepInfo.playerWallBounces,x=p.x,y=p.y,vx=p.vx,vy=p.vy,substeps=stepInfo.substeps},state.tick)
-            end
-            local separation=math.sqrt((p.x-b.x)^2+(p.y-b.y)^2)
-            local nowTouching=separation&lt;=p.radius+b.radius+0.02
-            touchingBall=nowTouching
-        else
-            if currentInput.kick
- and not lastKick then
-                metrics.kickAttempts+=1
-                local dx,dy=b.x-p.x,b.y-p.y
-                local separation=math.sqrt(dx*dx+dy*dy)
-                local accepted=Physics2D.tryKick(state,facingX,facingY)
-                if accepted then
-                    metrics.successfulKicks+=1
-                    metrics.lastKickSuccessTick=state.tick+1
-                end
-                logEvent("kickAttempt",{accepted=accepted,separation=separation,playerX=p.x,playerY=p.y,ballX=b.x,ballY=b.y})
-            end
-            lastKick=currentInput.kick
-            local _,stepInfo=Physics2D.step(state,currentInput)
-            physicsStepInfo=stepInfo
-            if speedRunRemaining&gt;0 then
-                speedRunRemaining-=1
-                if speedRunRemaining==0 then
-                    currentInput={x=0,y=0,kick=false}
-                    currentInputs[1]=currentInput
-                    logEvent("speedRunFinished",{ticks=120,playerX=p.x,playerVx=p.vx,playerSpeed=speed(p)},state.tick)
-                end
-            end
-            metrics.lastCollisionSubsteps=stepInfo.substeps
-            metrics.maxCollisionSubsteps=math.max(metrics.maxCollisionSubsteps,stepInfo.substeps)
-            if stepInfo.ballWallBounces&gt;0 then
-                metrics.ballWallBounces+=stepInfo.ballWallBounces
-                logEvent("ballBoundaryBounce",{count=stepInfo.ballWallBounces,x=b.x,y=b.y,vx=b.vx,vy=b.vy,substeps=stepInfo.substeps},state.tick)
-            end
-            if stepInfo.playerWallBounces&gt;0 then
-                metrics.playerWallBounces+=stepInfo.playerWallBounces
-                logEvent("playerBoundaryBounce",{count=stepInfo.playerWallBounces,x=p.x,y=p.y,vx=p.vx,vy=p.vy,substeps=stepInfo.substeps},state.tick)
-            end
-            local separation=math.sqrt((p.x-b.x)^2+(p.y-b.y)^2)
-            local nowTouching=separation&lt;=p.radius+b.radius+0.02
-            if stepInfo.playerBallContacts&gt;0 and not touchingBall then
-                metrics.ballContacts+=1
-                local contact=stepInfo.lastPlayerBallContact or {}
-                logEvent("playerBallContact",{
-                    separation=p.radius+b.radius-(contact.penetration or 0),postStepSeparation=separation,
-                    contactsThisTick=stepInfo.playerBallContacts,substep=contact.substep,substeps=stepInfo.substeps,
-                    normalX=contact.normalX,normalY=contact.normalY,normalSpeedBefore=contact.normalSpeedBefore,
-                    impulse=contact.impulse,penetration=contact.penetration,playerX=p.x,playerY=p.y,ballX=b.x,ballY=b.y,
-                },state.tick)
-            end
-            touchingBall=nowTouching
-        end
+		if pairMode then
+			local _, resolution = Physics2D.stepPlayerPair(state)
+			pairResolution = resolution
+			local separation = math.sqrt((p.x - p2.x) ^ 2 + (p.y - p2.y) ^ 2)
+			local nowTouching = separation &lt;= p.radius + p2.radius + 0.02
+			if resolution then
+				metrics.maxPlayerPenetration = math.max(metrics.maxPlayerPenetration, resolution.penetration)
+				metrics.maxPlayerCorrection =
+					math.max(metrics.maxPlayerCorrection, resolution.correctionA + resolution.correctionB)
+				if resolution and not touchingPlayers and (nowTouching or resolution.swept == true) then
+					metrics.playerContacts += 1
+					metrics.lastPlayerContactTick = state.tick
+					metrics.lastPlayerImpulse = resolution.impulse
+					logEvent("playerPlayerContact", {
+						separation = resolution.swept and (p.radius + p2.radius - resolution.penetration) or separation,
+						postStepSeparation = separation,
+						penetration = resolution.penetration,
+						correctionA = resolution.correctionA,
+						correctionB = resolution.correctionB,
+						normalX = resolution.normalX,
+						normalY = resolution.normalY,
+						normalSpeedBefore = resolution.normalSpeedBefore,
+						impulse = resolution.impulse,
+						swept = resolution.swept == true,
+						impactFraction = resolution.impactFraction,
+						p1x = p.x,
+						p1y = p.y,
+						p1vx = p.vx,
+						p1vy = p.vy,
+						p2x = p2.x,
+						p2y = p2.y,
+						p2vx = p2.vx,
+						p2vy = p2.vy,
+					}, state.tick)
+				end
+			end
+			touchingPlayers = nowTouching
+		elseif crowdMode then
+			local _, impacts, residuals, maxResidual, iterationsUsed =
+				Physics2D.stepThreeBody(state, Physics2D.Config.collisionIterations)
+			crowdResiduals = residuals
+			metrics.crowdLastSolverIterations = iterationsUsed
+			metrics.crowdMaxSolverIterations = math.max(metrics.crowdMaxSolverIterations, iterationsUsed)
+			local pairDefinitions = {
+				{ key = "player1-player2", a = p, b = p2, metric = "crowdContactsP1P2" },
+				{ key = "player1-ball", a = p, b = b, metric = "crowdContactsP1Ball" },
+				{ key = "player2-ball", a = p2, b = b, metric = "crowdContactsP2Ball" },
+			}
+			for _, definition in pairDefinitions do
+				local dx, dy = definition.a.x - definition.b.x, definition.a.y - definition.b.y
+				local separation = math.sqrt(dx * dx + dy * dy)
+				local isTouching = separation &lt;= definition.a.radius + definition.b.radius + 0.02
+				local impact = impacts[definition.key]
+				if impact then
+					metrics.crowdPeakPenetration = math.max(metrics.crowdPeakPenetration, impact.maxPenetration)
+				end
+				if isTouching and not touchingCrowdPairs[definition.key] then
+					metrics.crowdContacts += 1
+					metrics[definition.metric] += 1
+					logEvent("threeDiscContact", {
+						pair = definition.key,
+						separation = separation,
+						penetration = impact and impact.maxPenetration or 0,
+						correctionA = impact and impact.correctionA or 0,
+						correctionB = impact and impact.correctionB or 0,
+						normalX = impact and impact.normalX or 0,
+						normalY = impact and impact.normalY or 0,
+						normalSpeedBefore = impact and impact.normalSpeedBefore or 0,
+						impulseTotal = impact and impact.impulseTotal or 0,
+						peakImpulseIncrement = impact and impact.peakImpulseIncrement or 0,
+						lastImpulse = impact and impact.lastImpulse or 0,
+						resolutionCount = impact and impact.resolutionCount or 0,
+						residualPenetration = residuals[definition.key] or 0,
+						p1x = p.x,
+						p1y = p.y,
+						p1vx = p.vx,
+						p1vy = p.vy,
+						p2x = p2.x,
+						p2y = p2.y,
+						p2vx = p2.vx,
+						p2vy = p2.vy,
+						ballX = b.x,
+						ballY = b.y,
+						ballVx = b.vx,
+						ballVy = b.vy,
+					}, state.tick)
+				end
+				touchingCrowdPairs[definition.key] = isTouching
+			end
+			metrics.crowdLastResidualPenetration = maxResidual
+			metrics.crowdWorstResidualPenetration = math.max(metrics.crowdWorstResidualPenetration, maxResidual)
+			touchingPlayers = touchingCrowdPairs["player1-player2"] == true
+		elseif state.coreWorld then
+			local result = localMatch:step(currentInputs)
+			local coreInputs, kickAttempts = result.inputs, {}
+			for slot = 1, 10 do
+				local input = coreInputs[slot] or {}
+				if input.kick and not lastCoreKickInputs[slot] then
+					table.insert(kickAttempts, slot)
+				end
+				lastCoreKickInputs[slot] = input.kick == true
+			end
+			local coreEvents, coreSubsteps = result.physicsEvents, result.substeps
+			local stepInfo = {
+				substeps = coreSubsteps,
+				ballWallBounces = 0,
+				playerWallBounces = 0,
+				playerBallContacts = 0,
+				lastPlayerBallContact = nil,
+			}
+			local acceptedKicks, currentTouches, contactsByPlayer = {}, {}, {}
+			for _, event in ipairs(coreEvents) do
+				if event.kind == "kick" then
+					acceptedKicks[event.playerId] = true
+					metrics.successfulKicks += 1
+					metrics.lastKickSuccessTick = state.tick
+					logEvent("kickApplied", {
+						playerId = event.playerId,
+						targetId = event.targetId,
+						normalX = event.normalX,
+						normalY = event.normalY,
+					}, state.tick)
+				elseif event.kind == "boundaryContact" then
+					local count = event.count or 1
+					if event.discId == "ball" then
+						stepInfo.ballWallBounces += count
+					elseif type(event.discId) == "number" then
+						stepInfo.playerWallBounces += count
+					end
+				elseif
+					event.kind == "planeContact"
+					or event.kind == "segmentContact"
+					or event.kind == "vertexContact"
+				then
+					if event.discId == "ball" then
+						stepInfo.ballWallBounces += 1
+					elseif type(event.discId) == "number" then
+						stepInfo.playerWallBounces += 1
+					end
+				elseif event.kind == "discContact" then
+					local playerId
+					if event.discA == "ball" and type(event.discB) == "number" then
+						playerId = event.discB
+					elseif event.discB == "ball" and type(event.discA) == "number" then
+						playerId = event.discA
+					end
+					if playerId then
+						stepInfo.playerBallContacts += 1
+						local nx, ny = event.normalX, event.normalY
+						if event.discA == "ball" then
+							nx, ny = -nx, -ny
+						end
+						local contact = {
+							playerId = playerId,
+							normalX = nx,
+							normalY = ny,
+							penetration = event.penetration,
+							normalSpeedBefore = event.normalSpeedBefore,
+							impulse = event.impulse,
+						}
+						stepInfo.lastPlayerBallContact = contact
+						contactsByPlayer[playerId] = contact
+						currentTouches[playerId] = true
+					elseif type(event.discA) == "number" and type(event.discB) == "number" then
+						metrics.playerContacts += 1
+						metrics.lastPlayerContactTick = state.tick
+						metrics.maxPlayerPenetration = math.max(metrics.maxPlayerPenetration, event.penetration or 0)
+						metrics.lastPlayerImpulse = event.impulse or 0
+						logEvent("playerPlayerContact", {
+							playerA = event.discA,
+							playerB = event.discB,
+							normalX = event.normalX,
+							normalY = event.normalY,
+							penetration = event.penetration,
+							normalSpeedBefore = event.normalSpeedBefore,
+							impulse = event.impulse,
+						}, state.tick)
+					end
+				end
+			end
+			metrics.kickAttempts += #kickAttempts
+			for _, slot in ipairs(kickAttempts) do
+				local accepted = acceptedKicks[slot] == true
+				local actor = state.players[slot]
+				local separation = math.sqrt((actor.x - b.x) ^ 2 + (actor.y - b.y) ^ 2)
+				logEvent("kickAttempt", {
+					playerId = slot,
+					accepted = accepted,
+					separation = separation,
+					playerX = actor.x,
+					playerY = actor.y,
+					ballX = b.x,
+					ballY = b.y,
+				}, state.tick)
+			end
+			for slot, actor in ipairs(state.players) do
+				local dx, dy = actor.x - b.x, actor.y - b.y
+				local touching = math.sqrt(dx * dx + dy * dy) &lt;= actor.radius + b.radius + 0.02
+				if currentTouches[slot] and not touchingCoreBall[slot] then
+					metrics.ballContacts += 1
+					local contact = contactsByPlayer[slot] or {}
+					logEvent("playerBallContact", {
+						playerId = slot,
+						separation = actor.radius + b.radius - (contact.penetration or 0),
+						normalX = contact.normalX,
+						normalY = contact.normalY,
+						normalSpeedBefore = contact.normalSpeedBefore,
+						impulse = contact.impulse,
+						playerX = actor.x,
+						playerY = actor.y,
+						ballX = b.x,
+						ballY = b.y,
+					}, state.tick)
+				end
+				touchingCoreBall[slot] = touching
+			end
+			for _, event in ipairs(result.ruleEvents) do
+				logEvent(event.kind, table.clone(event), event.tick)
+			end
+			if result.roundChanged or result.phase == "goalPause" then
+				touchingCoreBall = {}
+				touchingBall = false
+				lastCoreKickInputs = {}
+			end
+			physicsStepInfo = stepInfo
+			if speedRunRemaining &gt; 0 then
+				speedRunRemaining -= 1
+				if speedRunRemaining == 0 then
+					currentInput = { x = 0, y = 0, kick = false }
+					currentInputs[1] = currentInput
+					logEvent(
+						"speedRunFinished",
+						{ ticks = 120, playerX = p.x, playerVx = p.vx, playerSpeed = speed(p) },
+						state.tick
+					)
+				end
+			end
+			metrics.lastCollisionSubsteps = stepInfo.substeps
+			metrics.maxCollisionSubsteps = math.max(metrics.maxCollisionSubsteps, stepInfo.substeps)
+			if stepInfo.ballWallBounces &gt; 0 then
+				metrics.ballWallBounces += stepInfo.ballWallBounces
+				logEvent("ballBoundaryBounce", {
+					count = stepInfo.ballWallBounces,
+					x = b.x,
+					y = b.y,
+					vx = b.vx,
+					vy = b.vy,
+					substeps = stepInfo.substeps,
+				}, state.tick)
+			end
+			if stepInfo.playerWallBounces &gt; 0 then
+				metrics.playerWallBounces += stepInfo.playerWallBounces
+				logEvent("playerBoundaryBounce", {
+					count = stepInfo.playerWallBounces,
+					x = p.x,
+					y = p.y,
+					vx = p.vx,
+					vy = p.vy,
+					substeps = stepInfo.substeps,
+				}, state.tick)
+			end
+			local separation = math.sqrt((p.x - b.x) ^ 2 + (p.y - b.y) ^ 2)
+			local nowTouching = separation &lt;= p.radius + b.radius + 0.02
+			touchingBall = nowTouching
+		else
+			if currentInput.kick and not lastKick then
+				metrics.kickAttempts += 1
+				local dx, dy = b.x - p.x, b.y - p.y
+				local separation = math.sqrt(dx * dx + dy * dy)
+				local accepted = Physics2D.tryKick(state, facingX, facingY)
+				if accepted then
+					metrics.successfulKicks += 1
+					metrics.lastKickSuccessTick = state.tick + 1
+				end
+				logEvent("kickAttempt", {
+					accepted = accepted,
+					separation = separation,
+					playerX = p.x,
+					playerY = p.y,
+					ballX = b.x,
+					ballY = b.y,
+				})
+			end
+			lastKick = currentInput.kick
+			local _, stepInfo = Physics2D.step(state, currentInput)
+			physicsStepInfo = stepInfo
+			if speedRunRemaining &gt; 0 then
+				speedRunRemaining -= 1
+				if speedRunRemaining == 0 then
+					currentInput = { x = 0, y = 0, kick = false }
+					currentInputs[1] = currentInput
+					logEvent(
+						"speedRunFinished",
+						{ ticks = 120, playerX = p.x, playerVx = p.vx, playerSpeed = speed(p) },
+						state.tick
+					)
+				end
+			end
+			metrics.lastCollisionSubsteps = stepInfo.substeps
+			metrics.maxCollisionSubsteps = math.max(metrics.maxCollisionSubsteps, stepInfo.substeps)
+			if stepInfo.ballWallBounces &gt; 0 then
+				metrics.ballWallBounces += stepInfo.ballWallBounces
+				logEvent("ballBoundaryBounce", {
+					count = stepInfo.ballWallBounces,
+					x = b.x,
+					y = b.y,
+					vx = b.vx,
+					vy = b.vy,
+					substeps = stepInfo.substeps,
+				}, state.tick)
+			end
+			if stepInfo.playerWallBounces &gt; 0 then
+				metrics.playerWallBounces += stepInfo.playerWallBounces
+				logEvent("playerBoundaryBounce", {
+					count = stepInfo.playerWallBounces,
+					x = p.x,
+					y = p.y,
+					vx = p.vx,
+					vy = p.vy,
+					substeps = stepInfo.substeps,
+				}, state.tick)
+			end
+			local separation = math.sqrt((p.x - b.x) ^ 2 + (p.y - b.y) ^ 2)
+			local nowTouching = separation &lt;= p.radius + b.radius + 0.02
+			if stepInfo.playerBallContacts &gt; 0 and not touchingBall then
+				metrics.ballContacts += 1
+				local contact = stepInfo.lastPlayerBallContact or {}
+				logEvent("playerBallContact", {
+					separation = p.radius + b.radius - (contact.penetration or 0),
+					postStepSeparation = separation,
+					contactsThisTick = stepInfo.playerBallContacts,
+					substep = contact.substep,
+					substeps = stepInfo.substeps,
+					normalX = contact.normalX,
+					normalY = contact.normalY,
+					normalSpeedBefore = contact.normalSpeedBefore,
+					impulse = contact.impulse,
+					penetration = contact.penetration,
+					playerX = p.x,
+					playerY = p.y,
+					ballX = b.x,
+					ballY = b.y,
+				}, state.tick)
+			end
+			touchingBall = nowTouching
+		end
 
-        accumulator-=stepDt
-        iterations+=1
-        local current=snapshot()
-        if recording then
-            historyBuffer[historyWrite]={
-                tick=current.tick,gameTime=current.gameTime,pairMode=pairMode,crowdMode=crowdMode,
-                inputX=current.input.x,inputY=current.input.y,kick=current.input.kick,
-                playerX=p.x,playerY=p.y,playerVx=p.vx,playerVy=p.vy,playerSpeed=current.player.speed,
-                player2X=p2.x,player2Y=p2.y,player2Vx=p2.vx,player2Vy=p2.vy,player2Speed=current.player2.speed,
-                players=current.players,
-                ballX=b.x,ballY=b.y,ballVx=b.vx,ballVy=b.vy,ballSpeed=current.ball.speed,
-                separation=current.separation,playerSeparation=current.playerSeparation,player2BallSeparation=current.player2BallSeparation,
-                pairPenetration=pairResolution and pairResolution.penetration or 0,
-                crowdContacts=metrics.crowdContacts,crowdResidual=metrics.crowdLastResidualPenetration,solverIterations=metrics.crowdLastSolverIterations,
-                physicsSubsteps=physicsStepInfo and physicsStepInfo.substeps or 0,
-                residualP1P2=crowdResiduals and crowdResiduals["player1-player2"] or 0,
-                residualP1Ball=crowdResiduals and crowdResiduals["player1-ball"] or 0,
-                residualP2Ball=crowdResiduals and crowdResiduals["player2-ball"] or 0,
-                pairNormalX=pairResolution and pairResolution.normalX or 0,
-                pairNormalY=pairResolution and pairResolution.normalY or 0,
-                pairImpulse=pairResolution and pairResolution.impulse or 0,
-                touchingBall=current.touchingBall,touchingPlayers=current.touchingPlayers,
-            }
-            historyWrite=(historyWrite%historyCapacity)+1
-            historyCount=math.min(historyCapacity,historyCount+1)
-        end
-        snapshotRemote:FireAllClients(current)
-    end
+		accumulator -= stepDt
+		iterations += 1
+		local current = snapshot()
+		if recording then
+			historyBuffer[historyWrite] = {
+				tick = current.tick,
+				gameTime = current.gameTime,
+				pairMode = pairMode,
+				crowdMode = crowdMode,
+				inputX = current.input.x,
+				inputY = current.input.y,
+				kick = current.input.kick,
+				playerX = p.x,
+				playerY = p.y,
+				playerVx = p.vx,
+				playerVy = p.vy,
+				playerSpeed = current.player.speed,
+				player2X = p2.x,
+				player2Y = p2.y,
+				player2Vx = p2.vx,
+				player2Vy = p2.vy,
+				player2Speed = current.player2.speed,
+				players = current.players,
+				ballX = b.x,
+				ballY = b.y,
+				ballVx = b.vx,
+				ballVy = b.vy,
+				ballSpeed = current.ball.speed,
+				separation = current.separation,
+				playerSeparation = current.playerSeparation,
+				player2BallSeparation = current.player2BallSeparation,
+				pairPenetration = pairResolution and pairResolution.penetration or 0,
+				crowdContacts = metrics.crowdContacts,
+				crowdResidual = metrics.crowdLastResidualPenetration,
+				solverIterations = metrics.crowdLastSolverIterations,
+				physicsSubsteps = physicsStepInfo and physicsStepInfo.substeps or 0,
+				residualP1P2 = crowdResiduals and crowdResiduals["player1-player2"] or 0,
+				residualP1Ball = crowdResiduals and crowdResiduals["player1-ball"] or 0,
+				residualP2Ball = crowdResiduals and crowdResiduals["player2-ball"] or 0,
+				pairNormalX = pairResolution and pairResolution.normalX or 0,
+				pairNormalY = pairResolution and pairResolution.normalY or 0,
+				pairImpulse = pairResolution and pairResolution.impulse or 0,
+				touchingBall = current.touchingBall,
+				touchingPlayers = current.touchingPlayers,
+			}
+			historyWrite = (historyWrite % historyCapacity) + 1
+			historyCount = math.min(historyCapacity, historyCount + 1)
+		end
+		snapshotRemote:FireAllClients(current)
+	end
 end)
 </ProtectedString><bool name="Disabled">false</bool><Content name="LinkedSource"><null /></Content><token name="RunContext">0</token><string name="ScriptGuid">{0030F6C4-73F1-454A-B044-9D42A15AE3E2}</string><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">LabServer</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e7616000009b6</UniqueId></Properties></Item><Item class="BindableFunction" referent="RBX7FEC71678A8E4B0A894AEC02BB196B2B"><Properties>
 					<BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">DebugState</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">2a8c184ef8e375f00b0e761600000f94</UniqueId></Properties></Item><Item class="ModuleScript" referent="RBXC95E11E8C4F441018B93F74BEEA7EDB9"><Properties>
@@ -2620,591 +3219,770 @@ return Suite
 local Core = {}
 
 local DEFAULTS = {
-    tickRate = 60,
-    solverMode = "adaptive", -- Explicit compatibility option: haxballDiscrete. 
-    playerAcceleration = 0.1,
-    playerKickAcceleration = 0.07,
-    playerDamping = 0.96,
-    playerKickDamping = 0.96,
-    ballDamping = 0.99,
-    defaultBounce = 0.5,
-    maxSubsteps = 64,
-    kickRangeExtra = 4,
-    kickCooldownTicks = 2,
-    fieldHalfWidth = 420,
-    fieldHalfHeight = 200,
+	tickRate = 60,
+	solverMode = "adaptive", -- Explicit compatibility option: haxballDiscrete.
+	playerAcceleration = 0.1,
+	playerKickAcceleration = 0.07,
+	playerDamping = 0.96,
+	playerKickDamping = 0.96,
+	ballDamping = 0.99,
+	defaultBounce = 0.5,
+	maxSubsteps = 64,
+	kickRangeExtra = 4,
+	kickCooldownTicks = 2,
+	fieldHalfWidth = 420,
+	fieldHalfHeight = 200,
 }
 
 local function finite(value)
-    return type(value) == "number" and value == value and math.abs(value) &lt; 1e12
+	return type(value) == "number" and value == value and math.abs(value) &lt; 1e12
 end
 
 local function validMask(value)
-    return finite(value) and value &gt;= 0 and value &lt;= 0xFFFFFFFF and math.floor(value) == value
+	return finite(value) and value &gt;= 0 and value &lt;= 0xFFFFFFFF and math.floor(value) == value
 end
 
 local function idKey(id)
-    return typeof(id) .. ":" .. tostring(id)
+	return typeof(id) .. ":" .. tostring(id)
 end
 
 function Core.newWorld(config)
-    config = config or {}
-    local settings = table.clone(DEFAULTS)
-    for key, value in pairs(config) do
-        settings[key] = value
-    end
-    assert(finite(settings.tickRate) and settings.tickRate &gt; 0, "tickRate must be positive")
-    assert(finite(settings.fieldHalfWidth) and settings.fieldHalfWidth &gt; 0, "fieldHalfWidth must be positive")
-    assert(finite(settings.fieldHalfHeight) and settings.fieldHalfHeight &gt; 0, "fieldHalfHeight must be positive")
-    assert(finite(settings.maxSubsteps) and settings.maxSubsteps&gt;=1 and settings.maxSubsteps&lt;=256 and math.floor(settings.maxSubsteps)==settings.maxSubsteps, "maxSubsteps must be an integer from 1 to 256")
-    assert(settings.solverMode == "adaptive" or settings.solverMode == "haxballDiscrete", "unknown solverMode")
-    return {
-        tick = 0,
-        config = settings,
-        discs = {},
-        discById = {},
-        events = {},
-        planes = {},
-        segments = {},
-        geometryById = {},
-        referenceGeometry = nil,
-        useBounds = settings.useBounds ~= false,
-        lastSubsteps = 0,
-        motionSegments = {},
-    }
+	config = config or {}
+	local settings = table.clone(DEFAULTS)
+	for key, value in pairs(config) do
+		settings[key] = value
+	end
+	assert(finite(settings.tickRate) and settings.tickRate &gt; 0, "tickRate must be positive")
+	assert(finite(settings.fieldHalfWidth) and settings.fieldHalfWidth &gt; 0, "fieldHalfWidth must be positive")
+	assert(finite(settings.fieldHalfHeight) and settings.fieldHalfHeight &gt; 0, "fieldHalfHeight must be positive")
+	assert(
+		finite(settings.maxSubsteps)
+			and settings.maxSubsteps &gt;= 1
+			and settings.maxSubsteps &lt;= 256
+			and math.floor(settings.maxSubsteps) == settings.maxSubsteps,
+		"maxSubsteps must be an integer from 1 to 256"
+	)
+	assert(settings.solverMode == "adaptive" or settings.solverMode == "haxballDiscrete", "unknown solverMode")
+	return {
+		tick = 0,
+		config = settings,
+		discs = {},
+		discById = {},
+		events = {},
+		planes = {},
+		segments = {},
+		geometryById = {},
+		referenceGeometry = nil,
+		useBounds = settings.useBounds ~= false,
+		lastSubsteps = 0,
+		motionSegments = {},
+	}
 end
 
 function Core.newDisc(spec)
-    assert(type(spec) == "table", "disc spec must be a table")
-    assert(spec.id ~= nil and (type(spec.id)=="number" or type(spec.id)=="string"), "disc id must be a number or string")
-    local disc = {
-        id = spec.id,
-        kind = spec.kind or "disc",
-        team = spec.team,
-        x = spec.x or 0,
-        y = spec.y or 0,
-        vx = spec.vx or 0,
-        vy = spec.vy or 0,
-        gravityX = spec.gravityX or 0,
-        gravityY = spec.gravityY or 0,
-        radius = spec.radius or 10,
-        invMass = spec.invMass == nil and 1 or spec.invMass,
-        damping = spec.damping == nil and 1 or spec.damping,
-        bCoef = spec.bCoef == nil and DEFAULTS.defaultBounce or spec.bCoef,
-        collisionGroup = spec.collisionGroup == nil and 1 or spec.collisionGroup,
-        collisionMask = spec.collisionMask == nil and 0xFFFFFFFF or spec.collisionMask,
-        acceleration = spec.acceleration or DEFAULTS.playerAcceleration,
-        kickAcceleration = spec.kickAcceleration or DEFAULTS.playerKickAcceleration,
-        kickDamping = spec.kickDamping == nil and (spec.damping or DEFAULTS.playerDamping) or spec.kickDamping,
-        kickStrength = spec.kickStrength or 0,
-        kickback = spec.kickback or 0,
-        kickRangeExtra = spec.kickRangeExtra == nil and DEFAULTS.kickRangeExtra or spec.kickRangeExtra,
-        kickable = spec.kickable == true,
-        kickHeld = false,
-        kickArmed = false,
-        kickCooldown = 0,
-        maxSpeed = spec.maxSpeed,
-        enabled = spec.enabled ~= false,
-        traceMotion = spec.traceMotion == true,
-    }
-    for _, key in ipairs({"x","y","vx","vy","gravityX","gravityY","radius","invMass","damping","bCoef","acceleration","kickAcceleration","kickDamping","kickStrength","kickback","kickRangeExtra"}) do
-        assert(finite(disc[key]), "disc field must be finite: " .. key)
-    end
-    assert(disc.radius &gt; 0, "disc radius must be positive")
-    assert(disc.invMass &gt;= 0, "inverse mass cannot be negative")
-    assert(disc.damping &gt;= 0 and disc.kickDamping &gt;= 0, "damping cannot be negative")
-    assert(validMask(disc.collisionGroup) and validMask(disc.collisionMask), "collision flags must be unsigned 32-bit integers")
-    if disc.maxSpeed ~= nil then
-        assert(finite(disc.maxSpeed) and disc.maxSpeed &gt; 0, "maxSpeed must be positive")
-    end
-    return disc
+	assert(type(spec) == "table", "disc spec must be a table")
+	assert(
+		spec.id ~= nil and (type(spec.id) == "number" or type(spec.id) == "string"),
+		"disc id must be a number or string"
+	)
+	local disc = {
+		id = spec.id,
+		kind = spec.kind or "disc",
+		team = spec.team,
+		x = spec.x or 0,
+		y = spec.y or 0,
+		vx = spec.vx or 0,
+		vy = spec.vy or 0,
+		gravityX = spec.gravityX or 0,
+		gravityY = spec.gravityY or 0,
+		radius = spec.radius or 10,
+		invMass = spec.invMass == nil and 1 or spec.invMass,
+		damping = spec.damping == nil and 1 or spec.damping,
+		bCoef = spec.bCoef == nil and DEFAULTS.defaultBounce or spec.bCoef,
+		collisionGroup = spec.collisionGroup == nil and 1 or spec.collisionGroup,
+		collisionMask = spec.collisionMask == nil and 0xFFFFFFFF or spec.collisionMask,
+		acceleration = spec.acceleration or DEFAULTS.playerAcceleration,
+		kickAcceleration = spec.kickAcceleration or DEFAULTS.playerKickAcceleration,
+		kickDamping = spec.kickDamping == nil and (spec.damping or DEFAULTS.playerDamping) or spec.kickDamping,
+		kickStrength = spec.kickStrength or 0,
+		kickback = spec.kickback or 0,
+		kickRangeExtra = spec.kickRangeExtra == nil and DEFAULTS.kickRangeExtra or spec.kickRangeExtra,
+		kickable = spec.kickable == true,
+		kickHeld = false,
+		kickArmed = false,
+		kickCooldown = 0,
+		maxSpeed = spec.maxSpeed,
+		enabled = spec.enabled ~= false,
+		traceMotion = spec.traceMotion == true,
+	}
+	for _, key in ipairs({
+		"x",
+		"y",
+		"vx",
+		"vy",
+		"gravityX",
+		"gravityY",
+		"radius",
+		"invMass",
+		"damping",
+		"bCoef",
+		"acceleration",
+		"kickAcceleration",
+		"kickDamping",
+		"kickStrength",
+		"kickback",
+		"kickRangeExtra",
+	}) do
+		assert(finite(disc[key]), "disc field must be finite: " .. key)
+	end
+	assert(disc.radius &gt; 0, "disc radius must be positive")
+	assert(disc.invMass &gt;= 0, "inverse mass cannot be negative")
+	assert(disc.damping &gt;= 0 and disc.kickDamping &gt;= 0, "damping cannot be negative")
+	assert(
+		validMask(disc.collisionGroup) and validMask(disc.collisionMask),
+		"collision flags must be unsigned 32-bit integers"
+	)
+	if disc.maxSpeed ~= nil then
+		assert(finite(disc.maxSpeed) and disc.maxSpeed &gt; 0, "maxSpeed must be positive")
+	end
+	return disc
 end
 
 function Core.addDisc(world, spec)
-    assert(type(world) == "table" and type(world.discs) == "table", "invalid world")
-    local disc = Core.newDisc(spec)
-    local key = idKey(disc.id)
-    assert(world.discById[key] == nil, "duplicate disc id: " .. tostring(disc.id))
-    world.discById[key] = disc
-    -- Insertion order is the solver order; build worlds in their intended physical order.
-    table.insert(world.discs, disc)
-    return disc
+	assert(type(world) == "table" and type(world.discs) == "table", "invalid world")
+	local disc = Core.newDisc(spec)
+	local key = idKey(disc.id)
+	assert(world.discById[key] == nil, "duplicate disc id: " .. tostring(disc.id))
+	world.discById[key] = disc
+	-- Insertion order is the solver order; build worlds in their intended physical order.
+	table.insert(world.discs, disc)
+	return disc
 end
 
 function Core.addPlane(world, spec)
-    assert(type(spec) == "table" and spec.id ~= nil, "plane id is required")
-    local nx, ny = spec.normalX, spec.normalY
-    assert(finite(nx) and finite(ny), "plane normal must be finite")
-    local length = math.sqrt(nx*nx+ny*ny)
-    assert(length &gt; 1e-12, "plane normal cannot be zero")
-    local plane = {
-        id=spec.id, normalX=nx/length, normalY=ny/length,
-        offset=spec.offset or 0, bCoef=spec.bCoef == nil and 0.5 or spec.bCoef,
-        collisionGroup=spec.collisionGroup == nil and 1 or spec.collisionGroup,
-        collisionMask=spec.collisionMask == nil and 0xFFFFFFFF or spec.collisionMask,
-    }
-    assert(finite(plane.offset) and finite(plane.bCoef), "plane values must be finite")
-    assert(validMask(plane.collisionGroup) and validMask(plane.collisionMask), "plane collision flags must be unsigned 32-bit integers")
-    local key="plane:"..idKey(plane.id)
-    assert(not world.geometryById[key], "duplicate plane id")
-    world.geometryById[key]=true
-    table.insert(world.planes,plane)
-    return plane
+	assert(type(spec) == "table" and spec.id ~= nil, "plane id is required")
+	local nx, ny = spec.normalX, spec.normalY
+	assert(finite(nx) and finite(ny), "plane normal must be finite")
+	local length = math.sqrt(nx * nx + ny * ny)
+	assert(length &gt; 1e-12, "plane normal cannot be zero")
+	local plane = {
+		id = spec.id,
+		normalX = nx / length,
+		normalY = ny / length,
+		offset = spec.offset or 0,
+		bCoef = spec.bCoef == nil and 0.5 or spec.bCoef,
+		collisionGroup = spec.collisionGroup == nil and 1 or spec.collisionGroup,
+		collisionMask = spec.collisionMask == nil and 0xFFFFFFFF or spec.collisionMask,
+	}
+	assert(finite(plane.offset) and finite(plane.bCoef), "plane values must be finite")
+	assert(
+		validMask(plane.collisionGroup) and validMask(plane.collisionMask),
+		"plane collision flags must be unsigned 32-bit integers"
+	)
+	local key = "plane:" .. idKey(plane.id)
+	assert(not world.geometryById[key], "duplicate plane id")
+	world.geometryById[key] = true
+	table.insert(world.planes, plane)
+	return plane
 end
 
-local function segmentArcData(x1,y1,x2,y2,curveDegrees)
-    if math.abs(curveDegrees)&lt;1e-9 then return nil end
-    assert(math.abs(curveDegrees)&lt;360, "segment curve must be between -360 and 360 degrees")
-    local dx,dy=x2-x1,y2-y1
-    local chord=math.sqrt(dx*dx+dy*dy)
-    local sweep=math.rad(curveDegrees)
-    local half=sweep*0.5
-    local offset
-    if math.abs(math.abs(curveDegrees)-180)&lt;1e-8 then
-        offset=0
-    else
-        local tangent=math.tan(half)
-        assert(math.abs(tangent)&gt;1e-12, "invalid curved segment")
-        offset=chord/(2*tangent)
-    end
-    local midX,midY=(x1+x2)*0.5,(y1+y2)*0.5
-    local leftX,leftY=-dy/chord,dx/chord
-    local centerX,centerY=midX+leftX*offset,midY+leftY*offset
-    local radius=math.sqrt((x1-centerX)^2+(y1-centerY)^2)
-    assert(finite(radius) and radius&gt;1e-9, "invalid curved segment radius")
-    return {centerX=centerX,centerY=centerY,radius=radius,startAngle=math.atan2(y1-centerY,x1-centerX),sweep=sweep}
+local function segmentArcData(x1, y1, x2, y2, curveDegrees)
+	if math.abs(curveDegrees) &lt; 1e-9 then
+		return nil
+	end
+	assert(math.abs(curveDegrees) &lt; 360, "segment curve must be between -360 and 360 degrees")
+	local dx, dy = x2 - x1, y2 - y1
+	local chord = math.sqrt(dx * dx + dy * dy)
+	local sweep = math.rad(curveDegrees)
+	local half = sweep * 0.5
+	local offset
+	if math.abs(math.abs(curveDegrees) - 180) &lt; 1e-8 then
+		offset = 0
+	else
+		local tangent = math.tan(half)
+		assert(math.abs(tangent) &gt; 1e-12, "invalid curved segment")
+		offset = chord / (2 * tangent)
+	end
+	local midX, midY = (x1 + x2) * 0.5, (y1 + y2) * 0.5
+	local leftX, leftY = -dy / chord, dx / chord
+	local centerX, centerY = midX + leftX * offset, midY + leftY * offset
+	local radius = math.sqrt((x1 - centerX) ^ 2 + (y1 - centerY) ^ 2)
+	assert(finite(radius) and radius &gt; 1e-9, "invalid curved segment radius")
+	return {
+		centerX = centerX,
+		centerY = centerY,
+		radius = radius,
+		startAngle = math.atan2(y1 - centerY, x1 - centerX),
+		sweep = sweep,
+	}
 end
 
 function Core.addSegment(world, spec)
-    assert(type(spec) == "table" and spec.id ~= nil, "segment id is required")
-    local segment = {
-        id=spec.id, x1=spec.x1, y1=spec.y1, x2=spec.x2, y2=spec.y2,
-        bCoef=spec.bCoef == nil and 0.5 or spec.bCoef,
-        collisionGroup=spec.collisionGroup == nil and 1 or spec.collisionGroup,
-        collisionMask=spec.collisionMask == nil and 0xFFFFFFFF or spec.collisionMask,
-        twoSided=spec.twoSided ~= false,
-        kickoffOnly=spec.kickoffOnly == true,
-        curveDegrees=spec.curveDegrees or spec.curve or 0,
-    }
-    for _, key in ipairs({"x1","y1","x2","y2","bCoef","curveDegrees"}) do
-        assert(finite(segment[key]), "segment field must be finite: "..key)
-    end
-    assert(validMask(segment.collisionGroup) and validMask(segment.collisionMask), "segment collision flags must be unsigned 32-bit integers")
-    local dx,dy=segment.x2-segment.x1,segment.y2-segment.y1
-    assert(dx*dx+dy*dy&gt;1e-16, "segment endpoints must differ")
-    local key="segment:"..idKey(segment.id)
-    assert(not world.geometryById[key], "duplicate segment id")
-    world.geometryById[key]=true
-    segment.arc=segmentArcData(segment.x1,segment.y1,segment.x2,segment.y2,segment.curveDegrees)
-    table.insert(world.segments,segment)
-    return segment
+	assert(type(spec) == "table" and spec.id ~= nil, "segment id is required")
+	local segment = {
+		id = spec.id,
+		x1 = spec.x1,
+		y1 = spec.y1,
+		x2 = spec.x2,
+		y2 = spec.y2,
+		bCoef = spec.bCoef == nil and 0.5 or spec.bCoef,
+		collisionGroup = spec.collisionGroup == nil and 1 or spec.collisionGroup,
+		collisionMask = spec.collisionMask == nil and 0xFFFFFFFF or spec.collisionMask,
+		twoSided = spec.twoSided ~= false,
+		kickoffOnly = spec.kickoffOnly == true,
+		curveDegrees = spec.curveDegrees or spec.curve or 0,
+	}
+	for _, key in ipairs({ "x1", "y1", "x2", "y2", "bCoef", "curveDegrees" }) do
+		assert(finite(segment[key]), "segment field must be finite: " .. key)
+	end
+	assert(
+		validMask(segment.collisionGroup) and validMask(segment.collisionMask),
+		"segment collision flags must be unsigned 32-bit integers"
+	)
+	local dx, dy = segment.x2 - segment.x1, segment.y2 - segment.y1
+	assert(dx * dx + dy * dy &gt; 1e-16, "segment endpoints must differ")
+	local key = "segment:" .. idKey(segment.id)
+	assert(not world.geometryById[key], "duplicate segment id")
+	world.geometryById[key] = true
+	segment.arc = segmentArcData(segment.x1, segment.y1, segment.x2, segment.y2, segment.curveDegrees)
+	table.insert(world.segments, segment)
+	return segment
 end
 
 local function collisionAllowed(a, b)
-    return bit32.band(a.collisionGroup, b.collisionMask) ~= 0
-        and bit32.band(b.collisionGroup, a.collisionMask) ~= 0
+	return bit32.band(a.collisionGroup, b.collisionMask) ~= 0 and bit32.band(b.collisionGroup, a.collisionMask) ~= 0
 end
 
 local function applyInputAndKick(world, inputs, events)
-    local cfg = world.config
-    for _, player in ipairs(world.discs) do
-        if player.enabled and player.kind == "player" then
-            local input = inputs[player.id] or inputs[idKey(player.id)] or {}
-            if type(input) ~= "table" then input = {} end
-            local ix = finite(input.x) and input.x or 0
-            local iy = finite(input.y) and input.y or 0
-            local magnitude = math.sqrt(ix*ix + iy*iy)
-            if magnitude &gt; 1 then ix, iy = ix/magnitude, iy/magnitude end
+	local cfg = world.config
+	for _, player in ipairs(world.discs) do
+		if player.enabled and player.kind == "player" then
+			local input = inputs[player.id] or inputs[idKey(player.id)] or {}
+			if type(input) ~= "table" then
+				input = {}
+			end
+			local ix = finite(input.x) and input.x or 0
+			local iy = finite(input.y) and input.y or 0
+			local magnitude = math.sqrt(ix * ix + iy * iy)
+			if magnitude &gt; 1 then
+				ix, iy = ix / magnitude, iy / magnitude
+			end
 
-            local kickHeld = input.kick == true
-            if kickHeld and not player.kickHeld then
-                player.kickArmed = true
-            elseif not kickHeld then
-                player.kickArmed = false
-            end
-            player.kickHeld = kickHeld
-            if player.kickCooldown &gt; 0 then player.kickCooldown -= 1 end
+			local kickHeld = input.kick == true
+			if kickHeld and not player.kickHeld then
+				player.kickArmed = true
+			elseif not kickHeld then
+				player.kickArmed = false
+			end
+			player.kickHeld = kickHeld
+			if player.kickCooldown &gt; 0 then
+				player.kickCooldown -= 1
+			end
 
-            if player.kickArmed and player.kickCooldown &lt;= 0 then
-                for _, target in ipairs(world.discs) do
-                    if target.enabled and target.kickable and target.invMass &gt; 0 then
-                        local dx, dy = target.x-player.x, target.y-player.y
-                        local distance = math.sqrt(dx*dx+dy*dy)
-                        local extra = player.kickRangeExtra
-                        if distance &gt; 0 and distance-player.radius-target.radius &lt; extra then
-                            local nx, ny = dx/distance, dy/distance
-                            target.vx += nx*player.kickStrength*target.invMass
-                            target.vy += ny*player.kickStrength*target.invMass
-                            player.vx -= nx*player.kickback*player.invMass
-                            player.vy -= ny*player.kickback*player.invMass
-                            player.kickArmed = false
-                            player.kickCooldown = cfg.kickCooldownTicks
-                            table.insert(events, {kind="kick", tick=world.tick+1, playerId=player.id, targetId=target.id, normalX=nx, normalY=ny})
-                            break
-                        end
-                    end
-                end
-            end
+			if player.kickArmed and player.kickCooldown &lt;= 0 then
+				for _, target in ipairs(world.discs) do
+					if target.enabled and target.kickable and target.invMass &gt; 0 then
+						local dx, dy = target.x - player.x, target.y - player.y
+						local distance = math.sqrt(dx * dx + dy * dy)
+						local extra = player.kickRangeExtra
+						if distance &gt; 0 and distance - player.radius - target.radius &lt; extra then
+							local nx, ny = dx / distance, dy / distance
+							target.vx += nx * player.kickStrength * target.invMass
+							target.vy += ny * player.kickStrength * target.invMass
+							player.vx -= nx * player.kickback * player.invMass
+							player.vy -= ny * player.kickback * player.invMass
+							player.kickArmed = false
+							player.kickCooldown = cfg.kickCooldownTicks
+							table.insert(events, {
+								kind = "kick",
+								tick = world.tick + 1,
+								playerId = player.id,
+								targetId = target.id,
+								normalX = nx,
+								normalY = ny,
+							})
+							break
+						end
+					end
+				end
+			end
 
-            local accel = player.kickArmed and player.kickAcceleration or player.acceleration
-            player.vx += ix*accel
-            player.vy += iy*accel
-            if player.maxSpeed then
-                local speed = math.sqrt(player.vx*player.vx+player.vy*player.vy)
-                if speed &gt; player.maxSpeed then
-                    local scale = player.maxSpeed/speed
-                    player.vx *= scale
-                    player.vy *= scale
-                end
-            end
-        end
-    end
-end
-
-local function integrate(world)
-    for _, disc in ipairs(world.discs) do
-        if disc.enabled and disc.invMass &gt; 0 then
-            disc.x += disc.vx
-            disc.y += disc.vy
-            local damping=(disc.kind=="player" and disc.kickArmed) and disc.kickDamping or disc.damping
-            disc.vx = (disc.vx+disc.gravityX)*damping
-            disc.vy = (disc.vy+disc.gravityY)*damping
-        end
-    end
+			local accel = player.kickArmed and player.kickAcceleration or player.acceleration
+			player.vx += ix * accel
+			player.vy += iy * accel
+			if player.maxSpeed then
+				local speed = math.sqrt(player.vx * player.vx + player.vy * player.vy)
+				if speed &gt; player.maxSpeed then
+					local scale = player.maxSpeed / speed
+					player.vx *= scale
+					player.vy *= scale
+				end
+			end
+		end
+	end
 end
 
 local function resolveBoundsForDisc(world, disc, events, eventKeys)
-    if not world.useBounds or not disc.enabled or disc.invMass&lt;=0 then return end
-    local cfg=world.config
-    local minX,maxX=-cfg.fieldHalfWidth+disc.radius,cfg.fieldHalfWidth-disc.radius
-    local minY,maxY=-cfg.fieldHalfHeight+disc.radius,cfg.fieldHalfHeight-disc.radius
-    local bounceCount=0
-    if disc.x&lt;minX then disc.x=minX;if disc.vx&lt;0 then disc.vx=-disc.vx*disc.bCoef;bounceCount+=1 end
-    elseif disc.x&gt;maxX then disc.x=maxX;if disc.vx&gt;0 then disc.vx=-disc.vx*disc.bCoef;bounceCount+=1 end end
-    if disc.y&lt;minY then disc.y=minY;if disc.vy&lt;0 then disc.vy=-disc.vy*disc.bCoef;bounceCount+=1 end
-    elseif disc.y&gt;maxY then disc.y=maxY;if disc.vy&gt;0 then disc.vy=-disc.vy*disc.bCoef;bounceCount+=1 end end
-    if bounceCount&gt;0 then
-        local key="boundary:"..idKey(disc.id)
-        local event=eventKeys[key]
-        if event then event.count+=bounceCount
-        else
-            event={kind="boundaryContact",tick=world.tick+1,discId=disc.id,count=bounceCount}
-            eventKeys[key]=event
-            table.insert(events,event)
-        end
-    end
+	if not world.useBounds or not disc.enabled or disc.invMass &lt;= 0 then
+		return
+	end
+	local cfg = world.config
+	local minX, maxX = -cfg.fieldHalfWidth + disc.radius, cfg.fieldHalfWidth - disc.radius
+	local minY, maxY = -cfg.fieldHalfHeight + disc.radius, cfg.fieldHalfHeight - disc.radius
+	local bounceCount = 0
+	if disc.x &lt; minX then
+		disc.x = minX
+		if disc.vx &lt; 0 then
+			disc.vx = -disc.vx * disc.bCoef
+			bounceCount += 1
+		end
+	elseif disc.x &gt; maxX then
+		disc.x = maxX
+		if disc.vx &gt; 0 then
+			disc.vx = -disc.vx * disc.bCoef
+			bounceCount += 1
+		end
+	end
+	if disc.y &lt; minY then
+		disc.y = minY
+		if disc.vy &lt; 0 then
+			disc.vy = -disc.vy * disc.bCoef
+			bounceCount += 1
+		end
+	elseif disc.y &gt; maxY then
+		disc.y = maxY
+		if disc.vy &gt; 0 then
+			disc.vy = -disc.vy * disc.bCoef
+			bounceCount += 1
+		end
+	end
+	if bounceCount &gt; 0 then
+		local key = "boundary:" .. idKey(disc.id)
+		local event = eventKeys[key]
+		if event then
+			event.count += bounceCount
+		else
+			event = { kind = "boundaryContact", tick = world.tick + 1, discId = disc.id, count = bounceCount }
+			eventKeys[key] = event
+			table.insert(events, event)
+		end
+	end
 end
 
 local function resolveDiscPair(a, b, reference)
-    local dx, dy = a.x-b.x, a.y-b.y
-    local d2 = dx*dx+dy*dy
-    local radii = a.radius+b.radius
-    if d2 &gt; radii*radii then return nil end
-    if d2 == 0 and reference then return nil end
+	local dx, dy = a.x - b.x, a.y - b.y
+	local d2 = dx * dx + dy * dy
+	local radii = a.radius + b.radius
+	if d2 &gt; radii * radii then
+		return nil
+	end
+	if d2 == 0 and reference then
+		return nil
+	end
 
-    local distance, nx, ny
-    if d2 &gt; 1e-16 then
-        distance = math.sqrt(d2)
-        nx, ny = dx/distance, dy/distance
-    else
-        -- Deterministic fallback for coincident centers. Original Haxball behavior
-        -- at exact coincidence must still be verified against an official oracle.
-        distance = 0
-        nx, ny = -1, 0
-    end
+	local distance, nx, ny
+	if d2 &gt; 1e-16 then
+		distance = math.sqrt(d2)
+		nx, ny = dx / distance, dy / distance
+	else
+		-- Deterministic fallback for coincident centers. Original Haxball behavior
+		-- at exact coincidence must still be verified against an official oracle.
+		distance = 0
+		nx, ny = -1, 0
+	end
 
-    local overlap = radii-distance
-    local invSum = a.invMass+b.invMass
-    if invSum &lt;= 0 then return nil end
-    local mf = a.invMass/invSum
-    local shareA = overlap*mf
-    a.x += nx*shareA
-    a.y += ny*shareA
-    local shareB = overlap-shareA
-    b.x -= nx*shareB
-    b.y -= ny*shareB
+	local overlap = radii - distance
+	local invSum = a.invMass + b.invMass
+	if invSum &lt;= 0 then
+		return nil
+	end
+	local mf = a.invMass / invSum
+	local shareA = overlap * mf
+	a.x += nx * shareA
+	a.y += ny * shareA
+	local shareB = overlap - shareA
+	b.x -= nx * shareB
+	b.y -= ny * shareB
 
-    local normalSpeedBefore=nx*(a.vx-b.vx)+ny*(a.vy-b.vy)
-    local normalVelocity=normalSpeedBefore
-    local impulseMagnitude = 0
-    if normalVelocity &lt; 0 then
-        -- Haxball-style restitution uses the product of disk bounce coefficients.
-        normalVelocity *= (a.bCoef*b.bCoef+1)
-        local changeA = mf*normalVelocity
-        a.vx -= nx*changeA
-        a.vy -= ny*changeA
-        local changeB = normalVelocity-changeA
-        b.vx += nx*changeB
-        b.vy += ny*changeB
-        impulseMagnitude = math.abs(normalVelocity)/invSum
-    end
-    return {normalX=nx,normalY=ny,penetration=overlap,normalSpeedBefore=normalSpeedBefore,impulse=impulseMagnitude}
+	local normalSpeedBefore = nx * (a.vx - b.vx) + ny * (a.vy - b.vy)
+	local normalVelocity = normalSpeedBefore
+	local impulseMagnitude = 0
+	if normalVelocity &lt; 0 then
+		-- Haxball-style restitution uses the product of disk bounce coefficients.
+		normalVelocity *= (a.bCoef * b.bCoef + 1)
+		local changeA = mf * normalVelocity
+		a.vx -= nx * changeA
+		a.vy -= ny * changeA
+		local changeB = normalVelocity - changeA
+		b.vx += nx * changeB
+		b.vy += ny * changeB
+		impulseMagnitude = math.abs(normalVelocity) / invSum
+	end
+	return {
+		normalX = nx,
+		normalY = ny,
+		penetration = overlap,
+		normalSpeedBefore = normalSpeedBefore,
+		impulse = impulseMagnitude,
+	}
 end
 
 local function resolveStaticGeometryForDisc(world, disc, events, eventKeys)
-    if not disc.enabled or disc.invMass&lt;=0 then return end
-    local function collide(geometry, kind, nx, ny, penetration)
-        if not collisionAllowed(disc,geometry) or penetration&lt;=0 then return end
-        disc.x+=nx*penetration
-        disc.y+=ny*penetration
-        local normalVelocity=disc.vx*nx+disc.vy*ny
-        local impulse=0
-        if normalVelocity&lt;0 then
-            local change=-(1+disc.bCoef*geometry.bCoef)*normalVelocity
-            disc.vx+=nx*change
-            disc.vy+=ny*change
-            impulse=change/disc.invMass
-        end
-        local key=kind..":"..idKey(disc.id)..":"..idKey(geometry.id)
-        local event=eventKeys[key]
-        if event then
-            event.penetration=math.max(event.penetration,penetration)
-            event.impulse=math.max(event.impulse,impulse)
-        else
-            event={kind=kind,tick=world.tick+1,discId=disc.id,geometryId=geometry.id,normalX=nx,normalY=ny,penetration=penetration,impulse=impulse}
-            eventKeys[key]=event
-            table.insert(events,event)
-        end
-    end
+	if not disc.enabled or disc.invMass &lt;= 0 then
+		return
+	end
+	local function collide(geometry, kind, nx, ny, penetration)
+		if not collisionAllowed(disc, geometry) or penetration &lt;= 0 then
+			return
+		end
+		disc.x += nx * penetration
+		disc.y += ny * penetration
+		local normalVelocity = disc.vx * nx + disc.vy * ny
+		local impulse = 0
+		if normalVelocity &lt; 0 then
+			local change = -(1 + disc.bCoef * geometry.bCoef) * normalVelocity
+			disc.vx += nx * change
+			disc.vy += ny * change
+			impulse = change / disc.invMass
+		end
+		local key = kind .. ":" .. idKey(disc.id) .. ":" .. idKey(geometry.id)
+		local event = eventKeys[key]
+		if event then
+			event.penetration = math.max(event.penetration, penetration)
+			event.impulse = math.max(event.impulse, impulse)
+		else
+			event = {
+				kind = kind,
+				tick = world.tick + 1,
+				discId = disc.id,
+				geometryId = geometry.id,
+				normalX = nx,
+				normalY = ny,
+				penetration = penetration,
+				impulse = impulse,
+			}
+			eventKeys[key] = event
+			table.insert(events, event)
+		end
+	end
 
-    for _,plane in ipairs(world.planes) do
-        local signed=disc.x*plane.normalX+disc.y*plane.normalY-plane.offset
-        local penetration=disc.radius-signed
-        if penetration&gt;0 then collide(plane,"planeContact",plane.normalX,plane.normalY,penetration) end
-    end
-    for _,segment in ipairs(world.segments) do
-        local qx,qy
-        if segment.arc then
-            local arc=segment.arc
-            local angle=math.atan2(disc.y-arc.centerY,disc.x-arc.centerX)
-            local delta=arc.sweep&gt;=0 and ((angle-arc.startAngle)%(2*math.pi)) or ((arc.startAngle-angle)%(2*math.pi))
-            if delta&lt;=math.abs(arc.sweep)+1e-9 then
-                qx=arc.centerX+arc.radius*math.cos(angle)
-                qy=arc.centerY+arc.radius*math.sin(angle)
-            else
-                local dStart=(disc.x-segment.x1)^2+(disc.y-segment.y1)^2
-                local dEnd=(disc.x-segment.x2)^2+(disc.y-segment.y2)^2
-                if dStart&lt;=dEnd then qx,qy=segment.x1,segment.y1 else qx,qy=segment.x2,segment.y2 end
-            end
-        else
-            local sx,sy=segment.x2-segment.x1,segment.y2-segment.y1
-            local length2=sx*sx+sy*sy
-            local t=math.clamp(((disc.x-segment.x1)*sx+(disc.y-segment.y1)*sy)/length2,0,1)
-            qx,qy=segment.x1+t*sx,segment.y1+t*sy
-        end
-        local dx,dy=disc.x-qx,disc.y-qy
-        local distance2=dx*dx+dy*dy
-        if distance2&lt;disc.radius*disc.radius then
-            local distance,nx,ny
-            if distance2&gt;1e-16 then
-                distance=math.sqrt(distance2);nx,ny=dx/distance,dy/distance
-            elseif segment.arc then
-                local arc=segment.arc
-                local angle=arc.startAngle+arc.sweep*0.5
-                nx,ny=math.cos(angle),math.sin(angle)
-                distance=0
-            else
-                local sx,sy=segment.x2-segment.x1,segment.y2-segment.y1
-                local length=math.sqrt(sx*sx+sy*sy)
-                nx,ny=-sy/length,sx/length
-                if not segment.twoSided and (disc.x-segment.x1)*nx+(disc.y-segment.y1)*ny&lt;0 then nx,ny=-nx,-ny end
-            end
-            local allowed=segment.arc~=nil or segment.twoSided
-            if not allowed then
-                local sx,sy=segment.x2-segment.x1,segment.y2-segment.y1
-                local length=math.sqrt(sx*sx+sy*sy)
-                allowed=(disc.x-segment.x1)*(-sy/length)+(disc.y-segment.y1)*(sx/length)&gt;=-1e-9
-            end
-            if allowed then collide(segment,"segmentContact",nx,ny,disc.radius-(distance or 0)) end
-        end
-    end
+	for _, plane in ipairs(world.planes) do
+		local signed = disc.x * plane.normalX + disc.y * plane.normalY - plane.offset
+		local penetration = disc.radius - signed
+		if penetration &gt; 0 then
+			collide(plane, "planeContact", plane.normalX, plane.normalY, penetration)
+		end
+	end
+	for _, segment in ipairs(world.segments) do
+		local qx, qy
+		if segment.arc then
+			local arc = segment.arc
+			local angle = math.atan2(disc.y - arc.centerY, disc.x - arc.centerX)
+			local delta = arc.sweep &gt;= 0 and ((angle - arc.startAngle) % (2 * math.pi))
+				or ((arc.startAngle - angle) % (2 * math.pi))
+			if delta &lt;= math.abs(arc.sweep) + 1e-9 then
+				qx = arc.centerX + arc.radius * math.cos(angle)
+				qy = arc.centerY + arc.radius * math.sin(angle)
+			else
+				local dStart = (disc.x - segment.x1) ^ 2 + (disc.y - segment.y1) ^ 2
+				local dEnd = (disc.x - segment.x2) ^ 2 + (disc.y - segment.y2) ^ 2
+				if dStart &lt;= dEnd then
+					qx, qy = segment.x1, segment.y1
+				else
+					qx, qy = segment.x2, segment.y2
+				end
+			end
+		else
+			local sx, sy = segment.x2 - segment.x1, segment.y2 - segment.y1
+			local length2 = sx * sx + sy * sy
+			local t = math.clamp(((disc.x - segment.x1) * sx + (disc.y - segment.y1) * sy) / length2, 0, 1)
+			qx, qy = segment.x1 + t * sx, segment.y1 + t * sy
+		end
+		local dx, dy = disc.x - qx, disc.y - qy
+		local distance2 = dx * dx + dy * dy
+		if distance2 &lt; disc.radius * disc.radius then
+			local distance, nx, ny
+			if distance2 &gt; 1e-16 then
+				distance = math.sqrt(distance2)
+				nx, ny = dx / distance, dy / distance
+			elseif segment.arc then
+				local arc = segment.arc
+				local angle = arc.startAngle + arc.sweep * 0.5
+				nx, ny = math.cos(angle), math.sin(angle)
+				distance = 0
+			else
+				local sx, sy = segment.x2 - segment.x1, segment.y2 - segment.y1
+				local length = math.sqrt(sx * sx + sy * sy)
+				nx, ny = -sy / length, sx / length
+				if not segment.twoSided and (disc.x - segment.x1) * nx + (disc.y - segment.y1) * ny &lt; 0 then
+					nx, ny = -nx, -ny
+				end
+			end
+			local allowed = segment.arc ~= nil or segment.twoSided
+			if not allowed then
+				local sx, sy = segment.x2 - segment.x1, segment.y2 - segment.y1
+				local length = math.sqrt(sx * sx + sy * sy)
+				allowed = (disc.x - segment.x1) * (-sy / length) + (disc.y - segment.y1) * (sx / length) &gt;= -1e-9
+			end
+			if allowed then
+				collide(segment, "segmentContact", nx, ny, disc.radius - (distance or 0))
+			end
+		end
+	end
 end
 
 -- Exact ordered static contact policy for the pinned Node-Haxball 2.3.0
 -- compatibility profile. Geometry is numeric reference data, not Roblox objects.
 function Core.setReferenceGeometry(world, geometry)
-    assert(world.config.solverMode == "haxballDiscrete", "reference geometry requires discrete mode")
-    world.referenceGeometry=geometry
+	assert(world.config.solverMode == "haxballDiscrete", "reference geometry requires discrete mode")
+	world.referenceGeometry = geometry
 end
 
 local function resolveReferenceGeometry(world, d, events)
-    local geo=world.referenceGeometry
-    if not geo or not d.enabled or d.invMass==0 then return end
-    local function response(g,nx,ny,penetration,kind)
-        d.x+=nx*penetration; d.y+=ny*penetration
-        local vn=d.vx*nx+d.vy*ny
-        if vn&lt;0 then
-            local change=vn*(d.bCoef*g.bCoef+1)
-            d.vx-=nx*change; d.vy-=ny*change
-            table.insert(events,{kind=kind,tick=world.tick+1,discId=d.id,geometryId=g.id})
-        end
-    end
-    for _,g in ipairs(geo.planes) do
-        if collisionAllowed(d,g) then
-            local p=g.offset-(g.normalX*d.x+g.normalY*d.y)+d.radius
-            if p&gt;0 then response(g,g.normalX,g.normalY,p,"planeContact") end
-        end
-    end
-    for _,g in ipairs(geo.segments) do
-        if not collisionAllowed(d,g) then continue end
-        local nx,ny,distance
-        if g.curveF then
-            nx=d.x-g.centerX;ny=d.y-g.centerY
-            local inside=g.v1NormalX*nx+g.v1NormalY*ny&gt;0 and g.v0NormalX*nx+g.v0NormalY*ny&gt;0
-            if inside==(g.curveF&lt;=0) then continue end
-            local length=math.sqrt(nx*nx+ny*ny)
-            if length==0 then continue end
-            distance=length-g.arcRadius;nx/=length;ny/=length
-        else
-            local sx,sy=g.x2-g.x1,g.y2-g.y1
-            if (d.x-g.x1)*sx+(d.y-g.y1)*sy&lt;=0 or (d.x-g.x2)*sx+(d.y-g.y2)*sy&gt;=0 then continue end
-            nx,ny=g.normalX,g.normalY
-            distance=nx*(d.x-g.x2)+ny*(d.y-g.y2)
-        end
-        local bias=g.bias or 0
-        if bias==0 then
-            if distance&lt;0 then distance=-distance;nx=-nx;ny=-ny end
-        else
-            if bias&lt;0 then bias=-bias;distance=-distance;nx=-nx;ny=-ny end
-            if distance &lt; -bias then continue end
-        end
-        if distance&lt;d.radius then response(g,nx,ny,d.radius-distance,"segmentContact") end
-    end
-    for _,g in ipairs(geo.vertices) do
-        if collisionAllowed(d,g) then
-            local nx,ny=d.x-g.x,d.y-g.y
-            local distance2=nx*nx+ny*ny
-            if distance2&gt;0 and distance2&lt;=d.radius*d.radius then
-                local length=math.sqrt(distance2)
-                response(g,nx/length,ny/length,d.radius-length,"vertexContact")
-            end
-        end
-    end
+	local geo = world.referenceGeometry
+	if not geo or not d.enabled or d.invMass == 0 then
+		return
+	end
+	local function response(g, nx, ny, penetration, kind)
+		d.x += nx * penetration
+		d.y += ny * penetration
+		local vn = d.vx * nx + d.vy * ny
+		if vn &lt; 0 then
+			local change = vn * (d.bCoef * g.bCoef + 1)
+			d.vx -= nx * change
+			d.vy -= ny * change
+			table.insert(events, { kind = kind, tick = world.tick + 1, discId = d.id, geometryId = g.id })
+		end
+	end
+	for _, g in ipairs(geo.planes) do
+		if collisionAllowed(d, g) then
+			local p = g.offset - (g.normalX * d.x + g.normalY * d.y) + d.radius
+			if p &gt; 0 then
+				response(g, g.normalX, g.normalY, p, "planeContact")
+			end
+		end
+	end
+	for _, g in ipairs(geo.segments) do
+		if not collisionAllowed(d, g) then
+			continue
+		end
+		local nx, ny, distance
+		if g.curveF then
+			nx = d.x - g.centerX
+			ny = d.y - g.centerY
+			local inside = g.v1NormalX * nx + g.v1NormalY * ny &gt; 0 and g.v0NormalX * nx + g.v0NormalY * ny &gt; 0
+			if inside == (g.curveF &lt;= 0) then
+				continue
+			end
+			local length = math.sqrt(nx * nx + ny * ny)
+			if length == 0 then
+				continue
+			end
+			distance = length - g.arcRadius
+			nx /= length
+			ny /= length
+		else
+			local sx, sy = g.x2 - g.x1, g.y2 - g.y1
+			if (d.x - g.x1) * sx + (d.y - g.y1) * sy &lt;= 0 or (d.x - g.x2) * sx + (d.y - g.y2) * sy &gt;= 0 then
+				continue
+			end
+			nx, ny = g.normalX, g.normalY
+			distance = nx * (d.x - g.x2) + ny * (d.y - g.y2)
+		end
+		local bias = g.bias or 0
+		if bias == 0 then
+			if distance &lt; 0 then
+				distance = -distance
+				nx = -nx
+				ny = -ny
+			end
+		else
+			if bias &lt; 0 then
+				bias = -bias
+				distance = -distance
+				nx = -nx
+				ny = -ny
+			end
+			if distance &lt; -bias then
+				continue
+			end
+		end
+		if distance &lt; d.radius then
+			response(g, nx, ny, d.radius - distance, "segmentContact")
+		end
+	end
+	for _, g in ipairs(geo.vertices) do
+		if collisionAllowed(d, g) then
+			local nx, ny = d.x - g.x, d.y - g.y
+			local distance2 = nx * nx + ny * ny
+			if distance2 &gt; 0 and distance2 &lt;= d.radius * d.radius then
+				local length = math.sqrt(distance2)
+				response(g, nx / length, ny / length, d.radius - length, "vertexContact")
+			end
+		end
+	end
 end
 
 function Core.stepWorld(world, inputs)
-    assert(type(world) == "table" and type(world.discs) == "table", "invalid world")
-    inputs = inputs or {}
-    local events,eventKeys = {},{}
-    world.motionSegments={}
-    local traceStarts={}
-    if world.config.solverMode=="haxballDiscrete" then
-        for _,disc in ipairs(world.discs) do
-            if disc.traceMotion then traceStarts[disc.id]={x=disc.x,y=disc.y} end
-        end
-    end
-    applyInputAndKick(world, inputs, events)
+	assert(type(world) == "table" and type(world.discs) == "table", "invalid world")
+	inputs = inputs or {}
+	local events, eventKeys = {}, {}
+	world.motionSegments = {}
+	local traceStarts = {}
+	if world.config.solverMode == "haxballDiscrete" then
+		for _, disc in ipairs(world.discs) do
+			if disc.traceMotion then
+				traceStarts[disc.id] = { x = disc.x, y = disc.y }
+			end
+		end
+	end
+	applyInputAndKick(world, inputs, events)
 
-    local maxSpeed,minRadius=0,math.huge
-    for _,disc in ipairs(world.discs) do
-        if disc.enabled and disc.invMass&gt;0 then
-            maxSpeed=math.max(maxSpeed,math.sqrt(disc.vx*disc.vx+disc.vy*disc.vy))
-            minRadius=math.min(minRadius,disc.radius)
-        end
-    end
-    local substeps=1
-    if minRadius&lt;math.huge then
-        local maxDistance=math.max(0.5,minRadius*0.5)
-        substeps=math.clamp(math.ceil(maxSpeed/maxDistance),1,world.config.maxSubsteps)
-    end
-    local reference = world.config.solverMode == "haxballDiscrete"
-    if reference then substeps=1 end
-    world.lastSubsteps=substeps
+	local maxSpeed, minRadius = 0, math.huge
+	for _, disc in ipairs(world.discs) do
+		if disc.enabled and disc.invMass &gt; 0 then
+			maxSpeed = math.max(maxSpeed, math.sqrt(disc.vx * disc.vx + disc.vy * disc.vy))
+			minRadius = math.min(minRadius, disc.radius)
+		end
+	end
+	local substeps = 1
+	if minRadius &lt; math.huge then
+		local maxDistance = math.max(0.5, minRadius * 0.5)
+		substeps = math.clamp(math.ceil(maxSpeed / maxDistance), 1, world.config.maxSubsteps)
+	end
+	local reference = world.config.solverMode == "haxballDiscrete"
+	if reference then
+		substeps = 1
+	end
+	world.lastSubsteps = substeps
 
-    -- Adaptive microsteps reduce discrete tunneling while preserving one input,
-    -- gravity, and damping application per logical tick.
-    for substep=1,substeps do
-        for _,disc in ipairs(world.discs) do
-            if disc.enabled and disc.invMass&gt;0 then
-                local startX,startY=disc.x,disc.y
-                disc.x+=disc.vx/substeps
-                disc.y+=disc.vy/substeps
-                if disc.traceMotion then
-                    table.insert(world.motionSegments,{discId=disc.id,x0=startX,y0=startY,x1=disc.x,y1=disc.y,substep=substep,substeps=substeps})
-                end
-            end
-        end
+	-- Adaptive microsteps reduce discrete tunneling while preserving one input,
+	-- gravity, and damping application per logical tick.
+	for substep = 1, substeps do
+		for _, disc in ipairs(world.discs) do
+			if disc.enabled and disc.invMass &gt; 0 then
+				local startX, startY = disc.x, disc.y
+				disc.x += disc.vx / substeps
+				disc.y += disc.vy / substeps
+				if disc.traceMotion then
+					table.insert(world.motionSegments, {
+						discId = disc.id,
+						x0 = startX,
+						y0 = startY,
+						x1 = disc.x,
+						y1 = disc.y,
+						substep = substep,
+						substeps = substeps,
+					})
+				end
+			end
+		end
 
-        -- The reference advances every position, damps velocities, then resolves contacts.
-        if reference then
-            for _,disc in ipairs(world.discs) do
-                if disc.enabled and disc.invMass&gt;0 then
-                    local damping=(disc.kind=="player" and disc.kickArmed) and disc.kickDamping or disc.damping
-                    disc.vx=(disc.vx+disc.gravityX)*damping
-                    disc.vy=(disc.vy+disc.gravityY)*damping
-                end
-            end
-        end
-        -- Preserve declared solver order inside each microstep.
-        for i=1,#world.discs do
-            local a=world.discs[i]
-            if a.enabled then
-                for j=i+1,#world.discs do
-                    local b=world.discs[j]
-                    if b.enabled and (a.invMass&gt;0 or b.invMass&gt;0) and collisionAllowed(a,b) then
-                        local contact=resolveDiscPair(a,b,reference)
-                        if contact then
-                            local key="pair:"..idKey(a.id)..":"..idKey(b.id)
-                            local existing=eventKeys[key]
-                            if existing then
-                                existing.penetration=math.max(existing.penetration,contact.penetration)
-                                existing.impulse=math.max(existing.impulse,contact.impulse)
-                            else
-                                contact.kind="discContact"
-                                contact.tick=world.tick+1
-                                contact.discA=a.id
-                                contact.discB=b.id
-                                eventKeys[key]=contact
-                                table.insert(events,contact)
-                            end
-                        end
-                    end
-                end
-                resolveBoundsForDisc(world,a,events,eventKeys)
-                if reference and world.referenceGeometry then
-                    resolveReferenceGeometry(world,a,events)
-                else
-                    resolveStaticGeometryForDisc(world,a,events,eventKeys)
-                end
-            end
-        end
-    end
+		-- The reference advances every position, damps velocities, then resolves contacts.
+		if reference then
+			for _, disc in ipairs(world.discs) do
+				if disc.enabled and disc.invMass &gt; 0 then
+					local damping = (disc.kind == "player" and disc.kickArmed) and disc.kickDamping or disc.damping
+					disc.vx = (disc.vx + disc.gravityX) * damping
+					disc.vy = (disc.vy + disc.gravityY) * damping
+				end
+			end
+		end
+		-- Preserve declared solver order inside each microstep.
+		for i = 1, #world.discs do
+			local a = world.discs[i]
+			if a.enabled then
+				for j = i + 1, #world.discs do
+					local b = world.discs[j]
+					if b.enabled and (a.invMass &gt; 0 or b.invMass &gt; 0) and collisionAllowed(a, b) then
+						local contact = resolveDiscPair(a, b, reference)
+						if contact then
+							local key = "pair:" .. idKey(a.id) .. ":" .. idKey(b.id)
+							local existing = eventKeys[key]
+							if existing then
+								existing.penetration = math.max(existing.penetration, contact.penetration)
+								existing.impulse = math.max(existing.impulse, contact.impulse)
+							else
+								contact.kind = "discContact"
+								contact.tick = world.tick + 1
+								contact.discA = a.id
+								contact.discB = b.id
+								eventKeys[key] = contact
+								table.insert(events, contact)
+							end
+						end
+					end
+				end
+				resolveBoundsForDisc(world, a, events, eventKeys)
+				if reference and world.referenceGeometry then
+					resolveReferenceGeometry(world, a, events)
+				else
+					resolveStaticGeometryForDisc(world, a, events, eventKeys)
+				end
+			end
+		end
+	end
 
-    -- Adaptive mode retains its historical post-contact velocity update.
-    if not reference then
-    for _,disc in ipairs(world.discs) do
-        if disc.enabled and disc.invMass&gt;0 then
-            local damping=(disc.kind=="player" and disc.kickArmed) and disc.kickDamping or disc.damping
-            disc.vx=(disc.vx+disc.gravityX)*damping
-            disc.vy=(disc.vy+disc.gravityY)*damping
-        end
-    end
-
-    end
-    if reference then
-        -- Goal crossing uses the completed, corrected tick, like the reference.
-        world.motionSegments={}
-        for _,disc in ipairs(world.discs) do
-            local start=traceStarts[disc.id]
-            if start then table.insert(world.motionSegments,{discId=disc.id,x0=start.x,y0=start.y,x1=disc.x,y1=disc.y,substep=1,substeps=1}) end
-        end
-    end
-    world.tick += 1
-    world.events = events
-    return world, events, substeps
+	-- Adaptive mode retains its historical post-contact velocity update.
+	if not reference then
+		for _, disc in ipairs(world.discs) do
+			if disc.enabled and disc.invMass &gt; 0 then
+				local damping = (disc.kind == "player" and disc.kickArmed) and disc.kickDamping or disc.damping
+				disc.vx = (disc.vx + disc.gravityX) * damping
+				disc.vy = (disc.vy + disc.gravityY) * damping
+			end
+		end
+	end
+	if reference then
+		-- Goal crossing uses the completed, corrected tick, like the reference.
+		world.motionSegments = {}
+		for _, disc in ipairs(world.discs) do
+			local start = traceStarts[disc.id]
+			if start then
+				table.insert(world.motionSegments, {
+					discId = disc.id,
+					x0 = start.x,
+					y0 = start.y,
+					x1 = disc.x,
+					y1 = disc.y,
+					substep = 1,
+					substeps = 1,
+				})
+			end
+		end
+	end
+	world.tick += 1
+	world.events = events
+	return world, events, substeps
 end
 
 function Core.snapshot(world)
-    local discs = table.create(#world.discs)
-    for index, disc in ipairs(world.discs) do
-        discs[index] = {
-            id=disc.id, kind=disc.kind, team=disc.team, x=disc.x, y=disc.y,
-            vx=disc.vx, vy=disc.vy, radius=disc.radius, invMass=disc.invMass,
-            damping=disc.damping, bCoef=disc.bCoef, collisionGroup=disc.collisionGroup,
-            collisionMask=disc.collisionMask, kickCooldown=disc.kickCooldown,
-        }
-    end
-    return {tick=world.tick, tickRate=world.config.tickRate, substeps=world.lastSubsteps, discs=discs, events=table.clone(world.events)}
+	local discs = table.create(#world.discs)
+	for index, disc in ipairs(world.discs) do
+		discs[index] = {
+			id = disc.id,
+			kind = disc.kind,
+			team = disc.team,
+			x = disc.x,
+			y = disc.y,
+			vx = disc.vx,
+			vy = disc.vy,
+			radius = disc.radius,
+			invMass = disc.invMass,
+			damping = disc.damping,
+			bCoef = disc.bCoef,
+			collisionGroup = disc.collisionGroup,
+			collisionMask = disc.collisionMask,
+			kickCooldown = disc.kickCooldown,
+		}
+	end
+	return {
+		tick = world.tick,
+		tickRate = world.config.tickRate,
+		substeps = world.lastSubsteps,
+		discs = discs,
+		events = table.clone(world.events),
+	}
 end
 
 return Core
@@ -3216,177 +3994,204 @@ Stadium.Metadata = Profile.Metadata
 Stadium.Groups = Profile.CollisionGroups
 
 local function copyRecord(record)
-    return table.clone(record)
+	return table.clone(record)
 end
 
 function Stadium.install(Core, world)
-    assert(type(Core) == "table" and type(world) == "table", "Core and world are required")
-    world.useBounds = false
-    if world.config.solverMode == "haxballDiscrete" then
-        local reference=require(script.Parent:WaitForChild("ClassicReference230"))
-        Core.setReferenceGeometry(world,reference)
-        for _,post in ipairs(reference.posts) do
-            local spec=table.clone(post)
-            spec.kind="post";spec.invMass=0;spec.damping=1
-            Core.addDisc(world,spec)
-        end
-        return {planes=#reference.planes,segments=#reference.segments,posts=#reference.posts,
-            profileId="node-haxball-2.3.0-classic",sourceCommit="npm:node-haxball@2.3.0"}
-    end
+	assert(type(Core) == "table" and type(world) == "table", "Core and world are required")
+	world.useBounds = false
+	if world.config.solverMode == "haxballDiscrete" then
+		local reference = require(script.Parent:WaitForChild("ClassicReference230"))
+		Core.setReferenceGeometry(world, reference)
+		for _, post in ipairs(reference.posts) do
+			local spec = table.clone(post)
+			spec.kind = "post"
+			spec.invMass = 0
+			spec.damping = 1
+			Core.addDisc(world, spec)
+		end
+		return {
+			planes = #reference.planes,
+			segments = #reference.segments,
+			posts = #reference.posts,
+			profileId = "node-haxball-2.3.0-classic",
+			sourceCommit = "npm:node-haxball@2.3.0",
+		}
+	end
 
-    for _, spec in ipairs(Profile.Geometry.planes) do
-        Core.addPlane(world, copyRecord(spec))
-    end
-    for _, spec in ipairs(Profile.Geometry.segments) do
-        Core.addSegment(world, copyRecord(spec))
-    end
+	for _, spec in ipairs(Profile.Geometry.planes) do
+		Core.addPlane(world, copyRecord(spec))
+	end
+	for _, spec in ipairs(Profile.Geometry.segments) do
+		Core.addSegment(world, copyRecord(spec))
+	end
 
-    local hbsAll = Profile.CollisionMasks.all
-    for _, post in ipairs(Profile.Geometry.posts) do
-        Core.addDisc(world, {
-            id = post.id,
-            kind = "post",
-            x = post.x,
-            y = post.y,
-            radius = post.radius,
-            invMass = 0,
-            damping = 1,
-            bCoef = post.bCoef,
-            collisionGroup = Profile.CollisionGroups.post,
-            collisionMask = hbsAll,
-        })
-    end
+	local hbsAll = Profile.CollisionMasks.all
+	for _, post in ipairs(Profile.Geometry.posts) do
+		Core.addDisc(world, {
+			id = post.id,
+			kind = "post",
+			x = post.x,
+			y = post.y,
+			radius = post.radius,
+			invMass = 0,
+			damping = 1,
+			bCoef = post.bCoef,
+			collisionGroup = Profile.CollisionGroups.post,
+			collisionMask = hbsAll,
+		})
+	end
 
-    return {
-        planes = #Profile.Geometry.planes,
-        segments = #Profile.Geometry.segments,
-        posts = #Profile.Geometry.posts,
-        profileId = Profile.Metadata.id,
-        sourceCommit = Profile.Metadata.sourceCommit,
-    }
+	return {
+		planes = #Profile.Geometry.planes,
+		segments = #Profile.Geometry.segments,
+		posts = #Profile.Geometry.posts,
+		profileId = Profile.Metadata.id,
+		sourceCommit = Profile.Metadata.sourceCommit,
+	}
 end
 
-return Stadium</ProtectedString><string name="ScriptGuid">{5F7D781C-D567-4F5B-9293-97AC04E2C592}</string><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">ClassicStadium2D</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">49939cb28d5917e30b0f7c200000234c</UniqueId></Properties></Item><Item class="ModuleScript" referent="RBXB51EE2C2D161469C8383DFF51B9DB861"><Properties>
+return Stadium
+</ProtectedString><string name="ScriptGuid">{5F7D781C-D567-4F5B-9293-97AC04E2C592}</string><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">ClassicStadium2D</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">49939cb28d5917e30b0f7c200000234c</UniqueId></Properties></Item><Item class="ModuleScript" referent="RBXB51EE2C2D161469C8383DFF51B9DB861"><Properties>
 					<Content name="LinkedSource"><null /></Content><ProtectedString name="Source">local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Profile = require(ReplicatedStorage:WaitForChild("HaxballLab"):WaitForChild("StadiumReference2D"))
 local Rules = {}
 
 Rules.GoalLines = {
-    { side = "left", x = Profile.Goals.leftX, team = Profile.Goals.scoringTeams.left },
-    { side = "right", x = Profile.Goals.rightX, team = Profile.Goals.scoringTeams.right },
+	{ side = "left", x = Profile.Goals.leftX, team = Profile.Goals.scoringTeams.left },
+	{ side = "right", x = Profile.Goals.rightX, team = Profile.Goals.scoringTeams.right },
 }
 Rules.GoalHalfHeight = Profile.Goals.halfHeight
 Rules.GoalPauseTicks = 90
 Rules.KickoffTicks = 30
 
 function Rules.newMatch()
-    return { phase = "playing", remainingTicks = 0, lastGoal = nil, kickoffTeam = nil }
+	return { phase = "playing", remainingTicks = 0, lastGoal = nil, kickoffTeam = nil }
 end
 
 function Rules.findGoalCrossing(motionSegments, ballId)
-    if type(motionSegments) ~= "table" then return nil end
-    ballId = ballId or "ball"
-    for _, path in ipairs(motionSegments) do
-        if path.discId == ballId then
-            for _, goal in ipairs(Rules.GoalLines) do
-                local crossed = goal.side == "right"
-                    and path.x0 &lt; goal.x and path.x1 &gt;= goal.x
-                    or goal.side == "left" and path.x0 &gt; goal.x and path.x1 &lt;= goal.x
-                if crossed then
-                    local dx = path.x1 - path.x0
-                    if math.abs(dx) &gt; 1e-12 then
-                        local alpha = (goal.x - path.x0) / dx
-                        local y = path.y0 + (path.y1 - path.y0) * alpha
-                        if math.abs(y) &lt;= Rules.GoalHalfHeight then
-                            return { side = goal.side, team = goal.team, x = goal.x, y = y, substep = path.substep, substeps = path.substeps, fraction = alpha }
-                        end
-                    end
-                end
-            end
-        end
-    end
-    return nil
+	if type(motionSegments) ~= "table" then
+		return nil
+	end
+	ballId = ballId or "ball"
+	for _, path in ipairs(motionSegments) do
+		if path.discId == ballId then
+			for _, goal in ipairs(Rules.GoalLines) do
+				local crossed = goal.side == "right" and path.x0 &lt; goal.x and path.x1 &gt;= goal.x
+					or goal.side == "left" and path.x0 &gt; goal.x and path.x1 &lt;= goal.x
+				if crossed then
+					local dx = path.x1 - path.x0
+					if math.abs(dx) &gt; 1e-12 then
+						local alpha = (goal.x - path.x0) / dx
+						local y = path.y0 + (path.y1 - path.y0) * alpha
+						if math.abs(y) &lt;= Rules.GoalHalfHeight then
+							return {
+								side = goal.side,
+								team = goal.team,
+								x = goal.x,
+								y = y,
+								substep = path.substep,
+								substeps = path.substeps,
+								fraction = alpha,
+							}
+						end
+					end
+				end
+			end
+		end
+	end
+	return nil
 end
 
 function Rules.beginGoalPause(match, score, goal, ball, players, pauseTicks)
-    assert(match.phase == "playing", "goal can only be recorded while playing")
-    assert(goal and (goal.team == "red" or goal.team == "blue"), "goal team is invalid")
-    score[goal.team] += 1
-    match.phase = "goalPause"
-    match.remainingTicks = pauseTicks or Rules.GoalPauseTicks
-    match.lastGoal = { team = goal.team, side = goal.side, x = goal.x, y = goal.y, tick = goal.tick }
-    ball.vx, ball.vy = 0, 0
-    for _, player in ipairs(players) do
-        player.vx, player.vy = 0, 0
-        player.kickHeld = false
-        player.kickArmed = false
-        player.kickCooldown = 0
-    end
-    return match.lastGoal
+	assert(match.phase == "playing", "goal can only be recorded while playing")
+	assert(goal and (goal.team == "red" or goal.team == "blue"), "goal team is invalid")
+	score[goal.team] += 1
+	match.phase = "goalPause"
+	match.remainingTicks = pauseTicks or Rules.GoalPauseTicks
+	match.lastGoal = { team = goal.team, side = goal.side, x = goal.x, y = goal.y, tick = goal.tick }
+	ball.vx, ball.vy = 0, 0
+	for _, player in ipairs(players) do
+		player.vx, player.vy = 0, 0
+		player.kickHeld = false
+		player.kickArmed = false
+		player.kickCooldown = 0
+	end
+	return match.lastGoal
 end
 
 function Rules.advancePause(match)
-    if match.phase ~= "goalPause" then return false end
-    match.remainingTicks = math.max(0, match.remainingTicks - 1)
-    return match.remainingTicks == 0
+	if match.phase ~= "goalPause" then
+		return false
+	end
+	match.remainingTicks = math.max(0, match.remainingTicks - 1)
+	return match.remainingTicks == 0
 end
 
 function Rules.resetKickoff(ball, players, spawnPoints)
-    ball.x, ball.y, ball.vx, ball.vy = 0, 0, 0, 0
-    for index, player in ipairs(players) do
-        local spawn = spawnPoints[index]
-        assert(spawn and type(spawn.x) == "number" and type(spawn.y) == "number", "spawn point is missing")
-        player.x, player.y, player.vx, player.vy = spawn.x, spawn.y, 0, 0
-        player.kickHeld, player.kickArmed, player.kickCooldown = false, false, 0
-    end
+	ball.x, ball.y, ball.vx, ball.vy = 0, 0, 0, 0
+	for index, player in ipairs(players) do
+		local spawn = spawnPoints[index]
+		assert(spawn and type(spawn.x) == "number" and type(spawn.y) == "number", "spawn point is missing")
+		player.x, player.y, player.vx, player.vy = spawn.x, spawn.y, 0, 0
+		player.kickHeld, player.kickArmed, player.kickCooldown = false, false, 0
+	end
 end
 
 function Rules.beginKickoff(match, team, ticks)
-    assert(match.phase == "goalPause", "kickoff can only follow a goal pause")
-    assert(team == "red" or team == "blue", "kickoff team is invalid")
-    match.phase, match.remainingTicks, match.kickoffTeam = "kickoff", ticks or Rules.KickoffTicks, team
+	assert(match.phase == "goalPause", "kickoff can only follow a goal pause")
+	assert(team == "red" or team == "blue", "kickoff team is invalid")
+	match.phase, match.remainingTicks, match.kickoffTeam = "kickoff", ticks or Rules.KickoffTicks, team
 end
 
 function Rules.advanceKickoff(match)
-    if match.phase ~= "kickoff" then return false end
-    match.remainingTicks = math.max(0, match.remainingTicks - 1)
-    return match.remainingTicks == 0
+	if match.phase ~= "kickoff" then
+		return false
+	end
+	match.remainingTicks = math.max(0, match.remainingTicks - 1)
+	return match.remainingTicks == 0
 end
 
 function Rules.resume(match)
-    match.phase, match.remainingTicks = "playing", 0
+	match.phase, match.remainingTicks = "playing", 0
 end
 
 function Rules.recordTouch(match, playerId, team, tick, kind)
-    if type(playerId) ~= "number" or (team ~= "red" and team ~= "blue") then return false end
-    match.lastTouch = { playerId = playerId, team = team, tick = tick, kind = kind }
-    return true
+	if type(playerId) ~= "number" or (team ~= "red" and team ~= "blue") then
+		return false
+	end
+	match.lastTouch = { playerId = playerId, team = team, tick = tick, kind = kind }
+	return true
 end
 
 function Rules.kickoffCollisionMask(match, playerTeam, defaultMask, ballGroup)
-    local mask = defaultMask
-    if match.kickoffTeam then
-        local kickoffFlag = match.kickoffTeam == "red" and Profile.CollisionGroups.redKO or Profile.CollisionGroups.blueKO
-        -- Haxball adds the kickoff flag to the normal player mask; ball remains enabled.
-        mask = bit32.bor(mask, kickoffFlag)
-    end
-    return mask
+	local mask = defaultMask
+	if match.kickoffTeam then
+		local kickoffFlag = match.kickoffTeam == "red" and Profile.CollisionGroups.redKO
+			or Profile.CollisionGroups.blueKO
+		-- Haxball adds the kickoff flag to the normal player mask; ball remains enabled.
+		mask = bit32.bor(mask, kickoffFlag)
+	end
+	return mask
 end
 
 function Rules.filterKickoffInput(match, playerTeam, input)
-    if match.kickoffTeam and playerTeam ~= match.kickoffTeam and input.kick then
-        return { x = input.x, y = input.y, kick = false }, true
-    end
-    return input, false
+	if match.kickoffTeam and playerTeam ~= match.kickoffTeam and input.kick then
+		return { x = input.x, y = input.y, kick = false }, true
+	end
+	return input, false
 end
 
 function Rules.completeKickoff(match, playerTeam)
-    if match.phase ~= "playing" or not match.kickoffTeam or playerTeam ~= match.kickoffTeam then return false end
-    match.kickoffTeam = nil
-    return true
+	if match.phase ~= "playing" or not match.kickoffTeam or playerTeam ~= match.kickoffTeam then
+		return false
+	end
+	match.kickoffTeam = nil
+	return true
 end
 
-return Rules</ProtectedString><string name="ScriptGuid">{B6DC4CFC-6445-4BF5-8608-099D8D14F5AA}</string><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">MatchRules2D</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">49939cb28d5917e30b0f7c2000002b77</UniqueId></Properties></Item><Item class="ModuleScript" referent="RBXClassicReference230Offline"><Properties><string name="Name">ClassicReference230</string><ProtectedString name="Source">-- Compatibility entry point: physics and presentation share the same numeric profile.
+return Rules
+</ProtectedString><string name="ScriptGuid">{B6DC4CFC-6445-4BF5-8608-099D8D14F5AA}</string><BinaryString name="AttributesSerialize" /><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId><string name="Name">MatchRules2D</string><BinaryString name="SerializedOverrides" /><int64 name="SourceAssetId">-1</int64><SharedString name="Tags">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString><UniqueId name="UniqueId">49939cb28d5917e30b0f7c2000002b77</UniqueId></Properties></Item><Item class="ModuleScript" referent="RBXClassicReference230Offline"><Properties><string name="Name">ClassicReference230</string><ProtectedString name="Source">-- Compatibility entry point: physics and presentation share the same numeric profile.
 return require(game:GetService("ReplicatedStorage"):WaitForChild("HaxballLab"):WaitForChild("ClassicReference230"))
 </ProtectedString></Properties></Item><Item class="ModuleScript" referent="RBXPhase4LocalMatch2D"><Properties><string name="Name">LocalMatch2D</string><ProtectedString name="Source">-- Local match orchestration. No Roblox services, scheduler, rendering or transport.
 local Core = require(script.Parent:WaitForChild("PhysicsCore2D"))
@@ -3395,136 +4200,181 @@ local Match = {}
 Match.__index = Match
 
 local function duration(value, fallback)
-    value = value == nil and fallback or value
-    assert(type(value)=="number" and value==value and value&gt;=0 and value&lt;1e9 and value%1==0, "duration/limit must be a nonnegative integer")
-    return value
+	value = value == nil and fallback or value
+	assert(
+		type(value) == "number" and value == value and value &gt;= 0 and value &lt; 1e9 and value % 1 == 0,
+		"duration/limit must be a nonnegative integer"
+	)
+	return value
 end
 local function stop(state)
-    state.ball.vx,state.ball.vy=0,0
-    state.ball.kickHeld,state.ball.kickArmed,state.ball.kickCooldown=false,false,0
-    for _,p in ipairs(state.players) do
-        p.vx,p.vy=0,0
-        p.kickHeld,p.kickArmed,p.kickCooldown=false,false,0
-    end
+	state.ball.vx, state.ball.vy = 0, 0
+	state.ball.kickHeld, state.ball.kickArmed, state.ball.kickCooldown = false, false, 0
+	for _, p in ipairs(state.players) do
+		p.vx, p.vy = 0, 0
+		p.kickHeld, p.kickArmed, p.kickCooldown = false, false, 0
+	end
 end
 local function copyTouch(touch)
-    return touch and table.clone(touch) or nil
+	return touch and table.clone(touch) or nil
 end
 function Match.attach(state, options)
-    options=options or {}
-    assert(state.coreWorld and state.players and state.spawnPoints and state.playerCollisionMasks, "complete local state required")
-    local self=setmetatable({state=state,match=Rules.newMatch(),needsKickRelease={},round=0,elapsedTicks=0},Match)
-    self.goalPauseTicks=duration(options.goalPauseTicks,Rules.GoalPauseTicks)
-    self.kickoffTicks=duration(options.kickoffTicks,Rules.KickoffTicks)
-    self.scoreLimit=duration(options.scoreLimit,0)
-    assert(self.goalPauseTicks&gt;0 and self.kickoffTicks&gt;0,"pause and kickoff durations must be at least one tick")
-    self.startingTeam=options.startingTeam or "red"
-    assert(self.startingTeam=="red" or self.startingTeam=="blue", "starting team must be red or blue")
-    if options.startWithKickoff~=false then self:restart(self.startingTeam) else self.round=1 end
-    return self
+	options = options or {}
+	assert(
+		state.coreWorld and state.players and state.spawnPoints and state.playerCollisionMasks,
+		"complete local state required"
+	)
+	local self = setmetatable(
+		{ state = state, match = Rules.newMatch(), needsKickRelease = {}, round = 0, elapsedTicks = 0 },
+		Match
+	)
+	self.goalPauseTicks = duration(options.goalPauseTicks, Rules.GoalPauseTicks)
+	self.kickoffTicks = duration(options.kickoffTicks, Rules.KickoffTicks)
+	self.scoreLimit = duration(options.scoreLimit, 0)
+	assert(self.goalPauseTicks &gt; 0 and self.kickoffTicks &gt; 0, "pause and kickoff durations must be at least one tick")
+	self.startingTeam = options.startingTeam or "red"
+	assert(self.startingTeam == "red" or self.startingTeam == "blue", "starting team must be red or blue")
+	if options.startWithKickoff ~= false then
+		self:restart(self.startingTeam)
+	else
+		self.round = 1
+	end
+	return self
 end
 function Match:_masks()
-    for slot,p in ipairs(self.state.players) do
-        p.collisionMask=Rules.kickoffCollisionMask(self.match,p.team,self.state.playerCollisionMasks[slot],self.state.ball.collisionGroup)
-    end
+	for slot, p in ipairs(self.state.players) do
+		p.collisionMask = Rules.kickoffCollisionMask(
+			self.match,
+			p.team,
+			self.state.playerCollisionMasks[slot],
+			self.state.ball.collisionGroup
+		)
+	end
 end
 function Match:_resetRound(team)
-    local s,m=self.state,self.match
-    Rules.resetKickoff(s.ball,s.players,s.spawnPoints)
-    stop(s)
-    self.round+=1
-    m.lastTouch=nil
-    m.phase,m.remainingTicks,m.kickoffTeam="kickoff",self.kickoffTicks,team
-    -- A kick held across a reset must be released; movement remains an input state.
-    for slot in ipairs(s.players) do self.needsKickRelease[slot]=true end
-    s.coreWorld.events={};s.coreWorld.motionSegments={}
-    self:_masks()
+	local s, m = self.state, self.match
+	Rules.resetKickoff(s.ball, s.players, s.spawnPoints)
+	stop(s)
+	self.round += 1
+	m.lastTouch = nil
+	m.phase, m.remainingTicks, m.kickoffTeam = "kickoff", self.kickoffTicks, team
+	-- A kick held across a reset must be released; movement remains an input state.
+	for slot in ipairs(s.players) do
+		self.needsKickRelease[slot] = true
+	end
+	s.coreWorld.events = {}
+	s.coreWorld.motionSegments = {}
+	self:_masks()
 end
 function Match:restart(team)
-    team=team or self.startingTeam
-    assert(team=="red" or team=="blue", "invalid starting team")
-    self.state.score.red,self.state.score.blue=0,0
-    self.elapsedTicks=0
-    self.match.lastGoal=nil;self.match.winner=nil
-    self:_resetRound(team)
+	team = team or self.startingTeam
+	assert(team == "red" or team == "blue", "invalid starting team")
+	self.state.score.red, self.state.score.blue = 0, 0
+	self.elapsedTicks = 0
+	self.match.lastGoal = nil
+	self.match.winner = nil
+	self:_resetRound(team)
 end
 function Match:step(rawInputs)
-    rawInputs=rawInputs or {}
-    local s,m=self.state,self.match
-    local phase=m.phase
-    local locked=phase~="playing"
-    local inputs={}
-    for slot,p in ipairs(s.players) do
-        local raw=rawInputs[slot] or {}
-        local kick=raw.kick==true
-        if locked and kick then self.needsKickRelease[slot]=true end
-        if not kick then self.needsKickRelease[slot]=false end
-        local input={x=raw.x or 0,y=raw.y or 0,kick=kick and not self.needsKickRelease[slot]}
-        if locked then input={x=0,y=0,kick=false}
-        else input=Rules.filterKickoffInput(m,p.team,input) end
-        inputs[p.id]=input
-    end
-    self:_masks()
-    local result={physicsEvents={},ruleEvents={},inputs=inputs,locked=locked,substeps=0,roundChanged=false}
-    local function event(kind, data)
-        data=data or {};data.kind=kind;data.tick=s.coreWorld.tick
-        table.insert(result.ruleEvents,data)
-    end
-    if locked then
-        -- A pause must freeze positions as well as inputs: no collision corrections.
-        stop(s)
-        s.coreWorld.tick+=1
-        s.coreWorld.events={};s.coreWorld.motionSegments={};s.coreWorld.lastSubsteps=0
-        if phase=="goalPause" and Rules.advancePause(m) then
-            if self.scoreLimit&gt;0 and (s.score.red&gt;=self.scoreLimit or s.score.blue&gt;=self.scoreLimit) then
-                m.phase,m.remainingTicks,m.kickoffTeam="finished",0,nil
-                m.winner=s.score.red&gt;s.score.blue and "red" or "blue"
-                m.lastTouch=nil
-                event("matchFinished",{winner=m.winner})
-            else
-                local team=m.lastGoal.team=="red" and "blue" or "red"
-                self:_resetRound(team);result.roundChanged=true
-                event("kickoffReset",{teamToKick=team,lockTicks=m.remainingTicks,round=self.round})
-            end
-        elseif phase=="kickoff" and Rules.advanceKickoff(m) then
-            Rules.resume(m)
-            event("kickoffComplete",{teamToKick=m.kickoffTeam})
-        end
-    else
-        if not m.kickoffTeam then self.elapsedTicks+=1 end
-        local _,events,substeps=Core.stepWorld(s.coreWorld,inputs)
-        result.physicsEvents,result.substeps=events,substeps
-        for _,e in ipairs(events) do
-            local slot,kind
-            if e.kind=="kick" and e.targetId==s.ball.id then slot,kind=e.playerId,"kick"
-            elseif e.kind=="discContact" then
-                if e.discA==s.ball.id then slot=e.discB elseif e.discB==s.ball.id then slot=e.discA end
-                kind="contact"
-            end
-            local p=type(slot)=="number" and s.players[slot] or nil
-            if p then
-                Rules.recordTouch(m,p.id,p.team,s.coreWorld.tick,kind)
-                if (s.ball.vx~=0 or s.ball.vy~=0) and Rules.completeKickoff(m,p.team) then
-                    event("kickoffTaken",{playerId=p.id,team=p.team})
-                end
-            end
-        end
-        local goal=Rules.findGoalCrossing(s.coreWorld.motionSegments,s.ball.id)
-        if goal then
-            goal.tick=s.coreWorld.tick
-            local lastTouch=copyTouch(m.lastTouch)
-            Rules.beginGoalPause(m,s.score,goal,s.ball,s.players,self.goalPauseTicks)
-            m.lastGoal.lastTouch=lastTouch
-            m.kickoffTeam=nil
-            stop(s)
-            for slot in ipairs(s.players) do self.needsKickRelease[slot]=true end
-            event("goalScored",{team=goal.team,side=goal.side,x=goal.x,y=goal.y,lastTouch=lastTouch})
-        end
-    end
-    s.tick=s.coreWorld.tick
-    self:_masks()
-    result.phase=m.phase;result.round=self.round
-    return result
+	rawInputs = rawInputs or {}
+	local s, m = self.state, self.match
+	local phase = m.phase
+	local locked = phase ~= "playing"
+	local inputs = {}
+	for slot, p in ipairs(s.players) do
+		local raw = rawInputs[slot] or {}
+		local kick = raw.kick == true
+		if locked and kick then
+			self.needsKickRelease[slot] = true
+		end
+		if not kick then
+			self.needsKickRelease[slot] = false
+		end
+		local input = { x = raw.x or 0, y = raw.y or 0, kick = kick and not self.needsKickRelease[slot] }
+		if locked then
+			input = { x = 0, y = 0, kick = false }
+		else
+			input = Rules.filterKickoffInput(m, p.team, input)
+		end
+		inputs[p.id] = input
+	end
+	self:_masks()
+	local result =
+		{ physicsEvents = {}, ruleEvents = {}, inputs = inputs, locked = locked, substeps = 0, roundChanged = false }
+	local function event(kind, data)
+		data = data or {}
+		data.kind = kind
+		data.tick = s.coreWorld.tick
+		table.insert(result.ruleEvents, data)
+	end
+	if locked then
+		-- A pause must freeze positions as well as inputs: no collision corrections.
+		stop(s)
+		s.coreWorld.tick += 1
+		s.coreWorld.events = {}
+		s.coreWorld.motionSegments = {}
+		s.coreWorld.lastSubsteps = 0
+		if phase == "goalPause" and Rules.advancePause(m) then
+			if self.scoreLimit &gt; 0 and (s.score.red &gt;= self.scoreLimit or s.score.blue &gt;= self.scoreLimit) then
+				m.phase, m.remainingTicks, m.kickoffTeam = "finished", 0, nil
+				m.winner = s.score.red &gt; s.score.blue and "red" or "blue"
+				m.lastTouch = nil
+				event("matchFinished", { winner = m.winner })
+			else
+				local team = m.lastGoal.team == "red" and "blue" or "red"
+				self:_resetRound(team)
+				result.roundChanged = true
+				event("kickoffReset", { teamToKick = team, lockTicks = m.remainingTicks, round = self.round })
+			end
+		elseif phase == "kickoff" and Rules.advanceKickoff(m) then
+			Rules.resume(m)
+			event("kickoffComplete", { teamToKick = m.kickoffTeam })
+		end
+	else
+		if not m.kickoffTeam then
+			self.elapsedTicks += 1
+		end
+		local _, events, substeps = Core.stepWorld(s.coreWorld, inputs)
+		result.physicsEvents, result.substeps = events, substeps
+		for _, e in ipairs(events) do
+			local slot, kind
+			if e.kind == "kick" and e.targetId == s.ball.id then
+				slot, kind = e.playerId, "kick"
+			elseif e.kind == "discContact" then
+				if e.discA == s.ball.id then
+					slot = e.discB
+				elseif e.discB == s.ball.id then
+					slot = e.discA
+				end
+				kind = "contact"
+			end
+			local p = type(slot) == "number" and s.players[slot] or nil
+			if p then
+				Rules.recordTouch(m, p.id, p.team, s.coreWorld.tick, kind)
+				if (s.ball.vx ~= 0 or s.ball.vy ~= 0) and Rules.completeKickoff(m, p.team) then
+					event("kickoffTaken", { playerId = p.id, team = p.team })
+				end
+			end
+		end
+		local goal = Rules.findGoalCrossing(s.coreWorld.motionSegments, s.ball.id)
+		if goal then
+			goal.tick = s.coreWorld.tick
+			local lastTouch = copyTouch(m.lastTouch)
+			Rules.beginGoalPause(m, s.score, goal, s.ball, s.players, self.goalPauseTicks)
+			m.lastGoal.lastTouch = lastTouch
+			m.kickoffTeam = nil
+			stop(s)
+			for slot in ipairs(s.players) do
+				self.needsKickRelease[slot] = true
+			end
+			event("goalScored", { team = goal.team, side = goal.side, x = goal.x, y = goal.y, lastTouch = lastTouch })
+		end
+	end
+	s.tick = s.coreWorld.tick
+	self:_masks()
+	result.phase = m.phase
+	result.round = self.round
+	return result
 end
 return Match
 </ProtectedString></Properties></Item></Item></Item><Item class="ServerStorage" referent="RBX9BB5EE4C7E8144D081D47FC60BFA3E95"><Properties>

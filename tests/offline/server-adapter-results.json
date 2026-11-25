@@ -33,5 +33,20 @@
     "leaving_player_cannot_keep_controlling_reused_slot",
     true,
     "PASS"
+  ],
+  [
+    "one_contact_episode_is_counted_once",
+    true,
+    "PASS"
+  ],
+  [
+    "departing_controller_does_not_clear_another_players_held_input",
+    true,
+    "PASS"
+  ],
+  [
+    "player_kick_damping_uses_its_own_configuration",
+    true,
+    "PASS"
   ]
 ]

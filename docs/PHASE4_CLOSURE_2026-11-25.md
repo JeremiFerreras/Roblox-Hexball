@@ -59,3 +59,7 @@ Los resultados individuales están en `tests/offline/*results.json`. Los adaptad
 El ciclo de partido local puede considerarse terminado para el entorno offline probado: arranque, saque, controles, física, goles, marcador, último toque, autogoles, pausas, reposiciones, repetición de rondas y final opcional por marcador. No hay fallos conocidos de este alcance tras la campaña ejecutada. Esto no demuestra ausencia de errores en estados no probados.
 
 Permanece una comprobación de aceptación en Studio: abrir `Roblox Hexball.rbxlx`, probar WASD/X, varios goles y saques, cámara y aspecto, y confirmar funcionamiento con los servicios reales. El rendimiento, el dibujo de píxeles, la recepción real de InputActions y la red no se pueden certificar con estos adaptadores. La fase 5 puede tomar esta base sin reabrir la calibración física por defecto.
+
+## Auditoría de calidad posterior
+
+El cierre funcional no equivalía a una certificación de calidad de producción. La [auditoría posterior](QUALITY_AUDIT_2026-11-25.md) corrigió un fallo de desconexión y un fallo de configuración, y reforzó las propias pruebas. Consultarla para el estado actual y las limitaciones.

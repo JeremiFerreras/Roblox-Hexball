@@ -13,7 +13,7 @@
 - En discreto se omite el par de centros exactamente coincidentes, como en Node; el modo adaptativo mantiene su separación determinista.
 - Los recorridos de gol discretos usan posición inicial y posición final corregida del tick. Se contabilizan contactos de vértice en el servidor.
 
-El modo anterior divergía en 63 de los 75 escenarios de la campaña. No se ajustaron aceleración, damping, fuerza de disparo ni masas para forzar coincidencias: en las pruebas digitales ejecutadas sus valores existentes ya coincidían.
+Corrección metodológica posterior: se retiró la comparación numérica con el supuesto modo anterior. Aquella sonda adaptativa no instalaba el perfil completo de producción y su conteo de divergencias no era una comparación válida del runtime anterior. Las comparaciones del modo discreto contra Node se mantienen y ahora comprueban también integridad de frames y eventos. No se ajustaron aceleración, damping, fuerza de disparo ni masas para forzar coincidencias: en las pruebas digitales ejecutadas sus valores existentes ya coincidían.
 
 ## Reproducción
 
