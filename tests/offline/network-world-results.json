@@ -1,0 +1,62 @@
+[
+  [
+    "world_10clients_seed1_loss0",
+    true,
+    "seed=1 loss=0 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed1_loss5",
+    true,
+    "seed=1 loss=5 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed1_loss15",
+    true,
+    "seed=1 loss=15 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed2_loss0",
+    true,
+    "seed=2 loss=0 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed2_loss5",
+    true,
+    "seed=2 loss=5 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed2_loss15",
+    true,
+    "seed=2 loss=15 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed3_loss0",
+    true,
+    "seed=3 loss=0 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed3_loss5",
+    true,
+    "seed=3 loss=5 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed3_loss15",
+    true,
+    "seed=3 loss=15 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed4_loss0",
+    true,
+    "seed=4 loss=0 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed4_loss5",
+    true,
+    "seed=4 loss=5 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ],
+  [
+    "world_10clients_seed4_loss15",
+    true,
+    "seed=4 loss=15 ticks=1800 clients=10 statePackets=904 rawBytes=435728"
+  ]
+]

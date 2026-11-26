@@ -129,10 +129,16 @@
   "children": [
     "ReplicatedStorage/HaxballLab/Remotes/Input",
     "ReplicatedStorage/HaxballLab/Remotes/Snapshot",
-    "ReplicatedStorage/HaxballLab/Remotes/DebugCommand"
+    "ReplicatedStorage/HaxballLab/Remotes/DebugCommand",
+    "ReplicatedStorage/HaxballLab/Remotes/InputStream",
+    "ReplicatedStorage/HaxballLab/Remotes/StateStream",
+    "ReplicatedStorage/HaxballLab/Remotes/Control"
   ],
   "layout": [
     false,
+    true,
+    true,
+    true,
     true,
     true,
     true

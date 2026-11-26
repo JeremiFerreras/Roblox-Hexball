@@ -44,7 +44,7 @@ check("held_movement_passes_from_real_client_to_real_server", function()
 		advance(1 / 60)
 	end
 	assert(snapshots.latest.player.x > -80)
-	assert(#inputCalls == before, "unchanged input flooded server")
+	assert(#inputCalls - before <= 12, "keepalive/retransmission rate exceeded budget")
 end)
 check("reset_button_starts_new_match_and_resends_held_input", function()
 	local before = #inputCalls
@@ -63,7 +63,14 @@ check("ball_rendering_and_reposition_are_driven_by_completed_match", function()
 	for i = 1, 240 do
 		advance(1 / 60)
 		local s = snapshots.latest
-		near(field.children.BallDisc.Position.X, s.ball.x * 0.5)
+		if s.matchPhase == "playing" then
+			assert(
+				math.abs(field.children.BallDisc.Position.X - s.ball.x * 0.5) <= math.max(2, s.ball.speed * 2),
+				"visual forecast exceeded bounded horizon"
+			)
+		else
+			near(field.children.BallDisc.Position.X, s.ball.x * 0.5)
+		end
 		near(field.children.BallDisc.Position.Z, -s.ball.y * 0.5)
 		if s.matchPhase == "goalPause" then
 			goal = true
@@ -144,5 +151,37 @@ check("camera_refits_after_viewport_resize", function()
 	frameOnly(1 / 60)
 	local expected = StadiumRender2D.cameraHeight(Profile.Presentation, Profile.Bounds, 35, 600, 1000)
 	near(camera.CFrame.Position.Y, expected)
+end)
+check("old_state_packet_cannot_rewind_the_actual_client", function()
+	button("ResetScenario").Activated.fn()
+	advance(1 / 60)
+	local current = snapshots.latest
+	local old = table.clone(current)
+	old.tick = 0
+	old.ball = table.clone(current.ball)
+	old.ball.x = 100
+	stateSignal.fn(NetCodec.encodeState(old))
+	frameOnly(1 / 60)
+	near(field.children.BallDisc.Position.X, 0)
+end)
+check("state_from_unknown_round_waits_for_reliable_bootstrap", function()
+	local current = snapshots.latest
+	local future = table.clone(current)
+	future.round += 1
+	future.ball = table.clone(current.ball)
+	future.ball.x = 100
+	stateSignal.fn(NetCodec.encodeState(future))
+	frameOnly(1 / 60)
+	near(field.children.BallDisc.Position.X, 0)
+end)
+check("duplicate_tick_state_cannot_replace_the_accepted_state", function()
+	button("ResetScenario").Activated.fn()
+	advance(1 / 60)
+	local duplicate = table.clone(snapshots.latest)
+	duplicate.ball = table.clone(duplicate.ball)
+	duplicate.ball.x = 100
+	stateSignal.fn(NetCodec.encodeState(duplicate))
+	frameOnly(1 / 60)
+	near(field.children.BallDisc.Position.X, 0)
 end)
 emit(json(result))

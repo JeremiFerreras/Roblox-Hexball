@@ -92,7 +92,10 @@ function Match:step(rawInputs)
 		if locked and kick then
 			self.needsKickRelease[slot] = true
 		end
-		if not kick then
+		if raw.stale then
+			self.needsKickRelease[slot] = true
+		end
+		if not kick and not raw.stale then
 			self.needsKickRelease[slot] = false
 		end
 		local input = { x = raw.x or 0, y = raw.y or 0, kick = kick and not self.needsKickRelease[slot] }

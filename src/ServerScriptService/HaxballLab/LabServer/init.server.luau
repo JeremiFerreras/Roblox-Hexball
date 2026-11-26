@@ -7,6 +7,15 @@ local remotes = lab.Remotes
 local inputRemote = remotes.Input
 local snapshotRemote = remotes.Snapshot
 local commandRemote = remotes.DebugCommand
+local inputStream = remotes:WaitForChild("InputStream")
+local stateStream = remotes:WaitForChild("StateStream")
+local controlRemote = remotes:WaitForChild("Control")
+local NetCodec = require(lab:WaitForChild("NetCodec"))
+local NetServer = require(script.Parent:WaitForChild("NetServer"))
+local network = NetServer.new()
+local lastAppliedMasks = {}
+local debugEnabled = RunService:IsStudio()
+local controlRequests = {}
 local Physics2D = require(script.Parent:WaitForChild("Physics2D"))
 local PhysicsCore2D = Physics2D.MatchCore
 local ClassicStadium2D = require(script.Parent:WaitForChild("ClassicStadium2D"))
@@ -32,7 +41,7 @@ local facingX, facingY = 1, 0
 local controlledPlayer = nil
 local accumulator = 0
 local stepDt = 1 / Physics2D.Config.tickRate
-local recording = true
+local recording = debugEnabled
 local historyCapacity = 3600
 local historyBuffer = {}
 local historyWrite = 1
@@ -149,8 +158,10 @@ for _, player in Players:GetPlayers() do
 	setController(player)
 end
 Players.PlayerRemoving:Connect(function(player)
+	controlRequests[player.UserId] = nil
 	local slot = playerUserSlots[player.UserId]
 	if slot then
+		network:release(slot)
 		playerUserSlots[player.UserId] = nil
 		slotUserIds[slot] = nil
 		currentInputs[slot] = { x = 0, y = 0, kick = false }
@@ -203,7 +214,14 @@ local function allocateInput(playerSlot, x, y, kick)
 	currentInputs[playerSlot] = value
 	return value
 end
-inputRemote.OnServerEvent:Connect(function(player, x, y, kick)
+local function receiveInput(player, x, y, kick)
+	local slot = playerUserSlots[player.UserId]
+	if state.coreWorld then
+		if slot then
+			network:receive(slot, x, state.tick)
+		end
+		return
+	end
 	local slot = playerUserSlots[player.UserId]
 	if not slot then
 		return
@@ -226,7 +244,9 @@ inputRemote.OnServerEvent:Connect(function(player, x, y, kick)
 	if value and slot == 1 then
 		currentInput = value
 	end
-end)
+end
+inputRemote.OnServerEvent:Connect(receiveInput)
+inputStream.OnServerEvent:Connect(receiveInput)
 
 local function speed(d)
 	return math.sqrt(d.vx * d.vx + d.vy * d.vy)
@@ -310,6 +330,8 @@ local function newState(pairEnabled, crowdEnabled, legacyPhysicsEnabled, startWi
 	matchId += 1
 	localMatch = new.coreWorld and LocalMatch2D.attach(new, { startWithKickoff = startWithKickoff == true }) or nil
 	matchState = localMatch and localMatch.match or MatchRules2D.newMatch()
+	network:epoch(matchId, localMatch and localMatch.round or 0)
+	lastAppliedMasks = {}
 	currentInputs = {}
 	for slot = 1, 10 do
 		currentInputs[slot] = { x = 0, y = 0, kick = false }
@@ -327,7 +349,7 @@ local function newState(pairEnabled, crowdEnabled, legacyPhysicsEnabled, startWi
 end
 newState(false, false, false, true)
 commandRemote.OnServerEvent:Connect(function(player, command)
-	if player ~= controlledPlayer then
+	if not debugEnabled or player ~= controlledPlayer then
 		return
 	end
 	if command == "reset" then
@@ -488,6 +510,12 @@ local function snapshot()
 				radius = disc.radius,
 				collisionGroup = disc.collisionGroup,
 				collisionMask = disc.collisionMask,
+				ack = network.queues[slot] and network.queues[slot].ack or 0,
+				kickHeld = disc.kickHeld,
+				kickArmed = disc.kickArmed,
+				kickCooldown = disc.kickCooldown,
+				needsKickRelease = localMatch and localMatch.needsKickRelease[slot] or false,
+				inputMask = lastAppliedMasks[slot] or 0,
 			})
 		end
 	end
@@ -542,10 +570,32 @@ local function snapshot()
 		legacyMode = legacyMode,
 		ballActive = not pairMode,
 		metrics = table.clone(metrics),
+		networkStats = table.clone(network.stats),
+		debugEnabled = debugEnabled,
+		profileId = state.stadiumGeometry and state.stadiumGeometry.profileId or "legacy",
 		recording = recording,
 		historySamples = historyCount,
 	}
 end
+controlRemote.OnServerEvent:Connect(function(player, kind, nonce)
+	local previous = controlRequests[player.UserId] or -100
+	if state.tick - previous < 15 then
+		return
+	end
+	if kind == "ready" then
+		controlRequests[player.UserId] = state.tick
+		local slot = playerUserSlots[player.UserId]
+		if slot and network.queues[slot] then
+			network.queues[slot].pending = {}
+		end
+		local s = snapshot()
+		s.resync = true
+		snapshotRemote:FireClient(player, s)
+	elseif kind == "ping" and type(nonce) == "number" and nonce % 1 == 0 and nonce >= 0 and nonce < 4294967296 then
+		controlRequests[player.UserId] = state.tick
+		controlRemote:FireClient(player, "pong", nonce, state.tick)
+	end
+end)
 debugState.OnInvoke = function(request)
 	local current = snapshot()
 	if request == "regression" then
@@ -590,6 +640,7 @@ debugState.OnInvoke = function(request)
 end
 
 RunService.Heartbeat:Connect(function(dt)
+	local publishState
 	accumulator += dt
 	local iterations = 0
 	while accumulator >= stepDt and iterations < 8 do
@@ -694,7 +745,17 @@ RunService.Heartbeat:Connect(function(dt)
 			metrics.crowdWorstResidualPenetration = math.max(metrics.crowdWorstResidualPenetration, maxResidual)
 			touchingPlayers = touchingCrowdPairs["player1-player2"] == true
 		elseif state.coreWorld then
+			network:epoch(matchId, localMatch.round, state.tick)
+			currentInputs = network:consume(state.tick + 1)
+			if speedRunRemaining > 0 then
+				currentInputs[1] = { x = 1, y = 0, kick = false }
+			end
+			currentInput = currentInputs[1]
 			local result = localMatch:step(currentInputs)
+			for slot, input in pairs(result.inputs) do
+				lastAppliedMasks[slot] = NetCodec.mask(input.x, input.y, input.kick)
+			end
+			network:epoch(matchId, localMatch.round, state.tick)
 			local coreInputs, kickAttempts = result.inputs, {}
 			for slot = 1, 10 do
 				local input = coreInputs[slot] or {}
@@ -950,7 +1011,8 @@ RunService.Heartbeat:Connect(function(dt)
 
 		accumulator -= stepDt
 		iterations += 1
-		local current = snapshot()
+		local current = recording and snapshot() or nil
+		publishState = current
 		if recording then
 			historyBuffer[historyWrite] = {
 				tick = current.tick,
@@ -996,6 +1058,13 @@ RunService.Heartbeat:Connect(function(dt)
 			historyWrite = (historyWrite % historyCapacity) + 1
 			historyCount = math.min(historyCapacity, historyCount + 1)
 		end
-		snapshotRemote:FireAllClients(current)
+	end
+	if iterations > 0 then
+		local current = publishState or snapshot()
+		network:publish(current, function(s)
+			snapshotRemote:FireAllClients(s)
+		end, function(b)
+			stateStream:FireAllClients(b)
+		end)
 	end
 end)

@@ -11,6 +11,9 @@ for (const name of [
   "audit-test-results.json",
   "fuzz-results.json",
   "mutation-results.json",
+  "network-results.json",
+  "network-world-results.json",
+  "server-public-results.json",
 ]) {
   const data = JSON.parse(
     fs.readFileSync(new URL(name, import.meta.url), "utf8"),

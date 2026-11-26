@@ -9,6 +9,27 @@ local remotes = lab.Remotes
 local inputRemote = remotes.Input
 local snapshotRemote = remotes.Snapshot
 local commandRemote = remotes.DebugCommand
+local inputStream = remotes:WaitForChild("InputStream")
+local stateStream = remotes:WaitForChild("StateStream")
+local controlRemote = remotes:WaitForChild("Control")
+local NetCodec = require(lab:WaitForChild("NetCodec"))
+local NetInputClient = require(lab:WaitForChild("NetInputClient"))
+local netInput = NetInputClient.new()
+local NetPrediction = require(lab:WaitForChild("NetPrediction"))
+local prediction = NetPrediction.new()
+local bootstrap, ownSlot
+local lastAuthorityAt = 0
+local nextPingAt = 0
+local pingNonce = 0
+local pingTimes = {}
+local rtt = 0
+local function sendWire(b, reliable)
+	if reliable then
+		inputRemote:FireServer(b)
+	else
+		inputStream:FireServer(b)
+	end
+end
 local PredictionLab2D = require(lab:WaitForChild("PredictionLab2D"))
 local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
 local inputContext = ReplicatedStorage:WaitForChild("Inputs"):WaitForChild("HaxballGameplay")
@@ -121,6 +142,7 @@ local function fitCamera()
 end
 fitCamera()
 
+local showDiagnostics = RunService:IsStudio()
 local gui = Instance.new("ScreenGui")
 gui.Name = "HaxballLabDebug"
 gui.ResetOnSpawn = false
@@ -150,6 +172,7 @@ predictionLabel.TextXAlignment = Enum.TextXAlignment.Left
 predictionLabel.TextYAlignment = Enum.TextYAlignment.Top
 predictionLabel.TextWrapped = true
 predictionLabel.Text = "Predicción experimental | input delay 0 ms"
+predictionLabel.Visible = showDiagnostics
 predictionLabel.Parent = gui
 local calibrationLabel = Instance.new("TextLabel")
 calibrationLabel.Name = "StadiumCalibrationDebug"
@@ -180,6 +203,7 @@ calibrationLabel.Text = string.format(
 	#ClassicReference230.posts,
 	SCALE
 )
+calibrationLabel.Visible = showDiagnostics
 calibrationLabel.Parent = gui
 
 local function makeButton(name, text, x, width, y)
@@ -192,6 +216,7 @@ local function makeButton(name, text, x, width, y)
 	button.Font = Enum.Font.GothamMedium
 	button.TextSize = 13
 	button.Text = text
+	button.Visible = showDiagnostics
 	button.Parent = gui
 	return button
 end
@@ -303,16 +328,74 @@ local function readAction(action, fallback)
 	end
 	return fallback
 end
-snapshotRemote.OnClientEvent:Connect(function(s)
+local function acceptSnapshot(s)
+	if
+		latest
+		and (
+			s.matchId < latest.matchId
+			or s.matchId == latest.matchId
+				and (s.round < latest.round or s.round == latest.round and s.tick < latest.tick)
+		)
+	then
+		return false
+	end
 	local reset = latest and (s.matchId ~= latest.matchId or s.round ~= latest.round or s.tick < latest.tick)
-	previous, latest = reset and s or latest, s
-	if reset then
-		-- Re-send held movement after a reset; drop delayed controls from the old round.
+	if reset or not latest then
 		table.clear(delayedInputQueue)
 		lastSentX, lastSentY, lastSentKick = nil, nil, nil
 	end
+	local transition = latest and s.matchPhase ~= latest.matchPhase
+	previous, latest = (reset or transition) and s or latest, s
 	snapshotAge = 0
+	lastAuthorityAt = os.clock()
+	local slot
+	for i, d in ipairs(s.players or {}) do
+		if d.ownerUserId == player.UserId then
+			slot = i
+			break
+		end
+	end
+	if s.coreMode and slot then
+		if reset or s.resync or ownSlot ~= slot or netInput.matchId ~= s.matchId or netInput.round ~= s.round then
+			netInput:reset(s.matchId, s.round, s.players[slot].ack or 0)
+		end
+		netInput:confirm(s.players[slot].ack or 0)
+		prediction:restore(s, slot)
+	end
+	ownSlot = slot
+	return true
+end
+snapshotRemote.OnClientEvent:Connect(function(s)
+	-- Bootstrap carries ownership/static configuration; dynamic packets carry no diagnostics.
+	if not latest or s.matchId > latest.matchId or s.matchId == latest.matchId and s.round >= latest.round then
+		bootstrap = s
+	end
+	if
+		s.resync
+		and latest
+		and s.matchId == latest.matchId
+		and s.round == latest.round
+		and s.tick < latest.tick
+		and ownSlot
+	then
+		netInput:reset(s.matchId, s.round, math.max(s.players[ownSlot].ack or 0, latest.players[ownSlot].ack or 0))
+	end
+	acceptSnapshot(s)
 end)
+stateStream.OnClientEvent:Connect(function(b)
+	local s = NetCodec.decodeState(b, bootstrap)
+	if s and (not latest or s.matchId ~= latest.matchId or s.round ~= latest.round or s.tick > latest.tick) then
+		acceptSnapshot(s)
+	end
+end)
+controlRemote.OnClientEvent:Connect(function(kind, nonce)
+	if kind == "pong" and pingTimes[nonce] then
+		local sample = math.max(0, os.clock() - pingTimes[nonce])
+		pingTimes[nonce] = nil
+		rtt = rtt == 0 and sample or rtt * 0.8 + sample * 0.2
+	end
+end)
+controlRemote:FireServer("ready")
 
 local function renderLine(part, a, b, color, visible)
 	local delta = b - a
@@ -334,84 +417,56 @@ RunService.RenderStepped:Connect(function(dt)
 	end
 	local kick = readAction(kickAction, false) == true
 	local now = os.clock()
-	if move.X ~= lastSentX or move.Y ~= lastSentY or kick ~= lastSentKick then
-		lastSentX, lastSentY, lastSentKick = move.X, move.Y, kick
-		local packet = { x = move.X, y = move.Y, kick = kick }
-		if syntheticInputDelayMs <= 0 then
-			inputRemote:FireServer(packet.x, packet.y, packet.kick)
+	if now >= nextPingAt then
+		nextPingAt = now + 1
+		if not latest or now - lastAuthorityAt > 1 then
+			controlRemote:FireServer("ready")
 		else
-			table.insert(delayedInputQueue, { due = now + syntheticInputDelayMs / 1000, packet = packet })
+			pingNonce = (pingNonce + 1) % 4294967296
+			table.clear(pingTimes)
+			pingTimes[pingNonce] = now
+			controlRemote:FireServer("ping", pingNonce)
+		end
+	end
+	if latest and latest.coreMode and ownSlot then
+		netInput:sample(NetCodec.mask(move.X, move.Y, kick), latest.tick + math.floor(snapshotAge * 60), now)
+		local b, reliable = netInput:packet(now)
+		if b then
+			if syntheticInputDelayMs <= 0 then
+				sendWire(b, reliable)
+			else
+				table.insert(
+					delayedInputQueue,
+					{ due = now + syntheticInputDelayMs / 1000, wire = b, reliable = reliable }
+				)
+			end
+		end
+	elseif not latest or not latest.coreMode then
+		if move.X ~= lastSentX or move.Y ~= lastSentY or kick ~= lastSentKick then
+			lastSentX, lastSentY, lastSentKick = move.X, move.Y, kick
+			inputRemote:FireServer(move.X, move.Y, kick)
 		end
 	end
 	while delayedInputQueue[1] and delayedInputQueue[1].due <= now do
-		local queued = table.remove(delayedInputQueue, 1).packet
-		inputRemote:FireServer(queued.x, queued.y, queued.kick)
+		local queued = table.remove(delayedInputQueue, 1)
+		sendWire(queued.wire, queued.reliable)
 	end
 	if not latest then
 		return
 	end
 
-	local predictedState, predictedContact
-	local predictionTicks = math.clamp(math.ceil(syntheticInputDelayMs * 60 / 1000), 0, 24)
-	if syntheticInputDelayMs > 0 and latest.coreMode and latest.matchPhase == "playing" and latest.predictionParams then
-		predictedState = PredictionLab2D.predict(
-			latest.player,
-			{ x = move.X, y = move.Y, kick = kick },
-			latest.predictionParams,
-			predictionTicks
-		)
-		local targets = {}
-		for _, disc in ipairs(latest.players or {}) do
-			if disc.playerId ~= 1 then
-				table.insert(targets, {
-					id = disc.playerId,
-					kind = "player",
-					x = disc.x,
-					y = disc.y,
-					vx = disc.vx,
-					vy = disc.vy,
-					radius = disc.radius,
-				})
-			end
-		end
-		table.insert(targets, {
-			id = "ball",
-			kind = "ball",
-			x = latest.ball.x,
-			y = latest.ball.y,
-			vx = latest.ball.vx,
-			vy = latest.ball.vy,
-			radius = latest.ball.radius,
-		})
-		predictedContact = PredictionLab2D.firstContact(predictedState.path, latest.player.radius or 15, targets)
-		local lead = math.sqrt((predictedState.x - latest.player.x) ^ 2 + (predictedState.y - latest.player.y) ^ 2)
-		local forecast = predictedContact
-				and string.format(
-					"%s %s in %d ticks",
-					predictedContact.kind == "ball" and "BALL" or "PLAYER",
-					tostring(predictedContact.targetId),
-					predictedContact.tick
-				)
-			or "no predicted contact"
-		drawDisc(predictionGhost, toWorld(predictedState.x, predictedState.y), latest.player.radius or 15)
-		predictionGhost.Transparency = 0.38
-		predictionLabel.Text = string.format(
-			"SIMULATED INPUT DELAY %d ms | horizon %d ticks\nGhost lead %.2f units | ball gap %.2f\nForecast: %s | server touch now: %s",
-			syntheticInputDelayMs,
-			predictionTicks,
-			lead,
-			latest.separation,
-			forecast,
-			tostring(latest.touchingBall)
-		)
-	else
-		predictionGhost.Transparency = 1
-		predictionLabel.Text = syntheticInputDelayMs > 0
-				and string.format("Input delay %d ms | prediction active in 5v5 core only", syntheticInputDelayMs)
-			or "Predicción experimental | input delay 0 ms"
-	end
+	predictionGhost.Transparency = 1
+	predictionLabel.Text = string.format(
+		"NET v1 | RTT %.0f ms | snapshot age %.0f ms\nPending inputs %d | correction %.3f units\nArtificial input delay %d ms",
+		rtt * 1000,
+		snapshotAge * 1000,
+		#netInput.pending,
+		prediction.correction,
+		syntheticInputDelayMs
+	)
 
-	local alpha = math.clamp(snapshotAge * 60, 0, 1)
+	local interval = previous and latest.tick > previous.tick and (latest.tick - previous.tick) / 60 or 1 / 30
+	local alpha = math.clamp(snapshotAge / interval, 0, 1)
 	local a = previous and previous.tick < latest.tick and previous or latest
 	local function lerp(disc, axis)
 		return a[disc][axis] + (latest[disc][axis] - a[disc][axis]) * alpha
@@ -419,6 +474,15 @@ RunService.RenderStepped:Connect(function(dt)
 	local p1 = toWorld(lerp("player", "x"), lerp("player", "y"))
 	local p2 = toWorld(lerp("player2", "x"), lerp("player2", "y"))
 	local ball = toWorld(lerp("ball", "x"), lerp("ball", "y"))
+	local predictedActor, predictedBall
+	if latest.coreMode and ownSlot and latest.matchPhase == "playing" and now - lastAuthorityAt < 0.3 then
+		local target = latest.tick + math.min(18, 1 + math.ceil(rtt * 30) + math.floor(snapshotAge * 60))
+		predictedActor, predictedBall = prediction:advance(target, NetCodec.mask(move.X, move.Y, kick))
+		if predictedBall then
+			predictedActor, predictedBall = prediction:visual(predictedActor, predictedBall, dt)
+			ball = toWorld(predictedBall.x, predictedBall.y)
+		end
+	end
 	drawDisc(ballDisc, ball, latest.ball.radius or 10)
 	drawDisc(playerDisc, p1, latest.player.radius or 15)
 	drawDisc(playerDisc2, p2, latest.player2.radius or 15)
@@ -430,6 +494,9 @@ RunService.RenderStepped:Connect(function(dt)
 			local py = previousDisc and (previousDisc.y + (disc.y - previousDisc.y) * alpha) or disc.y
 			local visual = playerVisuals[slot]
 			if visual then
+				if predictedActor and slot == ownSlot then
+					px, py = predictedActor.x, predictedActor.y
+				end
 				drawDisc(visual, toWorld(px, py), disc.radius or 15)
 				visual.Transparency = 0
 				visual.Color = disc.team == "red" and Color3.fromRGB(238, 90, 80) or Color3.fromRGB(75, 155, 255)
@@ -580,5 +647,8 @@ RunService.RenderStepped:Connect(function(dt)
 		latest.recording and "recording" or "paused",
 		latest.historySamples or 0
 	)
+	if not showDiagnostics then
+		label.Text = matchLine .. "\nWASD: mover | X: patear"
+	end
 	recordButton.Text = latest.recording and "Pausar registro" or "Reanudar registro"
 end)

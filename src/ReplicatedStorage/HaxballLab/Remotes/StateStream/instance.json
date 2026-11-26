@@ -1,0 +1,27 @@
+{
+  "attributes": {
+    "class": "UnreliableRemoteEvent",
+    "referent": "RBXPhase5StateStream"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": null,
+      "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "StateStream",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

@@ -135,10 +135,12 @@
     "ServerScriptService/HaxballLab/ClassicStadium2D",
     "ServerScriptService/HaxballLab/MatchRules2D",
     "ServerScriptService/HaxballLab/ClassicReference230",
-    "ServerScriptService/HaxballLab/LocalMatch2D"
+    "ServerScriptService/HaxballLab/LocalMatch2D",
+    "ServerScriptService/HaxballLab/NetServer"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,

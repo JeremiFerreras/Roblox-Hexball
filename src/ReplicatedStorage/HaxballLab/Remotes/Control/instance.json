@@ -1,0 +1,27 @@
+{
+  "attributes": {
+    "class": "RemoteEvent",
+    "referent": "RBXPhase5Control"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": null,
+      "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Control",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

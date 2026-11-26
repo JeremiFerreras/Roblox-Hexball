@@ -1,0 +1,36 @@
+{
+  "attributes": {
+    "class": "ModuleScript",
+    "referent": "RBXPhase5NetCodec"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": null,
+      "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "NetCodec",
+          "children": []
+        },
+        {
+          "tag": "ProtectedString",
+          "attributes": {
+            "name": "Source"
+          },
+          "text": null,
+          "children": [],
+          "sourceFile": "init.luau"
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "layout": [
+    false
+  ]
+}

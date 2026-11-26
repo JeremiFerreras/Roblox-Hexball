@@ -7,6 +7,7 @@ import { root, writeReport } from "./runtime.mjs";
 const cwd = fileURLToPath(new URL("./", import.meta.url));
 const output = fileURLToPath(new URL("build/audit-mutations/", root));
 const reports = {
+  "network.mjs": "network-results.json",
   "local-match.mjs": "local-match-results.json",
   "client-adapter.mjs": "client-adapter-results.json",
   "server-adapter.mjs": "server-adapter-results.json",

@@ -32,3 +32,7 @@ La referencia es Node-Haxball, una implementación independiente; no es una capt
 ## Auditoría de calidad
 
 `npm run test:quality` comprueba el runner, ejecuta 64 partidos con semillas reproducibles e introduce 12 fallos deliberados en memoria para exigir que las pruebas los detecten. El cargador `modules.mjs` ejecuta los módulos completos usando el árbol real de dependencias, sin eliminar líneas de código. El comparador exige frames completos y valores finitos. `quality-summary.json` conserva conteos y hashes. Ver `docs/QUALITY_AUDIT_2026-11-25.md`.
+
+## Red v1
+
+`npm run test:network` ejecuta el códec, colas y pérdida/desorden, las doce simulaciones con diez clientes y la separación del modo público. El transporte se simula; no se abren salas Roblox. La predicción usa el núcleo compartido real. Ver `docs/PHASE5_NETWORK_V1_2026-11-25.md`.

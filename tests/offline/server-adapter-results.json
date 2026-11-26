@@ -48,5 +48,15 @@
     "player_kick_damping_uses_its_own_configuration",
     true,
     "PASS"
+  ],
+  [
+    "match_rejects_raw_position_inputs_and_bounds_state_send_rate",
+    true,
+    "PASS"
+  ],
+  [
+    "lagging_heartbeat_sends_one_fresh_datagram_instead_of_backlog",
+    true,
+    "PASS"
   ]
 ]

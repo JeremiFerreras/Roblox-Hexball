@@ -132,10 +132,20 @@
     "ReplicatedStorage/HaxballLab/PredictionLab2D",
     "ReplicatedStorage/HaxballLab/StadiumReference2D",
     "ReplicatedStorage/HaxballLab/ClassicReference230",
-    "ReplicatedStorage/HaxballLab/StadiumRender2D"
+    "ReplicatedStorage/HaxballLab/StadiumRender2D",
+    "ReplicatedStorage/HaxballLab/NetCodec",
+    "ReplicatedStorage/HaxballLab/NetInputQueue",
+    "ReplicatedStorage/HaxballLab/NetInputClient",
+    "ReplicatedStorage/HaxballLab/PhysicsCore2D",
+    "ReplicatedStorage/HaxballLab/NetPrediction"
   ],
   "layout": [
     false,
+    true,
+    true,
+    true,
+    true,
+    true,
     true,
     true,
     true,

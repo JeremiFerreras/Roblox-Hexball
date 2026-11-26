@@ -75,10 +75,10 @@
     "exitCode": 1
   },
   {
-    "name": "match_id_reset_ignored",
+    "name": "unknown_round_state_accepted",
     "detected": true,
     "failedTests": [
-      "match_identifier_detects_reset_at_same_tick_and_round"
+      "state_from_unknown_round_waits_for_reliable_bootstrap"
     ],
     "exitCode": 1
   },
@@ -111,6 +111,37 @@
     "detected": true,
     "failedTests": [
       "player_kick_damping_uses_its_own_configuration"
+    ],
+    "exitCode": 1
+  },
+  {
+    "name": "input_epoch_validation_removed",
+    "detected": true,
+    "failedTests": [
+      "old_epochs_duplicate_sequences_and_conflicts_are_rejected",
+      "round_reset_preserves_held_raw_input_until_release"
+    ],
+    "exitCode": 1
+  },
+  {
+    "name": "first_input_transition_skipped",
+    "detected": true,
+    "failedTests": [
+      "reordered_transitions_are_applied_once_in_sequence",
+      "old_epochs_duplicate_sequences_and_conflicts_are_rejected",
+      "input_flood_cannot_apply_extra_transitions_per_tick",
+      "input_timeout_stops_and_keepalive_recovers_held_direction",
+      "round_reset_preserves_held_raw_input_until_release",
+      "short_press_release_survives_a_single_batched_packet",
+      "connection_timeout_cannot_rearm_a_held_kick"
+    ],
+    "exitCode": 1
+  },
+  {
+    "name": "state_precision_silently_reduced",
+    "detected": true,
+    "failedTests": [
+      "state_codec_482_bytes_preserves_f64_and_hidden_state"
     ],
     "exitCode": 1
   }

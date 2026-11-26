@@ -37,7 +37,7 @@ Para volver a extraer desde el archivo original (sobrescribe archivos coincident
 python tools/place.py export
 ```
 
-El proyecto actual contiene 127 instancias y 16 scripts/módulos. La validación y los cambios físicos están documentados en `docs/PHYSICS_OFFLINE_2026-11-25.md`. La comprobación es estructural; no sustituye ejecutar el juego en Roblox Studio. Los recursos externos se conservan por su ID, no se descargan.
+El proyecto actual contiene 136 instancias y 22 scripts/módulos. La validación y los cambios físicos están documentados en `docs/PHYSICS_OFFLINE_2026-11-25.md`. La comprobación es estructural; no sustituye ejecutar el juego en Roblox Studio. Los recursos externos se conservan por su ID, no se descargan.
 
 ## Pruebas físicas fuera de Studio
 
@@ -50,3 +50,7 @@ La fase 4 incorpora un controlador de partido, pruebas de goles y saques y geome
 [Estado de cierre funcional de fase 4](docs/PHASE4_CLOSURE_2026-11-25.md): aprobado en el entorno offline, pendiente de aceptación nativa en Studio.
 
 [Auditoría de calidad y límites](docs/QUALITY_AUDIT_2026-11-25.md): reproducción de fallos, pruebas de mutación y partidos pseudoaleatorios.
+
+## Fase 5: red v1
+
+[Implementación y pruebas](docs/PHASE5_NETWORK_V1_2026-11-25.md): protocolo de estados de 482 bytes, controles secuenciados, predicción compartida y reconciliación. [Aceptación pendiente en Studio](docs/PHASE5_STUDIO_ACCEPTANCE.md). No se da por cerrada la fase 5 ni se promete igualdad de ping.
