@@ -1,0 +1,33 @@
+name: Phase 5 prototype checks
+
+on:
+  push:
+    branches:
+      - phase5/adaptive-buffer-work
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: tests/offline/package-lock.json
+      - name: Install pinned offline dependencies
+        run: npm ci --prefix tests/offline
+      - name: Execute actual proposed Luau modules
+        run: node work/phase5/check-luau.mjs
+      - name: Check independent clock model
+        run: node work/phase5/check-model.mjs
+      - name: Existing regression and network suite
+        run: npm test --prefix tests/offline
+      - name: Existing quality and mutation checks
+        run: npm run test:quality --prefix tests/offline
