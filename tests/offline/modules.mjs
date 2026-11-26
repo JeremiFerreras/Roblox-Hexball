@@ -45,6 +45,8 @@ export function moduleBundle() {
     if (e.className === "ModuleScript")
       code += `factories[nodes[${lua(e.relative)}]]=function() local script=nodes[${lua(e.relative)}]\n${read("src/" + e.relative + "/" + e.source)}\nend\n`;
   for (const [name, node] of Object.entries({
+    SnapshotBuffer: "ReplicatedStorage/HaxballLab/SnapshotBuffer",
+    NetMetrics: "ReplicatedStorage/HaxballLab/NetMetrics",
     NetPrediction: "ReplicatedStorage/HaxballLab/NetPrediction",
     NetCodec: "ReplicatedStorage/HaxballLab/NetCodec",
     NetInputQueue: "ReplicatedStorage/HaxballLab/NetInputQueue",

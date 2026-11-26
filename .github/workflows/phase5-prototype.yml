@@ -1,4 +1,4 @@
-name: Phase 5 prototype checks
+name: Phase 5 integrated checks
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
 jobs:
   offline:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,13 +21,16 @@ jobs:
           node-version: '24'
           cache: npm
           cache-dependency-path: tests/offline/package-lock.json
-      - name: Install pinned offline dependencies
-        run: npm ci --prefix tests/offline
-      - name: Execute actual proposed Luau modules
-        run: node work/phase5/check-luau.mjs
-      - name: Check independent clock model
-        run: node work/phase5/check-model.mjs
-      - name: Existing regression and network suite
+      - run: npm ci --prefix tests/offline
+      - name: Format and rebuild place plus inventory
+        run: python work/phase5/prepare-ci.py
+      - name: Source formatting
+        run: |
+          npm run format:check --prefix tests/offline
+          npm run format:check:luau --prefix tests/offline
+      - name: Regression network and actual client integration
         run: npm test --prefix tests/offline
-      - name: Existing quality and mutation checks
+      - name: Quality fuzz and mutation checks
         run: npm run test:quality --prefix tests/offline
+      - name: Export validated workspace changes
+        run: python work/phase5/export-ci.py

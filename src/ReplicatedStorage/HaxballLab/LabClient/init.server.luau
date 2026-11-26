@@ -17,6 +17,22 @@ local NetInputClient = require(lab:WaitForChild("NetInputClient"))
 local netInput = NetInputClient.new()
 local NetPrediction = require(lab:WaitForChild("NetPrediction"))
 local prediction = NetPrediction.new()
+local SnapshotBuffer = require(lab:WaitForChild("SnapshotBuffer"))
+local presentation = SnapshotBuffer.new()
+local NetMetrics = require(lab:WaitForChild("NetMetrics"))
+local networkMetrics = NetMetrics.new()
+local nextMetricsAt, nextHudAt = 0, 0
+local function resetInputs(matchId, round, ack)
+	networkMetrics:count("cancelledInputs", #netInput.pending)
+	netInput:reset(matchId, round, ack)
+end
+local function confirmInputs(ack)
+	local _, confirmed = netInput:confirm(ack, os.clock())
+	for _, entry in ipairs(confirmed or {}) do
+		networkMetrics:add("ackMs", entry.ms)
+		networkMetrics:count("confirmedInputs")
+	end
+end
 local bootstrap, ownSlot
 local lastAuthorityAt = 0
 local nextPingAt = 0
@@ -24,6 +40,9 @@ local pingNonce = 0
 local pingTimes = {}
 local rtt = 0
 local function sendWire(b, reliable)
+	networkMetrics:count("inputPackets")
+	networkMetrics:count("inputBytes", buffer.len(b))
+	if reliable then networkMetrics:count("reliableFallbackPackets") end
 	if reliable then
 		inputRemote:FireServer(b)
 	else
@@ -174,6 +193,16 @@ predictionLabel.TextWrapped = true
 predictionLabel.Text = "Predicción experimental | input delay 0 ms"
 predictionLabel.Visible = showDiagnostics
 predictionLabel.Parent = gui
+-- Client-local console: PlayerGui.HaxballLabDebug.NetworkDiagnostics:Invoke().
+local networkDiagnostics = Instance.new("BindableFunction")
+networkDiagnostics.Name = "NetworkDiagnostics"
+networkDiagnostics.OnInvoke = function()
+	local report = networkMetrics:report()
+	report.presentation = presentation.status and table.clone(presentation.status) or nil
+	report.pendingInputs = #netInput.pending
+	return report
+end
+networkDiagnostics.Parent = gui
 local calibrationLabel = Instance.new("TextLabel")
 calibrationLabel.Name = "StadiumCalibrationDebug"
 calibrationLabel.Size = UDim2.fromOffset(760, 82)
@@ -295,7 +324,7 @@ goalTestButton.Activated:Connect(function()
 	commandRemote:FireServer("setupGoalTest")
 end)
 
-local latest, previous
+local latest
 local snapshotAge = 0
 local lastSentX, lastSentY, lastSentKick = 0, 0, false
 local syntheticInputDelayMs = 0
@@ -344,10 +373,13 @@ local function acceptSnapshot(s)
 		table.clear(delayedInputQueue)
 		lastSentX, lastSentY, lastSentKick = nil, nil, nil
 	end
-	local transition = latest and s.matchPhase ~= latest.matchPhase
-	previous, latest = (reset or transition) and s or latest, s
-	snapshotAge = 0
-	lastAuthorityAt = os.clock()
+	local unique = not latest or reset or s.tick > latest.tick
+	latest = s
+	if unique then
+		snapshotAge = 0
+		lastAuthorityAt = os.clock()
+		presentation:push(s, lastAuthorityAt)
+	end
 	local slot
 	for i, d in ipairs(s.players or {}) do
 		if d.ownerUserId == player.UserId then
@@ -356,16 +388,31 @@ local function acceptSnapshot(s)
 		end
 	end
 	if s.coreMode and slot then
-		if reset or s.resync or ownSlot ~= slot or netInput.matchId ~= s.matchId or netInput.round ~= s.round then
-			netInput:reset(s.matchId, s.round, s.players[slot].ack or 0)
+		if ownSlot == slot and netInput.matchId == s.matchId and netInput.round == s.round then
+			confirmInputs(s.players[slot].ack or 0)
 		end
-		netInput:confirm(s.players[slot].ack or 0)
-		prediction:restore(s, slot)
+		if reset or s.resync or ownSlot ~= slot or netInput.matchId ~= s.matchId or netInput.round ~= s.round then
+			table.clear(delayedInputQueue)
+			resetInputs(s.matchId, s.round, s.players[slot].ack or 0)
+		end
+		if unique or ownSlot ~= slot then
+			prediction:restore(s, slot)
+			if prediction.correctionSample then
+				networkMetrics:add("playerCorrection", prediction.correction)
+				networkMetrics:add("ballCorrection", prediction.ballCorrection)
+				if prediction.correction > 0.01 then networkMetrics:count("playerCorrections") end
+				if prediction.ballCorrection > 0.01 then networkMetrics:count("ballCorrections") end
+			end
+		end
+	elseif netInput.matchId then
+		table.clear(delayedInputQueue)
+		resetInputs(nil, nil, 0)
 	end
 	ownSlot = slot
 	return true
 end
 snapshotRemote.OnClientEvent:Connect(function(s)
+	networkMetrics:count("fullSnapshotPackets")
 	-- Bootstrap carries ownership/static configuration; dynamic packets carry no diagnostics.
 	if not latest or s.matchId > latest.matchId or s.matchId == latest.matchId and s.round >= latest.round then
 		bootstrap = s
@@ -378,20 +425,25 @@ snapshotRemote.OnClientEvent:Connect(function(s)
 		and s.tick < latest.tick
 		and ownSlot
 	then
-		netInput:reset(s.matchId, s.round, math.max(s.players[ownSlot].ack or 0, latest.players[ownSlot].ack or 0))
+		resetInputs(s.matchId, s.round, math.max(s.players[ownSlot].ack or 0, latest.players[ownSlot].ack or 0))
 	end
 	acceptSnapshot(s)
 end)
 stateStream.OnClientEvent:Connect(function(b)
+	networkMetrics:count("statePackets")
+	if typeof(b) == "buffer" then networkMetrics:count("stateBytes", buffer.len(b)) end
 	local s = NetCodec.decodeState(b, bootstrap)
 	if s and (not latest or s.matchId ~= latest.matchId or s.round ~= latest.round or s.tick > latest.tick) then
-		acceptSnapshot(s)
+		if not acceptSnapshot(s) then networkMetrics:count("rejectedStates") end
+	else
+		networkMetrics:count("rejectedStates")
 	end
 end)
 controlRemote.OnClientEvent:Connect(function(kind, nonce)
 	if kind == "pong" and pingTimes[nonce] then
 		local sample = math.max(0, os.clock() - pingTimes[nonce])
 		pingTimes[nonce] = nil
+		networkMetrics:add("rttMs", sample * 1000)
 		rtt = rtt == 0 and sample or rtt * 0.8 + sample * 0.2
 	end
 end)
@@ -410,13 +462,13 @@ end
 
 RunService.RenderStepped:Connect(function(dt)
 	fitCamera()
-	snapshotAge += dt
 	local move = readAction(moveAction, Vector2.zero)
 	if typeof(move) ~= "Vector2" then
 		move = Vector2.zero
 	end
 	local kick = readAction(kickAction, false) == true
 	local now = os.clock()
+	snapshotAge = latest and math.max(0, now - lastAuthorityAt) or 0
 	if now >= nextPingAt then
 		nextPingAt = now + 1
 		if not latest or now - lastAuthorityAt > 1 then
@@ -429,7 +481,8 @@ RunService.RenderStepped:Connect(function(dt)
 		end
 	end
 	if latest and latest.coreMode and ownSlot then
-		netInput:sample(NetCodec.mask(move.X, move.Y, kick), latest.tick + math.floor(snapshotAge * 60), now)
+		local command = netInput:sample(NetCodec.mask(move.X, move.Y, kick), latest.tick + math.floor(snapshotAge * 60), now)
+		if command then networkMetrics:count("queuedInputs") end
 		local b, reliable = netInput:packet(now)
 		if b then
 			if syntheticInputDelayMs <= 0 then
@@ -456,24 +509,30 @@ RunService.RenderStepped:Connect(function(dt)
 	end
 
 	predictionGhost.Transparency = 1
-	predictionLabel.Text = string.format(
-		"NET v1 | RTT %.0f ms | snapshot age %.0f ms\nPending inputs %d | correction %.3f units\nArtificial input delay %d ms",
-		rtt * 1000,
-		snapshotAge * 1000,
-		#netInput.pending,
-		prediction.correction,
-		syntheticInputDelayMs
-	)
-
-	local interval = previous and latest.tick > previous.tick and (latest.tick - previous.tick) / 60 or 1 / 30
-	local alpha = math.clamp(snapshotAge / interval, 0, 1)
-	local a = previous and previous.tick < latest.tick and previous or latest
-	local function lerp(disc, axis)
-		return a[disc][axis] + (latest[disc][axis] - a[disc][axis]) * alpha
+	local poses, status = presentation:sample(now)
+	if now >= nextMetricsAt then
+		nextMetricsAt = now + 0.05
+		networkMetrics:add("snapshotAgeMs", snapshotAge * 1000)
+		if status then
+			networkMetrics:add("renderLagMs", status.renderLagMs)
+			networkMetrics:add("adaptiveDelayMs", status.delayMs)
+		end
 	end
-	local p1 = toWorld(lerp("player", "x"), lerp("player", "y"))
-	local p2 = toWorld(lerp("player2", "x"), lerp("player2", "y"))
-	local ball = toWorld(lerp("ball", "x"), lerp("ball", "y"))
+	if showDiagnostics and now >= nextHudAt then
+		nextHudAt = now + 1
+		local report = networkMetrics:report()
+		predictionLabel.Text = string.format(
+			"NET v2 | RTT %.0f ms | state age %.0f ms\nACK p95 %s ms | pending %d | buffer %.0f ms\nCorrection p95 %s units | input delay %d ms",
+			rtt * 1000, snapshotAge * 1000,
+			report.samples.ackMs.p95 and string.format("%.0f", report.samples.ackMs.p95) or "--",
+			#netInput.pending, status and status.delayMs or 0,
+			report.samples.playerCorrection.p95 and string.format("%.3f", report.samples.playerCorrection.p95) or "--",
+			syntheticInputDelayMs
+		)
+	end
+	local p1 = toWorld(poses.player.x, poses.player.y)
+	local p2 = toWorld(poses.player2.x, poses.player2.y)
+	local ball = toWorld(poses.ball.x, poses.ball.y)
 	local predictedActor, predictedBall
 	if latest.coreMode and ownSlot and latest.matchPhase == "playing" and now - lastAuthorityAt < 0.3 then
 		local target = latest.tick + math.min(18, 1 + math.ceil(rtt * 30) + math.floor(snapshotAge * 60))
@@ -489,9 +548,8 @@ RunService.RenderStepped:Connect(function(dt)
 	local extraDiscMode = latest.pairMode or latest.crowdMode
 	if latest.players and #latest.players > 0 then
 		for slot, disc in ipairs(latest.players) do
-			local previousDisc = a.players and a.players[slot]
-			local px = previousDisc and (previousDisc.x + (disc.x - previousDisc.x) * alpha) or disc.x
-			local py = previousDisc and (previousDisc.y + (disc.y - previousDisc.y) * alpha) or disc.y
+			local remotePose = poses.players[slot] or disc
+			local px, py = remotePose.x, remotePose.y
 			local visual = playerVisuals[slot]
 			if visual then
 				if predictedActor and slot == ownSlot then

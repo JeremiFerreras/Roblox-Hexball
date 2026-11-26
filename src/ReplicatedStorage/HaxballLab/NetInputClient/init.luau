@@ -20,20 +20,23 @@ function Client:reset(matchId, round, ack)
 	self.lastSend = -math.huge
 	self.lastReliable = -math.huge
 end
-function Client:confirm(ack)
+function Client:confirm(ack, now)
 	if type(ack) ~= "number" or ack ~= ack or ack % 1 ~= 0 or ack > 4294967295 or ack < self.ack then
 		return false
 	end
-	if ack > self.seq then
-		self.seq = ack
-		self.pending = {}
-		self.mask = nil
-	end
+	local confirmed = {}
 	self.ack = ack
 	while self.pending[1] and self.pending[1].seq <= ack do
-		table.remove(self.pending, 1)
+		local command = table.remove(self.pending, 1)
+		if type(now) == "number" and now == now and now < math.huge and now >= command.created then
+			table.insert(confirmed, { seq = command.seq, ms = (now - command.created) * 1000 })
+		end
 	end
-	return true
+	if ack > self.seq then
+		self.seq = ack
+		self.mask = nil
+	end
+	return true, confirmed
 end
 function Client:sample(mask, tick, now)
 	if not self.matchId then
@@ -46,7 +49,9 @@ function Client:sample(mask, tick, now)
 		end -- bounded backlog, retry current state after acknowledgements
 		self.seq += 1
 		self.mask = mask
-		table.insert(self.pending, { seq = self.seq, tick = tick, mask = mask, created = now })
+		local command = { seq = self.seq, tick = tick, mask = mask, created = now }
+		table.insert(self.pending, command)
+		return command
 	end
 end
 function Client:packet(now)
