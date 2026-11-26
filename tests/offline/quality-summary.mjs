@@ -12,6 +12,7 @@ for (const name of [
   "fuzz-results.json",
   "mutation-results.json",
   "network-results.json",
+  "presentation-results.json",
   "network-world-results.json",
   "server-public-results.json",
 ]) {

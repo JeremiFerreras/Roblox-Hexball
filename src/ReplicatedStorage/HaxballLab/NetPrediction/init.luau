@@ -62,8 +62,14 @@ function Prediction:restore(s, slot)
 		self.forecasts = {}
 		self.epoch = epoch
 		self.correction = 0
+		self.lastMeasuredTick = nil
 	end
 	local previous = self.forecasts[s.tick]
+	self.correctionSample = previous ~= nil and self.lastMeasuredTick ~= s.tick
+	if self.correctionSample then
+		self.lastMeasuredTick = s.tick
+	end
+	self.ballCorrection = previous and math.sqrt((previous.ballX - s.ball.x) ^ 2 + (previous.ballY - s.ball.y) ^ 2) or 0
 	local dx = previous and previous.x - s.players[slot].x or 0
 	local dy = previous and previous.y - s.players[slot].y or 0
 	self.correction = math.sqrt(dx * dx + dy * dy)

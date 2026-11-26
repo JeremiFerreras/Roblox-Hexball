@@ -69,8 +69,7 @@
     "detected": true,
     "failedTests": [
       "actual_server_snapshots_drive_all_ten_visual_discs",
-      "ball_rendering_and_reposition_are_driven_by_completed_match",
-      "real_client_interpolates_ball_between_snapshots"
+      "ball_rendering_and_reposition_are_driven_by_completed_match"
     ],
     "exitCode": 1
   },

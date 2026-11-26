@@ -40,7 +40,17 @@
     "PASS"
   ],
   [
-    "real_client_interpolates_ball_between_snapshots",
+    "real_client_interpolates_remote_player_using_buffer",
+    true,
+    "PASS"
+  ],
+  [
+    "real_client_exposes_local_network_measurements",
+    true,
+    "PASS"
+  ],
+  [
+    "duplicate_reliable_snapshot_does_not_refresh_state_age",
     true,
     "PASS"
   ],
@@ -61,6 +71,11 @@
   ],
   [
     "duplicate_tick_state_cannot_replace_the_accepted_state",
+    true,
+    "PASS"
+  ],
+  [
+    "round_reset_counts_cancelled_unconfirmed_commands",
     true,
     "PASS"
   ]

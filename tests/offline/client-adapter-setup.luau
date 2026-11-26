@@ -249,6 +249,8 @@ local game = {
 }
 local moduleMap = {
 	NetPrediction = NetPrediction,
+	SnapshotBuffer = SnapshotBuffer,
+	NetMetrics = NetMetrics,
 	NetCodec = NetCodec,
 	NetInputClient = NetInputClient,
 	PredictionLab2D = Prediction,

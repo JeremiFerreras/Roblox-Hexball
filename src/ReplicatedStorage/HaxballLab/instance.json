@@ -137,10 +137,14 @@
     "ReplicatedStorage/HaxballLab/NetInputQueue",
     "ReplicatedStorage/HaxballLab/NetInputClient",
     "ReplicatedStorage/HaxballLab/PhysicsCore2D",
-    "ReplicatedStorage/HaxballLab/NetPrediction"
+    "ReplicatedStorage/HaxballLab/NetPrediction",
+    "ReplicatedStorage/HaxballLab/SnapshotBuffer",
+    "ReplicatedStorage/HaxballLab/NetMetrics"
   ],
   "layout": [
     false,
+    true,
+    true,
     true,
     true,
     true,

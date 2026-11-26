@@ -132,19 +132,39 @@ check("match_identifier_detects_reset_at_same_tick_and_round", function()
 	assert(snapshots.latest.tick == previous.tick and snapshots.latest.round == previous.round)
 	assert(snapshots.latest.matchId ~= previous.matchId and #inputCalls == count + 1)
 end)
-check("real_client_interpolates_ball_between_snapshots", function()
-	local a = table.clone(snapshots.latest)
-	a.tick = 100
-	a.ball = table.clone(a.ball)
-	a.ball.x = 10
-	local b = table.clone(a)
-	b.tick = 101
-	b.ball = table.clone(a.ball)
-	b.ball.x = 20
-	snapshotSignal.fn(a)
-	snapshotSignal.fn(b)
-	frameOnly(1 / 120)
-	near(field.children.BallDisc.Position.X, 7.5)
+check("real_client_interpolates_remote_player_using_buffer", function()
+	local template = table.clone(snapshots.latest)
+	template.matchPhase = "playing"
+	template.kickoffTeam = nil
+	for i = 0, 2 do
+		local s = table.clone(template)
+		s.tick = 100 + i * 2
+		s.players = table.clone(template.players)
+		s.players[2] = table.clone(template.players[2])
+		s.players[2].x = i * 20
+		snapshotSignal.fn(s)
+		frameOnly(1 / 30)
+	end
+	local x = field.children.PlayerDisc2.Position.X
+	assert(x > 10 and x <= 20, "remote player did not use buffered authority: " .. x)
+end)
+check("real_client_exposes_local_network_measurements", function()
+	local r = guiRoot.children.HaxballLabDebug.children.NetworkDiagnostics.OnInvoke()
+	assert(r.capacity == 256 and r.samples.ackMs.count > 0)
+	assert(r.counters.inputPackets > 0 and r.counters.inputBytes >= r.counters.inputPackets * 21)
+	assert(r.counters.stateBytes == r.counters.statePackets * 482)
+	assert(r.presentation.frames <= 32 and r.presentation.delayMs <= 100)
+end)
+check("duplicate_reliable_snapshot_does_not_refresh_state_age", function()
+	frameOnly(0.1)
+	local get = guiRoot.children.HaxballLabDebug.children.NetworkDiagnostics.OnInvoke
+	local before = get().presentation.ageMs
+	local duplicate = table.clone(snapshots.latest)
+	duplicate.tick = 104
+	duplicate.matchPhase = "playing"
+	snapshotSignal.fn(duplicate)
+	frameOnly(1 / 60)
+	assert(get().presentation.ageMs >= before + 15)
 end)
 check("camera_refits_after_viewport_resize", function()
 	camera.ViewportSize = vector(600, 1000, nil, "Vector2")
@@ -183,5 +203,19 @@ check("duplicate_tick_state_cannot_replace_the_accepted_state", function()
 	stateSignal.fn(NetCodec.encodeState(duplicate))
 	frameOnly(1 / 60)
 	near(field.children.BallDisc.Position.X, 0)
+end)
+check("round_reset_counts_cancelled_unconfirmed_commands", function()
+	button("ResetScenario").Activated.fn()
+	advance(1 / 60)
+	button("InputDelay500").Activated.fn()
+	moveState = vector(-1, 0, nil, "Vector2")
+	frameOnly(1 / 60)
+	local get = guiRoot.children.HaxballLabDebug.children.NetworkDiagnostics.OnInvoke
+	local before = get().counters.cancelledInputs or 0
+	assert(get().pendingInputs > 0, "test did not create unconfirmed input")
+	button("ResetScenario").Activated.fn()
+	advance(1 / 60)
+	assert((get().counters.cancelledInputs or 0) > before, "reset did not classify cancelled inputs")
+	button("InputDelay0").Activated.fn()
 end)
 emit(json(result))
