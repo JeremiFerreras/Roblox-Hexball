@@ -1,6 +1,23 @@
 // Deliberate faults are applied in memory only, in isolated test subprocesses.
 export const mutations = [
   {
+    name: "stalled_forecast_snaps_back",
+    path: "src/ReplicatedStorage/HaxballLab/LabClient/init.server.luau",
+    before:
+      'if latest.coreMode and ownSlot and latest.matchPhase == "playing" then',
+    after:
+      'if latest.coreMode and ownSlot and latest.matchPhase == "playing" and now - lastAuthorityAt < 0.3 then',
+    test: "client-adapter.mjs",
+  },
+  {
+    name: "duplicate_pending_throttle_removed",
+    path: "src/ReplicatedStorage/HaxballLab/NetInputClient/init.luau",
+    before:
+      "if hasPending and newest == self.lastPacketSeq and not reliable and now - self.lastSend < 1 / 30 - 1e-6 then",
+    after: "if false then",
+    test: "network.mjs",
+  },
+  {
     name: "goal_detection_disabled",
     path: "src/ServerScriptService/HaxballLab/MatchRules2D/init.luau",
     before: "function Rules.findGoalCrossing(motionSegments, ballId)",

@@ -1,4 +1,4 @@
-# Aceptación nativa pendiente — fase 5 v1
+# Aceptación nativa pendiente — fase 5
 
 1. Abrir el RBXLX actualizado en Studio. Iniciar servidor local y al menos dos clientes; después repetir con diez cuando el entorno lo permita.
 2. Confirmar controles de cada puesto, marcador común, goles, pausa y saque. Mantener X durante una pausa: no debe patear hasta soltar y volver a pulsar.
@@ -10,3 +10,5 @@
 8. Confirmar comportamiento de modo público: sin comandos de laboratorio ni historial continuo. No activar herramientas de debug para usuarios normales.
 
 Estas comprobaciones no se presentan como ejecutadas. Su resultado decide el ajuste de frecuencias, interpolación y compensación competitiva.
+
+Ya existe una prueba offline de diez copias del cliente real y un servidor con adaptadores. Sus resultados y límites están en [el informe multicliente](PHASE5_MULTICLIENT_2026-11-25.md). No sustituye esta lista nativa. Repetir especialmente el corte de 1,2 s y comprobar que el último pronóstico se congela sin saltar al estado antiguo.

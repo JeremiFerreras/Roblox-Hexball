@@ -33,7 +33,7 @@ local function confirmInputs(ack)
 		networkMetrics:count("confirmedInputs")
 	end
 end
-local bootstrap, ownSlot
+local bootstrap, ownSlot, latest
 local lastAuthorityAt = 0
 local nextPingAt = 0
 local pingNonce = 0
@@ -202,6 +202,17 @@ networkDiagnostics.OnInvoke = function()
 	local report = networkMetrics:report()
 	report.presentation = presentation.status and table.clone(presentation.status) or nil
 	report.pendingInputs = #netInput.pending
+	report.authority = latest
+			and {
+				matchId = latest.matchId,
+				round = latest.round,
+				tick = latest.tick,
+				ownSlot = ownSlot,
+				ageMs = math.max(0, os.clock() - lastAuthorityAt) * 1000,
+			}
+		or nil
+	report.inputs = { sequence = netInput.seq, acknowledged = netInput.ack, mask = netInput.mask }
+	report.predictedTick = prediction.world and prediction.world.tick or nil
 	return report
 end
 networkDiagnostics.Parent = gui
@@ -326,7 +337,6 @@ goalTestButton.Activated:Connect(function()
 	commandRemote:FireServer("setupGoalTest")
 end)
 
-local latest
 local snapshotAge = 0
 local lastSentX, lastSentY, lastSentKick = 0, 0, false
 local syntheticInputDelayMs = 0
@@ -507,7 +517,7 @@ RunService.RenderStepped:Connect(function(dt)
 				)
 			end
 		end
-	elseif not latest or not latest.coreMode then
+	elseif latest and not latest.coreMode then
 		if move.X ~= lastSentX or move.Y ~= lastSentY or kick ~= lastSentKick then
 			lastSentX, lastSentY, lastSentKick = move.X, move.Y, kick
 			inputRemote:FireServer(move.X, move.Y, kick)
@@ -549,7 +559,9 @@ RunService.RenderStepped:Connect(function(dt)
 	local p2 = toWorld(poses.player2.x, poses.player2.y)
 	local ball = toWorld(poses.ball.x, poses.ball.y)
 	local predictedActor, predictedBall
-	if latest.coreMode and ownSlot and latest.matchPhase == "playing" and now - lastAuthorityAt < 0.3 then
+	-- advance() clamps at confirmedTick + 18. Keep that final forecast during a
+	-- stalled stream instead of jumping back to an older authoritative pose.
+	if latest.coreMode and ownSlot and latest.matchPhase == "playing" then
 		local target = latest.tick + math.min(18, 1 + math.ceil(rtt * 30) + math.floor(snapshotAge * 60))
 		predictedActor, predictedBall = prediction:advance(target, NetCodec.mask(move.X, move.Y, kick))
 		if predictedBall then

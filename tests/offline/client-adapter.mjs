@@ -1,7 +1,9 @@
 import { writeReport } from "./runtime.mjs";
 import { serverSetup } from "./server-adapter.mjs";
 import { read, moduleSource, runLuau } from "./runtime.mjs";
-const setup = read("tests/offline/client-adapter-setup.luau");
+const setup =
+  read("tests/offline/client-ui-adapter.luau") +
+  read("tests/offline/client-adapter-setup.luau");
 const tests = read("tests/offline/client-adapter-tests.luau");
 const result = await runLuau(
   serverSetup +

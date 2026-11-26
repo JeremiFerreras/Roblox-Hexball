@@ -401,4 +401,60 @@ test("prediction_speed_does_not_increase_with_render_fps", function()
 		end
 	end
 end)
+test("identical_pending_retries_use_30hz_but_new_transitions_use_60hz", function()
+	local c = NetInputClient.new()
+	c:reset(1, 1, 0)
+	c:sample(1, 0, 0)
+	assert(c:packet(0))
+	assert(not c:packet(1 / 60))
+	assert(c:packet(1 / 30))
+	c:sample(16, 3, 3 / 60)
+	assert(c:packet(3 / 60), "new kick waited for duplicate retry interval")
+	c:sample(0, 4, 4 / 60)
+	assert(c:packet(4 / 60), "release waited for duplicate retry interval")
+end)
+test("retry_throttle_preserves_reliable_recovery_and_epoch_reset", function()
+	local c = NetInputClient.new()
+	c:reset(1, 1, 0)
+	c:sample(1, 0, 0)
+	assert(c:packet(0))
+	assert(c:packet(0.14))
+	local b, reliable = c:packet(0.16 + 1e-6)
+	assert(b and reliable, "reliable deadline delayed by duplicate throttle")
+	c:reset(2, 1, 0)
+	c:sample(1, 0, 0.17)
+	assert(c:packet(0.17), "new epoch reused duplicate throttle state")
+end)
+test("ack_window_progress_is_not_throttled_as_duplicate", function()
+	local c = NetInputClient.new()
+	c:reset(1, 1, 0)
+	for i = 1, 10 do
+		c:sample(i % 2 == 0 and 1 or 0, i, i / 100)
+	end
+	assert(c:packet(0.1))
+	c:confirm(1, 0.11)
+	local b = c:packet(0.1 + 1 / 60)
+	assert(b)
+	local packet = NetCodec.decodeInput(b)
+	assert(packet.commands[#packet.commands].seq == 9)
+end)
+test("client_timestamps_cannot_rewind_or_accelerate_authority", function()
+	local early, late = NetInputQueue.new(1, 1), NetInputQueue.new(1, 1)
+	local a = NetCodec.encodeInput(
+		1,
+		1,
+		{ { seq = 1, tick = 100, mask = 2 }, { seq = 2, tick = 100, mask = 16 }, { seq = 3, tick = 100, mask = 0 } }
+	)
+	local b = NetCodec.encodeInput(
+		1,
+		1,
+		{ { seq = 1, tick = 400, mask = 2 }, { seq = 2, tick = 400, mask = 16 }, { seq = 3, tick = 400, mask = 0 } }
+	)
+	assert(early:receive(a, 300) and late:receive(b, 300))
+	for t = 301, 305 do
+		local x, y = early:step(t), late:step(t)
+		assert(x.x == y.x and x.y == y.y and x.kick == y.kick and early.ack == late.ack)
+		assert(early.ack == math.min(t - 300, 3), "more than one transition applied per tick")
+	end
+end)
 emit(json(results))

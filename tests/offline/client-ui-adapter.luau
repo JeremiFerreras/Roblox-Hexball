@@ -1,0 +1,126 @@
+-- Minimal numeric/property adapters. These do not render or emulate Roblox services.
+local nativeTypeof = typeof
+local vectorMeta = {}
+vectorMeta.__index = function(v, k)
+	if k == "Magnitude" then
+		return math.sqrt(v.X * v.X + v.Y * v.Y + (v.Z or 0) ^ 2)
+	end
+end
+local function vector(x, y, z, kind)
+	return setmetatable({ X = x, Y = y, Z = z, __type = kind or "Vector3" }, vectorMeta)
+end
+vectorMeta.__add = function(a, b)
+	return vector(a.X + b.X, a.Y + b.Y, (a.Z or 0) + (b.Z or 0), a.__type)
+end
+vectorMeta.__sub = function(a, b)
+	return vector(a.X - b.X, a.Y - b.Y, (a.Z or 0) - (b.Z or 0), a.__type)
+end
+vectorMeta.__mul = function(a, b)
+	return vector(a.X * b, a.Y * b, (a.Z or 0) * b, a.__type)
+end
+local function typeof(v)
+	return type(v) == "table" and v.__type or nativeTypeof(v)
+end
+local Vector3 = {
+	new = function(x, y, z)
+		return vector(x, y, z)
+	end,
+}
+local Vector2 = { zero = vector(0, 0, nil, "Vector2") }
+local frameMeta
+frameMeta = {
+	__mul = function(a, b)
+		return setmetatable({ Position = a.Position or b.Position, rotation = b.rotation or a.rotation }, frameMeta)
+	end,
+}
+local CFrame = {
+	new = function(x, y, z)
+		return setmetatable({ Position = type(x) == "table" and x or vector(x, y, z) }, frameMeta)
+	end,
+	Angles = function(x, y, z)
+		return setmetatable({ rotation = { x, y, z } }, frameMeta)
+	end,
+	lookAt = function(a, b)
+		assert((b - a).Magnitude > 0)
+		return setmetatable({ Position = a, target = b }, frameMeta)
+	end,
+}
+local Color3 = {
+	new = function(...)
+		return { ... }
+	end,
+	fromRGB = function(...)
+		return { ... }
+	end,
+}
+local UDim2 = {
+	new = function(...)
+		return { ... }
+	end,
+	fromOffset = function(...)
+		return { ... }
+	end,
+}
+local Enum = {
+	PartType = { Ball = "Ball", Cylinder = "Cylinder" },
+	Material = { Neon = "Neon" },
+	CameraType = { Scriptable = "Scriptable" },
+	Font = { Code = "Code", GothamMedium = "GothamMedium" },
+	TextXAlignment = { Left = "Left" },
+	TextYAlignment = { Top = "Top" },
+}
+local objects = {}
+local nodeMeta = {}
+local function object(name, class)
+	local o = setmetatable({
+		_props = {
+			Name = name,
+			ClassName = class,
+			Position = vector(0, 11, 0),
+			Size = vector(1, 1, 1),
+			Material = "Plastic",
+			Transparency = 0,
+		},
+		children = {},
+	}, nodeMeta)
+	o.Activated = signal()
+	table.insert(objects, o)
+	return o
+end
+nodeMeta.__index = function(self, key)
+	if key == "WaitForChild" then
+		return function(o, name)
+			assert(o.children[name], o.Name .. " missing child " .. name)
+			return o.children[name]
+		end
+	end
+	if key == "Position" and self._props.CFrame then
+		return self._props.CFrame.Position
+	end
+	return self._props[key]
+end
+nodeMeta.__newindex = function(self, key, value)
+	self._props[key] = value
+	if key == "Parent" then
+		value.children[self.Name] = self
+	end
+end
+local Instance = {
+	new = function(class)
+		return object(class, class)
+	end,
+}
+local guiRoot = object("PlayerGui", "PlayerGui")
+local camera = object("Camera", "Camera")
+local field = object("HaxballLab", "Model")
+for _, name in ipairs({ "PlayerDisc", "PlayerDisc2", "BallDisc", "DebugLine", "PairDebugLine", "BallP2DebugLine" }) do
+	local p = object(name, "Part")
+	p.Parent = field
+end
+local workspace = {
+	CurrentCamera = camera,
+	WaitForChild = function(self, name)
+		assert(name == "HaxballLab")
+		return field
+	end,
+}

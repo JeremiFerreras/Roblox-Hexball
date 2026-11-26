@@ -19,6 +19,7 @@ function Client:reset(matchId, round, ack)
 	self.mask = nil
 	self.lastSend = -math.huge
 	self.lastReliable = -math.huge
+	self.lastPacketSeq = nil
 end
 function Client:confirm(ack, now)
 	if type(ack) ~= "number" or ack ~= ack or ack % 1 ~= 0 or ack > 4294967295 or ack < self.ack then
@@ -69,9 +70,16 @@ function Client:packet(now)
 	if #commands == 0 then
 		commands[1] = { seq = self.seq, tick = self.lastTick or 0, mask = self.mask }
 	end
+	local reliable = hasPending and now - self.pending[1].created >= 0.15 and now - self.lastReliable >= 0.15
+	local newest = commands[#commands].seq
+	-- Retry identical unacknowledged data at 30 Hz. New transitions/window progress
+	-- retain the 60 Hz cap above; reliable recovery keeps its independent deadline.
+	if hasPending and newest == self.lastPacketSeq and not reliable and now - self.lastSend < 1 / 30 - 1e-6 then
+		return nil
+	end
 	local b = Codec.encodeInput(self.matchId, self.round, commands)
 	self.lastSend = now
-	local reliable = hasPending and now - self.pending[1].created >= 0.15 and now - self.lastReliable >= 0.15
+	self.lastPacketSeq = newest
 	if reliable then
 		self.lastReliable = now
 	end

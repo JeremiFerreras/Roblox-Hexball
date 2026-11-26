@@ -1,5 +1,21 @@
 [
   {
+    "name": "stalled_forecast_snaps_back",
+    "detected": true,
+    "failedTests": [
+      "stalled_stream_holds_last_bounded_forecast_without_rewinding"
+    ],
+    "exitCode": 1
+  },
+  {
+    "name": "duplicate_pending_throttle_removed",
+    "detected": true,
+    "failedTests": [
+      "identical_pending_retries_use_30hz_but_new_transitions_use_60hz"
+    ],
+    "exitCode": 1
+  },
+  {
     "name": "goal_detection_disabled",
     "detected": true,
     "failedTests": [
@@ -132,7 +148,8 @@
       "input_timeout_stops_and_keepalive_recovers_held_direction",
       "round_reset_preserves_held_raw_input_until_release",
       "short_press_release_survives_a_single_batched_packet",
-      "connection_timeout_cannot_rearm_a_held_kick"
+      "connection_timeout_cannot_rearm_a_held_kick",
+      "client_timestamps_cannot_rewind_or_accelerate_authority"
     ],
     "exitCode": 1
   },

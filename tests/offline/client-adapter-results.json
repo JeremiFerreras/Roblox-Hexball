@@ -78,5 +78,10 @@
     "round_reset_counts_cancelled_unconfirmed_commands",
     true,
     "PASS"
+  ],
+  [
+    "stalled_stream_holds_last_bounded_forecast_without_rewinding",
+    true,
+    "PASS"
   ]
 ]

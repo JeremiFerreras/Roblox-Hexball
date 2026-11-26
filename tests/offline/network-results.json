@@ -153,5 +153,25 @@
     "prediction_speed_does_not_increase_with_render_fps",
     true,
     "PASS"
+  ],
+  [
+    "identical_pending_retries_use_30hz_but_new_transitions_use_60hz",
+    true,
+    "PASS"
+  ],
+  [
+    "retry_throttle_preserves_reliable_recovery_and_epoch_reset",
+    true,
+    "PASS"
+  ],
+  [
+    "ack_window_progress_is_not_throttled_as_duplicate",
+    true,
+    "PASS"
+  ],
+  [
+    "client_timestamps_cannot_rewind_or_accelerate_authority",
+    true,
+    "PASS"
   ]
 ]

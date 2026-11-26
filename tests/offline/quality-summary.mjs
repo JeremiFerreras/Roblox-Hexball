@@ -14,6 +14,7 @@ for (const name of [
   "network-results.json",
   "presentation-results.json",
   "network-world-results.json",
+  "multiclient-results.json",
   "server-public-results.json",
 ]) {
   const data = JSON.parse(

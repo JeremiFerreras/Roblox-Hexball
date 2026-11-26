@@ -110,7 +110,7 @@
     {
       "path": "src/ReplicatedStorage/HaxballLab/LabClient/init.server.luau",
       "className": "Script",
-      "sha256": "00bcaf37d5fb091fc9b3ba40705d10693a13b14686e45a33f8987bf5e597e608"
+      "sha256": "cd2ccd02e54be319f1b95bea95489e3a3b2305d7a3a0eaf1163641d57e5f3132"
     },
     {
       "path": "src/ReplicatedStorage/HaxballLab/PredictionLab2D/init.luau",
@@ -145,7 +145,7 @@
     {
       "path": "src/ReplicatedStorage/HaxballLab/NetInputClient/init.luau",
       "className": "ModuleScript",
-      "sha256": "8a626e192e238e8c64b7ba615a708efa14960b9d73dc4d11a30f840733157afa"
+      "sha256": "0be14b0aa6a56633b404ac93cdebb2d55958934e115108443bf44ebf86701232"
     },
     {
       "path": "src/ReplicatedStorage/HaxballLab/PhysicsCore2D/init.luau",
