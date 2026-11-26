@@ -54,3 +54,5 @@ La fase 4 incorpora un controlador de partido, pruebas de goles y saques y geome
 ## Fase 5: red v1
 
 [Implementación y pruebas](docs/PHASE5_NETWORK_V1_2026-11-25.md): protocolo de estados de 482 bytes, controles secuenciados, predicción compartida y reconciliación. [Aceptación pendiente en Studio](docs/PHASE5_STUDIO_ACCEPTANCE.md). No se da por cerrada la fase 5 ni se promete igualdad de ping.
+
+El avance de presentación remota y métricas de la fase 5 está documentado en [este informe](docs/PHASE5_BUFFER_METRICS_2026-11-25.md).

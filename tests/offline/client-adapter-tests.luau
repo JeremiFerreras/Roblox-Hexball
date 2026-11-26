@@ -212,9 +212,10 @@ check("round_reset_counts_cancelled_unconfirmed_commands", function()
 	frameOnly(1 / 60)
 	local get = guiRoot.children.HaxballLabDebug.children.NetworkDiagnostics.OnInvoke
 	local before = get().counters.cancelledInputs or 0
-	assert(get().pendingInputs > 0)
+	assert(get().pendingInputs > 0, "test did not create unconfirmed input")
 	button("ResetScenario").Activated.fn()
-	assert((get().counters.cancelledInputs or 0) > before)
+	advance(1 / 60)
+	assert((get().counters.cancelledInputs or 0) > before, "reset did not classify cancelled inputs")
 	button("InputDelay0").Activated.fn()
 end)
 emit(json(result))
