@@ -1,16 +1,14 @@
 local Profile = {}
 
 Profile.Metadata = {
-    id = "haxball-classic-reference",
+    id = "simple-soccer-classic",
     name = "Classic",
-    sourceRepository = "haxball/haxball-issues",
-    sourceFile = "stadiums/classic.hbs",
-    sourceCommit = "4b9724f49fe0ff87ad3f111eb91b208020d96d73",
-    sourcePermalink = "https://github.com/haxball/haxball-issues/blob/4b9724f49fe0ff87ad3f111eb91b208020d96d73/stadiums/classic.hbs",
     geometryStatus = "FROZEN_REFERENCE",
-    logicalUnits = "Haxball stadium units",
-    note = "HBS width/height are 420/200; physical geometry spans x=[-420,420], y=[-200,200].",
+    logicalUnits = "stadium units",
+    note = "The classic field bounds are x=[-420,420], y=[-200,200].",
 }
+Profile.PlayerCount = 8
+Profile.PlayersPerTeam = 4
 
 Profile.StadiumProperties = {
     width = 420,
@@ -44,7 +42,7 @@ Profile.Goals = {
 }
 
 Profile.CollisionGroups = {
-    -- Haxball collision flag bit values.
+    -- Reference collision flag bit values.
     ball = 1,
     red = 2,
     blue = 4,
@@ -103,10 +101,11 @@ Profile.Geometry = {
 }
 
 Profile.SpawnPoints = {
-    -- Current 5v5 lab formation; a project choice, not a claim about HBS default spawns.
+    -- Mirrored four-a-side kickoff formation.
     { x = -80, y = 0 },
-    { x = -150, y = -54 }, { x = -150, y = -18 }, { x = -150, y = 18 }, { x = -150, y = 54 },
-    { x = 150, y = -72 }, { x = 150, y = -36 }, { x = 150, y = 0 }, { x = 150, y = 36 }, { x = 150, y = 72 },
+    { x = -150, y = -45 }, { x = -150, y = 0 }, { x = -150, y = 45 },
+    { x = 80, y = 0 },
+    { x = 150, y = -45 }, { x = 150, y = 0 }, { x = 150, y = 45 },
 }
 
 Profile.Simulation = {
@@ -120,10 +119,10 @@ Profile.PhysicsBaseline = {
         frames = 12368,
         stadium = "Small",
         sha256 = "60a184ca3e33f763424960e407bc7d898cbf13a0a5e54eb85f811661e4d478d5",
-        engine = "Node-Haxball",
+        engine = "independent browser-football replay reference",
         engineCommit = "4d4b88f1e5e25d484d27819ee6a4699720bda164",
         evidenceLevel = "RECONSTRUCTED_INDEPENDENT_IMPLEMENTATION",
-        note = "Replay stadium is Small, not the frozen Classic geometry profile; values remain candidates until cross-validated.",
+        note = "Replay stadium is separate from the frozen Classic geometry profile; values remain candidates until cross-validated.",
     },
     active = {
         status = "PROJECT_PROVISIONAL",
@@ -168,7 +167,7 @@ Profile.Calibration = {
         geometryCounts = { planes = 6, segments = 14, kickoffSegments = 4, posts = 4 },
     },
     replayComparison = {
-        class = "RECONSTRUCTED_AND_MEASURED_ON_NODE_HAXBALL",
+        class = "RECONSTRUCTED_FROM_SEPARATE_GAMEPLAY_REPLAY",
         sourceSha256 = Profile.PhysicsBaseline.evidenceReplay.sha256,
         sourceStadium = "Small",
         frames = 12368,

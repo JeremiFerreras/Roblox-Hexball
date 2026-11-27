@@ -1,5 +1,5 @@
 -- Versioned wire format. State is lossless f64; rendering precision is not physics precision.
-local Codec = { VERSION = 1, STATE_BYTES = 482, MAX_COMMANDS = 8 }
+local Codec = { VERSION = 1, PLAYER_COUNT = 8, PLAYERS_PER_TEAM = 4, STATE_BYTES = 72 + 8 * 41, MAX_COMMANDS = 8 }
 local phases = { playing = 1, kickoff = 2, goalPause = 3, finished = 4 }
 local phaseNames = { [1] = "playing", [2] = "kickoff", [3] = "goalPause", [4] = "finished" }
 local function finite(v)
@@ -15,7 +15,7 @@ local function teamName(n)
 	return n == 1 and "red" or n == 2 and "blue" or nil
 end
 function Codec.mask(x, y, kick)
-	-- Digital Haxball controls. Opposite keys cancel before encoding.
+	-- Digital directional controls. Opposite keys cancel before encoding.
 	return (x < 0 and 1 or x > 0 and 2 or 0) + (y < 0 and 4 or y > 0 and 8 or 0) + (kick and 16 or 0)
 end
 function Codec.input(mask)
@@ -67,11 +67,11 @@ function Codec.decodeInput(b)
 	return packet
 end
 function Codec.encodeState(s)
-	assert(s.coreMode and #s.players == 10, "5v5 state required")
+	assert(s.coreMode and #s.players == Codec.PLAYER_COUNT, "4v4 state required")
 	local b = buffer.create(Codec.STATE_BYTES)
 	buffer.writeu8(b, 0, 1)
 	buffer.writeu8(b, 1, 2)
-	buffer.writeu8(b, 2, 11)
+	buffer.writeu8(b, 2, Codec.PLAYER_COUNT + 1)
 	buffer.writeu8(b, 3, assert(phases[s.matchPhase]))
 	for _, f in ipairs({ { 4, s.matchId }, { 8, s.round }, { 12, s.tick }, { 16, s.elapsedMatchTicks or 0 } }) do
 		assert(integer(f[2], 4294967295))
@@ -110,10 +110,10 @@ function Codec.encodeState(s)
 	return b
 end
 function Codec.decodeState(b, base)
-	if typeof(b) ~= "buffer" or buffer.len(b) ~= 482 then
+	if typeof(b) ~= "buffer" or buffer.len(b) ~= Codec.STATE_BYTES then
 		return nil, "size"
 	end
-	if buffer.readu8(b, 0) ~= 1 or buffer.readu8(b, 1) ~= 2 or buffer.readu8(b, 2) ~= 11 then
+	if buffer.readu8(b, 0) ~= 1 or buffer.readu8(b, 1) ~= 2 or buffer.readu8(b, 2) ~= Codec.PLAYER_COUNT + 1 then
 		return nil, "version"
 	end
 	if
@@ -126,7 +126,7 @@ function Codec.decodeState(b, base)
 		return nil, "enum"
 	end
 	local phase = phaseNames[buffer.readu8(b, 3)]
-	if not phase or not base or not base.players or #base.players ~= 10 then
+	if not phase or not base or not base.players or #base.players ~= Codec.PLAYER_COUNT then
 		return nil, "bootstrap"
 	end
 	local s = table.clone(base)
@@ -148,7 +148,7 @@ function Codec.decodeState(b, base)
 		s.lastGoal = table.clone(base.lastGoal)
 	end
 	local touch = buffer.readu8(b, 28)
-	if touch > 10 then
+	if touch > Codec.PLAYER_COUNT then
 		return nil, "touch"
 	end
 	s.lastTouch = touch > 0
@@ -198,7 +198,7 @@ function Codec.decodeState(b, base)
 		s.players[slot] = d
 	end
 	s.player = s.players[1]
-	s.player2 = s.players[6]
+	s.player2 = s.players[Codec.PLAYERS_PER_TEAM + 1]
 	return s
 end
 return Codec

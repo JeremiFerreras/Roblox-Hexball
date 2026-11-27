@@ -17,6 +17,9 @@ type StadiumProfile = {
     PlayArea: { minX: number, maxX: number, minY: number, maxY: number },
     StadiumProperties: { bg: { width: number, height: number, kickOffRadius: number } },
     CollisionGroups: { wall: number },
+    PlayerCount: number,
+    PlayersPerTeam: number,
+    SpawnPoints: { Point },
 }
 type StadiumReference = {
     segments: { StadiumSegment },
@@ -28,6 +31,7 @@ type Circle = { id: string, x: number, y: number, radius: number, thickness: num
 type Post = { id: string, x: number, y: number, radius: number, fill: string, stroke: string }
 type SceneData = {
     width: number, height: number, bounds: Rect, grass: Rect, palette: Palette,
+    playerCount: number, playersPerTeam: number,
     stripes: { Stripe }, lines: { SceneLine }, circles: { Circle }, posts: { Post },
 }
 type Layout = { width: number, height: number, scale: number }
@@ -164,6 +168,8 @@ function Scene.build(profile: StadiumProfile, reference: StadiumReference): Scen
         },
         grass = grass,
         palette = Scene.Palette,
+        playerCount = profile.PlayerCount,
+        playersPerTeam = profile.PlayersPerTeam,
         stripes = {},
         lines = {},
         circles = {},
@@ -242,6 +248,8 @@ function Scene.build(profile: StadiumProfile, reference: StadiumReference): Scen
     end
 
     assert(scene.width > 0 and scene.height > 0, "invalid stadium bounds")
+    assert(scene.playerCount == 8 and scene.playersPerTeam == 4, "Simple Soccer requires an eight-player 4v4 roster")
+    assert(#profile.SpawnPoints == scene.playerCount, "spawn point count must match the 4v4 roster")
     assert(#scene.stripes > 0 and #scene.lines >= 10 and #scene.posts == 4, "incomplete Classic stadium scene")
     return scene
 end

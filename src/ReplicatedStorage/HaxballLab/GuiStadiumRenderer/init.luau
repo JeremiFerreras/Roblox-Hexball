@@ -53,7 +53,7 @@ local function makeCircle(ui, parent, name, zIndex, fill, stroke, strokeWidth)
     local frame = create(ui, "Frame", parent, {
         Name = name,
         AnchorPoint = ui.vector(0.5, 0.5),
-        BackgroundColor3 = fill,
+        BackgroundColor3 = fill or ui.color(0, 0, 0),
         BackgroundTransparency = fill and 0 or 1,
         BorderSizePixel = 0,
         Position = ui.offset(0, 0),
@@ -125,7 +125,7 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
     }, Renderer)
 
     self.gui = create(ui, "ScreenGui", playerGui, {
-        Name = "HaxballStadium2D",
+        Name = "SimpleSoccerStadium2D",
         ResetOnSpawn = false,
         IgnoreGuiInset = true,
         DisplayOrder = 0,
@@ -178,8 +178,8 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
         table.insert(self.postFrames, { frame = frame, source = post })
     end
 
-    for slot = 1, 10 do
-        local team = slot <= 5 and "red" or "blue"
+    for slot = 1, scene.playerCount do
+        local team = slot <= scene.playersPerTeam and "red" or "blue"
         local frame = makeCircle(ui, self.root, "Player" .. slot, 20,
             colorFrom(ui, scene.palette, team),
             colorFrom(ui, scene.palette, "goal"), 2.4)
@@ -307,7 +307,7 @@ function Renderer:render(frame, focus)
     self:_placeStatic(layout, camera)
 
     local players = frame.players or {}
-    for slot = 1, 10 do
+    for slot = 1, self.scene.playerCount do
         local token = self.playerTokens[slot]
         local actor = players[slot]
         local visible = actor ~= nil and actor.visible ~= false
