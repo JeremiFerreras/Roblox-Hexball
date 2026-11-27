@@ -1,0 +1,45 @@
+name: GUI 2D stadium tests
+
+on:
+  push:
+    branches:
+      - "Visual-procces-haxball-(phase-6)"
+    paths:
+      - "src/ReplicatedStorage/HaxballLab/GuiStadiumScene/**"
+      - "src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer/**"
+      - "src/ReplicatedStorage/HaxballLab/LabClient/**"
+      - "src/ReplicatedStorage/HaxballLab/instance.json"
+      - "tests/luau/**"
+      - ".github/workflows/gui-stadium-tests.yml"
+  pull_request:
+    branches:
+      - "Visual-procces-haxball-(phase-6)"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gui-stadium:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install pinned Luau CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/luau"
+          curl -fsSL "https://github.com/luau-lang/luau/releases/download/0.748/luau-ubuntu.zip" -o "$RUNNER_TEMP/luau.zip"
+          unzip -q "$RUNNER_TEMP/luau.zip" -d "$RUNNER_TEMP/luau"
+          test -x "$RUNNER_TEMP/luau/luau"
+          test -x "$RUNNER_TEMP/luau/luau-analyze"
+          echo "$RUNNER_TEMP/luau" >> "$GITHUB_PATH"
+
+      - name: Analyze pure Luau scene and tests
+        run: |
+          luau-analyze src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau tests/luau/run-gui-stadium-tests.luau
+
+      - name: Run headless scene and GUI adapter tests
+        run: luau tests/luau/run-gui-stadium-tests.luau

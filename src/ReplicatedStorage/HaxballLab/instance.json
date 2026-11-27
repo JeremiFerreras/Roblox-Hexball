@@ -125,10 +125,14 @@
     "ReplicatedStorage/HaxballLab/SnapshotBuffer",
     "ReplicatedStorage/HaxballLab/NetMetrics",
     "ReplicatedStorage/HaxballLab/Remotes",
-    "ReplicatedStorage/HaxballLab/VisualStadiumBuilder"
+    "ReplicatedStorage/HaxballLab/VisualStadiumBuilder",
+    "ReplicatedStorage/HaxballLab/GuiStadiumScene",
+    "ReplicatedStorage/HaxballLab/GuiStadiumRenderer"
   ],
   "layout": [
     false,
+    true,
+    true,
     true,
     true,
     true,
