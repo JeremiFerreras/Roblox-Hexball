@@ -33,7 +33,7 @@ GitHub Actions uses the pinned Luau CLI to analyze the pure geometry module, ver
 
 Local tests (Luau CLI 0.748):
 
-    luau-analyze src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau
+    luau-analyze tests/luau/run-gui-stadium-tests.luau
     luau tests/luau/run-gui-stadium-tests.luau
 
 Open the generated Simple-Soccer-Game-4v4.rbxlx artifact in Roblox Studio using File → Open from File.

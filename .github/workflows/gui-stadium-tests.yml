@@ -59,7 +59,7 @@ jobs:
         run: |
           luau-analyze src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau
 
-      - name: Reject stale 3D renderer references in the live client
+      - name: Reject legacy renderer, runtime path and branding references
         shell: bash
         run: |
           set -euo pipefail
@@ -68,8 +68,12 @@ jobs:
             echo "Legacy 3D renderer reference remains in the live client"
             exit 1
           fi
-          if grep -RniE 'WaitForChild\("HaxballLab"|\.HaxballLab|node-haxball|Node-Haxball|Classic Haxball' src/ReplicatedStorage/HaxballLab src/ServerScriptService/HaxballLab; then
-            echo "Legacy runtime dependency or brand reference remains in Simple Soccer modules"
+          if grep -RniE 'Haxball|haxball|Node-' --include='*.luau' src/ReplicatedStorage/HaxballLab src/ServerScriptService/HaxballLab; then
+            echo "Legacy game branding remains in runtime Luau sources"
+            exit 1
+          fi
+          if grep -RniE 'WaitForChild\("HaxballLab"|\.HaxballLab' --include='*.luau' src/ReplicatedStorage src/ServerScriptService; then
+            echo "Runtime still references the old ReplicatedStorage folder"
             exit 1
           fi
 
