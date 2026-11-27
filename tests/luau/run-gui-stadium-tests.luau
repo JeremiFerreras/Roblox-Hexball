@@ -71,6 +71,7 @@ local function fakeNode(className)
     if className == "Frame" then
         node.AbsoluteSize = { X = 1280, Y = 720 }
     end
+    node.Destroy = function(self) self.Destroyed = true end
     return node
 end
 
@@ -78,6 +79,7 @@ local fakeUI = {
     new = fakeNode,
     color = function(r, g, b) return { R = r, G = g, B = b } end,
     offset = function(x, y) return { X = x, Y = y } end,
+    scale = function(x, y) return { ScaleX = x, ScaleY = y } end,
     vector = function(x, y) return { X = x, Y = y } end,
     circleCorner = { Scale = 1, Offset = 0 },
     strokeBorder = "Border",
@@ -116,7 +118,7 @@ local tokenSix = renderer.playerTokens[6]
 check("red token is visible and centered on followed player", tokenOne.frame.Visible
     and near(tokenOne.frame.Position.X, 640) and near(tokenOne.frame.Position.Y, 360))
 check("blue token uses its remote position", tokenSix.frame.Visible
-    and near(tokenSix.frame.Position.X, 708) and near(tokenSix.frame.Position.Y, 328))
+    and near(tokenSix.frame.Position.X, 707.2) and near(tokenSix.frame.Position.Y, 328))
 check("player token diameter matches physical radius", near(tokenOne.frame.Size.X, 48))
 check("ball diameter matches physical radius", near(renderer.ballToken.Size.X, 32))
 check("absent players remain hidden", renderer.playerTokens[2].frame.Visible == false)

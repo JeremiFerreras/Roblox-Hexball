@@ -13,6 +13,9 @@ local function defaultUI()
         offset = function(x, y)
             return UDim2.fromOffset(x, y)
         end,
+        scale = function(x, y)
+            return UDim2.fromScale(x, y)
+        end,
         vector = function(x, y)
             return Vector2.new(x, y)
         end,
@@ -79,21 +82,6 @@ local function makeLine(ui, parent, name, color, zIndex)
     })
 end
 
-local function setLine(frame, x1, y1, x2, y2, thickness)
-    local dx, dy = x2 - x1, y2 - y1
-    local length = math.sqrt(dx * dx + dy * dy)
-    frame.Visible = length > 0.01
-    if not frame.Visible then
-        return
-    end
-    frame.Position = frame.Parent and frame.Parent.Position and frame.Position or frame.Position
-    frame.Position = frame.Position -- Keep property assignment explicit for UI implementations.
-    frame.Size = frame.Size
-    -- Position and size are supplied by the caller's UI adapter.
-    frame.Rotation = math.deg(math.atan2(dy, dx))
-    frame._unused = nil
-end
-
 local function placeLine(ui, frame, x1, y1, x2, y2, thickness)
     local dx, dy = x2 - x1, y2 - y1
     local length = math.sqrt(dx * dx + dy * dy)
@@ -148,7 +136,7 @@ function Renderer.new(playerGui, scene, ui, legacyField)
         Name = "Viewport",
         AnchorPoint = ui.vector(0, 0),
         Position = ui.offset(0, 0),
-        Size = UDim2.fromScale and UDim2.fromScale(1, 1) or ui.offset(0, 0),
+        Size = ui.scale(1, 1),
         BackgroundColor3 = colorFrom(ui, scene.palette, "outerGrass"),
         BorderSizePixel = 0,
         ClipsDescendants = true,
@@ -200,7 +188,7 @@ function Renderer.new(playerGui, scene, ui, legacyField)
             Name = "Number",
             AnchorPoint = ui.vector(0, 0),
             Position = ui.offset(0, 0),
-            Size = UDim2.fromScale and UDim2.fromScale(1, 1) or ui.offset(0, 0),
+            Size = ui.scale(1, 1),
             BackgroundTransparency = 1,
             BorderSizePixel = 0,
             Text = string.format("%02d", slot),
@@ -223,7 +211,7 @@ function Renderer.new(playerGui, scene, ui, legacyField)
     end
 
     self.grassRect = grass
-    self:hideLegacyField(legacyField)
+    Renderer.hideLegacyField(legacyField)
     return self
 end
 
