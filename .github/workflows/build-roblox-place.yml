@@ -1,0 +1,82 @@
+name: Build Roblox Studio place (GUI 2D)
+
+on:
+  push:
+    branches:
+      - "Visual-procces-haxball-(phase-6)"
+    paths:
+      - "src/**"
+      - "tools/place.py"
+      - ".github/workflows/build-roblox-place.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-place:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild Roblox Studio place from edited sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/place.py build build/Roblox-Hexball-GUI.rbxlx
+          test -s build/Roblox-Hexball-GUI.rbxlx
+
+      - name: Validate rebuilt place and GUI modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          place = Path("build/Roblox-Hexball-GUI.rbxlx")
+          root = ET.parse(place).getroot()
+          assert root.tag == "roblox", root.tag
+
+          names = {}
+          for item in root.iter("Item"):
+              name = item.findtext('Properties/string[@name="Name"]')
+              if name:
+                  names.setdefault(name, []).append(item)
+
+          assert "HaxballLab" in names, "HaxballLab model missing"
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "LabClient"):
+              assert required in names, f"{required} missing from place XML"
+
+          scripts = []
+          for item in root.iter("Item"):
+              if item.get("class") in ("Script", "LocalScript", "ModuleScript"):
+                  name = item.findtext('Properties/string[@name="Name"]')
+                  source = item.find('Properties/ProtectedString[@name="Source"]')
+                  scripts.append((name, source.text if source is not None else None))
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "LabClient"):
+              assert any(name == required and source for name, source in scripts), (
+                  f"{required} script source missing or empty"
+              )
+
+          assert len(scripts) >= 25, f"unexpected script count: {len(scripts)}"
+          print(f"PASS: parsed {place.stat().st_size} bytes of RBXLX")
+          print(f"PASS: {len(list(root.iter('Item')))} instances, {len(scripts)} scripts")
+          print("PASS: GUI scene, GUI renderer and active LabClient source are embedded")
+          PY
+
+      - name: Upload Roblox Studio place
+        uses: actions/upload-artifact@v4
+        with:
+          name: Roblox-Hexball-GUI-RBXLX
+          path: build/Roblox-Hexball-GUI.rbxlx
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
