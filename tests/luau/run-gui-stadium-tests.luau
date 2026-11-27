@@ -213,7 +213,7 @@ local function presentationState(tick, phase, ballPosition, ballVelocity)
         players[slot] = {
             x = tick * slot,
             y = 0,
-            vx = velocity,
+            vx = slot,
             vy = 0,
         }
     end
@@ -223,9 +223,9 @@ local function presentationState(tick, phase, ballPosition, ballVelocity)
         tick = tick,
         matchPhase = phase or "playing",
         coreMode = true,
-        ball = { x = ballPosition or tick, y = 0, vx = ballVelocity or 60, vy = 0 },
-        player = { x = tick, y = 0, vx = 60, vy = 0 },
-        player2 = { x = tick * 2, y = 0, vx = 120, vy = 0 },
+        ball = { x = ballPosition or tick, y = 0, vx = ballVelocity or 1, vy = 0 },
+        player = { x = tick, y = 0, vx = 1, vy = 0 },
+        player2 = { x = tick * 2, y = 0, vx = 2, vy = 0 },
         players = players,
     }
 end
@@ -254,7 +254,7 @@ local easingPresentation = SnapshotBuffer.new()
 local easingStart = presentationState(0)
 easingStart.ball.x, easingStart.ball.vx = 0, 0
 local easingEnd = presentationState(2)
-easingEnd.ball.x, easingEnd.ball.vx = 2, 120
+easingEnd.ball.x, easingEnd.ball.vx = 2, 2
 easingPresentation:push(easingStart, 0)
 easingPresentation:sample(0)
 easingPresentation:push(easingEnd, 2 / 60)
@@ -265,9 +265,9 @@ check("Hermite interpolation preserves acceleration instead of forcing linear mo
 
 local boundedPresentation = SnapshotBuffer.new()
 local boundedStart = presentationState(0)
-boundedStart.ball.x, boundedStart.ball.vx = 0, -600
+boundedStart.ball.x, boundedStart.ball.vx = 0, -3
 local boundedEnd = presentationState(2)
-boundedEnd.ball.x, boundedEnd.ball.vx = 2, 600
+boundedEnd.ball.x, boundedEnd.ball.vx = 2, 3
 boundedPresentation:push(boundedStart, 0)
 boundedPresentation:sample(0)
 boundedPresentation:push(boundedEnd, 2 / 60)
