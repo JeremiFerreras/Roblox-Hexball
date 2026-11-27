@@ -21,6 +21,13 @@ check("stadium bounds retain 840x400 logical units", scene.width == 840 and scen
 check("playable grass rectangle matches Classic HBS", scene.grass.minX == -370 and scene.grass.maxX == 370
     and scene.grass.minY == -170 and scene.grass.maxY == 170)
 check("all four physical posts are present", #scene.posts == 4)
+check("outer grass matches reference RGB", table.concat(scene.palette.outerGrass, ",") == "116,146,92")
+check("main grass matches reference RGB", table.concat(scene.palette.grass, ",") == "112,156,93")
+check("mowing stripe matches reference RGB", table.concat(scene.palette.stripeA, ",") == "123,164,108")
+check("pitch lines match reference RGB", table.concat(scene.palette.line, ",") == "199,235,187")
+check("team reds match reference RGB", table.concat(scene.palette.red, ",") == "217,99,89")
+check("team blues match reference RGB", table.concat(scene.palette.blue, ",") == "89,130,221")
+check("goal posts match reference RGB", table.concat(scene.palette.post, ",") == "249,198,205")
 check("center circle uses the 75-unit reference radius", #scene.circles == 1 and scene.circles[1].radius == 75)
 check("diagonal stripes are generated in a bounded count", #scene.stripes >= 18 and #scene.stripes <= 24)
 check("pitch and goal markings are generated", #scene.lines >= 20)

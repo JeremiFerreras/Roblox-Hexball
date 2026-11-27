@@ -36,15 +36,16 @@ type Camera = { x: number?, y: number? }
 local Scene = {}
 
 Scene.Palette = {
+    -- Sampled from the supplied 1280x720 reference image.
     outerGrass = { 116, 146, 92 },
-    grass = { 120, 160, 104 },
-    stripeA = { 127, 168, 112 },
-    stripeB = { 108, 152, 89 },
-    line = { 199, 221, 184 },
-    goal = { 12, 15, 13 },
-    post = { 246, 191, 198 },
-    red = { 229, 105, 98 },
-    blue = { 75, 130, 224 },
+    grass = { 112, 156, 93 },
+    stripeA = { 123, 164, 108 },
+    stripeB = { 112, 156, 93 },
+    line = { 199, 235, 187 },
+    goal = { 5, 8, 3 },
+    post = { 249, 198, 205 },
+    red = { 217, 99, 89 },
+    blue = { 89, 130, 221 },
     ball = { 255, 255, 255 },
     debug = { 255, 220, 70 },
 }
