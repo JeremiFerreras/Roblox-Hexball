@@ -10,7 +10,7 @@ local RED_ANCHORS = {
 	[1] = { x = -155, y = -5 },
 	[2] = { x = -82, y = 52 },
 	[3] = { x = -82, y = -55 },
-	[4] = { x = -15, y = 0 },
+	[4] = { x = 25, y = 0 },
 }
 local BLUE_START = {
 	{ x = 116, y = -112 },
@@ -19,8 +19,8 @@ local BLUE_START = {
 	{ x = 340, y = 22 },
 }
 local PASS_PLAN = {
-	{ 1, 2 }, { 2, 4 }, { 4, 3 }, { 3, 2 }, { 2, 4 }, { 4, 1 },
-	{ 1, 3 }, { 3, 4 }, { 4, 2 }, { 2, 1 },
+	-- The central player links short wall-passes through both half-spaces and a runner.
+	{ 1, 2 }, { 2, 1 }, { 1, 3 }, { 3, 1 }, { 1, 4 }, { 4, 1 },
 }
 
 local function clamp(value, low, high)
@@ -78,7 +78,7 @@ local function buildReplay(Core, Profile, Reference)
 	Core.addDisc(world, {
 		id = "ball",
 		kind = "ball",
-		x = -140,
+		x = -130,
 		y = -5,
 		radius = ballPhysics.radius,
 		invMass = ballPhysics.invMass,
@@ -102,7 +102,7 @@ local function buildReplay(Core, Profile, Reference)
 		local start = team == "red" and RED_ANCHORS[slot] or BLUE_START[slot - Profile.PlayersPerTeam]
 		if slot == 1 then
 			-- Start on the playable side of the ball, already aligned for the opening pass.
-			start = { x = -160, y = -25 }
+			start = { x = -148, y = -26 }
 		end
 		local disc = Core.addDisc(world, {
 			id = slot,
@@ -193,7 +193,7 @@ local function buildReplay(Core, Profile, Reference)
 
 		local holderDisc = players[holder]
 		local holderDistance = distance(holderDisc.x, holderDisc.y, ball.x, ball.y)
-		if not kicked and speed(ball) < 2.8 and holderDistance <= playerPhysics.radius + ballPhysics.radius + baseline.kickRangeExtra
+		if not kicked and speed(ball) < 3.8 and holderDistance <= playerPhysics.radius + ballPhysics.radius + baseline.kickRangeExtra
 			and distance(holderDisc.x, holderDisc.y, stagingX, stagingY) < 9 then
 			inputs[holder].kick = true
 		end
