@@ -78,7 +78,9 @@ local function clipDiagonal(rect: Rect, offset: number, angle: number): (Point?,
     if tx0 == nil or ty0 == nil then
         return nil, nil
     end
-    local t0, t1 = math.max(tx0, ty0), math.min(tx1, ty1)
+    local xStart, xEnd = assert(tx0), assert(tx1)
+    local yStart, yEnd = assert(ty0), assert(ty1)
+    local t0, t1 = math.max(xStart, yStart), math.min(xEnd, yEnd)
     if not finite(t0) or not finite(t1) or t1 - t0 < 1e-8 then
         return nil, nil
     end
@@ -108,13 +110,13 @@ function Scene.segmentPoints(segment: StadiumSegment, angularStep: number?): { P
     local sweep = curveF == 0 and math.pi or 2 * math.atan(1 / curveF)
     local startAngle = math.atan2(segment.y1 - centerY, segment.x1 - centerX)
     local count = math.max(1, math.ceil(math.abs(sweep) / angularStep))
-    local points: { Point } = table.create(count + 1)
+    local points: { Point } = {}
     for index = 0, count do
         local angle = startAngle + sweep * index / count
-        points[index + 1] = {
+        table.insert(points, {
             x = centerX + arcRadius * math.cos(angle),
             y = centerY + arcRadius * math.sin(angle),
-        }
+        })
     end
     -- Exact endpoints prevent hairline gaps at joins.
     points[1] = { x = segment.x1, y = segment.y1 }
