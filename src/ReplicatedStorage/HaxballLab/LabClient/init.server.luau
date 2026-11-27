@@ -515,22 +515,30 @@ RunService.RenderStepped:Connect(function(dt)
 	end
 	local extraDiscMode = latest.pairMode or latest.crowdMode
 	local playerActors = {}
-	if latest.players and #latest.players > 0 then
+	if latest.coreMode and latest.players and #latest.players > 0 then
 		for slot, disc in ipairs(latest.players) do
-			local remotePose = poses.players[slot] or disc
-			local px, py = remotePose.x, remotePose.y
-			if predictedActor and slot == ownSlot then
-				px, py = predictedActor.x, predictedActor.y
+			-- The server reserves ten physics discs, but only owned slots are real
+			-- lobby players. Keep explicit pair/crowd regression actors visible.
+			local regressionActor = latest.pairMode and (slot == 1 or slot == 6)
+				or latest.crowdMode and slot <= 3
+			local occupied = disc.ownerUserId ~= nil or regressionActor == true
+			if occupied then
+				local remotePose = poses.players[slot] or disc
+				local px, py = remotePose.x, remotePose.y
+				if predictedActor and slot == ownSlot then
+					px, py = predictedActor.x, predictedActor.y
+				end
+				playerActors[slot] = {
+					id = slot,
+					team = disc.team,
+					userId = disc.ownerUserId,
+					x = px,
+					y = py,
+					radius = disc.radius or 15,
+					label = string.format("%02d", slot),
+					visible = true,
+				}
 			end
-			playerActors[slot] = {
-				id = slot,
-				team = disc.team,
-				x = px,
-				y = py,
-				radius = disc.radius or 15,
-				label = string.format("%02d", slot),
-				visible = true,
-			}
 		end
 	else
 		playerActors[1] = {

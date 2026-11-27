@@ -44,3 +44,6 @@ Run locally with Luau CLI 0.748:
 luau-analyze src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau tests/luau/run-gui-stadium-tests.luau
 luau tests/luau/run-gui-stadium-tests.luau
 ```
+
+
+Player presentation uses the Roblox headshot thumbnail URI for occupied player slots (ownerUserId supplied by the server). Empty reserved physics slots are hidden; explicit pair/crowd regression actors remain visible. Thumbnail retrieval is client-resolved by Roblox and never participates in simulation or networking.

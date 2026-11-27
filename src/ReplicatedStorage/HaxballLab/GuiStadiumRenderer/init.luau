@@ -183,21 +183,36 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
         local frame = makeCircle(ui, self.root, "Player" .. slot, 20,
             colorFrom(ui, scene.palette, team),
             colorFrom(ui, scene.palette, "goal"), 2.4)
+        local avatar = create(ui, "ImageLabel", frame, {
+            Name = "Avatar",
+            AnchorPoint = ui.vector(0.5, 0.5),
+            Position = ui.scale(0.5, 0.5),
+            Size = ui.scale(0.66, 0.66),
+            BackgroundTransparency = 1,
+            BorderSizePixel = 0,
+            Image = "",
+            Visible = false,
+            ZIndex = 21,
+        })
+        create(ui, "UICorner", avatar, { CornerRadius = ui.circleCorner })
         local label = create(ui, "TextLabel", frame, {
             Name = "Number",
-            AnchorPoint = ui.vector(0, 0),
-            Position = ui.offset(0, 0),
-            Size = ui.scale(1, 1),
-            BackgroundTransparency = 1,
+            AnchorPoint = ui.vector(1, 1),
+            Position = ui.scale(1, 1),
+            Size = ui.scale(0.38, 0.38),
+            BackgroundColor3 = colorFrom(ui, scene.palette, "outerGrass"),
+            BackgroundTransparency = 0.08,
             BorderSizePixel = 0,
             Text = string.format("%02d", slot),
             TextColor3 = colorFrom(ui, scene.palette, "ball"),
             TextScaled = true,
             TextWrapped = false,
             Font = ui.boldFont,
-            ZIndex = 21,
+            ZIndex = 22,
         })
-        self.playerTokens[slot] = { frame = frame, label = label }
+        create(ui, "UICorner", label, { CornerRadius = ui.circleCorner })
+        makeStroke(ui, label, colorFrom(ui, scene.palette, "goal"), 1)
+        self.playerTokens[slot] = { frame = frame, avatar = avatar, label = label }
     end
 
     self.ballToken = makeCircle(ui, self.root, "Ball", 22,
@@ -305,6 +320,14 @@ function Renderer:render(frame, focus)
             token.frame.BackgroundColor3 = colorFrom(self.ui, self.scene.palette,
                 actor.team == "blue" and "blue" or "red")
             token.label.Text = actor.label or string.format("%02d", actor.id or slot)
+            local userId = actor.userId
+            local avatarUri = type(userId) == "number" and userId > 0 and userId < 9007199254740992
+                and ("rbxthumb://type=AvatarHeadShot&id=" .. tostring(math.floor(userId)) .. "&w=48&h=48")
+                or ""
+            if token.avatar.Image ~= avatarUri then
+                token.avatar.Image = avatarUri
+            end
+            token.avatar.Visible = avatarUri ~= ""
         end
     end
 
