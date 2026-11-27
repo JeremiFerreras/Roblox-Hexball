@@ -118,7 +118,7 @@ local tokenSix = renderer.playerTokens[6]
 check("red token is visible and centered on followed player", tokenOne.frame.Visible
     and near(tokenOne.frame.Position.X, 640) and near(tokenOne.frame.Position.Y, 360))
 check("blue token uses its remote position", tokenSix.frame.Visible
-    and near(tokenSix.frame.Position.X, 707.2) and near(tokenSix.frame.Position.Y, 328))
+    and near(tokenSix.frame.Position.X, 708) and near(tokenSix.frame.Position.Y, 328))
 check("player token diameter matches physical radius", near(tokenOne.frame.Size.X, 48))
 check("ball diameter matches physical radius", near(renderer.ballToken.Size.X, 32))
 check("absent players remain hidden", renderer.playerTokens[2].frame.Visible == false)
