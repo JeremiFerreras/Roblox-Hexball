@@ -592,6 +592,16 @@ RunService.RenderStepped:Connect(function(dt)
 	end
 
 	local poses, status = presentation:sample(now)
+	local predictedActor, predictedBall
+	if latest.coreMode and ownSlot and prediction.world and latest.matchPhase == "playing" then
+		-- Predict only the local player's control and its immediate ball interaction.
+		-- Remote players remain on the buffered Hermite timeline.
+		local targetTick = latest.tick + math.floor(math.max(0, now - lastAuthorityAt) * 60)
+		local actor, ball = prediction:advance(targetTick, NetCodec.mask(move.X, move.Y, kick))
+		if actor and ball then
+			predictedActor, predictedBall = prediction:visual(actor, ball, dt)
+		end
+	end
 	if now >= nextMetricsAt then
 		nextMetricsAt = now + 0.05
 		networkMetrics:add("snapshotAgeMs", snapshotAge * 1000)

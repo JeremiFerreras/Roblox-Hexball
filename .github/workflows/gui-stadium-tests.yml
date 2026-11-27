@@ -95,6 +95,7 @@ jobs:
           assert client.index("stateStream.OnClientEvent:Connect") < client.index('WaitForChild("SimpleSoccerControls"')
           assert "SimpleSoccerControls" in client and "Simple SoccerGameplay" not in client
           assert client.index("stateStream.OnClientEvent:Connect") < client.index("GuiStadiumRenderer.new")
+          assert "prediction:advance(targetTick" in client and "prediction:visual(actor, ball, dt)" in client
           assert client.index("controlRemote.OnClientEvent:Connect") < client.index("GuiStadiumRenderer.new")
           assert client.index("GuiStadiumRenderer.new") < client.index('controlRemote:FireServer("ready")')
           assert 'WaitForChild("Remotes"' in client and 'WaitForChild("Remotes"' in server
