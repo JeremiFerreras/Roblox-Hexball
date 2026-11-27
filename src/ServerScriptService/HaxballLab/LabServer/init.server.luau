@@ -140,26 +140,35 @@ local function finite(n)
 end
 
 local function setController(player)
+	-- Joining the Roblox server opens the menu; it does not consume a 4v4 slot.
+	-- The actual roster allocation happens only after the player presses Jugar.
 	if controlledPlayer == nil then
 		controlledPlayer = player
 	end
-	if not playerUserSlots[player.UserId] then
-        local slot = RosterAllocator.nextSlot(
-            slotUserIds,
-            StadiumProfile2D.PlayerCount,
-            StadiumProfile2D.PlayersPerTeam
-        )
-        if slot then
-            playerUserSlots[player.UserId] = slot
-            slotUserIds[slot] = player.UserId
-            if state.players and state.players[slot] then
-                RosterAllocator.activate(state.players[slot], player.UserId)
-            end
-        end
-    end
 	if player.Character then
 		player.Character:Destroy()
 	end
+end
+
+local function assignMatchSlot(player)
+	local existing = playerUserSlots[player.UserId]
+	if existing then
+		return existing
+	end
+	local slot = RosterAllocator.nextSlot(
+		slotUserIds,
+		StadiumProfile2D.PlayerCount,
+		StadiumProfile2D.PlayersPerTeam
+	)
+	if not slot then
+		return nil
+	end
+	playerUserSlots[player.UserId] = slot
+	slotUserIds[slot] = player.UserId
+	if state.players and state.players[slot] then
+		RosterAllocator.activate(state.players[slot], player.UserId)
+	end
+	return slot
 end
 Players.PlayerAdded:Connect(setController)
 for _, player in Players:GetPlayers() do
@@ -597,10 +606,24 @@ controlRemote.OnServerEvent:Connect(function(player, kind, nonce)
 	if state.tick - previous < 15 then
 		return
 	end
-	if kind == "ready" then
+	if kind == "join" then
 		controlRequests[player.UserId] = state.tick
+		local slot = assignMatchSlot(player)
+		if not slot then
+			controlRemote:FireClient(player, "full")
+			return
+		end
+		local s = snapshot()
+		s.resync = true
+		snapshotRemote:FireClient(player, s)
+		controlRemote:FireClient(player, "joined", slot)
+	elseif kind == "ready" then
 		local slot = playerUserSlots[player.UserId]
-		if slot and network.queues[slot] then
+		if not slot then
+			return
+		end
+		controlRequests[player.UserId] = state.tick
+		if network.queues[slot] then
 			network.queues[slot].pending = {}
 		end
 		local s = snapshot()

@@ -13,11 +13,13 @@ Simple Soccer Game is a **faithful inspiration** from the pace and readability o
 - **Server authority:** fixed-tick simulation, player allocation, collision/rule processing, goals, score and state publication.
 - **Client prediction:** local input prediction and snapshot reconciliation remain separate from match authority.
 - **GUI presentation:** a 2D ScreenGui pitch with reusable circular player tokens, ball, lines, goals, posts and a compact scoreboard.
-- **Loading screen:** a ReplicatedFirst screen with an original pre-authored 4v4 passing sequence. It uses eight rounded player discs and one ball, not video or a second physics simulation.
+- **Main menu:** an in-game title panel with a PlayStation-style hover-scale Jugar button and a live tiki-taka preview on the right.
+- **Physics preview:** the menu sequence is simulated locally with the same `PhysicsCore2D` module, 60 Hz tick rate, player/ball parameters, collision groups and Classic stadium geometry used by the server. Only rendering is interpolated between stored physics ticks.
+- **Loading screen:** a short ReplicatedFirst startup screen; it is separate from the main menu preview.
 
 ## Startup and connection
 
-The client waits for typed RemoteEvent/UnreliableRemoteEvent instances, connects all OnClientEvent listeners before constructing the pitch GUI, and then sends the ready handshake. The server replies with a reliable bootstrap snapshot. If no valid snapshot arrives, the client repeats the request. The loading screen closes only after a valid state is accepted and the renderer successfully draws its first frame.
+The client waits for typed RemoteEvent/UnreliableRemoteEvent instances, connects all OnClientEvent listeners, builds the main menu and its locally simulated preview, then reports the menu as ready. A player does not consume one of the eight match slots while browsing the menu. Pressing Jugar sends a join request; the server allocates a 4v4 slot only then and sends a reliable bootstrap snapshot. The live stadium and HUD are enabled after ownership is confirmed.
 
 The loader reports the actual preparation stages: local simulation/rule/prediction modules, GUI pitch geometry, initial server snapshot and first render. Avatar thumbnails are requested only for occupied player slots and do not block the match.
 

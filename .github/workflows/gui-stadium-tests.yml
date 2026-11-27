@@ -14,6 +14,7 @@ on:
       - "src/ReplicatedStorage/HaxballLab/RosterAllocator/**"
       - "src/ReplicatedStorage/HaxballLab/StadiumReference2D/**"
       - "src/ReplicatedStorage/HaxballLab/NetPrediction/**"
+      - "src/ReplicatedStorage/HaxballLab/MenuPreview/**"
       - "src/ReplicatedStorage/HaxballLab/SnapshotBuffer/**"
       - "src/ReplicatedStorage/HaxballLab/LabClient/**"
       - "src/ServerScriptService/HaxballLab/LabServer/**"
@@ -88,6 +89,7 @@ jobs:
           codec = Path("src/ReplicatedStorage/HaxballLab/NetCodec/init.luau").read_text()
           allocator = Path("src/ReplicatedStorage/HaxballLab/RosterAllocator/init.luau").read_text()
           profile = Path("src/ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau").read_text()
+          menu = Path("src/ReplicatedStorage/HaxballLab/MenuPreview/init.luau").read_text()
           boot = Path("src/ReplicatedFirst/SimpleSoccerBoot/init.client.luau").read_text()
           assert "local studsPerUnit = StadiumProfile2D.Presentation.studsPerUnit" in client
           assert "SCALE\n)" not in client, "undefined legacy SCALE format argument remains"
@@ -113,6 +115,11 @@ jobs:
           assert "task.wait(0.1)" not in boot, "boot screen must not poll attributes"
           assert "Set3dRenderingEnabled(false)" in client and "clampCamera" in Path("src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer/init.luau").read_text()
           assert "EnableSimpleSoccerDiagnostics" in client and "EnableSimpleSoccerDiagnostics" in server
+          assert 'controlRemote:FireServer("join")' in client and 'assignMatchSlot(player)' in server
+          assert "MenuPreview.getReplay" in client and "MenuPreview.sample" in client
+          assert "Core.stepWorld(world, inputs)" in menu and "TICK_RATE = 60" in menu
+          assert "MenuPreview" in Path("src/ReplicatedStorage/HaxballLab/instance.json").read_text()
+          assert "hostFrame" in Path("src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer/init.luau").read_text()
           print("PASS: early event listeners, correct input path, 4v4 roster and 400-byte codec")
           print("PASS: render-frame animation, wide pitch, attached numbers and completed goal")
           PY

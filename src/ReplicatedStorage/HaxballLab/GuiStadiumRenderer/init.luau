@@ -112,7 +112,7 @@ function Renderer.hideLegacyField(field)
     end
 end
 
-function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
+function Renderer.new(playerGui, scene, ui, legacyField, sceneApi, hostFrame)
     assert(playerGui and scene and sceneApi, "PlayerGui, scene data, and scene API are required")
     ui = ui or defaultUI()
     local self = setmetatable({
@@ -123,16 +123,26 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
         lastOrigin = nil,
         playerTokens = {},
         debugLines = {},
+        mounted = hostFrame ~= nil,
     }, Renderer)
 
-    self.gui = create(ui, "ScreenGui", playerGui, {
-        Name = "SimpleSoccerStadium2D",
-        ResetOnSpawn = false,
-        IgnoreGuiInset = true,
-        DisplayOrder = 0,
-        ZIndexBehavior = ui.siblingZIndex,
-    })
-    self.root = create(ui, "Frame", self.gui, {
+    local rootParent = playerGui
+    if hostFrame then
+        -- Menu previews mount the exact same renderer inside a responsive panel.
+        -- The standard live-match path still owns a full-screen ScreenGui.
+        self.gui = nil
+        rootParent = hostFrame
+    else
+        self.gui = create(ui, "ScreenGui", playerGui, {
+            Name = "SimpleSoccerStadium2D",
+            ResetOnSpawn = false,
+            IgnoreGuiInset = true,
+            DisplayOrder = 0,
+            ZIndexBehavior = ui.siblingZIndex,
+        })
+        rootParent = self.gui
+    end
+    self.root = create(ui, "Frame", rootParent, {
         Name = "Viewport",
         AnchorPoint = ui.vector(0, 0),
         Position = ui.offset(0, 0),
@@ -391,7 +401,10 @@ function Renderer:destroy()
     if self.gui then
         self.gui:Destroy()
         self.gui = nil
+    elseif self.root then
+        self.root:Destroy()
     end
+    self.root = nil
 end
 
 return Renderer

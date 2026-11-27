@@ -121,6 +121,7 @@
     "ReplicatedStorage/HaxballLab/NetInputClient",
     "ReplicatedStorage/HaxballLab/PhysicsCore2D",
     "ReplicatedStorage/HaxballLab/NetPrediction",
+    "ReplicatedStorage/HaxballLab/MenuPreview",
     "ReplicatedStorage/HaxballLab/SnapshotBuffer",
     "ReplicatedStorage/HaxballLab/NetMetrics",
     "ReplicatedStorage/HaxballLab/Remotes",
