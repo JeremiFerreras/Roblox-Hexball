@@ -1,5 +1,38 @@
 --!strict
 -- Pure 2D stadium description. No Roblox Instances, services, or physics mutations.
+type Point = { x: number, y: number }
+type Rect = { minX: number, maxX: number, minY: number, maxY: number }
+type RGB = { number }
+type Palette = {
+    outerGrass: RGB, grass: RGB, stripeA: RGB, stripeB: RGB,
+    line: RGB, goal: RGB, post: RGB, red: RGB, blue: RGB, ball: RGB, debug: RGB,
+}
+type StadiumSegment = {
+    id: string?, x1: number, y1: number, x2: number, y2: number,
+    curveF: number?, centerX: number?, centerY: number?, arcRadius: number?,
+    collisionGroup: number,
+}
+type StadiumProfile = {
+    Bounds: { minX: number, maxX: number, minY: number, maxY: number, spanWidth: number, spanHeight: number },
+    PlayArea: { minX: number, maxX: number, minY: number, maxY: number },
+    StadiumProperties: { bg: { width: number, height: number, kickOffRadius: number } },
+    CollisionGroups: { wall: number },
+}
+type StadiumReference = {
+    segments: { StadiumSegment },
+    posts: { { id: string?, x: number, y: number, radius: number } },
+}
+type Stripe = { id: string, a: Point, b: Point, thickness: number, color: string }
+type SceneLine = { id: string, a: Point, b: Point, thickness: number, color: string, layer: string }
+type Circle = { id: string, x: number, y: number, radius: number, thickness: number, color: string }
+type Post = { id: string, x: number, y: number, radius: number, fill: string, stroke: string }
+type SceneData = {
+    width: number, height: number, bounds: Rect, grass: Rect, palette: Palette,
+    stripes: { Stripe }, lines: { SceneLine }, circles: { Circle }, posts: { Post },
+}
+type Layout = { width: number, height: number, scale: number }
+type Camera = { x: number?, y: number? }
+
 local Scene = {}
 
 Scene.Palette = {
@@ -16,15 +49,15 @@ Scene.Palette = {
     debug = { 255, 220, 70 },
 }
 
-local function finite(value)
+local function finite(value: any): boolean
     return type(value) == "number" and value == value and math.abs(value) < 1e12
 end
 
-local function copyPoint(point)
+local function copyPoint(point: Point): Point
     return { x = point.x, y = point.y }
 end
 
-local function clipAxis(origin, direction, low, high)
+local function clipAxis(origin: number, direction: number, low: number, high: number): (number?, number?)
     if math.abs(direction) < 1e-9 then
         if origin < low or origin > high then
             return nil, nil
@@ -36,7 +69,7 @@ local function clipAxis(origin, direction, low, high)
     return math.min(first, last), math.max(first, last)
 end
 
-local function clipDiagonal(rect, offset, angle)
+local function clipDiagonal(rect: Rect, offset: number, angle: number): (Point?, Point?)
     local dx, dy = math.cos(angle), math.sin(angle)
     local nx, ny = -dy, dx
     local x0, y0 = nx * offset, ny * offset
@@ -58,7 +91,7 @@ local function clipDiagonal(rect, offset, angle)
     }
 end
 
-function Scene.segmentPoints(segment, angularStep)
+function Scene.segmentPoints(segment: StadiumSegment, angularStep: number?): { Point }
     angularStep = angularStep or math.pi / 36
     assert(finite(angularStep) and angularStep > 0 and angularStep < math.pi, "invalid angular step")
     if type(segment.curveF) ~= "number" then
@@ -68,15 +101,19 @@ function Scene.segmentPoints(segment, angularStep)
         }
     end
 
-    local sweep = segment.curveF == 0 and math.pi or 2 * math.atan(1 / segment.curveF)
-    local startAngle = math.atan2(segment.y1 - segment.centerY, segment.x1 - segment.centerX)
+    local curveF = assert(segment.curveF)
+    local centerX = assert(segment.centerX)
+    local centerY = assert(segment.centerY)
+    local arcRadius = assert(segment.arcRadius)
+    local sweep = curveF == 0 and math.pi or 2 * math.atan(1 / curveF)
+    local startAngle = math.atan2(segment.y1 - centerY, segment.x1 - centerX)
     local count = math.max(1, math.ceil(math.abs(sweep) / angularStep))
-    local points = table.create(count + 1)
+    local points: { Point } = table.create(count + 1)
     for index = 0, count do
         local angle = startAngle + sweep * index / count
         points[index + 1] = {
-            x = segment.centerX + segment.arcRadius * math.cos(angle),
-            y = segment.centerY + segment.arcRadius * math.sin(angle),
+            x = centerX + arcRadius * math.cos(angle),
+            y = centerY + arcRadius * math.sin(angle),
         }
     end
     -- Exact endpoints prevent hairline gaps at joins.
@@ -85,7 +122,7 @@ function Scene.segmentPoints(segment, angularStep)
     return points
 end
 
-local function appendLine(lines, id, a, b, thickness, color, layer)
+local function appendLine(lines: { SceneLine }, id: string, a: Point, b: Point, thickness: number, color: string, layer: string?)
     local dx, dy = b.x - a.x, b.y - a.y
     if dx * dx + dy * dy <= 1e-12 then
         return
@@ -100,20 +137,20 @@ local function appendLine(lines, id, a, b, thickness, color, layer)
     })
 end
 
-function Scene.build(profile, reference)
+function Scene.build(profile: StadiumProfile, reference: StadiumReference): SceneData
     assert(type(profile) == "table" and type(reference) == "table", "profile and reference are required")
     local bounds = profile.Bounds
     local playArea = profile.PlayArea
     local bg = profile.StadiumProperties.bg
     assert(bounds and playArea and bg and reference.segments and reference.posts, "incomplete stadium reference")
 
-    local grass = {
+    local grass: Rect = {
         minX = playArea.minX or -bg.width,
         maxX = playArea.maxX or bg.width,
         minY = playArea.minY or -bg.height,
         maxY = playArea.maxY or bg.height,
     }
-    local scene = {
+    local scene: SceneData = {
         width = bounds.spanWidth,
         height = bounds.spanHeight,
         bounds = {
@@ -154,13 +191,13 @@ function Scene.build(profile, reference)
     -- Touchlines and halfway line are presentation geometry only.
     appendLine(scene.lines, "touchline-top",
         { x = grass.minX, y = grass.maxY }, { x = grass.maxX, y = grass.maxY },
-        1.8, "line")
+        1.8, "line", "marking")
     appendLine(scene.lines, "touchline-bottom",
         { x = grass.minX, y = grass.minY }, { x = grass.maxX, y = grass.minY },
-        1.8, "line")
+        1.8, "line", "marking")
     appendLine(scene.lines, "halfway-line",
         { x = 0, y = grass.minY }, { x = 0, y = grass.maxY },
-        1.8, "line")
+        1.8, "line", "marking")
 
     -- Reuse the exact reference segments that the discrete collision profile installs.
     local wallGroup = profile.CollisionGroups.wall
@@ -206,7 +243,7 @@ function Scene.build(profile, reference)
     return scene
 end
 
-function Scene.fit(viewportWidth, viewportHeight)
+function Scene.fit(viewportWidth: number, viewportHeight: number): Layout
     assert(finite(viewportWidth) and finite(viewportHeight) and viewportWidth > 0 and viewportHeight > 0,
         "viewport dimensions must be positive finite numbers")
     -- Show the full 400-unit pitch height with a small horizontal crop on 16:9,
@@ -219,7 +256,7 @@ function Scene.fit(viewportWidth, viewportHeight)
     }
 end
 
-function Scene.toViewport(x, y, layout, camera)
+function Scene.toViewport(x: number, y: number, layout: Layout, camera: Camera?): (number, number)
     assert(finite(x) and finite(y) and type(layout) == "table" and finite(layout.scale) and layout.scale > 0,
         "invalid world point or layout")
     camera = camera or { x = 0, y = 0 }
@@ -229,7 +266,7 @@ function Scene.toViewport(x, y, layout, camera)
         layout.height * 0.5 - (y - cameraY) * layout.scale
 end
 
-function Scene.toLogical(screenX, screenY, layout, camera)
+function Scene.toLogical(screenX: number, screenY: number, layout: Layout, camera: Camera?): Point
     assert(finite(screenX) and finite(screenY) and type(layout) == "table" and finite(layout.scale) and layout.scale > 0,
         "invalid screen point or layout")
     camera = camera or { x = 0, y = 0 }
