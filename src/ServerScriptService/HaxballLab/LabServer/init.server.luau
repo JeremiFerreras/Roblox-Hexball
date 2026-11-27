@@ -153,7 +153,7 @@ local function setController(player)
             playerUserSlots[player.UserId] = slot
             slotUserIds[slot] = player.UserId
             if state.players and state.players[slot] then
-                state.players[slot].ownerUserId = player.UserId
+                RosterAllocator.activate(state.players[slot], player.UserId)
             end
         end
     end
@@ -176,8 +176,8 @@ Players.PlayerRemoving:Connect(function(player)
 		lastCoreKickInputs[slot] = nil
 		touchingCoreBall[slot] = nil
 		if state.players and state.players[slot] then
-			state.players[slot].ownerUserId = nil
-		end
+            RosterAllocator.deactivate(state.players[slot], state.spawnPoints and state.spawnPoints[slot])
+        end
 	end
 	if player == controlledPlayer then
 		controlledPlayer = nil
@@ -306,6 +306,7 @@ local function makeCoreState()
 			kickRangeExtra = Physics2D.Config.kickRangeExtra,
 			collisionGroup = slot <= StadiumProfile2D.PlayersPerTeam and ClassicStadium2D.Groups.red or ClassicStadium2D.Groups.blue,
 			collisionMask = StadiumProfile2D.CollisionMasks.player,
+            enabled = slotUserIds[slot] ~= nil,
 		})
 		disc.ownerUserId = slotUserIds[slot]
 		players[slot] = disc
@@ -500,14 +501,17 @@ local function snapshot()
 	local p2dx, p2dy = p.x - p2.x, p.y - p2.y
 	local p2bdx, p2bdy = p2.x - b.x, p2.y - b.y
 	local playerSnapshots = {}
-	local redCount, blueCount = 0, 0
+	local redCount, blueCount, occupiedCount = 0, 0, 0
 	if state.players then
 		for slot, disc in ipairs(state.players) do
-			if disc.team == "red" then
-				redCount += 1
-			elseif disc.team == "blue" then
-				blueCount += 1
-			end
+			if disc.ownerUserId ~= nil then
+                occupiedCount += 1
+                if disc.team == "red" then
+                    redCount += 1
+                elseif disc.team == "blue" then
+                    blueCount += 1
+                end
+            end
 			table.insert(playerSnapshots, {
 				playerId = slot,
 				team = disc.team,
@@ -551,7 +555,8 @@ local function snapshot()
 		},
 		player2 = { x = p2.x, y = p2.y, vx = p2.vx, vy = p2.vy, speed = speed(p2), radius = p2.radius },
 		players = playerSnapshots,
-		playerCount = #playerSnapshots,
+		playerCount = StadiumProfile2D.PlayerCount,
+        occupiedPlayerCount = occupiedCount,
 		redCount = redCount,
 		blueCount = blueCount,
 		ball = {

@@ -214,4 +214,33 @@ local unbalancedRoster = { [1] = 7001, [2] = 7002 }
 check("4v4 allocator fills the smaller team first",
     RosterAllocator.nextSlot(unbalancedRoster, 8, 4) == 5)
 
+local mockDisc = {
+    x = 90, y = 40, vx = 4, vy = -3,
+    ownerUserId = nil, enabled = false,
+    kickHeld = true, kickArmed = true, kickCooldown = 2,
+}
+RosterAllocator.activate(mockDisc, 9876)
+check("allocated player disc becomes active and owner-bound",
+    mockDisc.enabled and mockDisc.ownerUserId == 9876)
+RosterAllocator.deactivate(mockDisc, { x = -150, y = 0 })
+check("released player disc is inactive, stopped and returned to spawn",
+    not mockDisc.enabled and mockDisc.ownerUserId == nil
+    and mockDisc.vx == 0 and mockDisc.vy == 0
+    and mockDisc.x == -150 and mockDisc.y == 0
+    and not mockDisc.kickHeld and not mockDisc.kickArmed and mockDisc.kickCooldown == 0)
+
+local Core = require("../../src/ReplicatedStorage/HaxballLab/PhysicsCore2D")
+local inactiveWorld = Core.newWorld({ useBounds = false })
+local testBall = Core.addDisc(inactiveWorld, { id = "ball", kind = "ball", x = 0, y = 0, radius = 10, invMass = 1 })
+local emptySlot = Core.addDisc(inactiveWorld, {
+    id = 1, kind = "player", x = 0, y = 0, radius = 15, invMass = 1,
+    enabled = false,
+})
+Core.stepWorld(inactiveWorld, {})
+check("unoccupied disabled slot cannot push the ball", testBall.x == 0 and testBall.y == 0)
+emptySlot.enabled = true
+Core.stepWorld(inactiveWorld, {})
+check("occupied enabled player disc participates in physical collision",
+    testBall.x ~= 0 or testBall.y ~= 0)
+
 print(string.format("GUI_STADIUM_TESTS_OK passed=%d", passed))

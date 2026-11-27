@@ -102,6 +102,8 @@ function Prediction:restore(s, slot)
 		for _, key in ipairs({ "x", "y", "vx", "vy", "kickHeld", "kickArmed", "kickCooldown", "collisionMask" }) do
 			p[key] = d[key]
 		end
+        -- Ownership is sent in the reliable bootstrap and retained by the state codec.
+        p.enabled = d.ownerUserId ~= nil
 		self.lastMasks[i] = d.inputMask or 0
 		self.release[i] = d.needsKickRelease == true
 	end

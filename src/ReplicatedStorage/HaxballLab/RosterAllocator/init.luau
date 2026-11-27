@@ -33,4 +33,22 @@ function Allocator.nextSlot(slotUserIds: { [number]: number? }, playerCount: num
     return nil
 end
 
+function Allocator.activate(disc, userId: number)
+    assert(type(disc) == "table", "player disc is required")
+    assert(type(userId) == "number" and userId > 0 and userId % 1 == 0, "user id must be a positive integer")
+    disc.ownerUserId = userId
+    disc.enabled = true
+end
+
+function Allocator.deactivate(disc, spawn: { x: number, y: number }?)
+    assert(type(disc) == "table", "player disc is required")
+    disc.ownerUserId = nil
+    disc.enabled = false
+    disc.vx, disc.vy = 0, 0
+    disc.kickHeld, disc.kickArmed, disc.kickCooldown = false, false, 0
+    if spawn then
+        disc.x, disc.y = spawn.x, spawn.y
+    end
+end
+
 return Allocator
