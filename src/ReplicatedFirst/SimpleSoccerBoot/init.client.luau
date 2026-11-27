@@ -100,7 +100,7 @@ local function addLine(name, x1, y1, x2, y2, thickness, color, transparency)
     line.Name = name
     line.AnchorPoint = Vector2.new(0.5, 0.5)
     line.Position = UDim2.fromScale((x1 + x2) * 0.5, (y1 + y2) * 0.5)
-    line.Size = UDim2.new(length * pitch.AbsoluteSize.Y / pitch.AbsoluteSize.X, 0, 0, thickness)
+    line.Size = UDim2.new(length / 2.1, 0, 0, thickness)
     line.Rotation = math.deg(math.atan2(dy, dx))
     line.BackgroundColor3 = color or palette.line
     line.BackgroundTransparency = transparency or 0.38
