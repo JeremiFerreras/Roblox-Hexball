@@ -3,14 +3,36 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
 local player = Players.LocalPlayer
-local lab = ReplicatedStorage:WaitForChild("HaxballLab")
-local remotes = lab.Remotes
-local inputRemote = remotes.Input
-local snapshotRemote = remotes.Snapshot
-local commandRemote = remotes.DebugCommand
-local inputStream = remotes:WaitForChild("InputStream")
-local stateStream = remotes:WaitForChild("StateStream")
-local controlRemote = remotes:WaitForChild("Control")
+local lab = ReplicatedStorage:WaitForChild("SimpleSoccerGame", 20)
+if not lab then
+    error("Simple Soccer: ReplicatedStorage.SimpleSoccerGame did not replicate")
+end
+local function setBootStage(stage, detail, bootError)
+    lab:SetAttribute("ClientBootStage", stage)
+    if detail then lab:SetAttribute("ClientBootDetail", detail) end
+    if bootError then lab:SetAttribute("ClientBootError", tostring(bootError)) end
+end
+local remotes = lab:WaitForChild("Remotes", 20)
+if not remotes then
+    setBootStage("ERROR", "No se encontraron los canales de red", "Remotes no replicados")
+    error("Simple Soccer: Remotes folder did not replicate")
+end
+local function requireRemote(name, className)
+    local remote = remotes:WaitForChild(name, 20)
+    if not remote or not remote:IsA(className) then
+        local message = string.format("Remote %s missing or expected %s", name, className)
+        setBootStage("ERROR", "No se pudo preparar la conexión", message)
+        error("Simple Soccer: " .. message)
+    end
+    return remote
+end
+local inputRemote = requireRemote("Input", "RemoteEvent")
+local snapshotRemote = requireRemote("Snapshot", "RemoteEvent")
+local commandRemote = requireRemote("DebugCommand", "RemoteEvent")
+local inputStream = requireRemote("InputStream", "UnreliableRemoteEvent")
+local stateStream = requireRemote("StateStream", "UnreliableRemoteEvent")
+local controlRemote = requireRemote("Control", "RemoteEvent")
+setBootStage("LOADING_MODULES", "Preparando simulación, predicción y sincronización")
 local NetCodec = require(lab:WaitForChild("NetCodec"))
 local NetInputClient = require(lab:WaitForChild("NetInputClient"))
 local netInput = NetInputClient.new()
@@ -52,19 +74,16 @@ local function sendWire(b, reliable)
 end
 local PredictionLab2D = require(lab:WaitForChild("PredictionLab2D"))
 local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
-local inputContext = ReplicatedStorage:WaitForChild("Inputs"):WaitForChild("HaxballGameplay")
+local inputContext = ReplicatedStorage:WaitForChild("Inputs"):WaitForChild("Simple SoccerGameplay")
 local moveAction = inputContext:WaitForChild("Move")
 local kickAction = inputContext:WaitForChild("Kick")
 local ClassicReference230 = require(lab:WaitForChild("ClassicReference230"))
-local GuiStadiumScene = require(lab:WaitForChild("GuiStadiumScene"))
-local GuiStadiumRenderer = require(lab:WaitForChild("GuiStadiumRenderer"))
-local stadiumScene = GuiStadiumScene.build(StadiumProfile2D, ClassicReference230)
-local legacyField = workspace:WaitForChild("HaxballLab")
-local stadiumRenderer = GuiStadiumRenderer.new(player:WaitForChild("PlayerGui"), stadiumScene, nil, legacyField, GuiStadiumScene)
+local stadiumRenderer = nil
+local firstRenderReady = false
 
-local showDiagnostics = lab:GetAttribute("EnableHaxballDiagnostics") == true
+local showDiagnostics = lab:GetAttribute("EnableSimpleSoccerDiagnostics") == true
 local gui = Instance.new("ScreenGui")
-gui.Name = "HaxballLabDebug"
+gui.Name = "SimpleSoccerDebug"
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 local label = Instance.new("TextLabel")
@@ -77,12 +96,12 @@ label.Font = Enum.Font.Code
 label.TextSize = 14
 label.TextXAlignment = Enum.TextXAlignment.Left
 label.TextYAlignment = Enum.TextYAlignment.Top
-label.Text = "Haxball diagnostics | opt-in"
+label.Text = "Simple Soccer diagnostics | opt-in"
 label.Visible = showDiagnostics
 label.Parent = gui
 
 local matchHud = Instance.new("ScreenGui")
-matchHud.Name = "HaxballMatchHud"
+matchHud.Name = "SimpleSoccerHUD"
 matchHud.ResetOnSpawn = false
 matchHud.IgnoreGuiInset = true
 matchHud.DisplayOrder = 20
@@ -90,39 +109,39 @@ matchHud.Parent = player:WaitForChild("PlayerGui")
 local hudPanel = Instance.new("Frame")
 hudPanel.Name = "ScorePanel"
 hudPanel.AnchorPoint = Vector2.new(0.5, 0)
-hudPanel.Position = UDim2.new(0.5, 0, 0, 18)
-hudPanel.Size = UDim2.fromOffset(390, 72)
-hudPanel.BackgroundColor3 = Color3.fromRGB(13, 24, 35)
-hudPanel.BackgroundTransparency = 0.08
+hudPanel.Position = UDim2.new(0.5, 0, 0, 14)
+hudPanel.Size = UDim2.fromOffset(350, 62)
+hudPanel.BackgroundColor3 = Color3.fromRGB(36, 57, 43)
+hudPanel.BackgroundTransparency = 0.10
 hudPanel.BorderSizePixel = 0
 hudPanel.Parent = matchHud
 local hudCorner = Instance.new("UICorner")
-hudCorner.CornerRadius = UDim.new(0, 14)
+hudCorner.CornerRadius = UDim.new(0, 10)
 hudCorner.Parent = hudPanel
 local hudStroke = Instance.new("UIStroke")
-hudStroke.Color = Color3.fromRGB(103, 139, 153)
-hudStroke.Transparency = 0.55
+hudStroke.Color = Color3.fromRGB(157, 181, 139)
+hudStroke.Transparency = 0.58
 hudStroke.Thickness = 1
 hudStroke.Parent = hudPanel
 local function makeHudLabel(name, text, position, size, color, textSize, font)
-	local item = Instance.new("TextLabel")
-	item.Name = name
-	item.Position = position
-	item.Size = size
-	item.BackgroundTransparency = 1
-	item.Text = text
-	item.TextColor3 = color
-	item.Font = font or Enum.Font.GothamBold
-	item.TextSize = textSize
-	item.TextXAlignment = Enum.TextXAlignment.Center
-	item.TextYAlignment = Enum.TextYAlignment.Center
-	item.Parent = hudPanel
-	return item
+    local item = Instance.new("TextLabel")
+    item.Name = name
+    item.Position = position
+    item.Size = size
+    item.BackgroundTransparency = 1
+    item.Text = text
+    item.TextColor3 = color
+    item.Font = font or Enum.Font.GothamBold
+    item.TextSize = textSize
+    item.TextXAlignment = Enum.TextXAlignment.Center
+    item.TextYAlignment = Enum.TextYAlignment.Center
+    item.Parent = hudPanel
+    return item
 end
-local redScoreLabel = makeHudLabel("RedScore", "RED  0", UDim2.fromOffset(12, 8), UDim2.fromOffset(112, 34), Color3.fromRGB(255, 137, 124), 21)
-local scoreDivider = makeHudLabel("ScoreDivider", ":", UDim2.fromOffset(181, 8), UDim2.fromOffset(28, 34), Color3.fromRGB(205, 222, 227), 23)
-local blueScoreLabel = makeHudLabel("BlueScore", "0  BLUE", UDim2.fromOffset(266, 8), UDim2.fromOffset(112, 34), Color3.fromRGB(132, 190, 255), 21)
-local statusLabel = makeHudLabel("MatchStatus", "CONNECTING", UDim2.fromOffset(16, 42), UDim2.new(1, -32, 0, 21), Color3.fromRGB(204, 220, 224), 12, Enum.Font.GothamMedium)
+local redScoreLabel = makeHudLabel("RedScore", "RED  0", UDim2.fromOffset(12, 5), UDim2.fromOffset(112, 34), Color3.fromRGB(213, 139, 128), 19)
+local scoreDivider = makeHudLabel("ScoreDivider", ":", UDim2.fromOffset(161, 5), UDim2.fromOffset(28, 34), Color3.fromRGB(220, 226, 207), 21)
+local blueScoreLabel = makeHudLabel("BlueScore", "0  BLUE", UDim2.fromOffset(226, 5), UDim2.fromOffset(112, 34), Color3.fromRGB(143, 172, 210), 19)
+local statusLabel = makeHudLabel("MatchStatus", "PREPARANDO PARTIDA", UDim2.fromOffset(10, 37), UDim2.new(1, -20, 0, 19), Color3.fromRGB(196, 211, 181), 11, Enum.Font.GothamMedium)
 local predictionLabel = Instance.new("TextLabel")
 predictionLabel.Name = "NetworkPredictionDebug"
 predictionLabel.Size = UDim2.fromOffset(370, 72)
@@ -138,7 +157,7 @@ predictionLabel.TextWrapped = true
 predictionLabel.Text = "Predicción experimental | input delay 0 ms"
 predictionLabel.Visible = showDiagnostics
 predictionLabel.Parent = gui
--- Client-local console: PlayerGui.HaxballLabDebug.NetworkDiagnostics:Invoke().
+-- Client-local console: PlayerGui.SimpleSoccerDebug.NetworkDiagnostics:Invoke().
 local networkDiagnostics = Instance.new("BindableFunction")
 networkDiagnostics.Name = "NetworkDiagnostics"
 networkDiagnostics.OnInvoke = function()
@@ -178,7 +197,7 @@ local goals = StadiumProfile2D.Goals
 local activePhysics = StadiumProfile2D.PhysicsBaseline.active
 local replayPhysics = StadiumProfile2D.PhysicsBaseline.replayCandidate
 calibrationLabel.Text = string.format(
-	"CLASSIC | physics/presentation reference Node-Haxball 2.3.0\nLogical %dx%d | goal opening %d | geometry %dP/%dS/%dV/%d posts\nVisual %.2f studs/unit | independent reference; official comparison pending",
+	"CLASSIC | physics/presentation reference independent classic-game reference\nLogical %dx%d | goal opening %d | geometry %dP/%dS/%dV/%d posts\nVisual %.2f studs/unit | independent reference; official comparison pending",
 	bounds.spanWidth,
 	bounds.spanHeight,
 	goals.openingWidth,
@@ -312,6 +331,7 @@ local function readAction(action, fallback)
 	end
 	return fallback
 end
+local hasReceivedSnapshot = false
 local function acceptSnapshot(s)
 	if
 		latest
@@ -330,6 +350,10 @@ local function acceptSnapshot(s)
 	end
 	local unique = not latest or reset or s.tick > latest.tick
 	latest = s
+    if not hasReceivedSnapshot then
+        hasReceivedSnapshot = true
+        setBootStage("SYNCHRONIZING", "Estado inicial recibido; sincronizando jugadores y balón")
+    end
 	if unique then
 		snapshotAge = 0
 		lastAuthorityAt = os.clock()
@@ -403,13 +427,30 @@ stateStream.OnClientEvent:Connect(function(b)
 	end
 end)
 controlRemote.OnClientEvent:Connect(function(kind, nonce)
-	if kind == "pong" and pingTimes[nonce] then
-		local sample = math.max(0, os.clock() - pingTimes[nonce])
-		pingTimes[nonce] = nil
-		networkMetrics:add("rttMs", sample * 1000)
-		rtt = rtt == 0 and sample or rtt * 0.8 + sample * 0.2
-	end
+    if kind == "pong" and pingTimes[nonce] then
+        local sample = math.max(0, os.clock() - pingTimes[nonce])
+        pingTimes[nonce] = nil
+        networkMetrics:add("rttMs", sample * 1000)
+        rtt = rtt == 0 and sample or rtt * 0.8 + sample * 0.2
+    end
 end)
+
+-- Connect all network listeners before constructing the GUI scene.
+setBootStage("BUILDING_PITCH", "Preparando cancha 2D, líneas y porterías")
+local visualOk, visualError = pcall(function()
+    local GuiStadiumScene = require(lab:WaitForChild("GuiStadiumScene"))
+    local GuiStadiumRenderer = require(lab:WaitForChild("GuiStadiumRenderer"))
+    local stadiumScene = GuiStadiumScene.build(StadiumProfile2D, ClassicReference230)
+    local legacyField = workspace:WaitForChild("SimpleSoccerGame", 15)
+    assert(legacyField, "legacy field model did not replicate")
+    stadiumRenderer = GuiStadiumRenderer.new(player:WaitForChild("PlayerGui"), stadiumScene, nil, legacyField, GuiStadiumScene)
+end)
+if not visualOk then
+    setBootStage("VISUAL_ERROR", "La conexión está preparada; revisando visualización", tostring(visualError))
+    warn("Simple Soccer GUI initialization failed: " .. tostring(visualError))
+else
+    setBootStage("WAITING_FOR_STATE", "Esperando el primer estado autoritativo")
+end
 controlRemote:FireServer("ready")
 
 local function sendCoreInput(move, kick, now)
@@ -487,6 +528,9 @@ RunService.RenderStepped:Connect(function(dt)
 		sendWire(queued.wire, queued.reliable)
 	end
 	if not latest then
+        if now >= nextPingAt - 0.05 then
+            setBootStage("WAITING_FOR_STATE", "Solicitando sincronización inicial al servidor")
+        end
 		return
 	end
 
@@ -577,16 +621,23 @@ RunService.RenderStepped:Connect(function(dt)
 	end
 
 	local focus = playerActors[ownSlot or 1] or poses.player
-	stadiumRenderer:render({
-		players = playerActors,
-		ball = {
-			x = ballPose.x,
-			y = ballPose.y,
-			radius = latest.ball.radius or 10,
-			visible = not latest.pairMode,
-		},
-		debugLines = debugLines,
-	}, focus)
+	if stadiumRenderer then
+        local rendered = stadiumRenderer:render({
+            players = playerActors,
+            ball = {
+                x = ballPose.x,
+                y = ballPose.y,
+                radius = latest.ball.radius or 10,
+                visible = not latest.pairMode,
+            },
+            debugLines = debugLines,
+        }, focus)
+        if rendered and not firstRenderReady then
+            firstRenderReady = true
+            setBootStage("READY", "Cancha y primer estado preparados · 4 contra 4")
+            lab:SetAttribute("ClientBootReady", true)
+        end
+    end
 	local m = latest.metrics
 	local lastTouchLine = latest.lastTouch
 			and string.format(
@@ -667,7 +718,7 @@ RunService.RenderStepped:Connect(function(dt)
 	blueScoreLabel.Text = string.format("%d  BLUE", latest.score.blue)
 	statusLabel.Text = string.upper(matchStatus)
 	label.Text = string.format(
-		"Haxball lab | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",
+		"Simple Soccer | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",
 		latest.tick,
 		latest.gameTime,
 		latest.crowdMode and "THREE-DISC TEST"
