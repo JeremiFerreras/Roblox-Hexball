@@ -32,6 +32,44 @@ local commandRemote = requireRemote("DebugCommand", "RemoteEvent")
 local inputStream = requireRemote("InputStream", "UnreliableRemoteEvent")
 local stateStream = requireRemote("StateStream", "UnreliableRemoteEvent")
 local controlRemote = requireRemote("Control", "RemoteEvent")
+local processSnapshot = nil
+local processStatePacket = nil
+local processControlEvent = nil
+local earlySnapshots = {}
+local earlyStatePackets = {}
+local earlyControlEvents = {}
+
+local function retainEarly(queue, payload, limit)
+    queue[#queue + 1] = payload
+    if #queue > limit then
+        table.remove(queue, 1)
+    end
+end
+
+-- Register the listeners before requiring any gameplay module or waiting for input assets.
+-- The ReplicatedStorage input-context name is resolved later; incoming state is buffered meanwhile.
+snapshotRemote.OnClientEvent:Connect(function(snapshot)
+    if processSnapshot then
+        processSnapshot(snapshot)
+    else
+        retainEarly(earlySnapshots, snapshot, 4)
+    end
+end)
+stateStream.OnClientEvent:Connect(function(packet)
+    if processStatePacket then
+        processStatePacket(packet)
+    else
+        retainEarly(earlyStatePackets, packet, 8)
+    end
+end)
+controlRemote.OnClientEvent:Connect(function(kind, nonce)
+    if processControlEvent then
+        processControlEvent(kind, nonce)
+    else
+        retainEarly(earlyControlEvents, { kind = kind, nonce = nonce }, 8)
+    end
+end)
+
 setBootStage("LOADING_MODULES", "Módulos locales: física 2D, reglas 4v4, predicción y red")
 local NetCodec = require(lab:WaitForChild("NetCodec"))
 local NetInputClient = require(lab:WaitForChild("NetInputClient"))
@@ -74,9 +112,18 @@ local function sendWire(b, reliable)
 end
 local PredictionLab2D = require(lab:WaitForChild("PredictionLab2D"))
 local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
-local inputContext = ReplicatedStorage:WaitForChild("Inputs"):WaitForChild("Simple SoccerGameplay")
-local moveAction = inputContext:WaitForChild("Move")
-local kickAction = inputContext:WaitForChild("Kick")
+local inputFolder = ReplicatedStorage:WaitForChild("Inputs", 20)
+local inputContext = inputFolder and inputFolder:WaitForChild("SimpleSoccerControls", 20)
+if not inputContext then
+    setBootStage("ERROR", "No se encontraron los controles", "Inputs.SimpleSoccerControls no está disponible")
+    error("Simple Soccer: ReplicatedStorage.Inputs.SimpleSoccerControls did not replicate")
+end
+local moveAction = inputContext:WaitForChild("Move", 10)
+local kickAction = inputContext:WaitForChild("Kick", 10)
+if not moveAction or not kickAction then
+    setBootStage("ERROR", "Faltan acciones de control", "Se requieren Move y Kick")
+    error("Simple Soccer: Move/Kick input actions did not replicate")
+end
 local ClassicReference230 = require(lab:WaitForChild("ClassicReference230"))
 local stadiumRenderer = nil
 local firstRenderReady = false
@@ -394,46 +441,56 @@ local function acceptSnapshot(s)
 	ownSlot = slot
 	return true
 end
-snapshotRemote.OnClientEvent:Connect(function(s)
-	networkMetrics:count("fullSnapshotPackets")
-	-- Bootstrap carries ownership/static configuration; dynamic packets carry no diagnostics.
-	if not latest or s.matchId > latest.matchId or s.matchId == latest.matchId and s.round >= latest.round then
-		bootstrap = s
-	end
-	if
-		s.resync
-		and latest
-		and s.matchId == latest.matchId
-		and s.round == latest.round
-		and s.tick < latest.tick
-		and ownSlot
-	then
-		resetInputs(s.matchId, s.round, math.max(s.players[ownSlot].ack or 0, latest.players[ownSlot].ack or 0))
-	end
-	acceptSnapshot(s)
-end)
-stateStream.OnClientEvent:Connect(function(b)
-	networkMetrics:count("statePackets")
-	if typeof(b) == "buffer" then
-		networkMetrics:count("stateBytes", buffer.len(b))
-	end
-	local s = NetCodec.decodeState(b, bootstrap)
-	if s and (not latest or s.matchId ~= latest.matchId or s.round ~= latest.round or s.tick > latest.tick) then
-		if not acceptSnapshot(s) then
-			networkMetrics:count("rejectedStates")
-		end
-	else
-		networkMetrics:count("rejectedStates")
-	end
-end)
-controlRemote.OnClientEvent:Connect(function(kind, nonce)
+processSnapshot = function(s)
+    networkMetrics:count("fullSnapshotPackets")
+    -- Bootstrap carries ownership/static configuration; dynamic packets carry no diagnostics.
+    if not latest or s.matchId > latest.matchId or s.matchId == latest.matchId and s.round >= latest.round then
+        bootstrap = s
+    end
+    if s.resync and latest and s.matchId == latest.matchId and s.round == latest.round
+        and s.tick < latest.tick and ownSlot then
+        resetInputs(s.matchId, s.round, math.max(s.players[ownSlot].ack or 0, latest.players[ownSlot].ack or 0))
+    end
+    acceptSnapshot(s)
+end
+
+processStatePacket = function(b)
+    networkMetrics:count("statePackets")
+    if typeof(b) == "buffer" then
+        networkMetrics:count("stateBytes", buffer.len(b))
+    end
+    local s = NetCodec.decodeState(b, bootstrap)
+    if s and (not latest or s.matchId ~= latest.matchId or s.round ~= latest.round or s.tick > latest.tick) then
+        if not acceptSnapshot(s) then
+            networkMetrics:count("rejectedStates")
+        end
+    else
+        networkMetrics:count("rejectedStates")
+    end
+end
+
+processControlEvent = function(kind, nonce)
     if kind == "pong" and pingTimes[nonce] then
         local sample = math.max(0, os.clock() - pingTimes[nonce])
         pingTimes[nonce] = nil
         networkMetrics:add("rttMs", sample * 1000)
         rtt = rtt == 0 and sample or rtt * 0.8 + sample * 0.2
     end
-end)
+end
+
+-- Replay reliable bootstrap snapshots first, then the most recent unreliable packets.
+for _, snapshot in ipairs(earlySnapshots) do
+    processSnapshot(snapshot)
+end
+table.clear(earlySnapshots)
+for _, packet in ipairs(earlyStatePackets) do
+    processStatePacket(packet)
+end
+table.clear(earlyStatePackets)
+for _, event in ipairs(earlyControlEvents) do
+    processControlEvent(event.kind, event.nonce)
+end
+table.clear(earlyControlEvents)
 
 -- Connect all network listeners before constructing the GUI scene.
 setBootStage("BUILDING_PITCH", "Assets GUI: césped, franjas, líneas, arcos y postes; avatares bajo demanda")

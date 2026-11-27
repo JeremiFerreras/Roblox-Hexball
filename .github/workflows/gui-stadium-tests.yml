@@ -87,8 +87,13 @@ jobs:
           codec = Path("src/ReplicatedStorage/HaxballLab/NetCodec/init.luau").read_text()
           allocator = Path("src/ReplicatedStorage/HaxballLab/RosterAllocator/init.luau").read_text()
           profile = Path("src/ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau").read_text()
+          boot = Path("src/ReplicatedFirst/SimpleSoccerBoot/init.client.luau").read_text()
           for remote in ("snapshotRemote.OnClientEvent:Connect", "stateStream.OnClientEvent:Connect", "controlRemote.OnClientEvent:Connect"):
               assert remote in client, f"missing event listener: {remote}"
+          assert client.index("snapshotRemote.OnClientEvent:Connect") < client.index("local NetCodec = require")
+          assert client.index("stateStream.OnClientEvent:Connect") < client.index('WaitForChild("SimpleSoccerControls"')
+          assert "SimpleSoccerControls" in client and "Simple SoccerGameplay" not in client
+          assert client.index("stateStream.OnClientEvent:Connect") < client.index("GuiStadiumRenderer.new")
           assert client.index("controlRemote.OnClientEvent:Connect") < client.index("GuiStadiumRenderer.new")
           assert client.index("GuiStadiumRenderer.new") < client.index('controlRemote:FireServer("ready")')
           assert 'WaitForChild("Remotes"' in client and 'WaitForChild("Remotes"' in server
@@ -96,7 +101,13 @@ jobs:
           assert "STATE_BYTES = 72 + 8 * 41" in codec and "4v4 state required" in codec
           assert "RosterAllocator.nextSlot" in client or "RosterAllocator.nextSlot" in server
           assert "two equal teams" in allocator
-          print("PASS: event listeners, typed remotes, 4v4 roster and 400-byte codec")
+          assert "RunService.RenderStepped:Connect" in boot
+          assert "task.wait(frameDuration)" not in boot
+          assert "AspectRatio = 2.1" in boot
+          assert 'Name = "Number"' in boot and "number.Parent = disc" in boot
+          assert 'goalBanner.Visible = true' in boot and 'RED  1  :  0  BLUE' in boot
+          print("PASS: early event listeners, correct input path, 4v4 roster and 400-byte codec")
+          print("PASS: render-frame animation, wide pitch, attached numbers and completed goal")
           PY
 
       - name: Run headless scene, GUI and 4v4 network tests

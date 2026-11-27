@@ -3,6 +3,7 @@ local Renderer = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumRende
 local Profile = require("../../src/ReplicatedStorage/HaxballLab/StadiumReference2D")
 local Reference = require("../../src/ReplicatedStorage/HaxballLab/ClassicReference230")
 local Codec = require("../../src/ReplicatedStorage/HaxballLab/NetCodec")
+local BootAnimationModule = nil
 local RosterAllocator = require("../../src/ReplicatedStorage/HaxballLab/RosterAllocator")
 
 local passed = 0
