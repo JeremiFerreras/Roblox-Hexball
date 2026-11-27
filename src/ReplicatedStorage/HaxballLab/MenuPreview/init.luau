@@ -7,10 +7,10 @@ local REPLAY_SECONDS = 15
 local MAX_TICKS = TICK_RATE * REPLAY_SECONDS
 
 local RED_ANCHORS = {
-	[1] = { x = -180, y = -12 },
-	[2] = { x = -78, y = 92 },
-	[3] = { x = 18, y = -92 },
-	[4] = { x = 160, y = 24 },
+	[1] = { x = -155, y = -5 },
+	[2] = { x = -82, y = 52 },
+	[3] = { x = -82, y = -55 },
+	[4] = { x = -15, y = 0 },
 }
 local BLUE_START = {
 	{ x = 116, y = -112 },
@@ -78,8 +78,8 @@ local function buildReplay(Core, Profile, Reference)
 	Core.addDisc(world, {
 		id = "ball",
 		kind = "ball",
-		x = -158,
-		y = -12,
+		x = -140,
+		y = -5,
 		radius = ballPhysics.radius,
 		invMass = ballPhysics.invMass,
 		damping = ballPhysics.damping,
@@ -102,7 +102,7 @@ local function buildReplay(Core, Profile, Reference)
 		local start = team == "red" and RED_ANCHORS[slot] or BLUE_START[slot - Profile.PlayersPerTeam]
 		if slot == 1 then
 			-- Start on the playable side of the ball, already aligned for the opening pass.
-			start = { x = -175.1, y = -34.1 }
+			start = { x = -160, y = -25 }
 		end
 		local disc = Core.addDisc(world, {
 			id = slot,
@@ -186,7 +186,7 @@ local function buildReplay(Core, Profile, Reference)
 			local slot = index + Profile.PlayersPerTeam
 			local disc = players[slot]
 			local lane = ({ -1, 1, -0.3, 0.3 })[index]
-			local defendX = clamp(ball.x + 86 + (index - 2.5) * 16, -24, 342)
+			local defendX = clamp(170 + (index - 2.5) * 30, 75, 350)
 			local defendY = clamp(ball.y + lane * 66, -145, 145)
 			inputs[slot] = steer(disc, defendX, defendY, acceleration)
 		end
