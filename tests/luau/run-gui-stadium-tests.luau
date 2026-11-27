@@ -139,7 +139,7 @@ check("blue slot five uses its remote position", tokenFive.frame.Visible
 check("owned player receives a Roblox headshot thumbnail", tokenOne.avatar.Visible
     and tokenOne.avatar.Image == "rbxthumb://type=AvatarHeadShot&id=12345&w=48&h=48")
 check("unowned blue slot uses numeric badge without avatar request", not tokenFive.avatar.Visible
-    and tokenSix.label.Text == "06")
+    and tokenFive.label.Text == "05")
 check("player token diameter matches physical radius", near(tokenOne.frame.Size.X, 48))
 check("ball diameter matches physical radius", near(renderer.ballToken.Size.X, 32))
 check("absent players remain hidden", renderer.playerTokens[2].frame.Visible == false)
