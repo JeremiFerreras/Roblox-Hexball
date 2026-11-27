@@ -26,6 +26,7 @@ check("playable grass rectangle matches Classic HBS", scene.grass.minX == -370 a
 check("all four physical posts are present", #scene.posts == 4)
 check("scene roster is exactly four versus four", scene.playerCount == 8 and scene.playersPerTeam == 4)
 check("spawn configuration contains exactly eight players", Profile.PlayerCount == 8 and #Profile.SpawnPoints == 8)
+check("presentation scale is explicitly configured", Profile.Presentation ~= nil and near(Profile.Presentation.studsPerUnit, 0.5))
 check("outer grass matches reference RGB", table.concat(scene.palette.outerGrass, ",") == "116,146,92")
 check("main grass matches reference RGB", table.concat(scene.palette.grass, ",") == "112,156,93")
 check("mowing stripe matches reference RGB", table.concat(scene.palette.stripeA, ",") == "123,164,108")
