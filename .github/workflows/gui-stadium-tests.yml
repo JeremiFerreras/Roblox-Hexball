@@ -6,6 +6,9 @@ on:
       - "Visual-procces-haxball-(phase-6)"
     paths:
       - "src/ReplicatedStorage/HaxballLab/GuiStadiumScene/**"
+      - "src/ReplicatedStorage/HaxballLab/StadiumReference2D/**"
+      - "src/ReplicatedStorage/HaxballLab/ClassicReference230/**"
+      - "README.md"
       - "src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer/**"
       - "src/ReplicatedStorage/HaxballLab/LabClient/**"
       - "src/ReplicatedStorage/HaxballLab/instance.json"
