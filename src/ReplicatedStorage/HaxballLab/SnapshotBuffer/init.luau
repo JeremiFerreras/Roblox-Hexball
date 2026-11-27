@@ -96,7 +96,7 @@ function SnapshotBuffer:push(s, now)
     return true
 end
 
--- Cubic Hermite interpolation with velocity tangents measured in world units/second.
+-- Cubic Hermite interpolation with velocity tangents measured in logical units per game tick.
 -- Tangents are limited per axis to avoid large visual overshoot around collisions.
 local function hermiteAxis(p0, p1, v0, v1, alpha, duration)
     local delta = p1 - p0
@@ -213,15 +213,15 @@ function SnapshotBuffer:sample(now)
     local alpha = b.tick > a.tick
         and math.clamp((self.cursor - a.tick) / (b.tick - a.tick), 0, 1)
         or 1
-    local duration = math.max((b.tick - a.tick) / RATE, 1 / RATE)
+    local durationTicks = math.max(b.tick - a.tick, 1)
     local result = {
-        ball = interpolate(a.ball, b.ball, alpha, duration),
-        player = interpolate(a.player, b.player, alpha, duration),
-        player2 = interpolate(a.player2, b.player2, alpha, duration),
+        ball = interpolate(a.ball, b.ball, alpha, durationTicks),
+        player = interpolate(a.player, b.player, alpha, durationTicks),
+        player2 = interpolate(a.player2, b.player2, alpha, durationTicks),
         players = {},
     }
     for i, disc in ipairs(b.players) do
-        result.players[i] = interpolate(a.players[i] or disc, disc, alpha, duration)
+        result.players[i] = interpolate(a.players[i] or disc, disc, alpha, durationTicks)
     end
 
     local sourceGap = math.max(0, b.tick - a.tick)
