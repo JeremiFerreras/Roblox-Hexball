@@ -7,16 +7,16 @@ local REPLAY_SECONDS = 15
 local MAX_TICKS = TICK_RATE * REPLAY_SECONDS
 
 local RED_ANCHORS = {
-	[1] = { x = -80, y = -5 },
-	[2] = { x = 5, y = 65 },
-	[3] = { x = 5, y = -70 },
-	[4] = { x = 105, y = 0 },
+	[1] = { x = -155, y = -5 },
+	[2] = { x = -82, y = 52 },
+	[3] = { x = -82, y = -55 },
+	[4] = { x = 25, y = 0 },
 }
 local BLUE_START = {
-	{ x = 190, y = -112 },
-	{ x = 250, y = 112 },
-	{ x = 285, y = -82 },
-	{ x = 350, y = 22 },
+	{ x = 116, y = -112 },
+	{ x = 220, y = 112 },
+	{ x = 252, y = -82 },
+	{ x = 340, y = 22 },
 }
 local PASS_PLAN = {
 	-- The central player links short wall-passes through both half-spaces and a runner.
@@ -78,7 +78,7 @@ local function buildReplay(Core, Profile, Reference)
 	Core.addDisc(world, {
 		id = "ball",
 		kind = "ball",
-		x = -65,
+		x = -130,
 		y = -5,
 		radius = ballPhysics.radius,
 		invMass = ballPhysics.invMass,
@@ -102,7 +102,7 @@ local function buildReplay(Core, Profile, Reference)
 		local start = team == "red" and RED_ANCHORS[slot] or BLUE_START[slot - Profile.PlayersPerTeam]
 		if slot == 1 then
 			-- Start on the playable side of the ball, already aligned for the opening pass.
-			start = { x = -87, y = -22 }
+			start = { x = -148, y = -26 }
 		end
 		local disc = Core.addDisc(world, {
 			id = slot,
@@ -186,7 +186,7 @@ local function buildReplay(Core, Profile, Reference)
 			local slot = index + Profile.PlayersPerTeam
 			local disc = players[slot]
 			local lane = ({ -1, 1, -0.3, 0.3 })[index]
-			local defendX = clamp(250 + (index - 2.5) * 24, 150, 380)
+			local defendX = clamp(170 + (index - 2.5) * 30, 75, 350)
 			local defendY = clamp(ball.y + lane * 66, -145, 145)
 			inputs[slot] = steer(disc, defendX, defendY, acceleration)
 		end
@@ -217,7 +217,7 @@ local function buildReplay(Core, Profile, Reference)
 		local receiverDisc = players[receiver]
 		local ballAtReceiver = distance(ball.x, ball.y, receiverDisc.x, receiverDisc.y)
 			<= playerPhysics.radius + ballPhysics.radius + 5
-		if kicked and (receiverContacted or tick - lastKickTick >= 75) or passTicks >= 120 then
+		if kicked and (receiverContacted or tick - lastKickTick >= 105) or passTicks >= 180 then
 			passIndex = passIndex % #PASS_PLAN + 1
 			holder, receiver = PASS_PLAN[passIndex][1], PASS_PLAN[passIndex][2]
 			passTicks, kicked, receiverContacted = 0, false, false
