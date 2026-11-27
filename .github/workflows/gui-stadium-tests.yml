@@ -68,6 +68,10 @@ jobs:
             echo "Legacy 3D renderer reference remains in the live client"
             exit 1
           fi
+          if grep -RniE 'WaitForChild\("HaxballLab"|\.HaxballLab|node-haxball|Node-Haxball|Classic Haxball' src/ReplicatedStorage/HaxballLab src/ServerScriptService/HaxballLab; then
+            echo "Legacy runtime dependency or brand reference remains in Simple Soccer modules"
+            exit 1
+          fi
 
       - name: Verify client handshake and 4v4 invariants
         shell: bash

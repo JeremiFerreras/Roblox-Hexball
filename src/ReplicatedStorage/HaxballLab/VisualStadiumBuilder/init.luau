@@ -1,4 +1,4 @@
--- Procedural, presentation-only Classic Haxball stadium.
+-- Procedural, presentation-only classic soccer stadium.
 -- Geometry is derived from StadiumReference2D / ClassicReference230 and never collides.
 local Builder = {}
 
@@ -206,7 +206,7 @@ function Builder.build(fieldModel, profile, reference, render)
 			corner[4], corner[5], 8, 0.34, yMark, PALETTE.line, presentation, render)
 	end
 
-	-- Draw curved goal mouths and backs from the pinned Node-HaxBall Classic geometry.
+	-- Draw curved goal mouths and backs from the pinned classic-field reference geometry.
 	for _, segment in ipairs(reference.segments) do
 		if segment.collisionGroup == profile.CollisionGroups.wall then
 			local points = render.segmentPoints(segment, math.pi / 72)
