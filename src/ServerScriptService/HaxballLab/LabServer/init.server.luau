@@ -2,19 +2,24 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
-local lab = ReplicatedStorage:WaitForChild("HaxballLab")
-local remotes = lab.Remotes
-local inputRemote = remotes.Input
-local snapshotRemote = remotes.Snapshot
-local commandRemote = remotes.DebugCommand
-local inputStream = remotes:WaitForChild("InputStream")
-local stateStream = remotes:WaitForChild("StateStream")
-local controlRemote = remotes:WaitForChild("Control")
+local lab = ReplicatedStorage:WaitForChild("SimpleSoccerGame")
+local remotes = lab:WaitForChild("Remotes")
+local function requireRemote(name, className)
+    local remote = remotes:WaitForChild(name, 15)
+    assert(remote and remote:IsA(className), string.format("Simple Soccer remote %s missing or invalid", name))
+    return remote
+end
+local inputRemote = requireRemote("Input", "RemoteEvent")
+local snapshotRemote = requireRemote("Snapshot", "RemoteEvent")
+local commandRemote = requireRemote("DebugCommand", "RemoteEvent")
+local inputStream = requireRemote("InputStream", "UnreliableRemoteEvent")
+local stateStream = requireRemote("StateStream", "UnreliableRemoteEvent")
+local controlRemote = requireRemote("Control", "RemoteEvent")
 local NetCodec = require(lab:WaitForChild("NetCodec"))
 local NetServer = require(script.Parent:WaitForChild("NetServer"))
 local network = NetServer.new()
 local lastAppliedMasks = {}
-local debugEnabled = lab:GetAttribute("EnableHaxballDiagnostics") == true
+local debugEnabled = lab:GetAttribute("EnableSimpleSoccerDiagnostics") == true
 local controlRequests = {}
 local Physics2D = require(script.Parent:WaitForChild("Physics2D"))
 local PhysicsCore2D = Physics2D.MatchCore
@@ -138,7 +143,7 @@ local function setController(player)
 		controlledPlayer = player
 	end
 	if not playerUserSlots[player.UserId] then
-		for slot = 1, 10 do
+		for slot = 1, StadiumProfile2D.PlayerCount do
 			if slotUserIds[slot] == nil then
 				playerUserSlots[player.UserId] = slot
 				slotUserIds[slot] = player.UserId
@@ -258,9 +263,9 @@ local function makeCoreState()
 		fieldHalfWidth = Physics2D.Config.fieldHalfWidth,
 		fieldHalfHeight = Physics2D.Config.fieldHalfHeight,
 		useBounds = false,
-		solverMode = "haxballDiscrete",
+		solverMode = "classicDiscrete",
 	})
-	-- Preserve stadium order: ball, static posts, then ten player discs.
+	-- Preserve stadium order: ball, static posts, then eight player discs.
 	local ball = PhysicsCore2D.addDisc(world, {
 		id = "ball",
 		kind = "ball",
@@ -278,12 +283,12 @@ local function makeCoreState()
 	local spawnPoints = table.clone(StadiumProfile2D.SpawnPoints)
 	local players = {}
 	local playerCollisionMasks = {}
-	for slot = 1, 10 do
+	for slot = 1, StadiumProfile2D.PlayerCount do
 		local position = spawnPoints[slot]
 		local disc = PhysicsCore2D.addDisc(world, {
 			id = slot,
 			kind = "player",
-			team = slot <= 5 and "red" or "blue",
+			team = slot <= StadiumProfile2D.PlayersPerTeam and "red" or "blue",
 			x = position.x,
 			y = position.y,
 			radius = Physics2D.Config.playerRadius,
@@ -296,7 +301,7 @@ local function makeCoreState()
 			kickStrength = Physics2D.Config.kickStrength,
 			kickback = Physics2D.Config.kickback,
 			kickRangeExtra = Physics2D.Config.kickRangeExtra,
-			collisionGroup = slot <= 5 and ClassicStadium2D.Groups.red or ClassicStadium2D.Groups.blue,
+			collisionGroup = slot <= StadiumProfile2D.PlayersPerTeam and ClassicStadium2D.Groups.red or ClassicStadium2D.Groups.blue,
 			collisionMask = StadiumProfile2D.CollisionMasks.player,
 		})
 		disc.ownerUserId = slotUserIds[slot]
@@ -306,7 +311,7 @@ local function makeCoreState()
 	return {
 		tick = 0,
 		player = players[1],
-		player2 = players[6],
+		player2 = players[StadiumProfile2D.PlayersPerTeam + 1],
 		players = players,
 		ball = ball,
 		score = legacy.score,
@@ -335,7 +340,7 @@ local function newState(pairEnabled, crowdEnabled, legacyPhysicsEnabled, startWi
 	network:epoch(matchId, localMatch and localMatch.round or 0)
 	lastAppliedMasks = {}
 	currentInputs = {}
-	for slot = 1, 10 do
+	for slot = 1, StadiumProfile2D.PlayerCount do
 		currentInputs[slot] = { x = 0, y = 0, kick = false }
 	end
 	currentInput = currentInputs[1]
@@ -759,7 +764,7 @@ RunService.Heartbeat:Connect(function(dt)
 			end
 			network:epoch(matchId, localMatch.round, state.tick)
 			local coreInputs, kickAttempts = result.inputs, {}
-			for slot = 1, 10 do
+			for slot = 1, StadiumProfile2D.PlayerCount do
 				local input = coreInputs[slot] or {}
 				if input.kick and not lastCoreKickInputs[slot] then
 					table.insert(kickAttempts, slot)

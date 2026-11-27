@@ -1,5 +1,5 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Profile = require(ReplicatedStorage:WaitForChild("HaxballLab"):WaitForChild("StadiumReference2D"))
+local Profile = require(ReplicatedStorage:WaitForChild("SimpleSoccerGame"):WaitForChild("StadiumReference2D"))
 local Physics2D = {}
 Physics2D.MatchCore = require(script.Parent:WaitForChild("PhysicsCore2D"))
 

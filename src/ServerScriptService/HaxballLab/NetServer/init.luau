@@ -1,6 +1,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Codec = require(ReplicatedStorage.HaxballLab:WaitForChild("NetCodec"))
-local Queue = require(ReplicatedStorage.HaxballLab:WaitForChild("NetInputQueue"))
+local Codec = require(ReplicatedStorage.SimpleSoccerGame:WaitForChild("NetCodec"))
+local Queue = require(ReplicatedStorage.SimpleSoccerGame:WaitForChild("NetInputQueue"))
+local Profile = require(ReplicatedStorage.SimpleSoccerGame:WaitForChild("StadiumReference2D"))
 local Server = {}
 Server.__index = Server
 function Server.new()
@@ -20,7 +21,7 @@ function Server:epoch(matchId, round, tick)
 	end
 	local preserve = self.matchId == matchId
 	self.matchId, self.round = matchId, round
-	for slot = 1, 10 do
+	for slot = 1, Profile.PlayerCount do
 		local old = self.queues[slot]
 		local q = Queue.new(matchId, round)
 		if preserve and old then

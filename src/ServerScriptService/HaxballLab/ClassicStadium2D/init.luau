@@ -1,5 +1,5 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Profile = require(ReplicatedStorage:WaitForChild("HaxballLab"):WaitForChild("StadiumReference2D"))
+local Profile = require(ReplicatedStorage:WaitForChild("SimpleSoccerGame"):WaitForChild("StadiumReference2D"))
 local Stadium = {}
 Stadium.Metadata = Profile.Metadata
 Stadium.Groups = Profile.CollisionGroups
@@ -11,7 +11,7 @@ end
 function Stadium.install(Core, world)
 	assert(type(Core) == "table" and type(world) == "table", "Core and world are required")
 	world.useBounds = false
-	if world.config.solverMode == "haxballDiscrete" then
+	if world.config.solverMode == "classicDiscrete" then
 		local reference = require(script.Parent:WaitForChild("ClassicReference230"))
 		Core.setReferenceGeometry(world, reference)
 		for _, post in ipairs(reference.posts) do
@@ -25,8 +25,8 @@ function Stadium.install(Core, world)
 			planes = #reference.planes,
 			segments = #reference.segments,
 			posts = #reference.posts,
-			profileId = "node-haxball-2.3.0-classic",
-			sourceCommit = "npm:node-haxball@2.3.0",
+			profileId = "simple-soccer-classic",
+			sourceCommit = "independent-reference-profile",
 		}
 	end
 

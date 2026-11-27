@@ -1,5 +1,5 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Profile = require(ReplicatedStorage:WaitForChild("HaxballLab"):WaitForChild("StadiumReference2D"))
+local Profile = require(ReplicatedStorage:WaitForChild("SimpleSoccerGame"):WaitForChild("StadiumReference2D"))
 local Rules = {}
 
 Rules.GoalLines = {
@@ -114,7 +114,7 @@ function Rules.kickoffCollisionMask(match, playerTeam, defaultMask, ballGroup)
 	if match.kickoffTeam then
 		local kickoffFlag = match.kickoffTeam == "red" and Profile.CollisionGroups.redKO
 			or Profile.CollisionGroups.blueKO
-		-- Haxball adds the kickoff flag to the normal player mask; ball remains enabled.
+		-- The designated kickoff side receives its group flag; the ball remains enabled.
 		mask = bit32.bor(mask, kickoffFlag)
 	end
 	return mask
