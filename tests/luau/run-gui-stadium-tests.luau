@@ -122,7 +122,7 @@ check("GUI renderer creates one reusable ball token", renderer.ballToken ~= nil)
 renderer:render({
     players = {
         [1] = { id = 1, userId = 12345, x = -162.5, y = 0, radius = 15, team = "red", label = "01" },
-        [6] = { id = 6, x = -120, y = 20, radius = 15, team = "blue", label = "06" },
+        [5] = { id = 5, x = -120, y = 20, radius = 15, team = "blue", label = "05" },
     },
     ball = { x = -150, y = 24, radius = 10, visible = true },
     debugLines = {
@@ -131,14 +131,14 @@ renderer:render({
 }, { x = -162.5, y = 0 })
 
 local tokenOne = renderer.playerTokens[1]
-local tokenSix = renderer.playerTokens[6]
+local tokenFive = renderer.playerTokens[5]
 check("red token is visible and centered on followed player", tokenOne.frame.Visible
     and near(tokenOne.frame.Position.X, 640) and near(tokenOne.frame.Position.Y, 360))
-check("blue token uses its remote position", tokenSix.frame.Visible
-    and near(tokenSix.frame.Position.X, 708) and near(tokenSix.frame.Position.Y, 328))
+check("blue slot five uses its remote position", tokenFive.frame.Visible
+    and near(tokenFive.frame.Position.X, 708) and near(tokenFive.frame.Position.Y, 328))
 check("owned player receives a Roblox headshot thumbnail", tokenOne.avatar.Visible
     and tokenOne.avatar.Image == "rbxthumb://type=AvatarHeadShot&id=12345&w=48&h=48")
-check("unowned slot uses numeric badge without avatar request", not tokenSix.avatar.Visible
+check("unowned blue slot uses numeric badge without avatar request", not tokenFive.avatar.Visible
     and tokenSix.label.Text == "06")
 check("player token diameter matches physical radius", near(tokenOne.frame.Size.X, 48))
 check("ball diameter matches physical radius", near(renderer.ballToken.Size.X, 32))

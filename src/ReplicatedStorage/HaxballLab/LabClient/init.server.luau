@@ -32,7 +32,7 @@ local commandRemote = requireRemote("DebugCommand", "RemoteEvent")
 local inputStream = requireRemote("InputStream", "UnreliableRemoteEvent")
 local stateStream = requireRemote("StateStream", "UnreliableRemoteEvent")
 local controlRemote = requireRemote("Control", "RemoteEvent")
-setBootStage("LOADING_MODULES", "Preparando simulación, predicción y sincronización")
+setBootStage("LOADING_MODULES", "Módulos locales: física 2D, reglas 4v4, predicción y red")
 local NetCodec = require(lab:WaitForChild("NetCodec"))
 local NetInputClient = require(lab:WaitForChild("NetInputClient"))
 local netInput = NetInputClient.new()
@@ -436,7 +436,7 @@ controlRemote.OnClientEvent:Connect(function(kind, nonce)
 end)
 
 -- Connect all network listeners before constructing the GUI scene.
-setBootStage("BUILDING_PITCH", "Preparando cancha 2D, líneas y porterías")
+setBootStage("BUILDING_PITCH", "Assets GUI: césped, franjas, líneas, arcos y postes; avatares bajo demanda")
 local visualOk, visualError = pcall(function()
     local GuiStadiumScene = require(lab:WaitForChild("GuiStadiumScene"))
     local GuiStadiumRenderer = require(lab:WaitForChild("GuiStadiumRenderer"))
@@ -449,7 +449,7 @@ if not visualOk then
     setBootStage("VISUAL_ERROR", "La conexión está preparada; revisando visualización", tostring(visualError))
     warn("Simple Soccer GUI initialization failed: " .. tostring(visualError))
 else
-    setBootStage("WAITING_FOR_STATE", "Esperando el primer estado autoritativo")
+    setBootStage("WAITING_FOR_STATE", "Esperando snapshot inicial; los controles ya están conectados")
 end
 controlRemote:FireServer("ready")
 

@@ -143,17 +143,37 @@ local function setController(player)
 		controlledPlayer = player
 	end
 	if not playerUserSlots[player.UserId] then
-		for slot = 1, StadiumProfile2D.PlayerCount do
-			if slotUserIds[slot] == nil then
-				playerUserSlots[player.UserId] = slot
-				slotUserIds[slot] = player.UserId
-				if state.players and state.players[slot] then
-					state.players[slot].ownerUserId = player.UserId
-				end
-				break
-			end
-		end
-	end
+        -- Balance arrivals across the two four-player teams.
+        local redCount, blueCount = 0, 0
+        for slot = 1, StadiumProfile2D.PlayerCount do
+            if slotUserIds[slot] ~= nil then
+                if slot <= StadiumProfile2D.PlayersPerTeam then
+                    redCount += 1
+                else
+                    blueCount += 1
+                end
+            end
+        end
+        local firstTeam = redCount <= blueCount and "red" or "blue"
+        local secondTeam = firstTeam == "red" and "blue" or "red"
+        for _, teamName in ipairs({ firstTeam, secondTeam }) do
+            local firstSlot = teamName == "red" and 1 or StadiumProfile2D.PlayersPerTeam + 1
+            local lastSlot = firstSlot + StadiumProfile2D.PlayersPerTeam - 1
+            for slot = firstSlot, lastSlot do
+                if slotUserIds[slot] == nil then
+                    playerUserSlots[player.UserId] = slot
+                    slotUserIds[slot] = player.UserId
+                    if state.players and state.players[slot] then
+                        state.players[slot].ownerUserId = player.UserId
+                    end
+                    break
+                end
+            end
+            if playerUserSlots[player.UserId] then
+                break
+            end
+        end
+    end
 	if player.Character then
 		player.Character:Destroy()
 	end

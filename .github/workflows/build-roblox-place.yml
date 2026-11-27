@@ -29,8 +29,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python tools/place.py build build/Roblox-Hexball-GUI.rbxlx
-          test -s build/Roblox-Hexball-GUI.rbxlx
+          python tools/place.py build build/Simple-Soccer-Game-4v4.rbxlx
+          test -s build/Simple-Soccer-Game-4v4.rbxlx
 
       - name: Validate rebuilt place and GUI modules
         shell: bash
@@ -41,7 +41,7 @@ jobs:
           import xml.etree.ElementTree as ET
           from pathlib import Path
 
-          place = Path("build/Roblox-Hexball-GUI.rbxlx")
+          place = Path("build/Simple-Soccer-Game-4v4.rbxlx")
           root = ET.parse(place).getroot()
           assert root.tag == "roblox", root.tag
 
@@ -80,8 +80,8 @@ jobs:
       - name: Upload Roblox Studio place
         uses: actions/upload-artifact@v4
         with:
-          name: Roblox-Hexball-GUI-RBXLX
-          path: build/Roblox-Hexball-GUI.rbxlx
+          name: Simple-Soccer-Game-4v4
+          path: build/Simple-Soccer-Game-4v4.rbxlx
           if-no-files-found: error
           compression-level: 0
           retention-days: 30

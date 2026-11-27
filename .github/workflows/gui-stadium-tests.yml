@@ -19,7 +19,13 @@ on:
       - "src/ServerScriptService/HaxballLab/MatchRules2D/**"
       - "src/ServerScriptService/HaxballLab/LabRegression/**"
       - "src/ReplicatedFirst/**"
+      - "src/ServerScriptService/HaxballLab/ClassicStadium2D/**"
+      - "src/ServerScriptService/HaxballLab/Physics2D/**"
+      - "src/ReplicatedStorage/HaxballLab/PhysicsCore2D/**"
+      - "src/ReplicatedStorage/Inputs/**"
+      - "src/ServerScriptService/HaxballLab/instance.json"
       - "src/ReplicatedStorage/HaxballLab/instance.json"
+      - "src/Workspace/HaxballLab/instance.json"
       - "tests/luau/**"
       - ".github/workflows/gui-stadium-tests.yml"
   pull_request:
