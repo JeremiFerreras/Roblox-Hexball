@@ -126,7 +126,7 @@ Profile.PhysicsBaseline = {
     },
     active = {
         status = "PROJECT_PROVISIONAL",
-        note = "Existing lab runtime defaults retained; not certified against the official Haxball engine.",
+        note = "Existing simulation defaults retained as an independent reference profile; not an official engine certification.",
         player = {
             radius = 15, invMass = 0.5, damping = 0.96, bounce = 0.5,
             acceleration = 0.1, kickAcceleration = 0.07, kickDamping = 0.96,
