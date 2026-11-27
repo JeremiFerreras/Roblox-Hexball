@@ -130,12 +130,12 @@ check("unowned slot uses numeric badge without avatar request", not tokenSix.ava
 check("player token diameter matches physical radius", near(tokenOne.frame.Size.X, 48))
 check("ball diameter matches physical radius", near(renderer.ballToken.Size.X, 32))
 check("absent players remain hidden", renderer.playerTokens[2].frame.Visible == false)
+check("debug collision line is represented in GUI", renderer.debugLines[1].Visible)
 renderer:render({
     players = { [1] = { id = 1, x = 0, y = 0, radius = 15, team = "red", label = "01" } },
     ball = { x = 0, y = 0, radius = 10, visible = true },
 }, { x = 0, y = 0 })
 check("avatar image is cleared when a slot becomes unowned", not tokenOne.avatar.Visible and tokenOne.avatar.Image == "")
-check("debug collision line is represented in GUI", renderer.debugLines[1].Visible)
 check("center circle keeps 75-unit visual radius", near(renderer.centerCircle.Size.X, 240))
 renderer:destroy()
 check("renderer cleanup destroys its ScreenGui", renderer.gui == nil)
