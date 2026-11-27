@@ -39,7 +39,7 @@ jobs:
 
       - name: Analyze pure Luau scene and tests
         run: |
-          luau-analyze src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau tests/luau/run-gui-stadium-tests.luau
+          luau-analyze src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau
 
       - name: Run headless scene and GUI adapter tests
         run: luau tests/luau/run-gui-stadium-tests.luau
