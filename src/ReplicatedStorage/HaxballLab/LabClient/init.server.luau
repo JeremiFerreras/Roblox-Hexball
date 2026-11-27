@@ -243,6 +243,7 @@ local playArea = StadiumProfile2D.PlayArea
 local goals = StadiumProfile2D.Goals
 local activePhysics = StadiumProfile2D.PhysicsBaseline.active
 local replayPhysics = StadiumProfile2D.PhysicsBaseline.replayCandidate
+local studsPerUnit = StadiumProfile2D.Presentation.studsPerUnit
 calibrationLabel.Text = string.format(
 	"CLASSIC | physics/presentation reference independent classic-game reference\nLogical %dx%d | goal opening %d | geometry %dP/%dS/%dV/%d posts\nVisual %.2f studs/unit | independent reference; official comparison pending",
 	bounds.spanWidth,
@@ -252,7 +253,7 @@ calibrationLabel.Text = string.format(
 	#ClassicReference230.segments,
 	#ClassicReference230.vertices,
 	#ClassicReference230.posts,
-	SCALE
+	studsPerUnit
 )
 calibrationLabel.Visible = showDiagnostics
 calibrationLabel.Parent = gui
