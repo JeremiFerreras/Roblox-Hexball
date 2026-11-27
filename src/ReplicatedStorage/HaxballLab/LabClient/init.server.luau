@@ -604,11 +604,13 @@ RunService.RenderStepped:Connect(function(dt)
 		nextHudAt = now + 1
 		local report = networkMetrics:report()
 		predictionLabel.Text = string.format(
-			"NET v2 | RTT %.0f ms | state age %.0f ms\nACK p95 %s ms | pending %d | buffer %.0f ms\nCorrection p95 %s units | input delay %d ms",
+			"NET v3 | RTT %.0f ms | state age %.0f ms\nACK p95 %s ms | pending %d | render %.0f FPS | stream %.0f Hz\nHermite buffer %.0f ms | correction p95 %s units | input delay %d ms",
 			rtt * 1000,
 			snapshotAge * 1000,
 			report.samples.ackMs.p95 and string.format("%.0f", report.samples.ackMs.p95) or "--",
 			#netInput.pending,
+			status and status.renderFps or 0,
+			status and status.sourceRateHz or 0,
 			status and status.delayMs or 0,
 			report.samples.playerCorrection.p95 and string.format("%.3f", report.samples.playerCorrection.p95) or "--",
 			syntheticInputDelayMs

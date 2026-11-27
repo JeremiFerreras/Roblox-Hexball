@@ -3,6 +3,7 @@ local Renderer = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumRende
 local Profile = require("../../src/ReplicatedStorage/HaxballLab/StadiumReference2D")
 local Reference = require("../../src/ReplicatedStorage/HaxballLab/ClassicReference230")
 local Codec = require("../../src/ReplicatedStorage/HaxballLab/NetCodec")
+local SnapshotBuffer = require("../../src/ReplicatedStorage/HaxballLab/SnapshotBuffer")
 local RosterAllocator = require("../../src/ReplicatedStorage/HaxballLab/RosterAllocator")
 
 local passed = 0
@@ -202,6 +203,87 @@ invalid.players[10] = table.clone(wirePlayers[8])
 local acceptedLegacyTen = pcall(function() Codec.encodeState(invalid) end)
 check("legacy ten-player state is rejected", not acceptedLegacyTen)
 
+
+
+-- The live client renders at the display rate while snapshots arrive at 30 Hz.
+local function presentationState(tick, phase, ballPosition, ballVelocity)
+    local players = {}
+    for slot = 1, Profile.PlayerCount do
+        local velocity = slot * 60
+        players[slot] = {
+            x = tick * slot,
+            y = 0,
+            vx = velocity,
+            vy = 0,
+        }
+    end
+    return {
+        matchId = 88,
+        round = 1,
+        tick = tick,
+        matchPhase = phase or "playing",
+        coreMode = true,
+        ball = { x = ballPosition or tick, y = 0, vx = ballVelocity or 60, vy = 0 },
+        player = { x = tick, y = 0, vx = 60, vy = 0 },
+        player2 = { x = tick * 2, y = 0, vx = 120, vy = 0 },
+        players = players,
+    }
+end
+
+local presentation = SnapshotBuffer.new()
+presentation:push(presentationState(0), 0)
+presentation:sample(0)
+presentation:sample(1 / 60)
+presentation:push(presentationState(2), 2 / 60)
+presentation:sample(2 / 60)
+local interpolated, interpolationStatus = presentation:sample(3 / 60)
+check("30 Hz snapshots produce a distinct midpoint at a 60 Hz render sample",
+    interpolated ~= nil and near(interpolated.ball.x, 1))
+check("all eight player poses interpolate between server states",
+    interpolated ~= nil and near(interpolated.players[5].x, 5)
+    and near(interpolated.players[8].x, 8))
+check("ball and player velocities are used as cubic Hermite tangents",
+    interpolated ~= nil and near(interpolated.player2.x, 2))
+check("presentation reports actual render cadence and source cadence",
+    interpolationStatus ~= nil and interpolationStatus.renderFps > 55
+    and interpolationStatus.renderFps < 65 and near(interpolationStatus.sourceRateHz, 30))
+check("live presentation identifies the Hermite interpolation mode",
+    interpolationStatus ~= nil and interpolationStatus.interpolation == "cubic-hermite")
+
+local easingPresentation = SnapshotBuffer.new()
+local easingStart = presentationState(0)
+easingStart.ball.x, easingStart.ball.vx = 0, 0
+local easingEnd = presentationState(2)
+easingEnd.ball.x, easingEnd.ball.vx = 2, 120
+easingPresentation:push(easingStart, 0)
+easingPresentation:sample(0)
+easingPresentation:push(easingEnd, 2 / 60)
+easingPresentation:sample(2 / 60)
+local eased = easingPresentation:sample(3 / 60)
+check("Hermite interpolation preserves acceleration instead of forcing linear motion",
+    eased ~= nil and near(eased.ball.x, 0.5))
+
+local boundedPresentation = SnapshotBuffer.new()
+local boundedStart = presentationState(0)
+boundedStart.ball.x, boundedStart.ball.vx = 0, -600
+local boundedEnd = presentationState(2)
+boundedEnd.ball.x, boundedEnd.ball.vx = 2, 600
+boundedPresentation:push(boundedStart, 0)
+boundedPresentation:sample(0)
+boundedPresentation:push(boundedEnd, 2 / 60)
+boundedPresentation:sample(2 / 60)
+local bounded = boundedPresentation:sample(3 / 60)
+check("collision-direction changes cannot create large spline overshoot",
+    bounded ~= nil and bounded.ball.x >= 0 and bounded.ball.x <= 2)
+
+local kickoffPresentation = SnapshotBuffer.new()
+kickoffPresentation:push(presentationState(0, "kickoff"), 0)
+kickoffPresentation:sample(0)
+kickoffPresentation:push(presentationState(2, "kickoff"), 2 / 60)
+kickoffPresentation:sample(2 / 60)
+local kickoffPose = kickoffPresentation:sample(3 / 60)
+check("kickoff and non-playing phases are interpolated instead of packet-stepped",
+    kickoffPose ~= nil and near(kickoffPose.ball.x, 1))
 
 local roster = {}
 local joinOrder = {}

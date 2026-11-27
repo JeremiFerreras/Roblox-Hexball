@@ -14,6 +14,7 @@ on:
       - "src/ReplicatedStorage/HaxballLab/RosterAllocator/**"
       - "src/ReplicatedStorage/HaxballLab/StadiumReference2D/**"
       - "src/ReplicatedStorage/HaxballLab/NetPrediction/**"
+      - "src/ReplicatedStorage/HaxballLab/SnapshotBuffer/**"
       - "src/ReplicatedStorage/HaxballLab/LabClient/**"
       - "src/ServerScriptService/HaxballLab/LabServer/**"
       - "src/ServerScriptService/HaxballLab/NetServer/**"
