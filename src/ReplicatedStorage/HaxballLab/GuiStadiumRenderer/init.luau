@@ -197,21 +197,20 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
         create(ui, "UICorner", avatar, { CornerRadius = ui.circleCorner })
         local label = create(ui, "TextLabel", frame, {
             Name = "Number",
-            AnchorPoint = ui.vector(1, 1),
-            Position = ui.scale(1, 1),
-            Size = ui.scale(0.38, 0.38),
-            BackgroundColor3 = colorFrom(ui, scene.palette, "outerGrass"),
-            BackgroundTransparency = 0.08,
+            AnchorPoint = ui.vector(0.5, 0.5),
+            Position = ui.scale(0.5, 0.5),
+            Size = ui.scale(0.88, 0.88),
+            BackgroundTransparency = 1,
             BorderSizePixel = 0,
             Text = string.format("%02d", slot),
             TextColor3 = colorFrom(ui, scene.palette, "ball"),
+            TextStrokeColor3 = ui.color(45, 57, 43),
+            TextStrokeTransparency = 0.32,
             TextScaled = true,
             TextWrapped = false,
             Font = ui.boldFont,
             ZIndex = 22,
         })
-        create(ui, "UICorner", label, { CornerRadius = ui.circleCorner })
-        makeStroke(ui, label, colorFrom(ui, scene.palette, "goal"), 1)
         self.playerTokens[slot] = { frame = frame, avatar = avatar, label = label }
     end
 

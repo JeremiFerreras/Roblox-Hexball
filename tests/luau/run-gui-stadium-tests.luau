@@ -133,6 +133,12 @@ renderer:render({
 
 local tokenOne = renderer.playerTokens[1]
 local tokenFive = renderer.playerTokens[5]
+check("player number is a centered child of its moving disc",
+    tokenOne.label.Parent == tokenOne.frame
+    and near(tokenOne.label.Position.ScaleX, 0.5)
+    and near(tokenOne.label.Position.ScaleY, 0.5)
+    and near(tokenOne.label.Size.ScaleX, 0.88)
+    and near(tokenOne.label.Size.ScaleY, 0.88))
 check("red token is visible and centered on followed player", tokenOne.frame.Visible
     and near(tokenOne.frame.Position.X, 640) and near(tokenOne.frame.Position.Y, 360))
 check("blue slot five uses its remote position", tokenFive.frame.Visible
