@@ -193,7 +193,7 @@ local function buildReplay(Core, Profile, Reference)
 
 		local holderDisc = players[holder]
 		local holderDistance = distance(holderDisc.x, holderDisc.y, ball.x, ball.y)
-		if not kicked and speed(ball) < 3.8 and holderDistance <= playerPhysics.radius + ballPhysics.radius + baseline.kickRangeExtra
+		if not kicked and speed(ball) < 8.5 and holderDistance <= playerPhysics.radius + ballPhysics.radius + baseline.kickRangeExtra
 			and distance(holderDisc.x, holderDisc.y, stagingX, stagingY) < 9 then
 			inputs[holder].kick = true
 		end
