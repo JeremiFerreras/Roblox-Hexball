@@ -127,10 +127,12 @@
     "ReplicatedStorage/HaxballLab/Remotes",
     "ReplicatedStorage/HaxballLab/VisualStadiumBuilder",
     "ReplicatedStorage/HaxballLab/GuiStadiumScene",
-    "ReplicatedStorage/HaxballLab/GuiStadiumRenderer"
+    "ReplicatedStorage/HaxballLab/GuiStadiumRenderer",
+    "ReplicatedStorage/HaxballLab/RosterAllocator"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,

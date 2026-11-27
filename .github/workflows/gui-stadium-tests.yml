@@ -11,6 +11,7 @@ on:
       - "README.md"
       - "src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer/**"
       - "src/ReplicatedStorage/HaxballLab/NetCodec/**"
+      - "src/ReplicatedStorage/HaxballLab/RosterAllocator/**"
       - "src/ReplicatedStorage/HaxballLab/StadiumReference2D/**"
       - "src/ReplicatedStorage/HaxballLab/NetPrediction/**"
       - "src/ReplicatedStorage/HaxballLab/LabClient/**"
@@ -76,6 +77,7 @@ jobs:
           client = Path("src/ReplicatedStorage/HaxballLab/LabClient/init.server.luau").read_text()
           server = Path("src/ServerScriptService/HaxballLab/LabServer/init.server.luau").read_text()
           codec = Path("src/ReplicatedStorage/HaxballLab/NetCodec/init.luau").read_text()
+          allocator = Path("src/ReplicatedStorage/HaxballLab/RosterAllocator/init.luau").read_text()
           profile = Path("src/ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau").read_text()
           for remote in ("snapshotRemote.OnClientEvent:Connect", "stateStream.OnClientEvent:Connect", "controlRemote.OnClientEvent:Connect"):
               assert remote in client, f"missing event listener: {remote}"
@@ -84,6 +86,8 @@ jobs:
           assert 'WaitForChild("Remotes"' in client and 'WaitForChild("Remotes"' in server
           assert "PlayerCount = 8" in profile and "PlayersPerTeam = 4" in profile
           assert "STATE_BYTES = 72 + 8 * 41" in codec and "4v4 state required" in codec
+          assert "RosterAllocator.nextSlot" in client or "RosterAllocator.nextSlot" in server
+          assert "two equal teams" in allocator
           print("PASS: event listeners, typed remotes, 4v4 roster and 400-byte codec")
           PY
 

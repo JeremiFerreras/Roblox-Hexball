@@ -21,6 +21,7 @@ local network = NetServer.new()
 local lastAppliedMasks = {}
 local debugEnabled = lab:GetAttribute("EnableSimpleSoccerDiagnostics") == true
 local controlRequests = {}
+local RosterAllocator = require(lab:WaitForChild("RosterAllocator"))
 local Physics2D = require(script.Parent:WaitForChild("Physics2D"))
 local PhysicsCore2D = Physics2D.MatchCore
 local ClassicStadium2D = require(script.Parent:WaitForChild("ClassicStadium2D"))
@@ -143,34 +144,16 @@ local function setController(player)
 		controlledPlayer = player
 	end
 	if not playerUserSlots[player.UserId] then
-        -- Balance arrivals across the two four-player teams.
-        local redCount, blueCount = 0, 0
-        for slot = 1, StadiumProfile2D.PlayerCount do
-            if slotUserIds[slot] ~= nil then
-                if slot <= StadiumProfile2D.PlayersPerTeam then
-                    redCount += 1
-                else
-                    blueCount += 1
-                end
-            end
-        end
-        local firstTeam = redCount <= blueCount and "red" or "blue"
-        local secondTeam = firstTeam == "red" and "blue" or "red"
-        for _, teamName in ipairs({ firstTeam, secondTeam }) do
-            local firstSlot = teamName == "red" and 1 or StadiumProfile2D.PlayersPerTeam + 1
-            local lastSlot = firstSlot + StadiumProfile2D.PlayersPerTeam - 1
-            for slot = firstSlot, lastSlot do
-                if slotUserIds[slot] == nil then
-                    playerUserSlots[player.UserId] = slot
-                    slotUserIds[slot] = player.UserId
-                    if state.players and state.players[slot] then
-                        state.players[slot].ownerUserId = player.UserId
-                    end
-                    break
-                end
-            end
-            if playerUserSlots[player.UserId] then
-                break
+        local slot = RosterAllocator.nextSlot(
+            slotUserIds,
+            StadiumProfile2D.PlayerCount,
+            StadiumProfile2D.PlayersPerTeam
+        )
+        if slot then
+            playerUserSlots[player.UserId] = slot
+            slotUserIds[slot] = player.UserId
+            if state.players and state.players[slot] then
+                state.players[slot].ownerUserId = player.UserId
             end
         end
     end

@@ -52,7 +52,7 @@ jobs:
                   names.setdefault(name, []).append(item)
 
           assert "SimpleSoccerGame" in names, "SimpleSoccerGame model/folder missing"
-          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot"):
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot", "RosterAllocator"):
               assert required in names, f"{required} missing from place XML"
 
           scripts = []
@@ -65,7 +65,7 @@ jobs:
                       None,
                   )
                   scripts.append((name, source.text if source is not None else None))
-          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot"):
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot", "RosterAllocator"):
               assert any(name == required and source for name, source in scripts), (
                   f"{required} script source missing or empty"
               )

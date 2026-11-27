@@ -3,6 +3,7 @@ local Renderer = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumRende
 local Profile = require("../../src/ReplicatedStorage/HaxballLab/StadiumReference2D")
 local Reference = require("../../src/ReplicatedStorage/HaxballLab/ClassicReference230")
 local Codec = require("../../src/ReplicatedStorage/HaxballLab/NetCodec")
+local RosterAllocator = require("../../src/ReplicatedStorage/HaxballLab/RosterAllocator")
 
 local passed = 0
 local function check(name, condition)
@@ -194,5 +195,23 @@ invalid.players[9] = table.clone(wirePlayers[8])
 invalid.players[10] = table.clone(wirePlayers[8])
 local acceptedLegacyTen = pcall(function() Codec.encodeState(invalid) end)
 check("legacy ten-player state is rejected", not acceptedLegacyTen)
+
+
+local roster = {}
+local joinOrder = {}
+for player = 1, 8 do
+    local slot = RosterAllocator.nextSlot(roster, 8, 4)
+    joinOrder[player] = slot
+    roster[slot] = 5000 + player
+end
+check("4v4 allocator alternates teams while counts are tied",
+    joinOrder[1] == 1 and joinOrder[2] == 5 and joinOrder[3] == 2 and joinOrder[4] == 6)
+check("4v4 allocator fills exactly four red and four blue slots",
+    joinOrder[5] == 3 and joinOrder[6] == 7 and joinOrder[7] == 4 and joinOrder[8] == 8)
+check("4v4 allocator rejects a ninth player without overwriting owners",
+    RosterAllocator.nextSlot(roster, 8, 4) == nil and roster[1] == 5001 and roster[8] == 5008)
+local unbalancedRoster = { [1] = 7001, [2] = 7002 }
+check("4v4 allocator fills the smaller team first",
+    RosterAllocator.nextSlot(unbalancedRoster, 8, 4) == 5)
 
 print(string.format("GUI_STADIUM_TESTS_OK passed=%d", passed))

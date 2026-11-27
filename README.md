@@ -9,7 +9,7 @@ Simple Soccer Game is a **faithful inspiration** from the pace and readability o
 ## Gameplay and architecture
 
 - **4v4:** exactly eight player slots, four per side. Blue begins at slot five.
-- **Balanced entry:** new arrivals are assigned to the side with fewer occupied places.
+- **Balanced entry:** a separately tested pure roster allocator alternates arrivals while teams are tied, fills the smaller team first, and rejects a ninth player without overwriting an owner.
 - **Server authority:** fixed-tick simulation, player allocation, collision/rule processing, goals, score and state publication.
 - **Client prediction:** local input prediction and snapshot reconciliation remain separate from match authority.
 - **GUI presentation:** a 2D ScreenGui pitch with reusable circular player tokens, ball, lines, goals, posts and a compact scoreboard.
