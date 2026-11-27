@@ -177,6 +177,20 @@ check("center circle keeps 75-unit visual radius", near(renderer.centerCircle.Si
 renderer:destroy()
 check("renderer cleanup destroys its ScreenGui", renderer.gui == nil)
 
+local pitchHost = fakeNode("Frame")
+local mountedRenderer = Renderer.new(fakePlayerGui, scene, fakeUI, nil, Scene, pitchHost)
+check("stadium renderer can mount inside a menu pitch panel", mountedRenderer.gui == nil
+    and mountedRenderer.root.Parent == pitchHost)
+mountedRenderer:render({
+    players = { [1] = { id = 1, x = 0, y = 0, radius = 15, team = "red", label = "01" } },
+    ball = { x = 10, y = 4, radius = 10, visible = true },
+}, { x = 0, y = 0 })
+check("mounted menu renderer uses the same stadium geometry", mountedRenderer.grass ~= nil
+    and mountedRenderer.ballToken.Visible)
+mountedRenderer:destroy()
+check("mounted renderer cleanup destroys only its viewport", mountedRenderer.root == nil
+    and pitchHost.Destroyed ~= true)
+
 
 -- Network codec contract for the four-a-side roster.
 local commands = {}
@@ -354,12 +368,16 @@ check("menu tiki-taka replay is cached and built at the 60 Hz physics tick",
     and physicsReplay.tickRate == 60 and physicsReplay.stats.simulatedTicks == 900)
 check("menu tiki-taka replay contains a full eight-player 4v4 scene",
     #physicsReplay.frames == 901 and #physicsReplay.frames[1].players == 8)
+print(string.format("MENU_PREVIEW_STATS kicks=%d receiverContacts=%d",
+    physicsReplay.stats.successfulPasses, physicsReplay.stats.receiverContacts))
 check("menu physics produces multiple real ball kicks",
     physicsReplay.stats.successfulPasses >= 3)
 local menuSampleA = MenuPreview.sample(physicsReplay, 2.25)
 local menuSampleB = MenuPreview.sample(physicsReplay, 2.25 + 1 / 120)
-check("menu preview samples at sub-tick render times without frame-stepping",
-    menuSampleA.ball.x == menuSampleB.ball.x or math.abs(menuSampleA.ball.x - menuSampleB.ball.x) < 100)
+local menuSampleDelta = math.abs(menuSampleA.ball.x - menuSampleB.ball.x)
+    + math.abs(menuSampleA.ball.y - menuSampleB.ball.y)
+check("menu preview samples smoothly between 60 Hz physics ticks",
+    menuSampleDelta < 25)
 local allMenuActorsFinite = true
 for _, actor in ipairs(menuSampleA.players) do
     if not (actor.x == actor.x and actor.y == actor.y and math.abs(actor.x) < 1000 and math.abs(actor.y) < 1000) then

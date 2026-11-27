@@ -100,6 +100,10 @@ local function buildReplay(Core, Profile, Reference)
 	for slot = 1, Profile.PlayerCount do
 		local team = slot <= Profile.PlayersPerTeam and "red" or "blue"
 		local start = team == "red" and RED_ANCHORS[slot] or BLUE_START[slot - Profile.PlayersPerTeam]
+		if slot == 1 then
+			-- Start on the playable side of the ball, already aligned for the opening pass.
+			start = { x = -175.1, y = -34.1 }
+		end
 		local disc = Core.addDisc(world, {
 			id = slot,
 			kind = "player",
@@ -141,7 +145,7 @@ local function buildReplay(Core, Profile, Reference)
 
 	local passIndex = 1
 	local holder, receiver = PASS_PLAN[passIndex][1], PASS_PLAN[passIndex][2]
-	local passTicks, kicked, kickCount, receiverContacts = 0, false, 0, 0
+	local passTicks, kicked, receiverContacted, kickCount, receiverContacts = 0, false, false, 0, 0
 	local lastKickTick = -1000
 	local acceleration = playerPhysics.acceleration
 	local kickAcceleration = playerPhysics.kickAcceleration
@@ -155,8 +159,9 @@ local function buildReplay(Core, Profile, Reference)
 			dx, dy, length = 1, 0, 1
 		end
 		local dirX, dirY = dx / length, dy / length
-		local stagingX = ball.x - dirX * (playerPhysics.radius + ballPhysics.radius - 3)
-		local stagingY = ball.y - dirY * (playerPhysics.radius + ballPhysics.radius - 3)
+		local kickReach = playerPhysics.radius + ballPhysics.radius + baseline.kickRangeExtra - 1
+		local stagingX = ball.x - dirX * kickReach
+		local stagingY = ball.y - dirY * kickReach
 
 		local inputs = {}
 		for slot = 1, Profile.PlayersPerTeam do
@@ -188,7 +193,7 @@ local function buildReplay(Core, Profile, Reference)
 
 		local holderDisc = players[holder]
 		local holderDistance = distance(holderDisc.x, holderDisc.y, ball.x, ball.y)
-		if not kicked and speed(ball) < 0.95 and holderDistance <= playerPhysics.radius + ballPhysics.radius + baseline.kickRangeExtra
+		if not kicked and speed(ball) < 2.8 and holderDistance <= playerPhysics.radius + ballPhysics.radius + baseline.kickRangeExtra
 			and distance(holderDisc.x, holderDisc.y, stagingX, stagingY) < 9 then
 			inputs[holder].kick = true
 		end
@@ -203,6 +208,7 @@ local function buildReplay(Core, Profile, Reference)
 				local touchedReceiver = (event.discA == "ball" and event.discB == receiver)
 					or (event.discB == "ball" and event.discA == receiver)
 				if touchedReceiver and kicked then
+					receiverContacted = true
 					receiverContacts += 1
 				end
 			end
@@ -211,10 +217,10 @@ local function buildReplay(Core, Profile, Reference)
 		local receiverDisc = players[receiver]
 		local ballAtReceiver = distance(ball.x, ball.y, receiverDisc.x, receiverDisc.y)
 			<= playerPhysics.radius + ballPhysics.radius + 5
-		if kicked and (ballAtReceiver or tick - lastKickTick >= 95) or passTicks >= 150 then
+		if kicked and (receiverContacted or tick - lastKickTick >= 105) or passTicks >= 180 then
 			passIndex = passIndex % #PASS_PLAN + 1
 			holder, receiver = PASS_PLAN[passIndex][1], PASS_PLAN[passIndex][2]
-			passTicks, kicked = 0, false
+			passTicks, kicked, receiverContacted = 0, false, false
 		end
 
 		local frame = {
