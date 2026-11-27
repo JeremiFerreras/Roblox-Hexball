@@ -141,8 +141,7 @@ local function hermiteAxis(p0, p1, v0, v1, alpha, duration)
     return math.clamp(value, low, high)
 end
 
-local function interpolate(a, b, alpha)
-    local duration = math.max((b.tick - a.tick) / RATE, 1 / RATE)
+local function interpolate(a, b, alpha, duration)
     return {
         x = hermiteAxis(a.x, b.x, a.vx, b.vx, alpha, duration),
         y = hermiteAxis(a.y, b.y, a.vy, b.vy, alpha, duration),
@@ -214,14 +213,15 @@ function SnapshotBuffer:sample(now)
     local alpha = b.tick > a.tick
         and math.clamp((self.cursor - a.tick) / (b.tick - a.tick), 0, 1)
         or 1
+    local duration = math.max((b.tick - a.tick) / RATE, 1 / RATE)
     local result = {
-        ball = interpolate(a.ball, b.ball, alpha),
-        player = interpolate(a.player, b.player, alpha),
-        player2 = interpolate(a.player2, b.player2, alpha),
+        ball = interpolate(a.ball, b.ball, alpha, duration),
+        player = interpolate(a.player, b.player, alpha, duration),
+        player2 = interpolate(a.player2, b.player2, alpha, duration),
         players = {},
     }
     for i, disc in ipairs(b.players) do
-        result.players[i] = interpolate(a.players[i] or disc, disc, alpha)
+        result.players[i] = interpolate(a.players[i] or disc, disc, alpha, duration)
     end
 
     local sourceGap = math.max(0, b.tick - a.tick)
