@@ -114,12 +114,13 @@ function Renderer.hideLegacyField(field)
     end
 end
 
-function Renderer.new(playerGui, scene, ui, legacyField)
-    assert(playerGui and scene, "PlayerGui and scene are required")
+function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
+    assert(playerGui and scene and sceneApi, "PlayerGui, scene data, and scene API are required")
     ui = ui or defaultUI()
     local self = setmetatable({
         ui = ui,
         scene = scene,
+        sceneApi = sceneApi,
         lastView = nil,
         playerTokens = {},
         debugLines = {},
@@ -231,7 +232,7 @@ function Renderer:_placeStatic(layout, camera)
     end
 
     local grass = self.grassRect
-    local gx, gy = self.scene.toViewport(grass.minX, grass.maxY, layout, camera)
+    local gx, gy = self.sceneApi.toViewport(grass.minX, grass.maxY, layout, camera)
     self.grass.Position = self.ui.offset(gx, gy)
     self.grass.Size = self.ui.offset((grass.maxX - grass.minX) * scale, (grass.maxY - grass.minY) * scale)
 
@@ -246,14 +247,14 @@ function Renderer:_placeStatic(layout, camera)
 
     for _, entry in ipairs(self.lineFrames) do
         local line = entry.source
-        local x1, y1 = self.scene.toViewport(line.a.x, line.a.y, layout, camera)
-        local x2, y2 = self.scene.toViewport(line.b.x, line.b.y, layout, camera)
+        local x1, y1 = self.sceneApi.toViewport(line.a.x, line.a.y, layout, camera)
+        local x2, y2 = self.sceneApi.toViewport(line.b.x, line.b.y, layout, camera)
         placeLine(self.ui, entry.frame, x1, y1, x2, y2, line.thickness * scale)
     end
 
     local circle = self.scene.circles[1]
     if circle then
-        local cx, cy = self.scene.toViewport(circle.x, circle.y, layout, camera)
+        local cx, cy = self.sceneApi.toViewport(circle.x, circle.y, layout, camera)
         self.centerCircle.Position = self.ui.offset(cx, cy)
         self.centerCircle.Size = self.ui.offset(circle.radius * 2 * scale, circle.radius * 2 * scale)
         self.centerCircle.Visible = true
@@ -261,7 +262,7 @@ function Renderer:_placeStatic(layout, camera)
 
     for _, entry in ipairs(self.postFrames) do
         local post = entry.source
-        local px, py = self.scene.toViewport(post.x, post.y, layout, camera)
+        local px, py = self.sceneApi.toViewport(post.x, post.y, layout, camera)
         local diameter = post.radius * 2 * scale
         entry.frame.Position = self.ui.offset(px, py)
         entry.frame.Size = self.ui.offset(diameter, diameter)
@@ -289,7 +290,7 @@ function Renderer:render(frame, focus)
         x = focus and type(focus.x) == "number" and focus.x or 0,
         y = focus and type(focus.y) == "number" and focus.y or 0,
     }
-    local layout = self.scene.fit(width, height)
+    local layout = self.sceneApi.fit(width, height)
     self:_placeStatic(layout, camera)
 
     local players = frame.players or {}
@@ -299,7 +300,7 @@ function Renderer:render(frame, focus)
         local visible = actor ~= nil and actor.visible ~= false
         token.frame.Visible = visible
         if visible then
-            local px, py = self.scene.toViewport(actor.x, actor.y, layout, camera)
+            local px, py = self.sceneApi.toViewport(actor.x, actor.y, layout, camera)
             local diameter = math.max(8, (actor.radius or 15) * 2 * layout.scale)
             token.frame.Position = self.ui.offset(px, py)
             token.frame.Size = self.ui.offset(diameter, diameter)
@@ -312,7 +313,7 @@ function Renderer:render(frame, focus)
     local ball = frame.ball
     self.ballToken.Visible = ball ~= nil and ball.visible ~= false
     if self.ballToken.Visible then
-        local bx, by = self.scene.toViewport(ball.x, ball.y, layout, camera)
+        local bx, by = self.sceneApi.toViewport(ball.x, ball.y, layout, camera)
         local diameter = math.max(6, (ball.radius or 10) * 2 * layout.scale)
         self.ballToken.Position = self.ui.offset(bx, by)
         self.ballToken.Size = self.ui.offset(diameter, diameter)
@@ -323,8 +324,8 @@ function Renderer:render(frame, focus)
         local line = debug[index]
         lineFrame.Visible = line ~= nil and line.visible ~= false
         if lineFrame.Visible then
-            local x1, y1 = self.scene.toViewport(line.a.x, line.a.y, layout, camera)
-            local x2, y2 = self.scene.toViewport(line.b.x, line.b.y, layout, camera)
+            local x1, y1 = self.sceneApi.toViewport(line.a.x, line.a.y, layout, camera)
+            local x2, y2 = self.sceneApi.toViewport(line.b.x, line.b.y, layout, camera)
             placeLine(self.ui, lineFrame, x1, y1, x2, y2, 1.5)
             lineFrame.BackgroundColor3 = self.ui.color(line.color[1], line.color[2], line.color[3])
         end

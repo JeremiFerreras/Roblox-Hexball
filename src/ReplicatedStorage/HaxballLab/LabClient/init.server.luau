@@ -60,7 +60,7 @@ local GuiStadiumScene = require(lab:WaitForChild("GuiStadiumScene"))
 local GuiStadiumRenderer = require(lab:WaitForChild("GuiStadiumRenderer"))
 local stadiumScene = GuiStadiumScene.build(StadiumProfile2D, ClassicReference230)
 local legacyField = workspace:WaitForChild("HaxballLab")
-local stadiumRenderer = GuiStadiumRenderer.new(player:WaitForChild("PlayerGui"), stadiumScene, nil, legacyField)
+local stadiumRenderer = GuiStadiumRenderer.new(player:WaitForChild("PlayerGui"), stadiumScene, nil, legacyField, GuiStadiumScene)
 
 local showDiagnostics = lab:GetAttribute("EnableHaxballDiagnostics") == true
 local gui = Instance.new("ScreenGui")

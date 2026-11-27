@@ -94,7 +94,7 @@ local legacyField = {
     GetDescendants = function() return { legacyPart } end,
 }
 local fakePlayerGui = { Children = {} }
-local renderer = Renderer.new(fakePlayerGui, scene, fakeUI, legacyField)
+local renderer = Renderer.new(fakePlayerGui, scene, fakeUI, legacyField, Scene)
 check("GUI renderer creates ScreenGui in PlayerGui", renderer.gui.Parent == fakePlayerGui)
 check("GUI renderer creates static grass and stripe layers", renderer.grass ~= nil and #renderer.stripeFrames == #scene.stripes)
 check("legacy 3D BaseParts are hidden locally", legacyPart.LocalTransparencyModifier == 1
