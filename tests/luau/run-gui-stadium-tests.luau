@@ -2,6 +2,7 @@ local Scene = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumScene")
 local Renderer = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer")
 local Profile = require("../../src/ReplicatedStorage/HaxballLab/StadiumReference2D")
 local Reference = require("../../src/ReplicatedStorage/HaxballLab/ClassicReference230")
+local Codec = require("../../src/ReplicatedStorage/HaxballLab/NetCodec")
 
 local passed = 0
 local function check(name, condition)
@@ -21,6 +22,8 @@ check("stadium bounds retain 840x400 logical units", scene.width == 840 and scen
 check("playable grass rectangle matches Classic HBS", scene.grass.minX == -370 and scene.grass.maxX == 370
     and scene.grass.minY == -170 and scene.grass.maxY == 170)
 check("all four physical posts are present", #scene.posts == 4)
+check("scene roster is exactly four versus four", scene.playerCount == 8 and scene.playersPerTeam == 4)
+check("spawn configuration contains exactly eight players", Profile.PlayerCount == 8 and #Profile.SpawnPoints == 8)
 check("outer grass matches reference RGB", table.concat(scene.palette.outerGrass, ",") == "116,146,92")
 check("main grass matches reference RGB", table.concat(scene.palette.grass, ",") == "112,156,93")
 check("mowing stripe matches reference RGB", table.concat(scene.palette.stripeA, ",") == "123,164,108")
@@ -69,6 +72,9 @@ local function fakeNode(className)
     local node = { ClassName = className, Children = {} }
     setmetatable(node, {
         __newindex = function(target, key, value)
+            if key == "BackgroundColor3" and value == nil then
+                error("BackgroundColor3 cannot be nil; use a valid transparent fill color")
+            end
             rawset(target, key, value)
             if key == "Parent" and type(value) == "table" and value.Children then
                 table.insert(value.Children, target)
@@ -110,7 +116,7 @@ check("GUI renderer creates static grass and stripe layers", renderer.grass ~= n
 check("legacy 3D BaseParts are hidden locally", legacyPart.LocalTransparencyModifier == 1)
 check("GUI hiding leaves physical collision flags untouched", legacyPart.CanCollide == true
     and legacyPart.CanTouch == true and legacyPart.CanQuery == true)
-check("GUI renderer creates ten reusable player tokens", #renderer.playerTokens == 10)
+check("GUI renderer creates eight reusable player tokens", #renderer.playerTokens == 8)
 check("GUI renderer creates one reusable ball token", renderer.ballToken ~= nil)
 
 renderer:render({
@@ -146,5 +152,47 @@ check("avatar image is cleared when a slot becomes unowned", not tokenOne.avatar
 check("center circle keeps 75-unit visual radius", near(renderer.centerCircle.Size.X, 240))
 renderer:destroy()
 check("renderer cleanup destroys its ScreenGui", renderer.gui == nil)
+
+
+-- Network codec contract for the four-a-side roster.
+local commands = {}
+for index = 1, 8 do
+    commands[index] = { seq = index, tick = index * 2, mask = index % 2 == 0 and 2 or 1 }
+end
+local encodedInputs = Codec.encodeInput(7, 3, commands)
+local decodedInputs = Codec.decodeInput(encodedInputs)
+check("4v4 input packet accepts eight command records", decodedInputs ~= nil and #decodedInputs.commands == 8)
+
+local wirePlayers = {}
+for slot = 1, Profile.PlayerCount do
+    wirePlayers[slot] = {
+        id = slot, team = slot <= Profile.PlayersPerTeam and "red" or "blue",
+        x = slot * 10, y = -slot * 2, vx = 0.25, vy = -0.5,
+        ack = slot, kickCooldown = 0, kickHeld = false, kickArmed = true,
+        needsKickRelease = false, collisionMask = Profile.CollisionMasks.player,
+        inputMask = 0, ownerUserId = 1000 + slot,
+    }
+end
+local state = {
+    coreMode = true, players = wirePlayers, matchPhase = "playing",
+    matchId = 21, round = 4, tick = 120, elapsedMatchTicks = 120,
+    pauseTicksRemaining = 0, kickoffTeam = nil, winner = nil,
+    score = { red = 2, blue = 1 },
+    lastTouch = { playerId = 8, team = "blue", kind = "kick", tick = 119 },
+    lastGoal = nil, ball = { x = 1.25, y = -2.5, vx = 3, vy = 4 },
+}
+local encodedState = Codec.encodeState(state)
+check("4v4 state packet is 400 bytes", buffer.len(encodedState) == 400)
+local decodedState = Codec.decodeState(encodedState, state)
+check("4v4 state packet restores all eight players", decodedState ~= nil and #decodedState.players == 8)
+check("blue team starts at slot five", decodedState ~= nil and decodedState.player2.id == 5)
+check("player eight touch survives network encoding", decodedState ~= nil and decodedState.lastTouch.playerId == 8)
+check("player ownership metadata survives bootstrap", decodedState ~= nil and decodedState.players[8].ownerUserId == 1008)
+local invalid = table.clone(state)
+invalid.players = table.clone(wirePlayers)
+invalid.players[9] = table.clone(wirePlayers[8])
+invalid.players[10] = table.clone(wirePlayers[8])
+local acceptedLegacyTen = pcall(function() Codec.encodeState(invalid) end)
+check("legacy ten-player state is rejected", not acceptedLegacyTen)
 
 print(string.format("GUI_STADIUM_TESTS_OK passed=%d", passed))

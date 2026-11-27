@@ -10,7 +10,15 @@ on:
       - "src/ReplicatedStorage/HaxballLab/ClassicReference230/**"
       - "README.md"
       - "src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer/**"
+      - "src/ReplicatedStorage/HaxballLab/NetCodec/**"
+      - "src/ReplicatedStorage/HaxballLab/StadiumReference2D/**"
+      - "src/ReplicatedStorage/HaxballLab/NetPrediction/**"
       - "src/ReplicatedStorage/HaxballLab/LabClient/**"
+      - "src/ServerScriptService/HaxballLab/LabServer/**"
+      - "src/ServerScriptService/HaxballLab/NetServer/**"
+      - "src/ServerScriptService/HaxballLab/MatchRules2D/**"
+      - "src/ServerScriptService/HaxballLab/LabRegression/**"
+      - "src/ReplicatedFirst/**"
       - "src/ReplicatedStorage/HaxballLab/instance.json"
       - "tests/luau/**"
       - ".github/workflows/gui-stadium-tests.yml"
@@ -54,5 +62,24 @@ jobs:
             exit 1
           fi
 
-      - name: Run headless scene and GUI adapter tests
+      - name: Verify client handshake and 4v4 invariants
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          client = Path("src/ReplicatedStorage/HaxballLab/LabClient/init.server.luau").read_text()
+          server = Path("src/ServerScriptService/HaxballLab/LabServer/init.server.luau").read_text()
+          codec = Path("src/ReplicatedStorage/HaxballLab/NetCodec/init.luau").read_text()
+          profile = Path("src/ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau").read_text()
+          for remote in ("snapshotRemote.OnClientEvent:Connect", "stateStream.OnClientEvent:Connect", "controlRemote.OnClientEvent:Connect"):
+              assert remote in client, f"missing event listener: {remote}"
+          assert client.index("controlRemote.OnClientEvent:Connect") < client.index("GuiStadiumRenderer.new")
+          assert client.index("GuiStadiumRenderer.new") < client.index('controlRemote:FireServer("ready")')
+          assert 'WaitForChild("Remotes"' in client and 'WaitForChild("Remotes"' in server
+          assert "PlayerCount = 8" in profile and "PlayersPerTeam = 4" in profile
+          assert "STATE_BYTES = 72 + 8 * 41" in codec and "4v4 state required" in codec
+          print("PASS: event listeners, typed remotes, 4v4 roster and 400-byte codec")
+          PY
+
+      - name: Run headless scene, GUI and 4v4 network tests
         run: luau tests/luau/run-gui-stadium-tests.luau

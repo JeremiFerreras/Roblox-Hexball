@@ -51,8 +51,8 @@ jobs:
               if name:
                   names.setdefault(name, []).append(item)
 
-          assert "HaxballLab" in names, "HaxballLab model missing"
-          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "LabClient"):
+          assert "SimpleSoccerGame" in names, "SimpleSoccerGame model/folder missing"
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot"):
               assert required in names, f"{required} missing from place XML"
 
           scripts = []
@@ -65,7 +65,7 @@ jobs:
                       None,
                   )
                   scripts.append((name, source.text if source is not None else None))
-          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "LabClient"):
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot"):
               assert any(name == required and source for name, source in scripts), (
                   f"{required} script source missing or empty"
               )
@@ -73,7 +73,8 @@ jobs:
           assert len(scripts) >= 25, f"unexpected script count: {len(scripts)}"
           print(f"PASS: parsed {place.stat().st_size} bytes of RBXLX")
           print(f"PASS: {len(list(root.iter('Item')))} instances, {len(scripts)} scripts")
-          print("PASS: GUI scene, GUI renderer and active LabClient source are embedded")
+          assert any(name == "SimpleSoccerBoot" and source for name, source in scripts), "ReplicatedFirst boot script missing"
+          print("PASS: GUI scene, renderer, active client and loading screen sources are embedded")
           PY
 
       - name: Upload Roblox Studio place

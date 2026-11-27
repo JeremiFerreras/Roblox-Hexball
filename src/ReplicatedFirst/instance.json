@@ -84,8 +84,11 @@
       ]
     }
   ],
-  "children": [],
+  "children": [
+    "ReplicatedFirst/SimpleSoccerBoot"
+  ],
   "layout": [
-    false
+    false,
+    true
   ]
 }
