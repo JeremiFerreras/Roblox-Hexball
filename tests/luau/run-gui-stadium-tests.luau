@@ -1,7 +1,7 @@
-local Scene = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau")
-local Renderer = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer/init.luau")
-local Profile = require("../../src/ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau")
-local Reference = require("../../src/ReplicatedStorage/HaxballLab/ClassicReference230/init.luau")
+local Scene = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumScene")
+local Renderer = require("../../src/ReplicatedStorage/HaxballLab/GuiStadiumRenderer")
+local Profile = require("../../src/ReplicatedStorage/HaxballLab/StadiumReference2D")
+local Reference = require("../../src/ReplicatedStorage/HaxballLab/ClassicReference230")
 
 local passed = 0
 local function check(name, condition)
