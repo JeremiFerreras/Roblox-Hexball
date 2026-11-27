@@ -1,11 +1,11 @@
 -- Deterministic 2D match core.
--- Logical coordinates use Haxball stadium units. One call to stepWorld is one fixed game tick.
+-- Logical coordinates use stadium logical units. One call to stepWorld is one fixed game tick.
 -- Collision order follows the explicit disc insertion order: dynamic pairs, then static geometry per disc.
 local Core = {}
 
 local DEFAULTS = {
 	tickRate = 60,
-	solverMode = "adaptive", -- Explicit compatibility option: haxballDiscrete.
+	solverMode = "adaptive", -- Explicit compatibility option: classicDiscrete.
 	playerAcceleration = 0.1,
 	playerKickAcceleration = 0.07,
 	playerDamping = 0.96,
@@ -47,7 +47,7 @@ function Core.newWorld(config)
 			and math.floor(settings.maxSubsteps) == settings.maxSubsteps,
 		"maxSubsteps must be an integer from 1 to 256"
 	)
-	assert(settings.solverMode == "adaptive" or settings.solverMode == "haxballDiscrete", "unknown solverMode")
+	assert(settings.solverMode == "adaptive" or settings.solverMode == "classicDiscrete", "unknown solverMode")
 	return {
 		tick = 0,
 		config = settings,
@@ -370,7 +370,7 @@ local function resolveDiscPair(a, b, reference)
 		distance = math.sqrt(d2)
 		nx, ny = dx / distance, dy / distance
 	else
-		-- Deterministic fallback for coincident centers. Original Haxball behavior
+		-- Deterministic fallback for coincident centers. Reference-game behavior
 		-- at exact coincidence must still be verified against an official oracle.
 		distance = 0
 		nx, ny = -1, 0
@@ -393,7 +393,7 @@ local function resolveDiscPair(a, b, reference)
 	local normalVelocity = normalSpeedBefore
 	local impulseMagnitude = 0
 	if normalVelocity < 0 then
-		-- Haxball-style restitution uses the product of disk bounce coefficients.
+		-- Reference restitution uses the product of disk bounce coefficients.
 		normalVelocity *= (a.bCoef * b.bCoef + 1)
 		local changeA = mf * normalVelocity
 		a.vx -= nx * changeA
@@ -516,10 +516,10 @@ local function resolveStaticGeometryForDisc(world, disc, events, eventKeys)
 	end
 end
 
--- Exact ordered static contact policy for the pinned Node-Haxball 2.3.0
+-- Exact ordered static contact policy for the pinned independent game-engine reference
 -- compatibility profile. Geometry is numeric reference data, not Roblox objects.
 function Core.setReferenceGeometry(world, geometry)
-	assert(world.config.solverMode == "haxballDiscrete", "reference geometry requires discrete mode")
+	assert(world.config.solverMode == "classicDiscrete", "reference geometry requires discrete mode")
 	world.referenceGeometry = geometry
 end
 
@@ -614,7 +614,7 @@ function Core.stepWorld(world, inputs)
 	local events, eventKeys = {}, {}
 	world.motionSegments = {}
 	local traceStarts = {}
-	if world.config.solverMode == "haxballDiscrete" then
+	if world.config.solverMode == "classicDiscrete" then
 		for _, disc in ipairs(world.discs) do
 			if disc.traceMotion then
 				traceStarts[disc.id] = { x = disc.x, y = disc.y }
@@ -635,7 +635,7 @@ function Core.stepWorld(world, inputs)
 		local maxDistance = math.max(0.5, minRadius * 0.5)
 		substeps = math.clamp(math.ceil(maxSpeed / maxDistance), 1, world.config.maxSubsteps)
 	end
-	local reference = world.config.solverMode == "haxballDiscrete"
+	local reference = world.config.solverMode == "classicDiscrete"
 	if reference then
 		substeps = 1
 	end

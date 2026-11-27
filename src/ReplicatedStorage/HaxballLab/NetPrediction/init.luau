@@ -15,7 +15,7 @@ function Prediction.new()
 end
 function Prediction:_world()
 	local p = Profile.PhysicsBaseline.active
-	local w = Core.newWorld({ useBounds = false, solverMode = "haxballDiscrete" })
+	local w = Core.newWorld({ useBounds = false, solverMode = "classicDiscrete" })
 	Core.addDisc(w, {
 		id = "ball",
 		kind = "ball",
@@ -34,11 +34,11 @@ function Prediction:_world()
 		s.damping = 1
 		Core.addDisc(w, s)
 	end
-	for slot = 1, 10 do
+	for slot = 1, Profile.PlayerCount do
 		Core.addDisc(w, {
 			id = slot,
 			kind = "player",
-			team = slot <= 5 and "red" or "blue",
+			team = slot <= Profile.PlayersPerTeam and "red" or "blue",
 			radius = p.player.radius,
 			invMass = p.player.invMass,
 			damping = p.player.damping,
@@ -48,8 +48,8 @@ function Prediction:_world()
 			kickDamping = p.player.kickDamping,
 			kickStrength = p.player.kickStrength,
 			kickback = p.player.kickback,
-			collisionGroup = slot <= 5 and 2 or 4,
-			collisionMask = 39,
+			collisionGroup = slot <= Profile.PlayersPerTeam and Profile.CollisionGroups.red or Profile.CollisionGroups.blue,
+			collisionMask = Profile.CollisionMasks.player,
 		})
 	end
 	return w
@@ -98,7 +98,7 @@ function Prediction:restore(s, slot)
 	self.lastMasks = {}
 	self.release = {}
 	for i, d in ipairs(s.players) do
-		local p = self.world.discs[5 + i]
+		local p = self.world.discs[1 + #Geometry.posts + i]
 		for _, key in ipairs({ "x", "y", "vx", "vy", "kickHeld", "kickArmed", "kickCooldown", "collisionMask" }) do
 			p[key] = d[key]
 		end
@@ -142,12 +142,12 @@ function Prediction:advance(targetTick, mask)
 			self.history[tick] = mask
 		end
 		local inputs = {}
-		for i = 1, 10 do
+		for i = 1, Profile.PlayerCount do
 			local value = Codec.input(i == self.slot and localMask or self.lastMasks[i])
 			if not value.kick then
 				self.release[i] = false
 			end
-			if self.release[i] or self.kickoffTeam and (i <= 5 and "red" or "blue") ~= self.kickoffTeam then
+			if self.release[i] or self.kickoffTeam and (i <= Profile.PlayersPerTeam and "red" or "blue") ~= self.kickoffTeam then
 				value.kick = false
 			end
 			inputs[i] = value
@@ -155,21 +155,21 @@ function Prediction:advance(targetTick, mask)
 		local _, events = Core.stepWorld(self.world, inputs)
 		for _, e in ipairs(events) do
 			local id = e.kind == "kick" and e.playerId or e.discA == "ball" and e.discB or e.discB == "ball" and e.discA
-			if type(id) == "number" and self.kickoffTeam and (id <= 5 and "red" or "blue") == self.kickoffTeam then
+			if type(id) == "number" and self.kickoffTeam and (id <= Profile.PlayersPerTeam and "red" or "blue") == self.kickoffTeam then
 				local ball = self.world.discs[1]
 				if ball.vx ~= 0 or ball.vy ~= 0 then
 					self.kickoffTeam = nil
-					for i = 1, 10 do
-						self.world.discs[5 + i].collisionMask = 39
+					for i = 1, Profile.PlayerCount do
+						self.world.discs[1 + #Geometry.posts + i].collisionMask = Profile.CollisionMasks.player
 					end
 				end
 			end
 		end
-		local actor = self.world.discs[5 + self.slot]
+		local actor = self.world.discs[1 + #Geometry.posts + self.slot]
 		self.forecasts[self.world.tick] =
 			{ x = actor.x, y = actor.y, ballX = self.world.discs[1].x, ballY = self.world.discs[1].y }
 	end
-	local actor = self.world.discs[5 + self.slot]
+	local actor = self.world.discs[1 + #Geometry.posts + self.slot]
 	return actor, self.world.discs[1]
 end
 function Prediction:visual(actor, ball, dt)

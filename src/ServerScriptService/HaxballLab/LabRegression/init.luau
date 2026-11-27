@@ -1,8 +1,8 @@
 local Suite={}
 local ClassicStadium2D=require(script.Parent:WaitForChild("ClassicStadium2D"))
 local MatchRules2D=require(script.Parent:WaitForChild("MatchRules2D"))
-local PredictionLab2D=require(game:GetService("ReplicatedStorage").HaxballLab:WaitForChild("PredictionLab2D"))
-local StadiumProfile2D=require(game:GetService("ReplicatedStorage").HaxballLab:WaitForChild("StadiumReference2D"))
+local PredictionLab2D=require(game:GetService("ReplicatedStorage").SimpleSoccerGame:WaitForChild("PredictionLab2D"))
+local StadiumProfile2D=require(game:GetService("ReplicatedStorage").SimpleSoccerGame:WaitForChild("StadiumReference2D"))
 local function near(a,b,tolerance)
     return math.abs(a-b)<=tolerance
 end
@@ -174,28 +174,28 @@ function Suite.Run(P)
         for _,event in ipairs(w.events) do if event.kind=="kick" then repeatedKickEvent=true end end
         return {passed=near(first,5,1e-12) and near(second,5,1e-12) and firstKickEvent and not repeatedKickEvent,detail=string.format("ballVx=%.3f->%.3f kickEventFirst=%s repeated=%s",first,second,tostring(firstKickEvent),tostring(repeatedKickEvent))}
     end)
-    addResult(report,"core_ten_player_classic_world_600_ticks",function()
+    addResult(report,"core_eight_player_classic_world_600_ticks",function()
         local w=Core.newWorld({useBounds=false})
         Core.addDisc(w,{id="ball",kind="ball",radius=10,invMass=1,damping=0.99,bCoef=0.5,kickable=true,collisionGroup=ClassicStadium2D.Groups.ball})
         local geometry=ClassicStadium2D.install(Core,w)
-        local positions={{-80,0},{-150,-54},{-150,-18},{-150,18},{-150,54},{150,-72},{150,-36},{150,0},{150,36},{150,72}}
+        local positions={{-80,0},{-150,-45},{-150,0},{-150,45},{80,0},{150,-45},{150,0},{150,45}}
         local red,blue=0,0
-        for i=1,10 do
-            local team=i<=5 and "red" or "blue"
+        for i=1,8 do
+            local team=i<=4 and "red" or "blue"
             if team=="red" then red+=1 else blue+=1 end
             local p=positions[i]
-            Core.addDisc(w,{id=i,kind="player",team=team,x=p[1],y=p[2],radius=15,invMass=0.5,damping=0.96,bCoef=0.5,acceleration=0.1,kickAcceleration=0.07,kickStrength=5,kickback=0,collisionGroup=team=="red" and ClassicStadium2D.Groups.red or ClassicStadium2D.Groups.blue,collisionMask=require(game:GetService("ReplicatedStorage").HaxballLab.StadiumReference2D).CollisionMasks.player})
+            Core.addDisc(w,{id=i,kind="player",team=team,x=p[1],y=p[2],radius=15,invMass=0.5,damping=0.96,bCoef=0.5,acceleration=0.1,kickAcceleration=0.07,kickStrength=5,kickback=0,collisionGroup=team=="red" and ClassicStadium2D.Groups.red or ClassicStadium2D.Groups.blue,collisionMask=require(game:GetService("ReplicatedStorage").SimpleSoccerGame.StadiumReference2D).CollisionMasks.player})
         end
         local totalEvents,maxSubsteps=0,0
         local valid=true
         for tick=1,600 do
             local inputs={}
-            for i=1,10 do inputs[i]={x=math.sin(tick*0.013+i),y=math.cos(tick*0.017-i),kick=(tick%97==1)} end
+            for i=1,8 do inputs[i]={x=math.sin(tick*0.013+i),y=math.cos(tick*0.017-i),kick=(tick%97==1)} end
             local _,tickEvents,substeps=Core.stepWorld(w,inputs)
             totalEvents+=#tickEvents
             maxSubsteps=math.max(maxSubsteps,substeps)
         end
-        valid=w.tick==600 and #w.discs==15 and red==5 and blue==5 and geometry.planes==6 and geometry.segments==14 and geometry.posts==4 and totalEvents>0
+        valid=w.tick==600 and #w.discs==13 and red==4 and blue==4 and geometry.planes==6 and geometry.segments==14 and geometry.posts==4 and totalEvents>0
         for _,d in ipairs(w.discs) do
             valid=valid and finite(d.x) and finite(d.y) and finite(d.vx) and finite(d.vy)
             if d.kind=="player" then valid=valid and math.abs(d.x)<=405 and math.abs(d.y)<=185 end
@@ -204,11 +204,11 @@ function Suite.Run(P)
         valid=valid and math.abs(ball.x)<=410 and math.abs(ball.y)<=190
         return {passed=valid,detail=string.format("ticks=%d players=%d red=%d blue=%d discs=%d events=%d maxSubsteps=%d finite=%s",w.tick,red+blue,red,blue,#w.discs,totalEvents,maxSubsteps,tostring(valid))}
     end)
-    addResult(report,"core_dense_ten_disc_overlap_relaxes",function()
+    addResult(report,"core_dense_eight_player_overlap_relaxes",function()
         local w=Core.newWorld({useBounds=false})
         Core.addDisc(w,{id=0,kind="ball",radius=10,invMass=1,damping=0.99,kickable=true})
-        for i=1,10 do
-            Core.addDisc(w,{id=i,kind="player",x=((i-1)%5)*8-16,y=(i<=5 and -4 or 4),radius=15,invMass=0.5,damping=0.96})
+        for i=1,8 do
+            Core.addDisc(w,{id=i,kind="player",x=((i-1)%4)*8-12,y=(i<=4 and -4 or 4),radius=15,invMass=0.5,damping=0.96})
         end
         local initialMax,finalMax=0,0
         local valid=true
@@ -378,15 +378,15 @@ function Suite.Run(P)
         local ok=right and right.team=="red" and right.side=="right" and near(right.y,0,1e-12) and left and left.team=="blue" and left.side=="left" and outside==nil
         return {passed=ok,detail=string.format("right=%s/%s y=%.3f left=%s/%s outside=%s",right and right.side or "-",right and right.team or "-",right and right.y or -999,left and left.side or "-",left and left.team or "-",tostring(outside~=nil))}
     end)
-    addResult(report,"goal_pause_resets_ball_and_ten_player_positions",function()
+    addResult(report,"goal_pause_resets_ball_and_eight_player_positions",function()
         local match=MatchRules2D.newMatch()
         local score={red=0,blue=0}
         local ball={x=371,y=3,vx=8,vy=2}
         local players={}
         local spawns={}
-        for i=1,10 do
+        for i=1,8 do
             players[i]={x=i*3,y=-i,vx=1,vy=2,kickHeld=true,kickArmed=true,kickCooldown=4}
-            spawns[i]={x=(i<=5 and -100 or 100),y=(i-1)*4}
+            spawns[i]={x=(i<=4 and -100 or 100),y=(i-1)*4}
         end
         MatchRules2D.beginGoalPause(match,score,{team="red",side="right",x=370,y=3,tick=7},ball,players,2)
         local paused=match.phase=="goalPause" and score.red==1 and ball.vx==0 and players[1].vx==0
@@ -394,8 +394,8 @@ function Suite.Run(P)
         local ready=MatchRules2D.advancePause(match)
         MatchRules2D.resetKickoff(ball,players,spawns)
         MatchRules2D.resume(match)
-        local exact=ball.x==0 and ball.y==0 and players[10].x==100 and players[10].y==36 and players[10].kickArmed==false and players[10].kickCooldown==0
-        return {passed=paused and not doneEarly and ready and exact and match.phase=="playing" and score.red==1,detail=string.format("phase=%s redScore=%d pauseComplete=%s resetAllTen=%s",match.phase,score.red,tostring(ready),tostring(exact))}
+        local exact=ball.x==0 and ball.y==0 and players[8].x==100 and players[8].y==28 and players[8].kickArmed==false and players[8].kickCooldown==0
+        return {passed=paused and not doneEarly and ready and exact and match.phase=="playing" and score.red==1,detail=string.format("phase=%s redScore=%d pauseComplete=%s resetAllEight=%s",match.phase,score.red,tostring(ready),tostring(exact))}
     end)
     addResult(report,"kickoff_countdown_locks_until_complete",function()
         local match=MatchRules2D.newMatch()
