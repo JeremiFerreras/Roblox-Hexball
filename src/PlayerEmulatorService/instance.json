@@ -1,68 +1,20 @@
 {
   "attributes": {
     "class": "PlayerEmulatorService",
-    "referent": "RBX9003AC5D9C7D4047B624D2BCB5008E12"
+    "referent": "464"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "CustomPoliciesEnabled"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "string",
           "attributes": {
-            "name": "EmulatedCountryCode"
+            "name": "Name"
           },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "EmulatedGameLocale"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "PlayerEmulationEnabled"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "PseudolocalizationEnabled"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedEmulatedPolicyInfo"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "TextElongationFactor"
-          },
-          "text": "0",
+          "text": "PlayerEmulatorService",
           "children": []
         },
         {
@@ -84,9 +36,25 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "CustomPoliciesEnabled"
           },
-          "text": "false",
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "EmulatedCountryCode"
+          },
+          "text": "DO",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "EmulatedGameLocale"
+          },
+          "text": null,
           "children": []
         },
         {
@@ -98,11 +66,35 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "PlayerEmulationEnabled"
           },
-          "text": "PlayerEmulatorService",
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "PseudolocalizationEnabled"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedEmulatedPolicyInfo"
+          },
+          "text": "DAAAAB0AAABBbGxvd2VkRXh0ZXJuYWxMaW5rUmVmZXJlbmNlcwcAAAAADQAAAEFyZUFkc0FsbG93ZWQDARwAAABBcmVQYWlkUmFuZG9tSXRlbXNSZXN0cmljdGVkAwAXAAAASXNDb250ZW50U2hhcmluZ0FsbG93ZWQDASMAAABJc0VsaWdpYmxlVG9QdXJjaGFzZUNvbW1lcmNlUHJvZHVjdAMAIAAAAElzRWxpZ2libGVUb1B1cmNoYXNlU3Vic2NyaXB0aW9uAwEfAAAASXNFbmRsZXNzQ29udGVudEF1dG9wbGF5QWxsb3dlZAMBGwAAAElzRW5kbGVzc0NvbnRlbnRMb2FkQWxsb3dlZAMBGAAAAElzUGFpZEl0ZW1UcmFkaW5nQWxsb3dlZAMBFgAAAElzUGhvdG9Ub0F2YXRhckFsbG93ZWQDABgAAABJc1N1YmplY3RUb0NoaW5hUG9saWNpZXMDACEAAABJc1RoaXJkUGFydHlBY2NvdW50TGlua2luZ0FsbG93ZWQDAQ==",
           "children": []
         },
         {
@@ -110,7 +102,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -122,11 +114,19 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "TextElongationFactor"
+          },
+          "text": "0",
           "children": []
         },
         {
@@ -134,7 +134,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "696819431a01660b0b0e29500000038d",
+          "text": "3ddb84ffe3f0fbfc0b1a6c120000038d",
           "children": []
         }
       ]

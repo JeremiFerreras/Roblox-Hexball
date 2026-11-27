@@ -92,7 +92,8 @@ function Match:step(rawInputs)
 		if locked and kick then
 			self.needsKickRelease[slot] = true
 		end
-		if raw.stale then
+		-- A new slot may press X first. A timed-out slot must release a held kick.
+		if raw.stale and not raw.awaitingFirstInput then
 			self.needsKickRelease[slot] = true
 		end
 		if not kick and not raw.stale then

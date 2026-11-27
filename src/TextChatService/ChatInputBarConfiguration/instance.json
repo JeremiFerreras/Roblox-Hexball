@@ -1,14 +1,30 @@
 {
   "attributes": {
     "class": "ChatInputBarConfiguration",
-    "referent": "RBX3F4CBE43D89440FF8ED32CB2476A5A7E"
+    "referent": "457"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "ChatInputBarConfiguration",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
         {
           "tag": "bool",
           "attributes": {
@@ -22,12 +38,12 @@
           "attributes": {
             "name": "BackgroundColor3"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
               "attributes": {},
-              "text": "0.0980392173",
+              "text": "0.09803922",
               "children": []
             },
             {
@@ -39,7 +55,7 @@
             {
               "tag": "B",
               "attributes": {},
-              "text": "0.113725491",
+              "text": "0.11372549",
               "children": []
             }
           ]
@@ -49,7 +65,15 @@
           "attributes": {
             "name": "BackgroundTransparency"
           },
-          "text": "0.2000000000000000111",
+          "text": "0.2",
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
           "children": []
         },
         {
@@ -65,12 +89,12 @@
           "attributes": {
             "name": "FontFace"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "Family",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": [
                 {
                   "tag": "url",
@@ -95,7 +119,7 @@
             {
               "tag": "CachedFaceId",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": [
                 {
                   "tag": "url",
@@ -106,6 +130,14 @@
               ]
             }
           ]
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
         },
         {
           "tag": "token",
@@ -120,27 +152,59 @@
           "attributes": {
             "name": "PlaceholderColor3"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
               "attributes": {},
-              "text": "0.698039234",
+              "text": "0.69803923",
               "children": []
             },
             {
               "tag": "G",
               "attributes": {},
-              "text": "0.698039234",
+              "text": "0.69803923",
               "children": []
             },
             {
               "tag": "B",
               "attributes": {},
-              "text": "0.698039234",
+              "text": "0.69803923",
               "children": []
             }
           ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n        ",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
+          "children": []
         },
         {
           "tag": "Ref",
@@ -155,7 +219,7 @@
           "attributes": {
             "name": "TextColor3"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
@@ -190,7 +254,7 @@
           "attributes": {
             "name": "TextStrokeColor3"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
@@ -218,70 +282,6 @@
             "name": "TextStrokeTransparency"
           },
           "text": "0.5",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "ChatInputBarConfiguration",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "Tags"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
           "children": []
         },
         {

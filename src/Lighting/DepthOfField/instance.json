@@ -1,52 +1,20 @@
 {
   "attributes": {
     "class": "DepthOfFieldEffect",
-    "referent": "RBXD3300B88CEF047439A453A0856C14BB4"
+    "referent": "505"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
         {
-          "tag": "float",
+          "tag": "string",
           "attributes": {
-            "name": "FarIntensity"
+            "name": "Name"
           },
-          "text": "0.100000001",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "FocusDistance"
-          },
-          "text": "0.0500000007",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "InFocusRadius"
-          },
-          "text": "30",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "NearIntensity"
-          },
-          "text": "0.75",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "Enabled"
-          },
-          "text": "false",
+          "text": "DepthOfField",
           "children": []
         },
         {
@@ -68,9 +36,25 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "Enabled"
           },
           "text": "false",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FarIntensity"
+          },
+          "text": "0.1",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "FocusDistance"
+          },
+          "text": "0.05",
           "children": []
         },
         {
@@ -82,11 +66,27 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "float",
           "attributes": {
-            "name": "Name"
+            "name": "InFocusRadius"
           },
-          "text": "DepthOfField",
+          "text": "30",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "NearIntensity"
+          },
+          "text": "0.75",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
           "children": []
         },
         {
@@ -94,7 +94,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
           "children": []
         },
         {
@@ -106,11 +106,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

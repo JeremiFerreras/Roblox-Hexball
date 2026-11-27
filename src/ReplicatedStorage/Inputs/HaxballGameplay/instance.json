@@ -1,36 +1,20 @@
 {
   "attributes": {
     "class": "InputContext",
-    "referent": "RBXCC4E3F4206FC4ABDB9155B6C0301ED97"
+    "referent": "532"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
         {
-          "tag": "bool",
+          "tag": "string",
           "attributes": {
-            "name": "Enabled"
+            "name": "Name"
           },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "Priority"
-          },
-          "text": "10",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "Sink"
-          },
-          "text": "true",
+          "text": "HaxballGameplay",
           "children": []
         },
         {
@@ -52,9 +36,9 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "Enabled"
           },
-          "text": "false",
+          "text": "true",
           "children": []
         },
         {
@@ -66,11 +50,19 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "int",
           "attributes": {
-            "name": "Name"
+            "name": "Priority"
           },
-          "text": "HaxballGameplay",
+          "text": "10",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
           "children": []
         },
         {
@@ -78,7 +70,15 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "Sink"
+          },
+          "text": "true",
           "children": []
         },
         {
@@ -90,11 +90,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

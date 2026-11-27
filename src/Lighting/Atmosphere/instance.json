@@ -1,20 +1,44 @@
 {
   "attributes": {
     "class": "Atmosphere",
-    "referent": "RBX54D6A2BEB51144029FCD5B54B000727B"
+    "referent": "503"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Atmosphere",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
         {
           "tag": "Color3",
           "attributes": {
             "name": "Color"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
@@ -41,7 +65,7 @@
           "attributes": {
             "name": "Decay"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
@@ -52,13 +76,13 @@
             {
               "tag": "G",
               "attributes": {},
-              "text": "0.43921569",
+              "text": "0.4392157",
               "children": []
             },
             {
               "tag": "B",
               "attributes": {},
-              "text": "0.490196079",
+              "text": "0.49019608",
               "children": []
             }
           ]
@@ -68,7 +92,7 @@
           "attributes": {
             "name": "Density"
           },
-          "text": "0.300000012",
+          "text": "0.3",
           "children": []
         },
         {
@@ -88,27 +112,19 @@
           "children": []
         },
         {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
           "tag": "float",
           "attributes": {
             "name": "Offset"
           },
           "text": "0.25",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
           "children": []
         },
         {
@@ -120,27 +136,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "Atmosphere",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
           "children": []
         },
         {
@@ -152,11 +152,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

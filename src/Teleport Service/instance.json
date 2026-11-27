@@ -1,14 +1,22 @@
 {
   "attributes": {
     "class": "TeleportService",
-    "referent": "RBXE67AC140C8214379AEF675CBB5387311"
+    "referent": "473"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Teleport Service",
+          "children": []
+        },
         {
           "tag": "BinaryString",
           "attributes": {
@@ -26,14 +34,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -42,11 +42,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "Teleport Service",
+          "text": "false",
           "children": []
         },
         {
@@ -54,7 +54,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -66,11 +66,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

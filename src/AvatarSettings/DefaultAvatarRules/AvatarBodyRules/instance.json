@@ -1,14 +1,22 @@
 {
   "attributes": {
     "class": "AvatarBodyRules",
-    "referent": "RBX832D26B409E54BBA998EA7933231782D"
+    "referent": "489"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarBodyRules",
+          "children": []
+        },
         {
           "tag": "token",
           "attributes": {
@@ -18,17 +26,25 @@
           "children": []
         },
         {
-          "tag": "token",
+          "tag": "BinaryString",
           "attributes": {
-            "name": "AvatarType"
+            "name": "AttributesSerialize"
           },
-          "text": "1",
+          "text": null,
           "children": []
         },
         {
           "tag": "token",
           "attributes": {
             "name": "BuildMode"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
           },
           "text": "0",
           "children": []
@@ -55,46 +71,6 @@
             "name": "CustomBodyTypeScale"
           },
           "text": "0 1 ",
-          "children": []
-        },
-        {
-          "tag": "NumberRange",
-          "attributes": {
-            "name": "CustomBuildBodyType"
-          },
-          "text": "0 1 ",
-          "children": []
-        },
-        {
-          "tag": "NumberRange",
-          "attributes": {
-            "name": "CustomBuildHead"
-          },
-          "text": "0.95 1 ",
-          "children": []
-        },
-        {
-          "tag": "NumberRange",
-          "attributes": {
-            "name": "CustomBuildHeight"
-          },
-          "text": "0.9 1.05 ",
-          "children": []
-        },
-        {
-          "tag": "NumberRange",
-          "attributes": {
-            "name": "CustomBuildProportions"
-          },
-          "text": "0 1 ",
-          "children": []
-        },
-        {
-          "tag": "NumberRange",
-          "attributes": {
-            "name": "CustomBuildWidth"
-          },
-          "text": "0.7 1 ",
           "children": []
         },
         {
@@ -298,19 +274,11 @@
           "children": []
         },
         {
-          "tag": "NumberRange",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "CustomWorldHeight"
+            "name": "HistoryId"
           },
-          "text": "5.5 5.5 ",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "HeadOverride"
-          },
-          "text": "-1",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -322,35 +290,11 @@
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "bool",
           "attributes": {
-            "name": "LeftArmOverride"
+            "name": "DefinesCapabilities"
           },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "LeftLegOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "RightArmOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "RightLegOverride"
-          },
-          "text": "-1",
+          "text": "false",
           "children": []
         },
         {
@@ -362,59 +306,11 @@
           "children": []
         },
         {
-          "tag": "int64",
-          "attributes": {
-            "name": "TorsoOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "AvatarBodyRules",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
         },
         {
@@ -426,11 +322,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -438,7 +334,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "5a9239d8f0ae460b0b0fc61e00000404",
+          "text": "045fc68b982654180b1b595300000ec4",
           "children": []
         }
       ]

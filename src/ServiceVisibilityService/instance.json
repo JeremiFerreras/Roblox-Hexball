@@ -1,28 +1,20 @@
 {
   "attributes": {
     "class": "ServiceVisibilityService",
-    "referent": "RBX283EB31875F84AFD88B56DC17AC972BE"
+    "referent": "552"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "BinaryString",
+          "tag": "string",
           "attributes": {
-            "name": "HiddenServices"
+            "name": "Name"
           },
-          "text": "AAAAAA==",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "VisibleServices"
-          },
-          "text": "AAAAAA==",
+          "text": "ServiceVisibilityService",
           "children": []
         },
         {
@@ -42,11 +34,11 @@
           "children": []
         },
         {
-          "tag": "bool",
+          "tag": "BinaryString",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "HiddenServices"
           },
-          "text": "false",
+          "text": "AAAAAA==",
           "children": []
         },
         {
@@ -58,11 +50,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "ServiceVisibilityService",
+          "text": "false",
           "children": []
         },
         {
@@ -70,7 +62,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -82,11 +74,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -95,6 +87,14 @@
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e2950000003d9",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "VisibleServices"
+          },
+          "text": "AAAAAA==",
           "children": []
         }
       ]

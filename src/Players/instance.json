@@ -1,60 +1,20 @@
 {
   "attributes": {
     "class": "Players",
-    "referent": "RBX007294F1E928498AB677643DAAFEC0E6"
+    "referent": "451"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "bool",
+          "tag": "string",
           "attributes": {
-            "name": "BanningEnabled"
+            "name": "Name"
           },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "CharacterAutoLoads"
-          },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "MaxPlayersInternal"
-          },
-          "text": "30",
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "PreferredPlayersInternal"
-          },
-          "text": "30",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "RespawnTime"
-          },
-          "text": "3",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "UseStrafingAnimations"
-          },
-          "text": "false",
+          "text": "Players",
           "children": []
         },
         {
@@ -63,6 +23,14 @@
             "name": "AttributesSerialize"
           },
           "text": null,
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "BanningEnabled"
+          },
+          "text": "true",
           "children": []
         },
         {
@@ -76,9 +44,9 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "CharacterAutoLoads"
           },
-          "text": "false",
+          "text": "true",
           "children": []
         },
         {
@@ -90,11 +58,35 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "int",
           "attributes": {
-            "name": "Name"
+            "name": "MaxPlayersInternal"
           },
-          "text": "Players",
+          "text": "60",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "PreferredPlayersInternal"
+          },
+          "text": "60",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "RespawnTime"
+          },
+          "text": "3",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
           "children": []
         },
         {
@@ -102,7 +94,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -114,11 +106,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -127,6 +119,14 @@
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e295000000383",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "UseStrafingAnimations"
+          },
+          "text": "false",
           "children": []
         }
       ]

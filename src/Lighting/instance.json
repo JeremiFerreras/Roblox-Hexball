@@ -1,20 +1,28 @@
 {
   "attributes": {
     "class": "Lighting",
-    "referent": "RBX6741D5F9E948405F8CFAF9E7CD363615"
+    "referent": "500"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Lighting",
+          "children": []
+        },
         {
           "tag": "Color3",
           "attributes": {
             "name": "Ambient"
           },
-          "text": "\n\t\t\t\t",
+          "text": "\n        ",
           "children": [
             {
               "tag": "R",
@@ -37,6 +45,14 @@
           ]
         },
         {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": "AgAAACYAAABSQlhfTGlnaHRpbmdUZWNobm9sb2d5VW5pZmllZE1pZ3JhdGlvbgMBIAAAAFJCWF9PcmlnaW5hbFRlY2hub2xvZ3lPbkZpbGVMb2FkBAMAAAA=",
+          "children": []
+        },
+        {
           "tag": "float",
           "attributes": {
             "name": "Brightness"
@@ -45,11 +61,19 @@
           "children": []
         },
         {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
           "tag": "Color3",
           "attributes": {
             "name": "ColorShift_Bottom"
           },
-          "text": "\n\t\t\t\t",
+          "text": "\n        ",
           "children": [
             {
               "tag": "R",
@@ -76,7 +100,7 @@
           "attributes": {
             "name": "ColorShift_Top"
           },
-          "text": "\n\t\t\t\t",
+          "text": "\n        ",
           "children": [
             {
               "tag": "R",
@@ -135,24 +159,24 @@
           "attributes": {
             "name": "FogColor"
           },
-          "text": "\n\t\t\t\t",
+          "text": "\n        ",
           "children": [
             {
               "tag": "R",
               "attributes": {},
-              "text": "0.752941251",
+              "text": "0.75294125",
               "children": []
             },
             {
               "tag": "G",
               "attributes": {},
-              "text": "0.752941251",
+              "text": "0.75294125",
               "children": []
             },
             {
               "tag": "B",
               "attributes": {},
-              "text": "0.752941251",
+              "text": "0.75294125",
               "children": []
             }
           ]
@@ -190,11 +214,11 @@
           "children": []
         },
         {
-          "tag": "token",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "LightAttenuationMode"
+            "name": "HistoryId"
           },
-          "text": "0",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -210,24 +234,24 @@
           "attributes": {
             "name": "OutdoorAmbient"
           },
-          "text": "\n\t\t\t\t",
+          "text": "\n        ",
           "children": [
             {
               "tag": "R",
               "attributes": {},
-              "text": "0.274509817",
+              "text": "0.27450982",
               "children": []
             },
             {
               "tag": "G",
               "attributes": {},
-              "text": "0.274509817",
+              "text": "0.27450982",
               "children": []
             },
             {
               "tag": "B",
               "attributes": {},
-              "text": "0.274509817",
+              "text": "0.27450982",
               "children": []
             }
           ]
@@ -249,11 +273,43 @@
           "children": []
         },
         {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n      ",
+          "children": []
+        },
+        {
           "tag": "float",
           "attributes": {
             "name": "ShadowSoftness"
           },
-          "text": "0.200000003",
+          "text": "0.2",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
           "children": []
         },
         {
@@ -270,70 +326,6 @@
             "name": "TimeOfDay"
           },
           "text": "14:30:00",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": "AgAAACYAAABSQlhfTGlnaHRpbmdUZWNobm9sb2d5VW5pZmllZE1pZ3JhdGlvbgMBIAAAAFJC\nWF9PcmlnaW5hbFRlY2hub2xvZ3lPbkZpbGVMb2FkBAMAAAA=",
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "Lighting",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "Tags"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
           "children": []
         },
         {

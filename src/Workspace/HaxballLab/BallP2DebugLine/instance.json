@@ -1,28 +1,20 @@
 {
   "attributes": {
     "class": "Part",
-    "referent": "RBXB76D9DFB45464AB49B9F4E4499C23FA1"
+    "referent": "20"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
         {
-          "tag": "token",
+          "tag": "string",
           "attributes": {
-            "name": "shape"
+            "name": "Name"
           },
-          "text": "1",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "formFactorRaw"
-          },
-          "text": "1",
+          "text": "BallP2DebugLine",
           "children": []
         },
         {
@@ -31,6 +23,14 @@
             "name": "Anchored"
           },
           "text": "true",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
           "children": []
         },
         {
@@ -110,7 +110,7 @@
           "attributes": {
             "name": "CFrame"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -211,6 +211,14 @@
           "children": []
         },
         {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
           "tag": "bool",
           "attributes": {
             "name": "CastShadow"
@@ -239,7 +247,7 @@
           "attributes": {
             "name": "Color3uint8"
           },
-          "text": "4294930010",
+          "text": "16739930",
           "children": []
         },
         {
@@ -247,7 +255,7 @@
           "attributes": {
             "name": "CustomPhysicalProperties"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "CustomPhysics",
@@ -263,6 +271,14 @@
             "name": "EnableFluidForces"
           },
           "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "formFactorRaw"
+          },
+          "text": "1",
           "children": []
         },
         {
@@ -295,6 +311,14 @@
             "name": "FrontSurfaceInput"
           },
           "text": "0",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -366,7 +390,7 @@
           "attributes": {
             "name": "PivotOffset"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -495,7 +519,7 @@
           "attributes": {
             "name": "RotVelocity"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -516,6 +540,73 @@
               "children": []
             }
           ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n          ",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "shape"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "size"
+          },
+          "text": "\n            ",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0.18",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0.18",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
+          "children": []
         },
         {
           "tag": "float",
@@ -558,130 +649,39 @@
           "children": []
         },
         {
-          "tag": "Vector3",
-          "attributes": {
-            "name": "Velocity"
-          },
-          "text": "\n\t\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "X",
-              "attributes": {},
-              "text": "0",
-              "children": []
-            },
-            {
-              "tag": "Y",
-              "attributes": {},
-              "text": "0",
-              "children": []
-            },
-            {
-              "tag": "Z",
-              "attributes": {},
-              "text": "0",
-              "children": []
-            }
-          ]
-        },
-        {
-          "tag": "Vector3",
-          "attributes": {
-            "name": "size"
-          },
-          "text": "\n\t\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "X",
-              "attributes": {},
-              "text": "0.180000007",
-              "children": []
-            },
-            {
-              "tag": "Y",
-              "attributes": {},
-              "text": "0.180000007",
-              "children": []
-            },
-            {
-              "tag": "Z",
-              "attributes": {},
-              "text": "1",
-              "children": []
-            }
-          ]
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "BallP2DebugLine",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "Tags"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "UniqueId"
           },
           "text": "2a8c184ef8e375f00b0e7616000017c0",
           "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "Velocity"
+          },
+          "text": "\n            ",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
         }
       ]
     }

@@ -1,14 +1,38 @@
 {
   "attributes": {
     "class": "VoiceChatService",
-    "referent": "RBX8023076416C249809101037DE63A5170"
+    "referent": "558"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "VoiceChatService",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
         {
           "tag": "token",
           "attributes": {
@@ -34,27 +58,11 @@
           "children": []
         },
         {
-          "tag": "token",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "UseAudioApi"
+            "name": "HistoryId"
           },
-          "text": "2",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -66,27 +74,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "VoiceChatService",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -98,11 +90,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -111,6 +103,14 @@
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e2950000003e8",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "UseAudioApi"
+          },
+          "text": "2",
           "children": []
         }
       ]

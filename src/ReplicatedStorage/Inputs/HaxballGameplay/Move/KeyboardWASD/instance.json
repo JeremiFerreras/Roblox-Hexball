@@ -1,18 +1,42 @@
 {
   "attributes": {
     "class": "InputBinding",
-    "referent": "RBXECB930FBC65C4F9C8C04F3081C2D171F"
+    "referent": "534"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t\t\t",
+      "text": "\n              ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "KeyboardWASD",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
         {
           "tag": "token",
           "attributes": {
             "name": "Backward"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
           },
           "text": "0",
           "children": []
@@ -26,24 +50,16 @@
           "children": []
         },
         {
-          "tag": "NumberRange",
-          "attributes": {
-            "name": "Deadzone"
-          },
-          "text": "0.1 1 ",
-          "children": []
-        },
-        {
           "tag": "Content",
           "attributes": {
             "name": "DisplayImage"
           },
-          "text": "\n\t\t\t\t\t\t\t\t",
+          "text": "\n                ",
           "children": [
             {
               "tag": "null",
               "attributes": {},
-              "text": null,
+              "text": "\n                ",
               "children": []
             }
           ]
@@ -70,6 +86,14 @@
             "name": "Forward"
           },
           "text": "0",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -117,7 +141,7 @@
           "attributes": {
             "name": "ReleasedThreshold"
           },
-          "text": "0.200000003",
+          "text": "0.2",
           "children": []
         },
         {
@@ -137,6 +161,14 @@
           "children": []
         },
         {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
           "tag": "float",
           "attributes": {
             "name": "Scale"
@@ -150,6 +182,30 @@
             "name": "SecondaryModifier"
           },
           "text": "0",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n              ",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
           "children": []
         },
         {
@@ -177,6 +233,14 @@
           "children": []
         },
         {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "2a8c184ef8e375f00b0e7616000009a5",
+          "children": []
+        },
+        {
           "tag": "token",
           "attributes": {
             "name": "Up"
@@ -189,7 +253,7 @@
           "attributes": {
             "name": "Vector2Scale"
           },
-          "text": "\n\t\t\t\t\t\t\t\t",
+          "text": "\n                ",
           "children": [
             {
               "tag": "X",
@@ -210,7 +274,7 @@
           "attributes": {
             "name": "Vector3Scale"
           },
-          "text": "\n\t\t\t\t\t\t\t\t",
+          "text": "\n                ",
           "children": [
             {
               "tag": "X",
@@ -231,78 +295,6 @@
               "children": []
             }
           ]
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "KeyboardWASD",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "Tags"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "UniqueId"
-          },
-          "text": "2a8c184ef8e375f00b0e7616000009a5",
-          "children": []
         }
       ]
     }

@@ -1,0 +1,174 @@
+{
+  "attributes": {
+    "class": "AudioListener",
+    "referent": "443"
+  },
+  "fields": [
+    {
+      "tag": "Properties",
+      "attributes": {},
+      "text": "\n          ",
+      "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AudioListener",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "AcousticSimulationEnabled"
+          },
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AngleAttenuation"
+          },
+          "text": "AA==",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "AudioInteractionGroup"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "DiffractionEnabled"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "DistanceAttenuation"
+          },
+          "text": "AA==",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "OcclusionEnabled"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "PositionInstance"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "PositionType"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ReverbEnabled"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n          ",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "SimulationFidelity"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "UniqueId"
+          },
+          "text": "3ddb84ffe3f0fbfc0b1a6c1200000a50",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "children": [
+    "Workspace/Camera/AudioListener/Wire"
+  ],
+  "layout": [
+    false,
+    true
+  ]
+}

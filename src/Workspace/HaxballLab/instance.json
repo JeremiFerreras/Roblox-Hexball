@@ -1,28 +1,45 @@
 {
   "attributes": {
     "class": "Model",
-    "referent": "RBX23BA3C86BF364A68AB85D1D52B4C3418"
+    "referent": "7"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
         {
-          "tag": "Content",
+          "tag": "string",
           "attributes": {
-            "name": "ExplorerIconContent"
+            "name": "Name"
           },
-          "text": "\n\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "null",
-              "attributes": {},
-              "text": null,
-              "children": []
-            }
-          ]
+          "text": "HaxballLab",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
         },
         {
           "tag": "token",
@@ -37,7 +54,7 @@
           "attributes": {
             "name": "ModelMeshCFrame"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "X",
@@ -118,7 +135,7 @@
           "attributes": {
             "name": "ModelMeshData"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": "rxNJufX5oaagQE3qNtzJSQ==",
           "children": []
         },
         {
@@ -126,7 +143,7 @@
           "attributes": {
             "name": "ModelMeshSize"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "X",
@@ -173,46 +190,6 @@
           "children": []
         },
         {
-          "tag": "float",
-          "attributes": {
-            "name": "ScaleFactor"
-          },
-          "text": "1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "SlimHash"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
-          "children": []
-        },
-        {
-          "tag": "OptionalCoordinateFrame",
-          "attributes": {
-            "name": "WorldPivotData"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
           "tag": "bool",
           "attributes": {
             "name": "DefinesCapabilities"
@@ -221,19 +198,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
+          "tag": "float",
           "attributes": {
-            "name": "HistoryId"
+            "name": "ScaleFactor"
           },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "HaxballLab",
+          "text": "1",
           "children": []
         },
         {
@@ -241,7 +210,15 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
+          "children": []
+        },
+        {
+          "tag": "SharedString",
+          "attributes": {
+            "name": "SlimHash"
+          },
+          "text": "rxNJufX5oaagQE3qNtzJSQ==",
           "children": []
         },
         {
@@ -253,11 +230,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -267,27 +244,37 @@
           },
           "text": "2a8c184ef8e375f00b0e7616000009a8",
           "children": []
+        },
+        {
+          "tag": "OptionalCoordinateFrame",
+          "attributes": {
+            "name": "WorldPivotData"
+          },
+          "text": "\n        ",
+          "children": []
         }
       ]
     }
   ],
   "children": [
     "Workspace/HaxballLab/Field",
+    "Workspace/HaxballLab/BoundaryWest",
+    "Workspace/HaxballLab/CenterLine",
+    "Workspace/HaxballLab/PlayerDisc",
+    "Workspace/HaxballLab/DebugLine",
+    "Workspace/HaxballLab/PairDebugLine",
     "Workspace/HaxballLab/BoundaryNorth",
     "Workspace/HaxballLab/BoundarySouth",
-    "Workspace/HaxballLab/BoundaryWest",
     "Workspace/HaxballLab/BoundaryEast",
-    "Workspace/HaxballLab/CenterLine",
     "Workspace/HaxballLab/CenterMark",
-    "Workspace/HaxballLab/PlayerDisc",
     "Workspace/HaxballLab/BallDisc",
-    "Workspace/HaxballLab/DebugLine",
     "Workspace/HaxballLab/PlayerDisc2",
-    "Workspace/HaxballLab/PairDebugLine",
-    "Workspace/HaxballLab/BallP2DebugLine"
+    "Workspace/HaxballLab/BallP2DebugLine",
+    "Workspace/HaxballLab/Phase6ClassicVisual"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,

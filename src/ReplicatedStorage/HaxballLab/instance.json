@@ -1,35 +1,52 @@
 {
   "attributes": {
     "class": "Folder",
-    "referent": "RBX015653999F454B2892DE379FA0EAF0F9"
+    "referent": "510"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
         {
-          "tag": "Content",
+          "tag": "string",
           "attributes": {
-            "name": "ExplorerIconContent"
+            "name": "Name"
           },
-          "text": "\n\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "null",
-              "attributes": {},
-              "text": null,
-              "children": []
-            }
-          ]
+          "text": "HaxballLab",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": "AQAAABgAAABFbmFibGVIYXhiYWxsRGlhZ25vc3RpY3MDAA==",
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
         },
         {
           "tag": "Color3",
           "attributes": {
             "name": "IconTint"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
@@ -52,22 +69,6 @@
           ]
         },
         {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
           "tag": "bool",
           "attributes": {
             "name": "DefinesCapabilities"
@@ -76,27 +77,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "HaxballLab",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
           "children": []
         },
         {
@@ -108,11 +93,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -127,7 +112,6 @@
     }
   ],
   "children": [
-    "ReplicatedStorage/HaxballLab/Remotes",
     "ReplicatedStorage/HaxballLab/LabClient",
     "ReplicatedStorage/HaxballLab/PredictionLab2D",
     "ReplicatedStorage/HaxballLab/StadiumReference2D",
@@ -139,10 +123,13 @@
     "ReplicatedStorage/HaxballLab/PhysicsCore2D",
     "ReplicatedStorage/HaxballLab/NetPrediction",
     "ReplicatedStorage/HaxballLab/SnapshotBuffer",
-    "ReplicatedStorage/HaxballLab/NetMetrics"
+    "ReplicatedStorage/HaxballLab/NetMetrics",
+    "ReplicatedStorage/HaxballLab/Remotes",
+    "ReplicatedStorage/HaxballLab/VisualStadiumBuilder"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,

@@ -1,36 +1,36 @@
 {
   "attributes": {
     "class": "AvatarClothingRules",
-    "referent": "RBX17F4E620AD434809A8D18847664A5001"
+    "referent": "493"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
         {
-          "tag": "int64",
+          "tag": "string",
           "attributes": {
-            "name": "ClassicPantsOverride"
+            "name": "Name"
           },
-          "text": "-1",
+          "text": "AvatarClothingRules",
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "BinaryString",
           "attributes": {
-            "name": "ClassicShirtOverride"
+            "name": "AttributesSerialize"
           },
-          "text": "-1",
+          "text": null,
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "SecurityCapabilities",
           "attributes": {
-            "name": "ClassicTShirtOverride"
+            "name": "Capabilities"
           },
-          "text": "-1",
+          "text": "0",
           "children": []
         },
         {
@@ -242,27 +242,11 @@
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "DressSkirtAccessoryOverride"
+            "name": "HistoryId"
           },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "JacketAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "LeftShoeAccessoryOverride"
-          },
-          "text": "-1",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -270,7 +254,7 @@
           "attributes": {
             "name": "LimitBounds"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -293,70 +277,6 @@
           ]
         },
         {
-          "tag": "int64",
-          "attributes": {
-            "name": "PantsAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "RightShoeAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "ShirtAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "ShortsAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SweaterAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "TShirtAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
           "tag": "bool",
           "attributes": {
             "name": "DefinesCapabilities"
@@ -365,27 +285,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "AvatarClothingRules",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
         },
         {
@@ -397,11 +301,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -409,7 +313,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "5a9239d8f0ae460b0b0fc61e00000408",
+          "text": "045fc68b982654180b1b595300000ec8",
           "children": []
         }
       ]

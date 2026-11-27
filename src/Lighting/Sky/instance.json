@@ -1,20 +1,52 @@
 {
   "attributes": {
     "class": "Sky",
-    "referent": "RBXC2D8065CDAE649899E174A25CEF87F06"
+    "referent": "501"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Sky",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
         {
           "tag": "bool",
           "attributes": {
             "name": "CelestialBodiesShown"
           },
           "text": "true",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -30,7 +62,7 @@
           "attributes": {
             "name": "MoonTextureContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -41,11 +73,27 @@
           ]
         },
         {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n        ",
+          "children": []
+        },
+        {
           "tag": "Content",
           "attributes": {
             "name": "SkyboxBackContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -60,7 +108,7 @@
           "attributes": {
             "name": "SkyboxDownContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -75,7 +123,7 @@
           "attributes": {
             "name": "SkyboxFrontContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -90,7 +138,7 @@
           "attributes": {
             "name": "SkyboxLeftContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -105,7 +153,7 @@
           "attributes": {
             "name": "SkyboxOrientation"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "X",
@@ -132,7 +180,7 @@
           "attributes": {
             "name": "SkyboxRightContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -147,7 +195,7 @@
           "attributes": {
             "name": "SkyboxUpContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -156,6 +204,14 @@
               "children": []
             }
           ]
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "332039975",
+          "children": []
         },
         {
           "tag": "int",
@@ -178,7 +234,7 @@
           "attributes": {
             "name": "SunTextureContent"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "uri",
@@ -191,65 +247,9 @@
         {
           "tag": "BinaryString",
           "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "Sky",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "332039975",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

@@ -1,14 +1,22 @@
 {
   "attributes": {
     "class": "AvatarAnimationRules",
-    "referent": "RBXD0E2515306C74F6EBB8C26A711395BA0"
+    "referent": "491"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarAnimationRules",
+          "children": []
+        },
         {
           "tag": "token",
           "attributes": {
@@ -26,11 +34,19 @@
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "BinaryString",
           "attributes": {
-            "name": "ClimbAnimationOverride"
+            "name": "AttributesSerialize"
           },
-          "text": "-1",
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
           "children": []
         },
         {
@@ -194,91 +210,11 @@
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "FallAnimationOverride"
+            "name": "HistoryId"
           },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "IdleAltAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "IdleAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "JumpAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "MoodAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "RunAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SwimAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SwimIdleAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "WalkAnimationOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -290,27 +226,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "AvatarAnimationRules",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
         },
         {
@@ -322,11 +242,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -334,7 +254,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "5a9239d8f0ae460b0b0fc61e00000406",
+          "text": "045fc68b982654180b1b595300000ec6",
           "children": []
         }
       ]

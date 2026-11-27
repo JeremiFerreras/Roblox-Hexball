@@ -1,14 +1,22 @@
 {
   "attributes": {
     "class": "VideoCaptureService",
-    "referent": "RBX052C8FA0FF41407E80D8F61E07C9915B"
+    "referent": "447"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "VideoCaptureService",
+          "children": []
+        },
         {
           "tag": "BinaryString",
           "attributes": {
@@ -26,14 +34,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -42,11 +42,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "VideoCaptureService",
+          "text": "false",
           "children": []
         },
         {
@@ -54,7 +54,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -66,11 +66,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -78,7 +78,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "696819431a01660b0b0e295000000379",
+          "text": "3ddb84ffe3f0fbfc0b1a6c1200000379",
           "children": []
         }
       ]

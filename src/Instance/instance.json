@@ -1,14 +1,22 @@
 {
   "attributes": {
-    "class": "TimerService",
-    "referent": "RBXA2E15CA41C4246DDA886CCB9A0466AFA"
+    "class": "LodDataService",
+    "referent": "495"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Instance",
+          "children": []
+        },
         {
           "tag": "BinaryString",
           "attributes": {
@@ -26,14 +34,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -42,11 +42,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "Instance",
+          "text": "false",
           "children": []
         },
         {
@@ -54,7 +54,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -66,11 +66,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -78,7 +78,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "696819431a01660b0b0e29500000036b",
+          "text": "696819431a01660b0b0e2950000003e2",
           "children": []
         }
       ]

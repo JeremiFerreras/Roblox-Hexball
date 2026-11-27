@@ -1,36 +1,20 @@
 {
   "attributes": {
     "class": "InputAction",
-    "referent": "RBX0F51A0942E134A5192E5E6794AD89847"
+    "referent": "535"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t\t",
+      "text": "\n            ",
       "children": [
         {
           "tag": "string",
           "attributes": {
-            "name": "DisplayName"
+            "name": "Name"
           },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "Enabled"
-          },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "Type"
-          },
-          "text": "0",
+          "text": "Kick",
           "children": []
         },
         {
@@ -50,11 +34,19 @@
           "children": []
         },
         {
+          "tag": "string",
+          "attributes": {
+            "name": "DisplayName"
+          },
+          "text": null,
+          "children": []
+        },
+        {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "Enabled"
           },
-          "text": "false",
+          "text": "true",
           "children": []
         },
         {
@@ -66,11 +58,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "Kick",
+          "text": "false",
           "children": []
         },
         {
@@ -78,7 +70,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n            ",
           "children": []
         },
         {
@@ -90,11 +82,19 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "Type"
+          },
+          "text": "0",
           "children": []
         },
         {

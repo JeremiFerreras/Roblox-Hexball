@@ -63,6 +63,7 @@ function Prediction:restore(s, slot)
 		self.epoch = epoch
 		self.correction = 0
 		self.lastMeasuredTick = nil
+		self.lastKickEdgeTick = nil
 	end
 	local previous = self.forecasts[s.tick]
 	self.correctionSample = previous ~= nil and self.lastMeasuredTick ~= s.tick
@@ -115,6 +116,18 @@ function Prediction:restore(s, slot)
 		end
 	end
 end
+function Prediction:recordKickEdge(mask)
+	if not self.world or self.phase ~= "playing" then
+		return
+	end
+	-- A press and release can both arrive between rendered frames.
+	local tick = math.max(self.world.tick + 1, (self.lastKickEdgeTick or 0) + 1)
+	if tick <= self.confirmedTick + 18 then
+		self.history[tick] = mask
+		self.lastKickEdgeTick = tick
+	end
+end
+
 function Prediction:advance(targetTick, mask)
 	if not self.world or self.phase ~= "playing" then
 		return nil

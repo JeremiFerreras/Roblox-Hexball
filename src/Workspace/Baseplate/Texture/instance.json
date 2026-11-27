@@ -1,44 +1,28 @@
 {
   "attributes": {
     "class": "Texture",
-    "referent": "RBX796D0316D8114FD4BD6C01166AB33AFF"
+    "referent": "6"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
         {
-          "tag": "float",
+          "tag": "string",
           "attributes": {
-            "name": "OffsetStudsU"
+            "name": "Name"
           },
-          "text": "0",
+          "text": "Texture",
           "children": []
         },
         {
-          "tag": "float",
+          "tag": "BinaryString",
           "attributes": {
-            "name": "OffsetStudsV"
+            "name": "AttributesSerialize"
           },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "StudsPerTileU"
-          },
-          "text": "8",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "StudsPerTileV"
-          },
-          "text": "8",
+          "text": null,
           "children": []
         },
         {
@@ -50,11 +34,19 @@
           "children": []
         },
         {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
           "tag": "Color3",
           "attributes": {
             "name": "Color3"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "R",
@@ -81,12 +73,12 @@
           "attributes": {
             "name": "EmissiveMaskContent"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "null",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": []
             }
           ]
@@ -104,7 +96,7 @@
           "attributes": {
             "name": "EmissiveTint"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "R",
@@ -127,16 +119,32 @@
           ]
         },
         {
+          "tag": "token",
+          "attributes": {
+            "name": "Face"
+          },
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
           "tag": "Content",
           "attributes": {
             "name": "MetalnessMapContent"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "null",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": []
             }
           ]
@@ -146,20 +154,28 @@
           "attributes": {
             "name": "NormalMapContent"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "null",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": []
             }
           ]
         },
         {
-          "tag": "token",
+          "tag": "float",
           "attributes": {
-            "name": "ResampleMode"
+            "name": "OffsetStudsU"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "OffsetStudsV"
           },
           "text": "0",
           "children": []
@@ -177,22 +193,70 @@
           "attributes": {
             "name": "RoughnessMapContent"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "null",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": []
             }
           ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n          ",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "StudsPerTileU"
+          },
+          "text": "8",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "StudsPerTileV"
+          },
+          "text": "8",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
+          "children": []
         },
         {
           "tag": "Content",
           "attributes": {
             "name": "TextureContent"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "uri",
@@ -207,12 +271,12 @@
           "attributes": {
             "name": "TexturePackContent"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "null",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": []
             }
           ]
@@ -230,7 +294,7 @@
           "attributes": {
             "name": "Transparency"
           },
-          "text": "0.800000012",
+          "text": "0.8",
           "children": []
         },
         {
@@ -238,7 +302,7 @@
           "attributes": {
             "name": "UVOffset"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -259,7 +323,7 @@
           "attributes": {
             "name": "UVScale"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -276,91 +340,19 @@
           ]
         },
         {
-          "tag": "int",
-          "attributes": {
-            "name": "ZIndex"
-          },
-          "text": "1",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "Face"
-          },
-          "text": "1",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "Texture",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "Tags"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e2950000003eb",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "ZIndex"
+          },
+          "text": "1",
           "children": []
         }
       ]

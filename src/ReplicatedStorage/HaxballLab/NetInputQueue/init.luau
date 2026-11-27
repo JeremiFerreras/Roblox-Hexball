@@ -80,7 +80,8 @@ function Queue:step(tick)
 		self.suspended = true
 	end
 	local value = Codec.input(self.mask)
-	value.stale = self.suspended or self.ack == 0
+	value.awaitingFirstInput = self.ack == 0
+	value.stale = self.suspended or value.awaitingFirstInput
 	return value
 end
 return Queue

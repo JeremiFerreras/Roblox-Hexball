@@ -1,44 +1,20 @@
 {
   "attributes": {
     "class": "BloomEffect",
-    "referent": "RBX2A9D8D13EE4A467F8583A4D935534D12"
+    "referent": "504"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
         {
-          "tag": "float",
+          "tag": "string",
           "attributes": {
-            "name": "Intensity"
+            "name": "Name"
           },
-          "text": "1",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "Size"
-          },
-          "text": "24",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "Threshold"
-          },
-          "text": "2",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "Enabled"
-          },
-          "text": "true",
+          "text": "Bloom",
           "children": []
         },
         {
@@ -60,9 +36,9 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "Enabled"
           },
-          "text": "false",
+          "text": "true",
           "children": []
         },
         {
@@ -74,11 +50,19 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "float",
           "attributes": {
-            "name": "Name"
+            "name": "Intensity"
           },
-          "text": "Bloom",
+          "text": "1",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
           "children": []
         },
         {
@@ -86,7 +70,15 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Size"
+          },
+          "text": "24",
           "children": []
         },
         {
@@ -98,11 +90,19 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "Threshold"
+          },
+          "text": "2",
           "children": []
         },
         {

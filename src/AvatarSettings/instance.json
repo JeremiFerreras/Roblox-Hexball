@@ -1,20 +1,20 @@
 {
   "attributes": {
     "class": "AvatarSettings",
-    "referent": "RBXAF68844D335645E3898FA2CE9DB189BC"
+    "referent": "487"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "int",
+          "tag": "string",
           "attributes": {
-            "name": "RulesSchemaVersion"
+            "name": "Name"
           },
-          "text": "0",
+          "text": "AvatarSettings",
           "children": []
         },
         {
@@ -34,14 +34,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -50,11 +42,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "AvatarSettings",
+          "text": "false",
           "children": []
         },
         {
@@ -62,7 +54,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -74,11 +66,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

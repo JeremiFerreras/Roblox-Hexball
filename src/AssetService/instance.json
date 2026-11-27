@@ -1,14 +1,22 @@
 {
   "attributes": {
     "class": "AssetService",
-    "referent": "RBX9733D62C8D034E0E8D941DA64DF72436"
+    "referent": "485"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AssetService",
+          "children": []
+        },
         {
           "tag": "bool",
           "attributes": {
@@ -34,14 +42,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -50,11 +50,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "AssetService",
+          "text": "false",
           "children": []
         },
         {
@@ -62,7 +62,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -74,11 +74,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

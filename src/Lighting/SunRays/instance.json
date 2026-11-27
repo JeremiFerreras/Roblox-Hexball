@@ -1,36 +1,20 @@
 {
   "attributes": {
     "class": "SunRaysEffect",
-    "referent": "RBX4939223116704D23AE370CCACD2B21D2"
+    "referent": "502"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
         {
-          "tag": "float",
+          "tag": "string",
           "attributes": {
-            "name": "Intensity"
+            "name": "Name"
           },
-          "text": "0.00999999978",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "Spread"
-          },
-          "text": "0.100000001",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "Enabled"
-          },
-          "text": "true",
+          "text": "SunRays",
           "children": []
         },
         {
@@ -52,9 +36,9 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "Enabled"
           },
-          "text": "false",
+          "text": "true",
           "children": []
         },
         {
@@ -66,11 +50,19 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "float",
           "attributes": {
-            "name": "Name"
+            "name": "Intensity"
           },
-          "text": "SunRays",
+          "text": "0.01",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
           "children": []
         },
         {
@@ -78,7 +70,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
           "children": []
         },
         {
@@ -90,11 +82,19 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "float",
+          "attributes": {
+            "name": "Spread"
+          },
+          "text": "0.1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

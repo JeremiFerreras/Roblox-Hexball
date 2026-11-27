@@ -1,14 +1,38 @@
 {
   "attributes": {
     "class": "AvatarAbilityRules",
-    "referent": "RBX7E191B7B7E4D418BB050D85E75678E73"
+    "referent": "494"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarAbilityRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
         {
           "tag": "token",
           "attributes": {
@@ -114,19 +138,11 @@
           "children": []
         },
         {
-          "tag": "BinaryString",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "AttributesSerialize"
+            "name": "HistoryId"
           },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -138,27 +154,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "AvatarAbilityRules",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
         },
         {
@@ -170,11 +170,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -182,7 +182,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "5a9239d8f0ae460b0b0fc61e00000409",
+          "text": "045fc68b982654180b1b595300000ec9",
           "children": []
         }
       ]

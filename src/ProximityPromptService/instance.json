@@ -1,36 +1,20 @@
 {
   "attributes": {
     "class": "ProximityPromptService",
-    "referent": "RBXAA38504C40464A2695C2EE8055AF4B8F"
+    "referent": "506"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "bool",
+          "tag": "string",
           "attributes": {
-            "name": "Enabled"
+            "name": "Name"
           },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "MaxIndicatorsVisible"
-          },
-          "text": "16",
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "MaxPromptsVisible"
-          },
-          "text": "16",
+          "text": "ProximityPromptService",
           "children": []
         },
         {
@@ -52,9 +36,9 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "Enabled"
           },
-          "text": "false",
+          "text": "true",
           "children": []
         },
         {
@@ -66,11 +50,27 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "int",
           "attributes": {
-            "name": "Name"
+            "name": "MaxIndicatorsVisible"
           },
-          "text": "ProximityPromptService",
+          "text": "16",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "MaxPromptsVisible"
+          },
+          "text": "16",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
           "children": []
         },
         {
@@ -78,7 +78,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -90,11 +90,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

@@ -1,20 +1,36 @@
 {
   "attributes": {
     "class": "AvatarCollisionRules",
-    "referent": "RBXA47889DE574C49E089BCCCA92222DC46"
+    "referent": "490"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
         {
-          "tag": "bool",
+          "tag": "string",
           "attributes": {
-            "name": "BodyPartsCollidableOnDeath"
+            "name": "Name"
           },
-          "text": "true",
+          "text": "AvatarCollisionRules",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
           "children": []
         },
         {
@@ -26,31 +42,12 @@
           "children": []
         },
         {
-          "tag": "Vector3",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "HitboxSize"
+            "name": "HistoryId"
           },
-          "text": "\n\t\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "X",
-              "attributes": {},
-              "text": "2",
-              "children": []
-            },
-            {
-              "tag": "Y",
-              "attributes": {},
-              "text": "5.5",
-              "children": []
-            },
-            {
-              "tag": "Z",
-              "attributes": {},
-              "text": "1",
-              "children": []
-            }
-          ]
+          "text": "00000000000000000000000000000000",
+          "children": []
         },
         {
           "tag": "token",
@@ -61,11 +58,27 @@
           "children": []
         },
         {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n          ",
+          "children": []
+        },
+        {
           "tag": "Vector3",
           "attributes": {
             "name": "SingleColliderSize"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -88,62 +101,6 @@
           ]
         },
         {
-          "tag": "token",
-          "attributes": {
-            "name": "TouchAndQueryDetectionMode"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "AvatarCollisionRules",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
           "tag": "int64",
           "attributes": {
             "name": "SourceAssetId"
@@ -152,11 +109,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -164,7 +121,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "5a9239d8f0ae460b0b0fc61e00000405",
+          "text": "045fc68b982654180b1b595300000ec5",
           "children": []
         }
       ]

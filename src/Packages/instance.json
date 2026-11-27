@@ -1,44 +1,20 @@
 {
   "attributes": {
     "class": "Packages",
-    "referent": "RBX18B58E4049174AFD83710A95E1E908DF"
+    "referent": "496"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "bool",
+          "tag": "string",
           "attributes": {
-            "name": "IsDehydrated"
+            "name": "Name"
           },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "OverridesRecalculated"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "ShellPackagesCount"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "int",
-          "attributes": {
-            "name": "SkippedInstancesCount"
-          },
-          "text": "0",
+          "text": "Packages",
           "children": []
         },
         {
@@ -58,14 +34,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -74,11 +42,19 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "IsDehydrated"
           },
-          "text": "Packages",
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
           "children": []
         },
         {
@@ -86,7 +62,23 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "ShellPackagesCount"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "int",
+          "attributes": {
+            "name": "SkippedInstancesCount"
+          },
+          "text": "0",
           "children": []
         },
         {
@@ -98,11 +90,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -110,7 +102,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "696819431a01660b0b0e2950000003b6",
+          "text": "3ddb84ffe3f0fbfc0b1a6c12000003b6",
           "children": []
         }
       ]

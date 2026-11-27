@@ -1,14 +1,22 @@
 {
   "attributes": {
     "class": "BubbleChatConfiguration",
-    "referent": "RBX68D8DA403A7E4DA8BE0B6AE13BCF5FEE"
+    "referent": "458"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "BubbleChatConfiguration",
+          "children": []
+        },
         {
           "tag": "string",
           "attributes": {
@@ -18,28 +26,36 @@
           "children": []
         },
         {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
           "tag": "Color3",
           "attributes": {
             "name": "BackgroundColor3"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
               "attributes": {},
-              "text": "0.980392158",
+              "text": "0.98039216",
               "children": []
             },
             {
               "tag": "G",
               "attributes": {},
-              "text": "0.980392158",
+              "text": "0.98039216",
               "children": []
             },
             {
               "tag": "B",
               "attributes": {},
-              "text": "0.980392158",
+              "text": "0.98039216",
               "children": []
             }
           ]
@@ -49,7 +65,7 @@
           "attributes": {
             "name": "BackgroundTransparency"
           },
-          "text": "0.10000000000000000555",
+          "text": "0.1",
           "children": []
         },
         {
@@ -66,6 +82,14 @@
             "name": "BubblesSpacing"
           },
           "text": "6",
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
           "children": []
         },
         {
@@ -89,12 +113,12 @@
           "attributes": {
             "name": "FontFace"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "Family",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": [
                 {
                   "tag": "url",
@@ -119,7 +143,7 @@
             {
               "tag": "CachedFaceId",
               "attributes": {},
-              "text": null,
+              "text": "\n            ",
               "children": [
                 {
                   "tag": "url",
@@ -132,11 +156,19 @@
           ]
         },
         {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
           "tag": "Vector3",
           "attributes": {
             "name": "LocalPlayerStudsOffset"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "X",
@@ -185,6 +217,38 @@
         {
           "tag": "bool",
           "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n        ",
+          "children": []
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
             "name": "TailVisible"
           },
           "text": "true",
@@ -195,12 +259,12 @@
           "attributes": {
             "name": "TextColor3"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "R",
               "attributes": {},
-              "text": "0.223529413",
+              "text": "0.22352941",
               "children": []
             },
             {
@@ -212,7 +276,7 @@
             {
               "tag": "B",
               "attributes": {},
-              "text": "0.239215687",
+              "text": "0.23921569",
               "children": []
             }
           ]
@@ -226,83 +290,19 @@
           "children": []
         },
         {
-          "tag": "float",
-          "attributes": {
-            "name": "VerticalStudsOffset"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "BubbleChatConfiguration",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "Tags"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e295000000401",
+          "children": []
+        },
+        {
+          "tag": "float",
+          "attributes": {
+            "name": "VerticalStudsOffset"
+          },
+          "text": "0",
           "children": []
         }
       ]

@@ -1,35 +1,52 @@
 {
   "attributes": {
     "class": "Folder",
-    "referent": "RBXD2E9B60052EA4928968F13145C883E1D"
+    "referent": "523"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
         {
-          "tag": "Content",
+          "tag": "string",
           "attributes": {
-            "name": "ExplorerIconContent"
+            "name": "Name"
           },
-          "text": "\n\t\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "null",
-              "attributes": {},
-              "text": null,
-              "children": []
-            }
-          ]
+          "text": "Remotes",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
         },
         {
           "tag": "Color3",
           "attributes": {
             "name": "IconTint"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "R",
@@ -52,22 +69,6 @@
           ]
         },
         {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
           "tag": "bool",
           "attributes": {
             "name": "DefinesCapabilities"
@@ -76,27 +77,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "Remotes",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
         },
         {
@@ -108,11 +93,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

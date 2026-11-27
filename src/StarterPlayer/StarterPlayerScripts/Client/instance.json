@@ -1,60 +1,20 @@
 {
   "attributes": {
     "class": "LocalScript",
-    "referent": "RBXBECEDAE72F694E9E833CFA5BC122F700"
+    "referent": "468"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
-        {
-          "tag": "ProtectedString",
-          "attributes": {
-            "name": "Source"
-          },
-          "text": null,
-          "children": [],
-          "sourceFile": "init.client.luau"
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "Disabled"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "Content",
-          "attributes": {
-            "name": "LinkedSource"
-          },
-          "text": null,
-          "children": [
-            {
-              "tag": "null",
-              "attributes": {},
-              "text": null,
-              "children": []
-            }
-          ]
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "RunContext"
-          },
-          "text": "0",
-          "children": []
-        },
         {
           "tag": "string",
           "attributes": {
-            "name": "ScriptGuid"
+            "name": "Name"
           },
-          "text": "{D14F9AD7-2AAC-463A-9032-D0DF9C8C4963}",
+          "text": "Client",
           "children": []
         },
         {
@@ -76,7 +36,7 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "Disabled"
           },
           "text": "false",
           "children": []
@@ -90,11 +50,42 @@
           "children": []
         },
         {
+          "tag": "ContentId",
+          "attributes": {
+            "name": "LinkedSource"
+          },
+          "text": "\n            ",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": "\n            ",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RunContext"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
           "tag": "string",
           "attributes": {
-            "name": "Name"
+            "name": "ScriptGuid"
           },
-          "text": "Client",
+          "text": "{D14F9AD7-2AAC-463A-9032-D0DF9C8C4963}",
           "children": []
         },
         {
@@ -102,8 +93,17 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Source"
+          },
+          "text": null,
+          "children": [],
+          "sourceFile": "init.client.luau"
         },
         {
           "tag": "int64",
@@ -114,11 +114,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

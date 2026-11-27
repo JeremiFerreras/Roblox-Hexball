@@ -60,6 +60,10 @@ local field = workspace:WaitForChild("HaxballLab")
 local playerDisc = field:WaitForChild("PlayerDisc")
 local playerDisc2 = field:WaitForChild("PlayerDisc2")
 local ballDisc = field:WaitForChild("BallDisc")
+playerDisc.Color = Color3.fromRGB(229, 105, 98)
+playerDisc2.Color = Color3.fromRGB(75, 130, 224)
+playerDisc.Material = Enum.Material.SmoothPlastic
+playerDisc2.Material = Enum.Material.SmoothPlastic
 local debugLine = field:WaitForChild("DebugLine")
 local pairDebugLine = field:WaitForChild("PairDebugLine")
 local ballP2DebugLine = field:WaitForChild("BallP2DebugLine")
@@ -68,16 +72,72 @@ local playerVisuals = { [1] = playerDisc, [2] = playerDisc2 }
 for playerId = 3, 10 do
 	local visual = Instance.new("Part")
 	visual.Name = "PlayerDisc" .. playerId
-	visual.Shape = Enum.PartType.Cylinder
+	visual.Shape = Enum.PartType.Ball
 	visual.Size = playerDisc.Size
 	visual.Anchored = true
 	visual.CanCollide = false
 	visual.CanTouch = false
 	visual.CanQuery = false
 	visual.CastShadow = false
-	visual.Material = playerDisc.Material
+	visual.Material = Enum.Material.SmoothPlastic
+	visual.Color = playerId % 2 == 1 and Color3.fromRGB(229, 105, 98) or Color3.fromRGB(75, 130, 224)
 	visual.Parent = field
 	playerVisuals[playerId] = visual
+end
+local playerRims, playerAccents = {}, {}
+local DISC_SCALE = StadiumProfile2D.Presentation.studsPerUnit
+for playerId = 1, 10 do
+	local rim = Instance.new("Part")
+	rim.Name = "PlayerRim" .. playerId
+	rim.Shape = Enum.PartType.Ball
+	rim.Size = Vector3.new(18, 2.6, 18)
+	rim.Anchored = true
+	rim.CanCollide = false
+	rim.CanTouch = false
+	rim.CanQuery = false
+	rim.CastShadow = false
+	rim.Material = Enum.Material.SmoothPlastic
+	rim.Transparency = 1
+	rim.Parent = field
+	playerRims[playerId] = rim
+	playerAccents[playerId] = {}
+end
+local function updatePlayerRim(playerId, position, radius, team)
+	local rim = playerRims[playerId]
+	if not rim then return end
+	local diameter = (radius * 2 + 1.8) * DISC_SCALE
+	rim.Size = Vector3.new(diameter, math.max(1.25, diameter * 0.22), diameter)
+	rim.CFrame = CFrame.new(position.X, position.Y - 0.3, position.Z)
+	rim.Color = team == "red" and Color3.fromRGB(157, 67, 64) or Color3.fromRGB(48, 87, 157)
+	rim.Transparency = 0
+end
+local function hidePlayerAccents(playerId)
+	for _, accent in ipairs(playerAccents[playerId] or {}) do accent.Transparency = 1 end
+end
+
+local function newBallCosmetic(name, shape)
+	local part = Instance.new("Part")
+	part.Name = name
+	part.Shape = shape or Enum.PartType.Block
+	part.Anchored = true
+	part.CanCollide = false
+	part.CanTouch = false
+	part.CanQuery = false
+	part.CastShadow = false
+	part.Material = Enum.Material.SmoothPlastic
+	part.Color = Color3.fromRGB(67, 84, 61)
+	part.Parent = field
+	return part
+end
+local ballTrim = newBallCosmetic("BallVisualTrim", Enum.PartType.Cylinder)
+ballTrim.Shape = Enum.PartType.Ball
+ballTrim.Transparency = 1
+local function updateBallDesign(position, radius, visible)
+	local worldRadius = radius * DISC_SCALE
+	local diameter = worldRadius * 2
+	ballTrim.Size = Vector3.new(diameter + 0.45, 1.7, diameter + 0.45)
+	ballTrim.CFrame = CFrame.new(position.X, position.Y - 0.36, position.Z)
+	ballTrim.Transparency = visible and 0.5 or 1
 end
 local predictionGhost = Instance.new("Part")
 predictionGhost.Name = "PredictionGhost"
@@ -95,6 +155,8 @@ predictionGhost.Parent = field
 
 local ClassicReference230 = require(lab:WaitForChild("ClassicReference230"))
 local StadiumRender2D = require(lab:WaitForChild("StadiumRender2D"))
+local StadiumVisualBuilder = require(lab:WaitForChild("VisualStadiumBuilder"))
+local visualStadium = StadiumVisualBuilder.build(field, StadiumProfile2D, ClassicReference230, StadiumRender2D)
 local Presentation = StadiumProfile2D.Presentation
 local SCALE = Presentation.studsPerUnit
 local function toWorld(logicalX, logicalY)
@@ -103,9 +165,9 @@ local function toWorld(logicalX, logicalY)
 end
 local function drawDisc(part, position, radius)
 	local diameter = 2 * radius * SCALE
-	part.Shape = Enum.PartType.Cylinder
-	part.Size = Vector3.new(1, diameter, diameter)
-	part.CFrame = CFrame.new(position) * CFrame.Angles(0, 0, math.pi / 2)
+	part.Shape = Enum.PartType.Ball
+	part.Size = Vector3.new(diameter, math.max(1.35, diameter * 0.2), diameter)
+	part.CFrame = CFrame.new(position)
 end
 -- Draw the same segment/arc/post coordinates used by the discrete solver.
 local geometryFolder = Instance.new("Folder")
@@ -163,7 +225,7 @@ local function fitCamera()
 end
 fitCamera()
 
-local showDiagnostics = RunService:IsStudio()
+local showDiagnostics = lab:GetAttribute("EnableHaxballDiagnostics") == true
 local gui = Instance.new("ScreenGui")
 gui.Name = "HaxballLabDebug"
 gui.ResetOnSpawn = false
@@ -178,8 +240,52 @@ label.Font = Enum.Font.Code
 label.TextSize = 14
 label.TextXAlignment = Enum.TextXAlignment.Left
 label.TextYAlignment = Enum.TextYAlignment.Top
-label.Text = "Haxball lab | WASD move | X kick"
+label.Text = "Haxball diagnostics | opt-in"
+label.Visible = showDiagnostics
 label.Parent = gui
+
+local matchHud = Instance.new("ScreenGui")
+matchHud.Name = "HaxballMatchHud"
+matchHud.ResetOnSpawn = false
+matchHud.IgnoreGuiInset = true
+matchHud.DisplayOrder = 20
+matchHud.Parent = player:WaitForChild("PlayerGui")
+local hudPanel = Instance.new("Frame")
+hudPanel.Name = "ScorePanel"
+hudPanel.AnchorPoint = Vector2.new(0.5, 0)
+hudPanel.Position = UDim2.new(0.5, 0, 0, 18)
+hudPanel.Size = UDim2.fromOffset(390, 72)
+hudPanel.BackgroundColor3 = Color3.fromRGB(13, 24, 35)
+hudPanel.BackgroundTransparency = 0.08
+hudPanel.BorderSizePixel = 0
+hudPanel.Parent = matchHud
+local hudCorner = Instance.new("UICorner")
+hudCorner.CornerRadius = UDim.new(0, 14)
+hudCorner.Parent = hudPanel
+local hudStroke = Instance.new("UIStroke")
+hudStroke.Color = Color3.fromRGB(103, 139, 153)
+hudStroke.Transparency = 0.55
+hudStroke.Thickness = 1
+hudStroke.Parent = hudPanel
+local function makeHudLabel(name, text, position, size, color, textSize, font)
+	local item = Instance.new("TextLabel")
+	item.Name = name
+	item.Position = position
+	item.Size = size
+	item.BackgroundTransparency = 1
+	item.Text = text
+	item.TextColor3 = color
+	item.Font = font or Enum.Font.GothamBold
+	item.TextSize = textSize
+	item.TextXAlignment = Enum.TextXAlignment.Center
+	item.TextYAlignment = Enum.TextYAlignment.Center
+	item.Parent = hudPanel
+	return item
+end
+local redScoreLabel = makeHudLabel("RedScore", "RED  0", UDim2.fromOffset(12, 8), UDim2.fromOffset(112, 34), Color3.fromRGB(255, 137, 124), 21)
+local scoreDivider = makeHudLabel("ScoreDivider", ":", UDim2.fromOffset(181, 8), UDim2.fromOffset(28, 34), Color3.fromRGB(205, 222, 227), 23)
+local blueScoreLabel = makeHudLabel("BlueScore", "0  BLUE", UDim2.fromOffset(266, 8), UDim2.fromOffset(112, 34), Color3.fromRGB(132, 190, 255), 21)
+local statusLabel = makeHudLabel("MatchStatus", "CONNECTING", UDim2.fromOffset(16, 42), UDim2.new(1, -32, 0, 21), Color3.fromRGB(204, 220, 224), 12, Enum.Font.GothamMedium)
 local predictionLabel = Instance.new("TextLabel")
 predictionLabel.Name = "NetworkPredictionDebug"
 predictionLabel.Size = UDim2.fromOffset(370, 72)
@@ -480,6 +586,48 @@ local function renderLine(part, a, b, color, visible)
 	end
 end
 
+local function sendCoreInput(move, kick, now)
+	local mask = NetCodec.mask(move.X, move.Y, kick)
+	local tick = latest.tick + math.floor(math.max(0, now - lastAuthorityAt) * 60)
+	local command = netInput:sample(mask, tick, now)
+	if command then
+		networkMetrics:count("queuedInputs")
+	end
+	local b, reliable = netInput:packet(now)
+	if b then
+		if syntheticInputDelayMs <= 0 then
+			sendWire(b, reliable)
+		else
+			table.insert(
+				delayedInputQueue,
+				{ due = now + syntheticInputDelayMs / 1000, wire = b, reliable = reliable }
+			)
+		end
+	end
+	return command
+end
+
+local function onKickEdge(kick)
+	if not (latest and latest.coreMode and ownSlot) then
+		return
+	end
+	local move = readAction(moveAction, Vector2.zero)
+	if typeof(move) ~= "Vector2" then
+		move = Vector2.zero
+	end
+	local command = sendCoreInput(move, kick, os.clock())
+	if command then
+		prediction:recordKickEdge(command.mask)
+	end
+end
+
+kickAction.Pressed:Connect(function()
+	onKickEdge(true)
+end)
+kickAction.Released:Connect(function()
+	onKickEdge(false)
+end)
+
 RunService.RenderStepped:Connect(function(dt)
 	fitCamera()
 	local move = readAction(moveAction, Vector2.zero)
@@ -495,28 +643,14 @@ RunService.RenderStepped:Connect(function(dt)
 			controlRemote:FireServer("ready")
 		else
 			pingNonce = (pingNonce + 1) % 4294967296
-			table.clear(pingTimes)
+			-- Keep late replies measurable across subsequent probes; retain at most eight.
+			pingTimes[(pingNonce - 8) % 4294967296] = nil
 			pingTimes[pingNonce] = now
 			controlRemote:FireServer("ping", pingNonce)
 		end
 	end
 	if latest and latest.coreMode and ownSlot then
-		local command =
-			netInput:sample(NetCodec.mask(move.X, move.Y, kick), latest.tick + math.floor(snapshotAge * 60), now)
-		if command then
-			networkMetrics:count("queuedInputs")
-		end
-		local b, reliable = netInput:packet(now)
-		if b then
-			if syntheticInputDelayMs <= 0 then
-				sendWire(b, reliable)
-			else
-				table.insert(
-					delayedInputQueue,
-					{ due = now + syntheticInputDelayMs / 1000, wire = b, reliable = reliable }
-				)
-			end
-		end
+		sendCoreInput(move, kick, now)
 	elseif latest and not latest.coreMode then
 		if move.X ~= lastSentX or move.Y ~= lastSentY or kick ~= lastSentKick then
 			lastSentX, lastSentY, lastSentKick = move.X, move.Y, kick
@@ -572,6 +706,8 @@ RunService.RenderStepped:Connect(function(dt)
 	drawDisc(ballDisc, ball, latest.ball.radius or 10)
 	drawDisc(playerDisc, p1, latest.player.radius or 15)
 	drawDisc(playerDisc2, p2, latest.player2.radius or 15)
+	updatePlayerRim(1, p1, latest.player.radius or 15, "red")
+	updatePlayerRim(2, p2, latest.player2.radius or 15, "blue")
 	local extraDiscMode = latest.pairMode or latest.crowdMode
 	if latest.players and #latest.players > 0 then
 		for slot, disc in ipairs(latest.players) do
@@ -584,43 +720,57 @@ RunService.RenderStepped:Connect(function(dt)
 				end
 				drawDisc(visual, toWorld(px, py), disc.radius or 15)
 				visual.Transparency = 0
-				visual.Color = disc.team == "red" and Color3.fromRGB(238, 90, 80) or Color3.fromRGB(75, 155, 255)
+				visual.Color = disc.team == "red" and Color3.fromRGB(229, 105, 98) or Color3.fromRGB(75, 130, 224)
+				updatePlayerRim(slot, toWorld(px, py), disc.radius or 15, disc.team)
 			end
 		end
 		for slot = #latest.players + 1, #playerVisuals do
 			if playerVisuals[slot] then
 				playerVisuals[slot].Transparency = 1
 			end
+			if playerRims[slot] then playerRims[slot].Transparency = 1 end
+			hidePlayerAccents(slot)
 		end
 	else
 		for slot = 2, #playerVisuals do
 			if playerVisuals[slot] then
 				playerVisuals[slot].Transparency = slot == 2 and (extraDiscMode and 0 or 1) or 1
 			end
+			if playerRims[slot] then playerRims[slot].Transparency = slot == 2 and extraDiscMode and 0 or 1 end
+			if not (slot == 2 and extraDiscMode) then hidePlayerAccents(slot) end
 		end
 	end
-	ballDisc.Transparency = latest.pairMode and 1 or 0
-	renderLine(
-		debugLine,
-		p1,
-		ball,
-		latest.touchingBall and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(255, 220, 70),
-		not latest.pairMode
-	)
-	renderLine(
-		pairDebugLine,
-		p1,
-		p2,
-		latest.touchingPlayers and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(80, 220, 255),
-		extraDiscMode
-	)
-	renderLine(
-		ballP2DebugLine,
-		p2,
-		ball,
-		latest.touchingPlayer2Ball and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(255, 110, 90),
-		latest.crowdMode
-	)
+	local ballVisible = not latest.pairMode
+	ballDisc.Transparency = ballVisible and 0 or 1
+	ballDisc.Color = Color3.fromRGB(242, 243, 232)
+	updateBallDesign(ball, latest.ball.radius or 10, ballVisible)
+	if showDiagnostics then
+		renderLine(
+			debugLine,
+			p1,
+			ball,
+			latest.touchingBall and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(255, 220, 70),
+			not latest.pairMode
+		)
+		renderLine(
+			pairDebugLine,
+			p1,
+			p2,
+			latest.touchingPlayers and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(80, 220, 255),
+			extraDiscMode
+		)
+		renderLine(
+			ballP2DebugLine,
+			p2,
+			ball,
+			latest.touchingPlayer2Ball and Color3.fromRGB(70, 255, 130) or Color3.fromRGB(255, 110, 90),
+			latest.crowdMode
+		)
+	else
+		debugLine.Transparency = 1
+		pairDebugLine.Transparency = 1
+		ballP2DebugLine.Transparency = 1
+	end
 
 	for _, visual in ipairs(geometryVisuals) do
 		local visible = latest.coreMode
@@ -628,7 +778,7 @@ RunService.RenderStepped:Connect(function(dt)
 				visual.group == 32
 				or latest.kickoffTeam and bit32.band(visual.group, latest.kickoffTeam == "red" and 8 or 16) ~= 0
 			)
-		visual.part.Transparency = visible and 0 or 1
+		visual.part.Transparency = showDiagnostics and visible and 0 or 1
 	end
 	local m = latest.metrics
 	local lastTouchLine = latest.lastTouch
@@ -706,6 +856,9 @@ RunService.RenderStepped:Connect(function(dt)
 		matchStatus = "FINISHED " .. string.upper(latest.winner or "-")
 	end
 	local matchLine = string.format("Score RED %d - %d BLUE | %s", latest.score.red, latest.score.blue, matchStatus)
+	redScoreLabel.Text = string.format("RED  %d", latest.score.red)
+	blueScoreLabel.Text = string.format("%d  BLUE", latest.score.blue)
+	statusLabel.Text = string.upper(matchStatus)
 	label.Text = string.format(
 		"Haxball lab | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",
 		latest.tick,
@@ -737,3 +890,5 @@ RunService.RenderStepped:Connect(function(dt)
 	end
 	recordButton.Text = latest.recording and "Pausar registro" or "Reanudar registro"
 end)
+
+

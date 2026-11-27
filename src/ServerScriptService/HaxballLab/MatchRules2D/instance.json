@@ -1,44 +1,20 @@
 {
   "attributes": {
     "class": "ModuleScript",
-    "referent": "RBXB51EE2C2D161469C8383DFF51B9DB861"
+    "referent": "546"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
-        {
-          "tag": "Content",
-          "attributes": {
-            "name": "LinkedSource"
-          },
-          "text": null,
-          "children": [
-            {
-              "tag": "null",
-              "attributes": {},
-              "text": null,
-              "children": []
-            }
-          ]
-        },
-        {
-          "tag": "ProtectedString",
-          "attributes": {
-            "name": "Source"
-          },
-          "text": null,
-          "children": [],
-          "sourceFile": "init.luau"
-        },
         {
           "tag": "string",
           "attributes": {
-            "name": "ScriptGuid"
+            "name": "Name"
           },
-          "text": "{B6DC4CFC-6445-4BF5-8608-099D8D14F5AA}",
+          "text": "MatchRules2D",
           "children": []
         },
         {
@@ -58,14 +34,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -74,11 +42,34 @@
           "children": []
         },
         {
+          "tag": "ContentId",
+          "attributes": {
+            "name": "LinkedSource"
+          },
+          "text": "\n            ",
+          "children": [
+            {
+              "tag": "null",
+              "attributes": {},
+              "text": "\n            ",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
           "tag": "string",
           "attributes": {
-            "name": "Name"
+            "name": "ScriptGuid"
           },
-          "text": "MatchRules2D",
+          "text": "{B6DC4CFC-6445-4BF5-8608-099D8D14F5AA}",
           "children": []
         },
         {
@@ -86,8 +77,17 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Source"
+          },
+          "text": null,
+          "children": [],
+          "sourceFile": "init.luau"
         },
         {
           "tag": "int64",
@@ -98,11 +98,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

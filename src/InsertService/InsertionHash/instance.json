@@ -1,20 +1,20 @@
 {
   "attributes": {
     "class": "StringValue",
-    "referent": "RBXF03F762FE1ED4ECE83D54256A582D047"
+    "referent": "477"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
         {
           "tag": "string",
           "attributes": {
-            "name": "Value"
+            "name": "Name"
           },
-          "text": "{0E463D39-7D73-4495-B299-70A916E22D3D}",
+          "text": "InsertionHash",
           "children": []
         },
         {
@@ -34,14 +34,6 @@
           "children": []
         },
         {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "HistoryId"
@@ -50,11 +42,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "InsertionHash",
+          "text": "false",
           "children": []
         },
         {
@@ -62,7 +54,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
           "children": []
         },
         {
@@ -74,11 +66,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -87,6 +79,14 @@
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e2950000003f2",
+          "children": []
+        },
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Value"
+          },
+          "text": "{0E463D39-7D73-4495-B299-70A916E22D3D}",
           "children": []
         }
       ]

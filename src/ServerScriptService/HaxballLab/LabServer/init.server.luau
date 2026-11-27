@@ -14,7 +14,7 @@ local NetCodec = require(lab:WaitForChild("NetCodec"))
 local NetServer = require(script.Parent:WaitForChild("NetServer"))
 local network = NetServer.new()
 local lastAppliedMasks = {}
-local debugEnabled = RunService:IsStudio()
+local debugEnabled = lab:GetAttribute("EnableHaxballDiagnostics") == true
 local controlRequests = {}
 local Physics2D = require(script.Parent:WaitForChild("Physics2D"))
 local PhysicsCore2D = Physics2D.MatchCore
@@ -328,6 +328,8 @@ local function newState(pairEnabled, crowdEnabled, legacyPhysicsEnabled, startWi
 	legacyMode = legacyPhysicsEnabled == true
 	state = new
 	matchId += 1
+	-- Control request timestamps use match ticks, which start over here.
+	table.clear(controlRequests)
 	localMatch = new.coreWorld and LocalMatch2D.attach(new, { startWithKickoff = startWithKickoff == true }) or nil
 	matchState = localMatch and localMatch.match or MatchRules2D.newMatch()
 	network:epoch(matchId, localMatch and localMatch.round or 0)

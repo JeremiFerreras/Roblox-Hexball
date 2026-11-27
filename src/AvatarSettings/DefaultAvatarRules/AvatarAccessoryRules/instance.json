@@ -1,14 +1,22 @@
 {
   "attributes": {
     "class": "AvatarAccessoryRules",
-    "referent": "RBX393A1062EF0640E4B3CE0EE957570C5E"
+    "referent": "492"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "AvatarAccessoryRules",
+          "children": []
+        },
         {
           "tag": "token",
           "attributes": {
@@ -18,11 +26,19 @@
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "BinaryString",
           "attributes": {
-            "name": "BackAccessoryOverride"
+            "name": "AttributesSerialize"
           },
-          "text": "-1",
+          "text": null,
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
           "children": []
         },
         {
@@ -180,49 +196,17 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "EnableSpawnEffects"
-          },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
             "name": "EnableVFX"
           },
           "text": "true",
           "children": []
         },
         {
-          "tag": "int64",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "FaceAccessoryOverride"
+            "name": "HistoryId"
           },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "FrontAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "HairAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "HeadAccessoryOverride"
-          },
-          "text": "-1",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -230,7 +214,7 @@
           "attributes": {
             "name": "LimitBounds"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -261,46 +245,6 @@
           "children": []
         },
         {
-          "tag": "int64",
-          "attributes": {
-            "name": "NeckAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "ShoulderAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "WaistAccessoryOverride"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
           "tag": "bool",
           "attributes": {
             "name": "DefinesCapabilities"
@@ -309,27 +253,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "AvatarAccessoryRules",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n          ",
           "children": []
         },
         {
@@ -341,11 +269,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -353,7 +281,7 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "5a9239d8f0ae460b0b0fc61e00000407",
+          "text": "045fc68b982654180b1b595300000ec7",
           "children": []
         }
       ]

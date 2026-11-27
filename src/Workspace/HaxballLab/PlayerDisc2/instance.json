@@ -1,28 +1,20 @@
 {
   "attributes": {
     "class": "Part",
-    "referent": "RBX49AFAE2C93274D79BB045E9677814171"
+    "referent": "19"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t\t",
+      "text": "\n          ",
       "children": [
         {
-          "tag": "token",
+          "tag": "string",
           "attributes": {
-            "name": "shape"
+            "name": "Name"
           },
-          "text": "2",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "formFactorRaw"
-          },
-          "text": "1",
+          "text": "PlayerDisc2",
           "children": []
         },
         {
@@ -31,6 +23,14 @@
             "name": "Anchored"
           },
           "text": "true",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
           "children": []
         },
         {
@@ -110,7 +110,7 @@
           "attributes": {
             "name": "CFrame"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -133,7 +133,7 @@
             {
               "tag": "R00",
               "attributes": {},
-              "text": "-4.37113883e-08",
+              "text": "-0.00000004371139",
               "children": []
             },
             {
@@ -157,7 +157,7 @@
             {
               "tag": "R11",
               "attributes": {},
-              "text": "-4.37113883e-08",
+              "text": "-0.00000004371139",
               "children": []
             },
             {
@@ -211,6 +211,14 @@
           "children": []
         },
         {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
           "tag": "bool",
           "attributes": {
             "name": "CastShadow"
@@ -239,7 +247,7 @@
           "attributes": {
             "name": "Color3uint8"
           },
-          "text": "4294268250",
+          "text": "16078170",
           "children": []
         },
         {
@@ -247,7 +255,7 @@
           "attributes": {
             "name": "CustomPhysicalProperties"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "CustomPhysics",
@@ -263,6 +271,14 @@
             "name": "EnableFluidForces"
           },
           "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "formFactorRaw"
+          },
+          "text": "1",
           "children": []
         },
         {
@@ -295,6 +311,14 @@
             "name": "FrontSurfaceInput"
           },
           "text": "0",
+          "children": []
+        },
+        {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -366,7 +390,7 @@
           "attributes": {
             "name": "PivotOffset"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -495,7 +519,7 @@
           "attributes": {
             "name": "RotVelocity"
           },
-          "text": "\n\t\t\t\t\t\t",
+          "text": "\n            ",
           "children": [
             {
               "tag": "X",
@@ -516,6 +540,73 @@
               "children": []
             }
           ]
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "SerializedOverrides"
+          },
+          "text": "\n          ",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "shape"
+          },
+          "text": "2",
+          "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "size"
+          },
+          "text": "\n            ",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "1",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "15",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "15",
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "int64",
+          "attributes": {
+            "name": "SourceAssetId"
+          },
+          "text": "-1",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "Tags"
+          },
+          "text": null,
+          "children": []
         },
         {
           "tag": "float",
@@ -558,130 +649,39 @@
           "children": []
         },
         {
-          "tag": "Vector3",
-          "attributes": {
-            "name": "Velocity"
-          },
-          "text": "\n\t\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "X",
-              "attributes": {},
-              "text": "0",
-              "children": []
-            },
-            {
-              "tag": "Y",
-              "attributes": {},
-              "text": "0",
-              "children": []
-            },
-            {
-              "tag": "Z",
-              "attributes": {},
-              "text": "0",
-              "children": []
-            }
-          ]
-        },
-        {
-          "tag": "Vector3",
-          "attributes": {
-            "name": "size"
-          },
-          "text": "\n\t\t\t\t\t\t",
-          "children": [
-            {
-              "tag": "X",
-              "attributes": {},
-              "text": "1",
-              "children": []
-            },
-            {
-              "tag": "Y",
-              "attributes": {},
-              "text": "15",
-              "children": []
-            },
-            {
-              "tag": "Z",
-              "attributes": {},
-              "text": "15",
-              "children": []
-            }
-          ]
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "DefinesCapabilities"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "PlayerDisc2",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "SerializedOverrides"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "int64",
-          "attributes": {
-            "name": "SourceAssetId"
-          },
-          "text": "-1",
-          "children": []
-        },
-        {
-          "tag": "SharedString",
-          "attributes": {
-            "name": "Tags"
-          },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
-          "children": []
-        },
-        {
           "tag": "UniqueId",
           "attributes": {
             "name": "UniqueId"
           },
           "text": "2a8c184ef8e375f00b0e761600001435",
           "children": []
+        },
+        {
+          "tag": "Vector3",
+          "attributes": {
+            "name": "Velocity"
+          },
+          "text": "\n            ",
+          "children": [
+            {
+              "tag": "X",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Y",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            },
+            {
+              "tag": "Z",
+              "attributes": {},
+              "text": "0",
+              "children": []
+            }
+          ]
         }
       ]
     }

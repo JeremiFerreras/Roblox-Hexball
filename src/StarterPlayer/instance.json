@@ -1,20 +1,36 @@
 {
   "attributes": {
     "class": "StarterPlayer",
-    "referent": "RBXD7120E3AE9454EB7AA463F4F671E152F"
+    "referent": "466"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "StarterPlayer",
+          "children": []
+        },
         {
           "tag": "bool",
           "attributes": {
             "name": "AllowCustomAnimations"
           },
           "text": "true",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
           "children": []
         },
         {
@@ -58,6 +74,14 @@
           "children": []
         },
         {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
           "tag": "bool",
           "attributes": {
             "name": "CharacterBreakJointsOnDeath"
@@ -70,7 +94,7 @@
           "attributes": {
             "name": "CharacterJumpHeight"
           },
-          "text": "7.19999981",
+          "text": "7.2",
           "children": []
         },
         {
@@ -202,6 +226,14 @@
           "children": []
         },
         {
+          "tag": "UniqueId",
+          "attributes": {
+            "name": "HistoryId"
+          },
+          "text": "00000000000000000000000000000000",
+          "children": []
+        },
+        {
           "tag": "bool",
           "attributes": {
             "name": "LoadCharacterAppearance"
@@ -250,38 +282,6 @@
           "children": []
         },
         {
-          "tag": "token",
-          "attributes": {
-            "name": "UseImprovedCharacterEvents"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "UserEmotesEnabled"
-          },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
           "tag": "bool",
           "attributes": {
             "name": "DefinesCapabilities"
@@ -290,27 +290,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "StarterPlayer",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -322,11 +306,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -335,6 +319,14 @@
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e295000000392",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "UserEmotesEnabled"
+          },
+          "text": "true",
           "children": []
         }
       ]

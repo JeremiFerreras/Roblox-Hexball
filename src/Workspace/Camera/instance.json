@@ -1,91 +1,107 @@
 {
   "attributes": {
     "class": "Camera",
-    "referent": "RBXE8EBA3EF9F8E4E2C9F6878E71314B79B"
+    "referent": "1"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t\t",
+      "text": "\n        ",
       "children": [
+        {
+          "tag": "string",
+          "attributes": {
+            "name": "Name"
+          },
+          "text": "Camera",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
+          "attributes": {
+            "name": "AttributesSerialize"
+          },
+          "text": null,
+          "children": []
+        },
         {
           "tag": "CoordinateFrame",
           "attributes": {
             "name": "CFrame"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "X",
               "attributes": {},
-              "text": "-32.7624016",
+              "text": "0",
               "children": []
             },
             {
               "tag": "Y",
               "attributes": {},
-              "text": "34.4810028",
+              "text": "560",
               "children": []
             },
             {
               "tag": "Z",
               "attributes": {},
-              "text": "-145.33815",
+              "text": "0",
               "children": []
             },
             {
               "tag": "R00",
               "attributes": {},
-              "text": "-0.411149085",
+              "text": "1",
               "children": []
             },
             {
               "tag": "R01",
               "attributes": {},
-              "text": "-0.656100333",
+              "text": "0",
               "children": []
             },
             {
               "tag": "R02",
               "attributes": {},
-              "text": "0.632841825",
+              "text": "0",
               "children": []
             },
             {
               "tag": "R10",
               "attributes": {},
-              "text": "-0",
+              "text": "0",
               "children": []
             },
             {
               "tag": "R11",
               "attributes": {},
-              "text": "0.694234252",
+              "text": "0",
               "children": []
             },
             {
               "tag": "R12",
               "attributes": {},
-              "text": "0.719749093",
+              "text": "1",
               "children": []
             },
             {
               "tag": "R20",
               "attributes": {},
-              "text": "-0.911568105",
+              "text": "0",
               "children": []
             },
             {
               "tag": "R21",
               "attributes": {},
-              "text": "0.295924187",
+              "text": "-1",
               "children": []
             },
             {
               "tag": "R22",
               "attributes": {},
-              "text": "-0.285433799",
+              "text": "0",
               "children": []
             }
           ]
@@ -103,6 +119,14 @@
           "attributes": {
             "name": "CameraType"
           },
+          "text": "6",
+          "children": []
+        },
+        {
+          "tag": "SecurityCapabilities",
+          "attributes": {
+            "name": "Capabilities"
+          },
           "text": "0",
           "children": []
         },
@@ -111,7 +135,7 @@
           "attributes": {
             "name": "FieldOfView"
           },
-          "text": "70",
+          "text": "40",
           "children": []
         },
         {
@@ -127,24 +151,24 @@
           "attributes": {
             "name": "Focus"
           },
-          "text": "\n\t\t\t\t\t",
+          "text": "\n          ",
           "children": [
             {
               "tag": "X",
               "attributes": {},
-              "text": "-34.0280724",
+              "text": "0",
               "children": []
             },
             {
               "tag": "Y",
               "attributes": {},
-              "text": "33.0415192",
+              "text": "540",
               "children": []
             },
             {
               "tag": "Z",
               "attributes": {},
-              "text": "-144.767288",
+              "text": "0",
               "children": []
             },
             {
@@ -220,59 +244,11 @@
           "children": []
         },
         {
-          "tag": "token",
+          "tag": "UniqueId",
           "attributes": {
-            "name": "OrthographicMode"
+            "name": "HistoryId"
           },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "OrthographicSize"
-          },
-          "text": "35",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "ProjectionType"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "VRTiltAndRollEnabled"
-          },
-          "text": "false",
-          "children": []
-        },
-        {
-          "tag": "float",
-          "attributes": {
-            "name": "ViewStretch"
-          },
-          "text": "1",
-          "children": []
-        },
-        {
-          "tag": "BinaryString",
-          "attributes": {
-            "name": "AttributesSerialize"
-          },
-          "text": null,
-          "children": []
-        },
-        {
-          "tag": "SecurityCapabilities",
-          "attributes": {
-            "name": "Capabilities"
-          },
-          "text": "0",
+          "text": "00000000000000000000000000000000",
           "children": []
         },
         {
@@ -284,27 +260,11 @@
           "children": []
         },
         {
-          "tag": "UniqueId",
-          "attributes": {
-            "name": "HistoryId"
-          },
-          "text": "00000000000000000000000000000000",
-          "children": []
-        },
-        {
-          "tag": "string",
-          "attributes": {
-            "name": "Name"
-          },
-          "text": "Camera",
-          "children": []
-        },
-        {
           "tag": "BinaryString",
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n        ",
           "children": []
         },
         {
@@ -316,11 +276,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -328,14 +288,25 @@
           "attributes": {
             "name": "UniqueId"
           },
-          "text": "696819431a01660b0b0e2950000003e9",
+          "text": "3ddb84ffe3f0fbfc0b1a6c1200000a4f",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "VRTiltAndRollEnabled"
+          },
+          "text": "false",
           "children": []
         }
       ]
     }
   ],
-  "children": [],
+  "children": [
+    "Workspace/Camera/AudioListener"
+  ],
   "layout": [
-    false
+    false,
+    true
   ]
 }

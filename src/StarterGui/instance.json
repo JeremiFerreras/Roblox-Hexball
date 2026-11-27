@@ -1,76 +1,20 @@
 {
   "attributes": {
     "class": "StarterGui",
-    "referent": "RBXBB13BFDE0BF44A9680598583E57AC687"
+    "referent": "471"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "token",
+          "tag": "string",
           "attributes": {
-            "name": "ClipsDescendantsSupportsRotation"
+            "name": "Name"
           },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "ResetPlayerGuiOnSpawn"
-          },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "RtlTextSupport"
-          },
-          "text": "0",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "ScreenOrientation"
-          },
-          "text": "4",
-          "children": []
-        },
-        {
-          "tag": "bool",
-          "attributes": {
-            "name": "ShowDevelopmentGui"
-          },
-          "text": "true",
-          "children": []
-        },
-        {
-          "tag": "Ref",
-          "attributes": {
-            "name": "StudioDefaultStyleSheet"
-          },
-          "text": "null",
-          "children": []
-        },
-        {
-          "tag": "Ref",
-          "attributes": {
-            "name": "StudioInsertWidgetLayerCollectorAutoLinkStyleSheet"
-          },
-          "text": "null",
-          "children": []
-        },
-        {
-          "tag": "token",
-          "attributes": {
-            "name": "VirtualCursorMode"
-          },
-          "text": "0",
+          "text": "StarterGui",
           "children": []
         },
         {
@@ -90,11 +34,11 @@
           "children": []
         },
         {
-          "tag": "bool",
+          "tag": "token",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "ClipsDescendantsSupportsRotation"
           },
-          "text": "false",
+          "text": "0",
           "children": []
         },
         {
@@ -106,11 +50,35 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "ResetPlayerGuiOnSpawn"
           },
-          "text": "StarterGui",
+          "text": "true",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "RtlTextSupport"
+          },
+          "text": "0",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "DefinesCapabilities"
+          },
+          "text": "false",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "ScreenOrientation"
+          },
+          "text": "4",
           "children": []
         },
         {
@@ -118,7 +86,15 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
+          "children": []
+        },
+        {
+          "tag": "bool",
+          "attributes": {
+            "name": "ShowDevelopmentGui"
+          },
+          "text": "true",
           "children": []
         },
         {
@@ -130,11 +106,27 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "Ref",
+          "attributes": {
+            "name": "StudioDefaultStyleSheet"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "Ref",
+          "attributes": {
+            "name": "StudioInsertWidgetLayerCollectorAutoLinkStyleSheet"
+          },
+          "text": "null",
+          "children": []
+        },
+        {
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {
@@ -143,6 +135,14 @@
             "name": "UniqueId"
           },
           "text": "696819431a01660b0b0e295000000394",
+          "children": []
+        },
+        {
+          "tag": "token",
+          "attributes": {
+            "name": "VirtualCursorMode"
+          },
+          "text": "0",
           "children": []
         }
       ]

@@ -1,20 +1,20 @@
 {
   "attributes": {
     "class": "StudioData",
-    "referent": "RBXB54F41BDAF534B64B3734C0FCB3654A6"
+    "referent": "465"
   },
   "fields": [
     {
       "tag": "Properties",
       "attributes": {},
-      "text": "\n\t\t\t",
+      "text": "\n      ",
       "children": [
         {
-          "tag": "bool",
+          "tag": "string",
           "attributes": {
-            "name": "EnableScriptCollabByDefaultOnLoad"
+            "name": "Name"
           },
-          "text": "false",
+          "text": "StudioData",
           "children": []
         },
         {
@@ -36,7 +36,7 @@
         {
           "tag": "bool",
           "attributes": {
-            "name": "DefinesCapabilities"
+            "name": "EnableScriptCollabByDefaultOnLoad"
           },
           "text": "false",
           "children": []
@@ -50,11 +50,11 @@
           "children": []
         },
         {
-          "tag": "string",
+          "tag": "bool",
           "attributes": {
-            "name": "Name"
+            "name": "DefinesCapabilities"
           },
-          "text": "StudioData",
+          "text": "false",
           "children": []
         },
         {
@@ -62,7 +62,7 @@
           "attributes": {
             "name": "SerializedOverrides"
           },
-          "text": null,
+          "text": "\n      ",
           "children": []
         },
         {
@@ -74,11 +74,11 @@
           "children": []
         },
         {
-          "tag": "SharedString",
+          "tag": "BinaryString",
           "attributes": {
             "name": "Tags"
           },
-          "text": "yuZpQdnvvUBOTYh1jqZ2cA==",
+          "text": null,
           "children": []
         },
         {

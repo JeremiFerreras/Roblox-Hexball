@@ -20,6 +20,7 @@ function Client:reset(matchId, round, ack)
 	self.lastSend = -math.huge
 	self.lastReliable = -math.huge
 	self.lastPacketSeq = nil
+	self.lastPacketFirst = nil
 end
 function Client:confirm(ack, now)
 	if type(ack) ~= "number" or ack ~= ack or ack % 1 ~= 0 or ack > 4294967295 or ack < self.ack then
@@ -64,8 +65,27 @@ function Client:packet(now)
 		return nil
 	end
 	local commands = {}
-	for i = 1, math.min(#self.pending, 8) do
-		commands[i] = self.pending[i]
+	local count = #self.pending
+	local limit = Codec.MAX_COMMANDS
+	local oldestWindowAdvances = count > limit
+		and self.pending[limit].seq > (self.lastPacketSeq or 0)
+	if count <= limit or oldestWindowAdvances then
+		for i = 1, math.min(count, limit) do
+			commands[i] = self.pending[i]
+		end
+	else
+		-- Keep repairing the oldest gap, and repeat a recent block so a lost
+		-- first transmission need not wait for a full round trip to be repaired.
+		local recentCount = math.floor(limit / 2)
+		local prefixCount = limit - recentCount
+		local sentCount = math.max(0, (self.lastPacketSeq or self.ack) - self.ack)
+		local last = math.clamp(sentCount + recentCount, limit, count)
+		for i = 1, prefixCount do
+			table.insert(commands, self.pending[i])
+		end
+		for i = last - recentCount + 1, last do
+			table.insert(commands, self.pending[i])
+		end
 	end
 	if #commands == 0 then
 		commands[1] = { seq = self.seq, tick = self.lastTick or 0, mask = self.mask }
@@ -74,12 +94,14 @@ function Client:packet(now)
 	local newest = commands[#commands].seq
 	-- Retry identical unacknowledged data at 30 Hz. New transitions/window progress
 	-- retain the 60 Hz cap above; reliable recovery keeps its independent deadline.
-	if hasPending and newest == self.lastPacketSeq and not reliable and now - self.lastSend < 1 / 30 - 1e-6 then
+	local sameWindow = newest == self.lastPacketSeq and commands[1].seq == self.lastPacketFirst
+	if hasPending and sameWindow and not reliable and now - self.lastSend < 1 / 30 - 1e-6 then
 		return nil
 	end
 	local b = Codec.encodeInput(self.matchId, self.round, commands)
 	self.lastSend = now
 	self.lastPacketSeq = newest
+	self.lastPacketFirst = commands[1].seq
 	if reliable then
 		self.lastReliable = now
 	end

@@ -1,38 +1,25 @@
 {
   "attributes": {
-    "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "http://www.roblox.com/roblox.xsd",
     "version": "4"
   },
   "fields": [
     {
-      "tag": "External",
-      "attributes": {},
-      "text": "null",
-      "children": []
-    },
-    {
-      "tag": "External",
-      "attributes": {},
-      "text": "nil",
-      "children": []
-    },
-    {
       "tag": "SharedStrings",
       "attributes": {},
-      "text": "\n\t\t",
+      "text": "\n    ",
       "children": [
         {
           "tag": "SharedString",
           "attributes": {
-            "md5": "SpZ11y+qjCSXFtgZmELrVA=="
+            "md5": "koD8ZJ3rS5Wu9spwt5QYWQ=="
           },
-          "text": "AQAAABUAAAACAAAAb34+AAUAAAAAAAADAAAAWFlWIAMAAAAAAAAEAAAAmJiYMAMAAAAAAAAF\nAAAAimFJUAMAAAAAAAAGAAAAz8unEAUAAAAAAAAHAAAArJRsEAIAAAAAAAAIAAAAY2RmgAMA\nAAAAAAAJAAAA3eTlEAYAAAAAAAAKAAAA6/3/MAUAAAAAAAALAAAAlHxfkAMAAAAAAAAMAAAA\neXBiQAUAAAAAAAANAAAAS0pKFAMAAAAAAAAOAAAAjIJoUAUAAAAAAAAPAAAA/xhDJAMAAAAA\nAAAQAAAAUFRUYAUAAAAAAAARAAAAhoZ2cAMAAAAAAAASAAAAzNLfAAYAAAAAAAATAAAAaoZA\nBAUAAAAAAAAUAAAA///+cAUAAAAAAAAVAAAA//PANAMAAAAAAAAWAAAAj5CHRAMAAAAAAAA=",
+          "text": "AQAAABUAAAACAAAAb34+AAUAAAAAAAADAAAAWFlWIAMAAAAAAAAEAAAAmJiYMAMAAAAAAAAFAAAAimFJUAMAAAAAAAAGAAAAz8unEAUAAAAAAAAHAAAArJRsEAIAAAAAAAAIAAAAY2RmgAMAAAAAAAAJAAAA3eTlEAYAAAAAAAAKAAAA6/3/MAUAAAAAAAALAAAAlHxfkAMAAAAAAAAMAAAAeXBiQAUAAAAAAAANAAAAS0pKFAMAAAAAAAAOAAAAjIJoUAUAAAAAAAAPAAAA/xhDJAMAAAAAAAAQAAAAUFRUYAUAAAAAAAARAAAAhoZ2cAMAAAAAAAASAAAAzNLfAAYAAAAAAAATAAAAaoZABAUAAAAAAAAUAAAA///+cAUAAAAAAAAVAAAA//PANAMAAAAAAAAWAAAAj5CHRAMAAAAAAAA=",
           "children": []
         },
         {
           "tag": "SharedString",
           "attributes": {
-            "md5": "yuZpQdnvvUBOTYh1jqZ2cA=="
+            "md5": "rxNJufX5oaagQE3qNtzJSQ=="
           },
           "text": null,
           "children": []
@@ -42,8 +29,7 @@
   ],
   "children": [
     "Workspace",
-    "Instance",
-    "CollectionService",
+    "TimerService",
     "SoundService",
     "VideoCaptureService",
     "NonReplicatedCSGDictionaryService",
@@ -54,7 +40,6 @@
     "TweenService",
     "MaterialService",
     "TextChatService",
-    "PermissionsService",
     "PlayerEmulatorService",
     "StudioData",
     "StarterPlayer",
@@ -62,6 +47,7 @@
     "StarterGui",
     "LocalizationService",
     "Teleport Service",
+    "CollectionService",
     "PhysicsService",
     "InsertService",
     "GamePassService",
@@ -70,37 +56,32 @@
     "Selection",
     "VRService",
     "ContextActionService",
-    "Instance__2",
+    "ScriptService",
     "AssetService",
     "TouchInputService",
     "AvatarSettings",
+    "Instance",
     "Packages",
     "GuidRegistryService",
-    "LuaWebService",
-    "ProcessInstancePhysicsService",
+    "ConfigureServerService",
+    "HttpService",
+    "Lighting",
+    "ProximityPromptService",
     "ReplicatedStorage",
+    "SerializationService",
     "ServerScriptService",
     "ServerStorage",
     "ServiceVisibilityService",
-    "VideoService",
-    "HttpService",
-    "DataStoreService",
-    "Lighting",
-    "Instance__3",
-    "ProximityPromptService",
-    "SerializationService",
     "Teams",
     "TestService",
     "UGCAvatarService",
     "VideoScreenCaptureService",
-    "VirtualInputManager",
-    "VoiceChatService"
+    "VideoService",
+    "VoiceChatService",
+    "PermissionsService",
+    "LuaWebService"
   ],
   "layout": [
-    false,
-    false,
-    true,
-    true,
     true,
     true,
     true,
