@@ -88,6 +88,9 @@ local fakeUI = {
 }
 
 local legacyPart = {
+    CanCollide = true,
+    CanTouch = true,
+    CanQuery = true,
     IsA = function(_, className) return className == "BasePart" end,
 }
 local legacyField = {
@@ -97,8 +100,9 @@ local fakePlayerGui = { Children = {} }
 local renderer = Renderer.new(fakePlayerGui, scene, fakeUI, legacyField, Scene)
 check("GUI renderer creates ScreenGui in PlayerGui", renderer.gui.Parent == fakePlayerGui)
 check("GUI renderer creates static grass and stripe layers", renderer.grass ~= nil and #renderer.stripeFrames == #scene.stripes)
-check("legacy 3D BaseParts are hidden locally", legacyPart.LocalTransparencyModifier == 1
-    and legacyPart.CanCollide == false and legacyPart.CanTouch == false and legacyPart.CanQuery == false)
+check("legacy 3D BaseParts are hidden locally", legacyPart.LocalTransparencyModifier == 1)
+check("GUI hiding leaves physical collision flags untouched", legacyPart.CanCollide == true
+    and legacyPart.CanTouch == true and legacyPart.CanQuery == true)
 check("GUI renderer creates ten reusable player tokens", #renderer.playerTokens == 10)
 check("GUI renderer creates one reusable ball token", renderer.ballToken ~= nil)
 

@@ -104,10 +104,8 @@ function Renderer.hideLegacyField(field)
     end
     for _, descendant in ipairs(field:GetDescendants()) do
         if descendant:IsA("BasePart") then
+            -- Presentation only: never modify collision/touch/query flags here.
             descendant.LocalTransparencyModifier = 1
-            descendant.CanCollide = false
-            descendant.CanTouch = false
-            descendant.CanQuery = false
         elseif descendant:IsA("Decal") or descendant:IsA("Texture") then
             descendant.Transparency = 1
         end

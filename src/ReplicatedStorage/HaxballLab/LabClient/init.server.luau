@@ -490,7 +490,6 @@ RunService.RenderStepped:Connect(function(dt)
 		return
 	end
 
-	predictionGhost.Transparency = 1
 	local poses, status = presentation:sample(now)
 	if now >= nextMetricsAt then
 		nextMetricsAt = now + 0.05

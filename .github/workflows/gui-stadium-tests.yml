@@ -41,5 +41,15 @@ jobs:
         run: |
           luau-analyze src/ReplicatedStorage/HaxballLab/GuiStadiumScene/init.luau
 
+      - name: Reject stale 3D renderer references in the live client
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLIENT="src/ReplicatedStorage/HaxballLab/LabClient/init.server.luau"
+          if grep -nE 'predictionGhost|CurrentCamera|fitCamera|CFrame\.lookAt|Instance\.new\("Part"\)|playerDisc|ballDisc|geometryVisuals|renderLine' "$CLIENT"; then
+            echo "Legacy 3D renderer reference remains in the live client"
+            exit 1
+          fi
+
       - name: Run headless scene and GUI adapter tests
         run: luau tests/luau/run-gui-stadium-tests.luau
