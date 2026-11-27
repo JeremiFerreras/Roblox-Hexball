@@ -89,6 +89,8 @@ jobs:
           allocator = Path("src/ReplicatedStorage/HaxballLab/RosterAllocator/init.luau").read_text()
           profile = Path("src/ReplicatedStorage/HaxballLab/StadiumReference2D/init.luau").read_text()
           boot = Path("src/ReplicatedFirst/SimpleSoccerBoot/init.client.luau").read_text()
+          assert "local studsPerUnit = StadiumProfile2D.Presentation.studsPerUnit" in client
+          assert "SCALE\n)" not in client, "undefined legacy SCALE format argument remains"
           for remote in ("snapshotRemote.OnClientEvent:Connect", "stateStream.OnClientEvent:Connect", "controlRemote.OnClientEvent:Connect"):
               assert remote in client, f"missing event listener: {remote}"
           assert client.index("snapshotRemote.OnClientEvent:Connect") < client.index("local NetCodec = require")
