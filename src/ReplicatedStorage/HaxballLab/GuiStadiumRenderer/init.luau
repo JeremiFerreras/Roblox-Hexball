@@ -119,7 +119,8 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
         ui = ui,
         scene = scene,
         sceneApi = sceneApi,
-        lastView = nil,
+        lastScale = nil,
+        lastOrigin = nil,
         playerTokens = {},
         debugLines = {},
     }, Renderer)
@@ -142,8 +143,21 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
         ZIndex = 0,
     })
 
+    -- Static pitch geometry lives in one container positioned at the logical origin.
+    -- Following the camera then moves a single Frame instead of re-laying out every
+    -- stripe, line and post on every rendered frame.
+    self.world = create(ui, "Frame", self.root, {
+        Name = "World",
+        AnchorPoint = ui.vector(0, 0),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Position = ui.offset(0, 0),
+        Size = ui.offset(0, 0),
+        ZIndex = 1,
+    })
+
     local grass = scene.grass
-    self.grass = create(ui, "Frame", self.root, {
+    self.grass = create(ui, "Frame", self.world, {
         Name = "ClassicGrass",
         AnchorPoint = ui.vector(0, 0),
         Position = ui.offset(0, 0),
@@ -163,16 +177,16 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
 
     self.lineFrames = {}
     for _, line in ipairs(scene.lines) do
-        local frame = makeLine(ui, self.root, line.id,
+        local frame = makeLine(ui, self.world, line.id,
             colorFrom(ui, scene.palette, line.color), line.layer == "goal" and 6 or 5)
         table.insert(self.lineFrames, { frame = frame, source = line })
     end
 
-    self.centerCircle = makeCircle(ui, self.root, "CenterCircle", 7, nil,
+    self.centerCircle = makeCircle(ui, self.world, "CenterCircle", 7, nil,
         colorFrom(ui, scene.palette, "line"), 2.2)
     self.postFrames = {}
     for _, post in ipairs(scene.posts) do
-        local frame = makeCircle(ui, self.root, post.id, 8,
+        local frame = makeCircle(ui, self.world, post.id, 8,
             colorFrom(ui, scene.palette, post.fill),
             colorFrom(ui, scene.palette, post.stroke), 2.4)
         table.insert(self.postFrames, { frame = frame, source = post })
@@ -228,24 +242,18 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi)
     return self
 end
 
-function Renderer:_placeStatic(layout, camera)
+-- World-space layout: logical (x, y) maps to (x * scale, -y * scale) relative to the
+-- World container. It only depends on the zoom, so it is rebuilt when the scale
+-- changes (window resize) and never while the camera merely moves.
+function Renderer:_placeStatic(layout)
     local scale = layout.scale
-    local cameraX = camera.x
-    local cameraY = camera.y
-    local last = self.lastView
-    local changed = not last
-        or not near(last.width, layout.width)
-        or not near(last.height, layout.height)
-        or not near(last.scale, scale)
-        or not near(last.cameraX, cameraX)
-        or not near(last.cameraY, cameraY)
-    if not changed then
+    local last = self.lastScale
+    if last and near(last, scale) then
         return
     end
 
     local grass = self.grassRect
-    local gx, gy = self.sceneApi.toViewport(grass.minX, grass.maxY, layout, camera)
-    self.grass.Position = self.ui.offset(gx, gy)
+    self.grass.Position = self.ui.offset(grass.minX * scale, -grass.maxY * scale)
     self.grass.Size = self.ui.offset((grass.maxX - grass.minX) * scale, (grass.maxY - grass.minY) * scale)
 
     for _, entry in ipairs(self.stripeFrames) do
@@ -259,35 +267,28 @@ function Renderer:_placeStatic(layout, camera)
 
     for _, entry in ipairs(self.lineFrames) do
         local line = entry.source
-        local x1, y1 = self.sceneApi.toViewport(line.a.x, line.a.y, layout, camera)
-        local x2, y2 = self.sceneApi.toViewport(line.b.x, line.b.y, layout, camera)
-        placeLine(self.ui, entry.frame, x1, y1, x2, y2, line.thickness * scale)
+        placeLine(self.ui, entry.frame,
+            line.a.x * scale, -line.a.y * scale,
+            line.b.x * scale, -line.b.y * scale,
+            line.thickness * scale)
     end
 
     local circle = self.scene.circles[1]
     if circle then
-        local cx, cy = self.sceneApi.toViewport(circle.x, circle.y, layout, camera)
-        self.centerCircle.Position = self.ui.offset(cx, cy)
+        self.centerCircle.Position = self.ui.offset(circle.x * scale, -circle.y * scale)
         self.centerCircle.Size = self.ui.offset(circle.radius * 2 * scale, circle.radius * 2 * scale)
         self.centerCircle.Visible = true
     end
 
     for _, entry in ipairs(self.postFrames) do
         local post = entry.source
-        local px, py = self.sceneApi.toViewport(post.x, post.y, layout, camera)
         local diameter = post.radius * 2 * scale
-        entry.frame.Position = self.ui.offset(px, py)
+        entry.frame.Position = self.ui.offset(post.x * scale, -post.y * scale)
         entry.frame.Size = self.ui.offset(diameter, diameter)
         entry.frame.Visible = true
     end
 
-    self.lastView = {
-        width = layout.width,
-        height = layout.height,
-        scale = scale,
-        cameraX = cameraX,
-        cameraY = cameraY,
-    }
+    self.lastScale = scale
 end
 
 function Renderer:render(frame, focus)
@@ -298,27 +299,49 @@ function Renderer:render(frame, focus)
         return false
     end
 
-    local camera = {
+    local layout = self.sceneApi.fit(width, height)
+    -- The requested focus is clamped so the view never leaves the stadium.
+    local camera = self.sceneApi.clampCamera(layout, self.scene.bounds, {
         x = focus and type(focus.x) == "number" and focus.x or 0,
         y = focus and type(focus.y) == "number" and focus.y or 0,
-    }
-    local layout = self.sceneApi.fit(width, height)
-    self:_placeStatic(layout, camera)
+    })
+    self:_placeStatic(layout)
+
+    -- Camera motion only repositions the World container.
+    local originX, originY = self.sceneApi.toViewport(0, 0, layout, camera)
+    local lastOrigin = self.lastOrigin
+    if not lastOrigin or not near(lastOrigin.x, originX) or not near(lastOrigin.y, originY) then
+        self.world.Position = self.ui.offset(originX, originY)
+        self.lastOrigin = { x = originX, y = originY }
+    end
 
     local players = frame.players or {}
     for slot = 1, self.scene.playerCount do
         local token = self.playerTokens[slot]
         local actor = players[slot]
         local visible = actor ~= nil and actor.visible ~= false
-        token.frame.Visible = visible
+        if token.visible ~= visible then
+            token.visible = visible
+            token.frame.Visible = visible
+        end
         if visible then
             local px, py = self.sceneApi.toViewport(actor.x, actor.y, layout, camera)
             local diameter = math.max(8, (actor.radius or 15) * 2 * layout.scale)
             token.frame.Position = self.ui.offset(px, py)
-            token.frame.Size = self.ui.offset(diameter, diameter)
-            token.frame.BackgroundColor3 = colorFrom(self.ui, self.scene.palette,
-                actor.team == "blue" and "blue" or "red")
-            token.label.Text = actor.label or string.format("%02d", actor.id or slot)
+            if token.diameter ~= diameter then
+                token.diameter = diameter
+                token.frame.Size = self.ui.offset(diameter, diameter)
+            end
+            local team = actor.team == "blue" and "blue" or "red"
+            if token.team ~= team then
+                token.team = team
+                token.frame.BackgroundColor3 = colorFrom(self.ui, self.scene.palette, team)
+            end
+            local text = actor.label or string.format("%02d", actor.id or slot)
+            if token.text ~= text then
+                token.text = text
+                token.label.Text = text
+            end
             local userId = actor.userId
             local avatarUri = type(userId) == "number" and userId > 0 and userId < 9007199254740992
                 and ("rbxthumb://type=AvatarHeadShot&id=" .. tostring(math.floor(userId)) .. "&w=48&h=48")
@@ -326,28 +349,39 @@ function Renderer:render(frame, focus)
             if token.avatar.Image ~= avatarUri then
                 token.avatar.Image = avatarUri
             end
-            token.avatar.Visible = avatarUri ~= ""
+            local avatarVisible = avatarUri ~= ""
+            if token.avatar.Visible ~= avatarVisible then
+                token.avatar.Visible = avatarVisible
+            end
         end
     end
 
     local ball = frame.ball
-    self.ballToken.Visible = ball ~= nil and ball.visible ~= false
-    if self.ballToken.Visible then
+    local ballVisible = ball ~= nil and ball.visible ~= false
+    if self.ballToken.Visible ~= ballVisible then
+        self.ballToken.Visible = ballVisible
+    end
+    if ballVisible then
         local bx, by = self.sceneApi.toViewport(ball.x, ball.y, layout, camera)
         local diameter = math.max(6, (ball.radius or 10) * 2 * layout.scale)
         self.ballToken.Position = self.ui.offset(bx, by)
-        self.ballToken.Size = self.ui.offset(diameter, diameter)
+        if self.ballDiameter ~= diameter then
+            self.ballDiameter = diameter
+            self.ballToken.Size = self.ui.offset(diameter, diameter)
+        end
     end
 
     local debug = frame.debugLines or {}
     for index, lineFrame in ipairs(self.debugLines) do
         local line = debug[index]
-        lineFrame.Visible = line ~= nil and line.visible ~= false
-        if lineFrame.Visible then
+        local lineVisible = line ~= nil and line.visible ~= false
+        if lineVisible then
             local x1, y1 = self.sceneApi.toViewport(line.a.x, line.a.y, layout, camera)
             local x2, y2 = self.sceneApi.toViewport(line.b.x, line.b.y, layout, camera)
             placeLine(self.ui, lineFrame, x1, y1, x2, y2, 1.5)
             lineFrame.BackgroundColor3 = self.ui.color(line.color[1], line.color[2], line.color[3])
+        elseif lineFrame.Visible then
+            lineFrame.Visible = false
         end
     end
     return true

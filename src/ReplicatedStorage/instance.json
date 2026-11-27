@@ -85,13 +85,11 @@
     }
   ],
   "children": [
-    "ReplicatedStorage/Shared",
     "ReplicatedStorage/HaxballLab",
     "ReplicatedStorage/Inputs"
   ],
   "layout": [
     false,
-    true,
     true,
     true
   ]

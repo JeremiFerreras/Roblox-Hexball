@@ -22,7 +22,7 @@
           "attributes": {
             "name": "AttributesSerialize"
           },
-          "text": "AQAAABgAAABFbmFibGVIYXhiYWxsRGlhZ25vc3RpY3MDAA==",
+          "text": "AQAAAB0AAABFbmFibGVTaW1wbGVTb2NjZXJEaWFnbm9zdGljcwMA",
           "children": []
         },
         {
@@ -116,7 +116,6 @@
     "ReplicatedStorage/HaxballLab/PredictionLab2D",
     "ReplicatedStorage/HaxballLab/StadiumReference2D",
     "ReplicatedStorage/HaxballLab/ClassicReference230",
-    "ReplicatedStorage/HaxballLab/StadiumRender2D",
     "ReplicatedStorage/HaxballLab/NetCodec",
     "ReplicatedStorage/HaxballLab/NetInputQueue",
     "ReplicatedStorage/HaxballLab/NetInputClient",
@@ -125,15 +124,12 @@
     "ReplicatedStorage/HaxballLab/SnapshotBuffer",
     "ReplicatedStorage/HaxballLab/NetMetrics",
     "ReplicatedStorage/HaxballLab/Remotes",
-    "ReplicatedStorage/HaxballLab/VisualStadiumBuilder",
     "ReplicatedStorage/HaxballLab/GuiStadiumScene",
     "ReplicatedStorage/HaxballLab/GuiStadiumRenderer",
     "ReplicatedStorage/HaxballLab/RosterAllocator"
   ],
   "layout": [
     false,
-    true,
-    true,
     true,
     true,
     true,

@@ -23,7 +23,13 @@ The loader reports the actual preparation stages: local simulation/rule/predicti
 
 ## Performance policy
 
-The decorative passing sequence updates at 20 Hz. It reuses eight circular player markers, one ball marker and pre-created pitch geometry. It does not spawn objects every frame, invoke the game physics, download 3D models, or stream video. Live match rendering reuses the same GUI tokens.
+The decorative passing sequence is sampled on every rendered frame (`RenderStepped`, Catmull-Rom interpolation) and is replayed while the match is still preparing, so the stage text and progress bar only reflect real loading stages. It reuses eight circular player markers, one ball marker and pre-created pitch geometry. It does not spawn objects every frame, invoke the game physics, download 3D models, or stream video. Live match rendering reuses the same GUI tokens.
+
+In match, the static pitch (grass, stripes, lines, posts) lives in a single `World` container: following the camera moves one Frame instead of re-laying out dozens of them every frame, and geometry is only rebuilt when the zoom changes. HUD and token properties are written only when their value changes, the diagnostics text is built only when diagnostics are enabled, and the client turns the 3D renderer off (`RunService:Set3dRenderingEnabled(false)`) because the GUI pitch covers the whole screen.
+
+The camera follows the player's disc (the ball for spectators) with a short frame-rate-independent ease, and is clamped to the 840x400 stadium bounds so it never shows empty space beyond the walls. The server drops its catch-up backlog after eight consecutive ticks instead of carrying it forever.
+
+Diagnostics are opt-in through the `EnableSimpleSoccerDiagnostics` attribute on `ReplicatedStorage.SimpleSoccerGame`.
 
 The loader does not claim a fabricated CPU percentage. It reports which local components are being prepared; performance measurements can be collected separately with Roblox profiling tools.
 

@@ -93,12 +93,10 @@
     }
   ],
   "children": [
-    "ServerScriptService/Server",
     "ServerScriptService/HaxballLab"
   ],
   "layout": [
     false,
-    true,
     true
   ]
 }

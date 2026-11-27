@@ -110,7 +110,6 @@ local function sendWire(b, reliable)
 		inputStream:FireServer(b)
 	end
 end
-local PredictionLab2D = require(lab:WaitForChild("PredictionLab2D"))
 local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
 local inputFolder = ReplicatedStorage:WaitForChild("Inputs", 20)
 local inputContext = inputFolder and inputFolder:WaitForChild("SimpleSoccerControls", 20)
@@ -132,6 +131,7 @@ local showDiagnostics = lab:GetAttribute("EnableSimpleSoccerDiagnostics") == tru
 local gui = Instance.new("ScreenGui")
 gui.Name = "SimpleSoccerDebug"
 gui.ResetOnSpawn = false
+gui.DisplayOrder = 30
 gui.Parent = player:WaitForChild("PlayerGui")
 local label = Instance.new("TextLabel")
 label.Size = UDim2.fromOffset(500, 190)
@@ -499,14 +499,18 @@ local visualOk, visualError = pcall(function()
     local GuiStadiumScene = require(lab:WaitForChild("GuiStadiumScene"))
     local GuiStadiumRenderer = require(lab:WaitForChild("GuiStadiumRenderer"))
     local stadiumScene = GuiStadiumScene.build(StadiumProfile2D, ClassicReference230)
-    local legacyField = workspace:WaitForChild("SimpleSoccerGame", 15)
-    assert(legacyField, "legacy field model did not replicate")
+    -- Optional presentation leftover: the GUI pitch must never depend on a 3D model.
+    local legacyField = workspace:FindFirstChild("SimpleSoccerGame")
     stadiumRenderer = GuiStadiumRenderer.new(player:WaitForChild("PlayerGui"), stadiumScene, nil, legacyField, GuiStadiumScene)
 end)
 if not visualOk then
     setBootStage("VISUAL_ERROR", "La conexión está preparada; revisando visualización", tostring(visualError))
     warn("Simple Soccer GUI initialization failed: " .. tostring(visualError))
 else
+    -- The GUI pitch covers the whole screen, so the 3D world behind it is pure GPU waste.
+    pcall(function()
+        RunService:Set3dRenderingEnabled(false)
+    end)
     setBootStage("WAITING_FOR_STATE", "Esperando snapshot inicial; los controles ya están conectados")
 end
 controlRemote:FireServer("ready")
@@ -552,6 +556,12 @@ end)
 kickAction.Released:Connect(function()
 	onKickEdge(false)
 end)
+
+-- Camera focus is eased in logical space (frame-rate independent) and then clamped to the
+-- stadium by the renderer, so teleports after goals glide and walls never reveal empty space.
+local CAMERA_SMOOTHING_SECONDS = 0.1
+local cameraFocus = nil
+local shownRed, shownBlue, shownStatus = nil, nil, nil
 
 RunService.RenderStepped:Connect(function(dt)
 	local move = readAction(moveAction, Vector2.zero)
@@ -690,7 +700,18 @@ RunService.RenderStepped:Connect(function(dt)
 		}
 	end
 
-	local focus = playerActors[ownSlot or 1] or poses.player
+	-- Follow our own disc; spectators (and a full lobby) follow the ball instead of slot 1.
+	local target = ownSlot and playerActors[ownSlot]
+	if not target then
+		target = latest.coreMode and ballPose or poses.player
+	end
+	if not cameraFocus then
+		cameraFocus = { x = target.x, y = target.y }
+	else
+		local blend = 1 - math.exp(-math.max(0, dt) / CAMERA_SMOOTHING_SECONDS)
+		cameraFocus.x += (target.x - cameraFocus.x) * blend
+		cameraFocus.y += (target.y - cameraFocus.y) * blend
+	end
 	if stadiumRenderer then
         local rendered = stadiumRenderer:render({
             players = playerActors,
@@ -701,79 +722,13 @@ RunService.RenderStepped:Connect(function(dt)
                 visible = not latest.pairMode,
             },
             debugLines = debugLines,
-        }, focus)
+        }, cameraFocus)
         if rendered and not firstRenderReady then
             firstRenderReady = true
             setBootStage("READY", "Cancha y primer estado preparados · 4 contra 4")
             lab:SetAttribute("ClientBootReady", true)
         end
     end
-	local m = latest.metrics
-	local lastTouchLine = latest.lastTouch
-			and string.format(
-				"Last: %s #%d (%s)",
-				string.upper(latest.lastTouch.team),
-				latest.lastTouch.playerId,
-				latest.lastTouch.kind
-			)
-		or "Last: -"
-	local p2Line = (latest.players and #latest.players > 0)
-			and string.format(
-				"Roster: %d | RED %d / BLUE %d | %s",
-				latest.playerCount,
-				latest.redCount,
-				latest.blueCount,
-				lastTouchLine
-			)
-		or (
-			(latest.pairMode or latest.crowdMode)
-				and string.format(
-					"P2: (%.2f, %.2f) speed %.2f | %s",
-					latest.player2.x,
-					latest.player2.y,
-					latest.player2.speed,
-					lastTouchLine
-				)
-			or ("P2: inactive | " .. lastTouchLine)
-		)
-	local ballLine = latest.pairMode and "Ball: inactive in player-pair test"
-		or string.format("Ball: (%.2f, %.2f) speed %.2f", latest.ball.x, latest.ball.y, latest.ball.speed)
-	local contactLine = latest.crowdMode
-			and string.format(
-				"Separations P1-P2 %.2f | P1-ball %.2f | P2-ball %.2f",
-				latest.playerSeparation,
-				latest.separation,
-				latest.player2BallSeparation
-			)
-		or (
-			latest.pairMode
-				and string.format("P1-P2: %.2f | contacts: %d", latest.playerSeparation, m.playerContacts)
-			or string.format(
-				"P1-ball: %.2f | contacts: %d | ball walls: %d",
-				latest.separation,
-				m.ballContacts,
-				m.ballWallBounces
-			)
-		)
-	local diagnosticsLine = latest.crowdMode
-			and string.format(
-				"3-disc test | peak overlap %.3f | residual %.4f/max %.4f | iter %d/%d",
-				m.crowdContacts,
-				m.crowdPeakPenetration,
-				m.crowdLastResidualPenetration,
-				m.crowdWorstResidualPenetration,
-				m.crowdLastSolverIterations,
-				m.crowdMaxSolverIterations
-			)
-		or string.format(
-			"Max penetration %.3f | correction %.3f | impulse %.3f | substeps %d/%d | suite %s",
-			m.maxPlayerPenetration,
-			m.maxPlayerCorrection,
-			m.lastPlayerImpulse,
-			m.lastCollisionSubsteps,
-			m.maxCollisionSubsteps,
-			m.regressionRan and string.format("%d/%d", m.regressionPassed, m.regressionTotal) or "pendiente"
-		)
 	local matchStatus = latest.matchPhase == "goalPause" and string.format("GOAL PAUSE %d", latest.pauseTicksRemaining)
 		or (
 			latest.matchPhase == "kickoff"
@@ -783,40 +738,117 @@ RunService.RenderStepped:Connect(function(dt)
 	if latest.matchPhase == "finished" then
 		matchStatus = "FINISHED " .. string.upper(latest.winner or "-")
 	end
-	local matchLine = string.format("Score RED %d - %d BLUE | %s", latest.score.red, latest.score.blue, matchStatus)
-	redScoreLabel.Text = string.format("RED  %d", latest.score.red)
-	blueScoreLabel.Text = string.format("%d  BLUE", latest.score.blue)
-	statusLabel.Text = string.upper(matchStatus)
-	label.Text = string.format(
-		"Simple Soccer | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",
-		latest.tick,
-		latest.gameTime,
-		latest.crowdMode and "THREE-DISC TEST"
-			or (
-				latest.pairMode and "PAIR TEST"
-				or (
-					latest.coreMode and ("CORE v1 | owner " .. tostring(latest.ownerUserId or "-"))
-					or (latest.legacyMode and "LEGACY CCD TEST" or ("owner " .. tostring(latest.ownerUserId or "-")))
-				)
-			),
-		matchLine,
-		m.kickAttempts,
-		m.successfulKicks,
-		m.lastKickSuccessTick,
-		latest.player.x,
-		latest.player.y,
-		latest.player.speed,
-		p2Line,
-		ballLine,
-		contactLine,
-		diagnosticsLine,
-		latest.recording and "recording" or "paused",
-		latest.historySamples or 0
-	)
-	if not showDiagnostics then
-		label.Text = matchLine .. "\nWASD: mover | X: patear"
+	-- HUD text is written only when it changes instead of on every rendered frame.
+	if latest.score.red ~= shownRed then
+		shownRed = latest.score.red
+		redScoreLabel.Text = string.format("RED  %d", shownRed)
 	end
-	recordButton.Text = latest.recording and "Pausar registro" or "Reanudar registro"
+	if latest.score.blue ~= shownBlue then
+		shownBlue = latest.score.blue
+		blueScoreLabel.Text = string.format("%d  BLUE", shownBlue)
+	end
+	if matchStatus ~= shownStatus then
+		shownStatus = matchStatus
+		statusLabel.Text = string.upper(matchStatus)
+	end
+
+	-- The diagnostics text is expensive to build; skip it entirely unless it is visible.
+	if showDiagnostics then
+		local m = latest.metrics
+		local lastTouchLine = latest.lastTouch
+				and string.format(
+					"Last: %s #%d (%s)",
+					string.upper(latest.lastTouch.team),
+					latest.lastTouch.playerId,
+					latest.lastTouch.kind
+				)
+			or "Last: -"
+		local p2Line = (latest.players and #latest.players > 0)
+				and string.format(
+					"Roster: %d | RED %d / BLUE %d | %s",
+					latest.playerCount,
+					latest.redCount,
+					latest.blueCount,
+					lastTouchLine
+				)
+			or (
+				(latest.pairMode or latest.crowdMode)
+						and string.format(
+							"P2: (%.2f, %.2f) speed %.2f | %s",
+							latest.player2.x,
+							latest.player2.y,
+							latest.player2.speed,
+							lastTouchLine
+						)
+					or ("P2: inactive | " .. lastTouchLine)
+			)
+		local ballLine = latest.pairMode and "Ball: inactive in player-pair test"
+			or string.format("Ball: (%.2f, %.2f) speed %.2f", latest.ball.x, latest.ball.y, latest.ball.speed)
+		local contactLine = latest.crowdMode
+				and string.format(
+					"Separations P1-P2 %.2f | P1-ball %.2f | P2-ball %.2f",
+					latest.playerSeparation,
+					latest.separation,
+					latest.player2BallSeparation
+				)
+			or (
+				latest.pairMode
+						and string.format("P1-P2: %.2f | contacts: %d", latest.playerSeparation, m.playerContacts)
+					or string.format(
+						"P1-ball: %.2f | contacts: %d | ball walls: %d",
+						latest.separation,
+						m.ballContacts,
+						m.ballWallBounces
+					)
+			)
+		local diagnosticsLine = latest.crowdMode
+				and string.format(
+					"3-disc test | contacts %d | peak overlap %.3f | residual %.4f/max %.4f | iter %d/%d",
+					m.crowdContacts,
+					m.crowdPeakPenetration,
+					m.crowdLastResidualPenetration,
+					m.crowdWorstResidualPenetration,
+					m.crowdLastSolverIterations,
+					m.crowdMaxSolverIterations
+				)
+			or string.format(
+				"Max penetration %.3f | correction %.3f | impulse %.3f | substeps %d/%d | suite %s",
+				m.maxPlayerPenetration,
+				m.maxPlayerCorrection,
+				m.lastPlayerImpulse,
+				m.lastCollisionSubsteps,
+				m.maxCollisionSubsteps,
+				m.regressionRan and string.format("%d/%d", m.regressionPassed, m.regressionTotal) or "pendiente"
+			)
+		local matchLine = string.format("Score RED %d - %d BLUE | %s", latest.score.red, latest.score.blue, matchStatus)
+		label.Text = string.format(
+			"Simple Soccer | WASD move | X kick\nTick: %d | t=%.2f s | %s\n%s\nKicks: %d attempts / %d accepted (last %d)\nP1: (%.2f, %.2f) speed %.2f\n%s\n%s\n%s\n%s\n%s | samples %d",
+			latest.tick,
+			latest.gameTime,
+			latest.crowdMode and "THREE-DISC TEST"
+				or (
+					latest.pairMode and "PAIR TEST"
+					or (
+						latest.coreMode and ("CORE v1 | owner " .. tostring(latest.ownerUserId or "-"))
+						or (latest.legacyMode and "LEGACY CCD TEST" or ("owner " .. tostring(latest.ownerUserId or "-")))
+					)
+				),
+			matchLine,
+			m.kickAttempts,
+			m.successfulKicks,
+			m.lastKickSuccessTick,
+			latest.player.x,
+			latest.player.y,
+			latest.player.speed,
+			p2Line,
+			ballLine,
+			contactLine,
+			diagnosticsLine,
+			latest.recording and "recording" or "paused",
+			latest.historySamples or 0
+		)
+		recordButton.Text = latest.recording and "Pausar registro" or "Reanudar registro"
+	end
 end)
 
 

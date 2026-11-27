@@ -1074,6 +1074,11 @@ RunService.Heartbeat:Connect(function(dt)
 			historyCount = math.min(historyCapacity, historyCount + 1)
 		end
 	end
+	-- Eight ticks is the catch-up budget. If the server is still behind after using it
+	-- (overload or a long stall), drop the backlog instead of carrying it forever.
+	if iterations >= 8 and accumulator >= stepDt then
+		accumulator = 0
+	end
 	if iterations > 0 then
 		local current = publishState or snapshot()
 		network:publish(current, function(s)

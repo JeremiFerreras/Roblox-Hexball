@@ -70,7 +70,7 @@ jobs:
                   f"{required} script source missing or empty"
               )
 
-          assert len(scripts) >= 25, f"unexpected script count: {len(scripts)}"
+          assert len(scripts) >= 20, f"unexpected script count: {len(scripts)}"
           print(f"PASS: parsed {place.stat().st_size} bytes of RBXLX")
           print(f"PASS: {len(list(root.iter('Item')))} instances, {len(scripts)} scripts")
           assert any(name == "SimpleSoccerBoot" and source for name, source in scripts), "ReplicatedFirst boot script missing"

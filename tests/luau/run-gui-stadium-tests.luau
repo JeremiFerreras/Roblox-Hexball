@@ -69,6 +69,16 @@ local portrait = Scene.fit(390, 844)
 check("portrait viewport scales by width without stretching", near(portrait.scale, 390 / 700))
 local wide = Scene.fit(1920, 1080)
 check("ultrawide layout remains finite", wide.scale > 0 and wide.scale < 3)
+local nearWall = Scene.clampCamera(layout, scene.bounds, { x = -162.5, y = 0 })
+check("camera near a wall stops where the view edge meets the stadium edge",
+    near(nearWall.x, -20) and near(nearWall.y, 0))
+local insideRange = Scene.clampCamera(layout, scene.bounds, { x = 10, y = 150 })
+check("camera follows X inside its range and centres a view taller than the stadium",
+    near(insideRange.x, 10) and near(insideRange.y, 0))
+local portraitCamera = Scene.clampCamera(portrait, scene.bounds, { x = 400, y = 0 })
+check("narrow viewports pan horizontally but never past the stadium edge", near(portraitCamera.x, 70))
+local missingCamera = Scene.clampCamera(layout, scene.bounds, nil)
+check("missing camera focus defaults to the stadium centre", near(missingCamera.x, 0) and near(missingCamera.y, 0))
 
 -- Exercise the GUI renderer with a fake UI adapter: no Roblox Studio or 3D engine.
 local function fakeNode(className)
@@ -141,10 +151,14 @@ check("player number is a centered child of its moving disc",
     and near(tokenOne.label.Position.ScaleY, 0.5)
     and near(tokenOne.label.Size.ScaleX, 0.88)
     and near(tokenOne.label.Size.ScaleY, 0.88))
-check("red token is visible and centered on followed player", tokenOne.frame.Visible
-    and near(tokenOne.frame.Position.X, 640) and near(tokenOne.frame.Position.Y, 360))
+-- At 1280x720 the view spans 800x450 units, so the camera may only travel x in [-20, 20]:
+-- following the player at x=-162.5 is clamped to -20 and the player sits left of centre.
+check("static pitch World container follows the clamped camera",
+    near(renderer.world.Position.X, 672) and near(renderer.world.Position.Y, 360))
+check("red token is visible and offset from the clamped camera", tokenOne.frame.Visible
+    and near(tokenOne.frame.Position.X, 412) and near(tokenOne.frame.Position.Y, 360))
 check("blue slot five uses its remote position", tokenFive.frame.Visible
-    and near(tokenFive.frame.Position.X, 708) and near(tokenFive.frame.Position.Y, 328))
+    and near(tokenFive.frame.Position.X, 480) and near(tokenFive.frame.Position.Y, 328))
 check("owned player receives a Roblox headshot thumbnail", tokenOne.avatar.Visible
     and tokenOne.avatar.Image == "rbxthumb://type=AvatarHeadShot&id=12345&w=48&h=48")
 check("unowned blue slot uses numeric badge without avatar request", not tokenFive.avatar.Visible

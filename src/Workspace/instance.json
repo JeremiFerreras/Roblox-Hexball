@@ -827,16 +827,10 @@
   ],
   "children": [
     "Workspace/Terrain",
-    "Workspace/SpawnLocation",
-    "Workspace/Baseplate",
-    "Workspace/HaxballLab",
     "Workspace/Camera"
   ],
   "layout": [
     false,
-    true,
-    true,
-    true,
     true,
     true
   ]

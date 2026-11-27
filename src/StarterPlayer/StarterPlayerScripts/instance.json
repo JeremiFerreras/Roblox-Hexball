@@ -84,11 +84,8 @@
       ]
     }
   ],
-  "children": [
-    "StarterPlayer/StarterPlayerScripts/Client"
-  ],
+  "children": [],
   "layout": [
-    false,
-    true
+    false
   ]
 }

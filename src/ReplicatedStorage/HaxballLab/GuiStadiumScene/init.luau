@@ -277,6 +277,29 @@ function Scene.toViewport(x: number, y: number, layout: Layout, camera: Camera?)
         layout.height * 0.5 - (y - cameraY) * layout.scale
 end
 
+local function clampAxis(value: number, halfView: number, low: number, high: number): number
+    -- A view wider than the stadium is simply centred; otherwise the view edge may
+    -- reach the stadium edge but never reveal empty space beyond it.
+    if halfView * 2 >= high - low then
+        return (low + high) * 0.5
+    end
+    return math.clamp(value, low + halfView, high - halfView)
+end
+
+-- Keeps the camera inside the stadium bounds (the logical 840x400 rectangle).
+-- Without this the view slides over empty outer grass whenever a player nears a wall.
+function Scene.clampCamera(layout: Layout, bounds: Rect, camera: Camera?): Point
+    assert(type(layout) == "table" and finite(layout.scale) and layout.scale > 0
+        and finite(layout.width) and finite(layout.height), "invalid layout")
+    camera = camera or { x = 0, y = 0 }
+    local cameraX = finite(camera.x) and camera.x or 0
+    local cameraY = finite(camera.y) and camera.y or 0
+    return {
+        x = clampAxis(cameraX, layout.width / layout.scale * 0.5, bounds.minX, bounds.maxX),
+        y = clampAxis(cameraY, layout.height / layout.scale * 0.5, bounds.minY, bounds.maxY),
+    }
+end
+
 function Scene.toLogical(screenX: number, screenY: number, layout: Layout, camera: Camera?): Point
     assert(finite(screenX) and finite(screenY) and type(layout) == "table" and finite(layout.scale) and layout.scale > 0,
         "invalid screen point or layout")

@@ -481,14 +481,14 @@ task.spawn(function()
     for _, attribute in ipairs({ "ClientBootStage", "ClientBootDetail", "ClientBootError", "ClientBootReady" }) do
         folder:GetAttributeChangedSignal(attribute):Connect(refresh)
     end
+    -- Attribute signals are enough: no polling loop waking the client every 0.1 s.
     refresh()
-    while gui.Parent and not loadingFinished do
-        task.wait(0.1)
-        refresh()
-    end
 end)
 
 -- RenderStepped follows the actual client frame rate; no fixed 20 Hz animation loop.
+-- The play is replayed while the real loading continues, so the stage text and the progress bar
+-- always reflect actual preparation instead of freezing on a fake "100 %" after the first goal.
+local playCompletedAt = nil
 local renderConnection
 renderConnection = RunService.RenderStepped:Connect(function()
     if not gui.Parent then
@@ -496,16 +496,26 @@ renderConnection = RunService.RenderStepped:Connect(function()
         return
     end
 
-    local elapsed = math.min(os.clock() - animationStart, animationDuration)
+    local now = os.clock()
+    if playCompletedAt then
+        -- Hold the finished play briefly, then replay it until the match is really ready.
+        if not loadingFinished and now - playCompletedAt >= 0.9 then
+            playCompletedAt = nil
+            animationStart = now
+            goalBanner.Visible = false
+            scoreLabel.Text = "RED  0  :  0  BLUE"
+        end
+        return
+    end
+
+    local elapsed = math.min(now - animationStart, animationDuration)
     renderPlay(elapsed)
 
-    if elapsed >= animationDuration and not animationFinished then
+    if elapsed >= animationDuration then
         animationFinished = true
+        playCompletedAt = now
         goalBanner.Visible = true
         scoreLabel.Text = "RED  1  :  0  BLUE"
-        stageLabel.Text = "JUGADA COMPLETADA"
-        detailLabel.Text = "PASE · DESMARQUE · REMATE · GOL"
-        progressFill.Size = UDim2.fromScale(1, 1)
         tryFinishLoading()
     end
 end)
