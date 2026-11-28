@@ -47,3 +47,16 @@ Local tests (Luau CLI 0.748):
     luau tests/luau/run-gui-stadium-tests.luau
 
 Open the generated Simple-Soccer-Game-4v4.rbxlx artifact in Roblox Studio using File → Open from File.
+
+## Dynamic stadium audio
+
+The soundtrack is client-rendered from six uploaded audio assets. The server remains authoritative for match outcomes and sends compact StadiumEvent messages; clients never send audio or gameplay decisions back to the server.
+
+- StadiumAudioCatalog stores asset IDs and curated playback regions in seconds.
+- StadiumAudio loops through different normal crowd beds with a two-track crossfade and plays reactions, transitions and whistle-like cues on separate capped channels.
+- MatchAudioEvents emits conservative context events (fastBreak, dangerousAttack, nearMiss, sustainedPressure) from authoritative ball position and velocity. Confirmed goalScored, kickoffReset, kickoffComplete and matchFinished events come from match rules.
+- CrowdChantDirector is an extension point for verified chant recordings. No clip in the current six-asset set is registered as a chant: generic crowd reactions are deliberately not mislabeled as organized chanting.
+
+Playback uses Sound.PlaybackRegionsEnabled and Sound.PlaybackRegion, so each curated region is played from its uploaded ID without a separate asset for every moment. The client applies fades, event cooldowns and region variation to avoid abrupt changes or repetitive crowd bursts.
+
+The whistle asset is treated as a set of whistle-like candidates, not certified referee-only recordings. Crowd reactions and sustained swells are contextual crowd sounds, not goal-specific recordings.

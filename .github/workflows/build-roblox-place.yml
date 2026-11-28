@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "Visual-procces-haxball-(phase-6)"
+      - "Sound-Effects-phase-7-(not-finished-phase-6-yet)"
     paths:
       - "src/**"
       - "tools/place.py"
@@ -52,7 +53,7 @@ jobs:
                   names.setdefault(name, []).append(item)
 
           assert "SimpleSoccerGame" in names, "SimpleSoccerGame model/folder missing"
-          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot", "RosterAllocator", "MenuPreview", "ShowcasePlays", "MainMenu"):
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot", "RosterAllocator", "MenuPreview", "ShowcasePlays", "MainMenu", "StadiumAudioCatalog", "StadiumAudio", "CrowdChantDirector", "MatchAudioEvents"):
               assert required in names, f"{required} missing from place XML"
 
           scripts = []
@@ -65,7 +66,7 @@ jobs:
                       None,
                   )
                   scripts.append((name, source.text if source is not None else None))
-          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot", "RosterAllocator", "MenuPreview", "ShowcasePlays", "MainMenu"):
+          for required in ("GuiStadiumScene", "GuiStadiumRenderer", "SimpleSoccerClient", "SimpleSoccerBoot", "RosterAllocator", "MenuPreview", "ShowcasePlays", "MainMenu", "StadiumAudioCatalog", "StadiumAudio", "CrowdChantDirector", "MatchAudioEvents"):
               assert any(name == required and source for name, source in scripts), (
                   f"{required} script source missing or empty"
               )

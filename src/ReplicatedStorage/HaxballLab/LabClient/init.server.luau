@@ -32,6 +32,9 @@ local commandRemote = requireRemote("DebugCommand", "RemoteEvent")
 local inputStream = requireRemote("InputStream", "UnreliableRemoteEvent")
 local stateStream = requireRemote("StateStream", "UnreliableRemoteEvent")
 local controlRemote = requireRemote("Control", "RemoteEvent")
+local stadiumEventRemote = requireRemote("StadiumEvent", "RemoteEvent")
+local processStadiumEvent = nil
+local earlyStadiumEvents = {}
 local processSnapshot = nil
 local processStatePacket = nil
 local processControlEvent = nil
@@ -67,6 +70,13 @@ controlRemote.OnClientEvent:Connect(function(kind, nonce)
         processControlEvent(kind, nonce)
     else
         retainEarly(earlyControlEvents, { kind = kind, nonce = nonce }, 8)
+    end
+end)
+stadiumEventRemote.OnClientEvent:Connect(function(kind, payload)
+    if processStadiumEvent then
+        processStadiumEvent(kind, payload)
+    else
+        retainEarly(earlyStadiumEvents, { kind = kind, payload = payload }, 24)
     end
 end)
 
@@ -124,6 +134,14 @@ if not moveAction or not kickAction then
     error("Simple Soccer: Move/Kick input actions did not replicate")
 end
 local ClassicReference230 = require(lab:WaitForChild("ClassicReference230"))
+local StadiumAudio = require(lab:WaitForChild("StadiumAudio"))
+local CrowdChantDirector = require(lab:WaitForChild("CrowdChantDirector"))
+local stadiumAudio = StadiumAudio.new()
+local chantDirector = CrowdChantDirector.new(stadiumAudio)
+processStadiumEvent = function(kind, payload)
+    stadiumAudio:HandleEvent(kind, payload)
+    chantDirector:HandleEvent(kind)
+end
 local stadiumRenderer = nil
 local mainMenu = nil
 local matchHud = nil
@@ -503,6 +521,10 @@ for _, event in ipairs(earlyControlEvents) do
     processControlEvent(event.kind, event.nonce)
 end
 table.clear(earlyControlEvents)
+for _, event in ipairs(earlyStadiumEvents) do
+    processStadiumEvent(event.kind, event.payload)
+end
+table.clear(earlyStadiumEvents)
 
 -- The menu and live match use the same generated Classic stadium scene and GUI renderer.
 setBootStage("BUILDING_PITCH", "Preparando cancha, simulación local y menú 4v4")

@@ -129,10 +129,16 @@
     "ReplicatedStorage/HaxballLab/GuiStadiumRenderer",
     "ReplicatedStorage/HaxballLab/RosterAllocator",
     "ReplicatedStorage/HaxballLab/ShowcasePlays",
-    "ReplicatedStorage/HaxballLab/MainMenu"
+    "ReplicatedStorage/HaxballLab/MainMenu",
+    "ReplicatedStorage/HaxballLab/StadiumAudioCatalog",
+    "ReplicatedStorage/HaxballLab/StadiumAudio",
+    "ReplicatedStorage/HaxballLab/CrowdChantDirector"
   ],
   "layout": [
     false,
+    true,
+    true,
+    true,
     true,
     true,
     true,

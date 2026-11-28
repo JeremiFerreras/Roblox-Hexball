@@ -15,6 +15,7 @@ local commandRemote = requireRemote("DebugCommand", "RemoteEvent")
 local inputStream = requireRemote("InputStream", "UnreliableRemoteEvent")
 local stateStream = requireRemote("StateStream", "UnreliableRemoteEvent")
 local controlRemote = requireRemote("Control", "RemoteEvent")
+local stadiumEventRemote = requireRemote("StadiumEvent", "RemoteEvent")
 local NetCodec = require(lab:WaitForChild("NetCodec"))
 local NetServer = require(script.Parent:WaitForChild("NetServer"))
 local network = NetServer.new()
@@ -28,7 +29,9 @@ local ClassicStadium2D = require(script.Parent:WaitForChild("ClassicStadium2D"))
 local StadiumProfile2D = require(lab:WaitForChild("StadiumReference2D"))
 local MatchRules2D = require(script.Parent:WaitForChild("MatchRules2D"))
 local LocalMatch2D = require(script.Parent:WaitForChild("LocalMatch2D"))
+local MatchAudioEvents = require(script.Parent:WaitForChild("MatchAudioEvents"))
 local localMatch
+local matchAudioEvents
 local matchId = 0
 local LabRegression = require(script.Parent:WaitForChild("LabRegression"))
 local debugState = script.Parent:WaitForChild("DebugState")
@@ -102,6 +105,36 @@ local function logEvent(kind, data, eventTick)
 		table.remove(events, 1)
 	end
 end
+local SOUND_RULE_EVENTS = {
+    goalScored = true,
+    kickoffReset = true,
+    kickoffComplete = true,
+    matchFinished = true,
+}
+
+local function publishStadiumEvent(kind, data, eventTick, targetPlayer)
+    local payload = table.clone(data or {})
+    local round = localMatch and localMatch.round or 0
+    payload.kind = kind
+    payload.matchId = matchId
+    payload.round = round
+    payload.tick = eventTick or payload.tick or state.tick
+    payload.eventId = string.format("%d:%d:%d:%s", matchId, round, payload.tick, kind)
+    if targetPlayer then
+        stadiumEventRemote:FireClient(targetPlayer, kind, payload)
+    else
+        stadiumEventRemote:FireAllClients(kind, payload)
+    end
+end
+
+local function sendStadiumSync(player)
+    publishStadiumEvent("matchSync", {
+        phase = matchState.phase,
+        score = table.clone(state.score),
+        elapsedMatchTicks = localMatch and localMatch.elapsedTicks or 0,
+    }, state.tick, player)
+end
+
 local function clearMetrics()
 	metrics.kickAttempts = 0
 	metrics.successfulKicks = 0
@@ -368,6 +401,7 @@ local function newState(pairEnabled, crowdEnabled, legacyPhysicsEnabled, startWi
 	table.clear(controlRequests)
 	localMatch = new.coreWorld and LocalMatch2D.attach(new, { startWithKickoff = startWithKickoff == true }) or nil
 	matchState = localMatch and localMatch.match or MatchRules2D.newMatch()
+	matchAudioEvents = localMatch and MatchAudioEvents.new(StadiumProfile2D) or nil
 	network:epoch(matchId, localMatch and localMatch.round or 0)
 	lastAppliedMasks = {}
 	currentInputs = {}
@@ -639,6 +673,7 @@ controlRemote.OnServerEvent:Connect(function(player, kind, nonce)
 		s.resync = true
 		snapshotRemote:FireClient(player, s)
 		controlRemote:FireClient(player, "joined", slot)
+		sendStadiumSync(player)
 	elseif kind == "ready" then
 		local slot = playerUserSlots[player.UserId]
 		if not slot then
@@ -651,6 +686,7 @@ controlRemote.OnServerEvent:Connect(function(player, kind, nonce)
 		local s = snapshot()
 		s.resync = true
 		snapshotRemote:FireClient(player, s)
+		sendStadiumSync(player)
 	elseif kind == "ping" and type(nonce) == "number" and nonce % 1 == 0 and nonce >= 0 and nonce < 4294967296 then
 		controlRequests[player.UserId] = state.tick
 		controlRemote:FireClient(player, "pong", nonce, state.tick)
@@ -940,6 +976,15 @@ RunService.Heartbeat:Connect(function(dt)
 			end
 			for _, event in ipairs(result.ruleEvents) do
 				logEvent(event.kind, table.clone(event), event.tick)
+				if SOUND_RULE_EVENTS[event.kind] then
+					publishStadiumEvent(event.kind, event, event.tick)
+				end
+			end
+			if matchAudioEvents then
+				for _, audioEvent in ipairs(matchAudioEvents:Step(b, result.phase, state.tick)) do
+					logEvent(audioEvent.kind, table.clone(audioEvent), audioEvent.tick)
+					publishStadiumEvent(audioEvent.kind, audioEvent, audioEvent.tick)
+				end
 			end
 			if result.roundChanged or result.phase == "goalPause" then
 				touchingCoreBall = {}

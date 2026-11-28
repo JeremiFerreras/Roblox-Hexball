@@ -117,10 +117,12 @@
     "ReplicatedStorage/HaxballLab/Remotes/DebugCommand",
     "ReplicatedStorage/HaxballLab/Remotes/InputStream",
     "ReplicatedStorage/HaxballLab/Remotes/StateStream",
-    "ReplicatedStorage/HaxballLab/Remotes/Control"
+    "ReplicatedStorage/HaxballLab/Remotes/Control",
+    "ReplicatedStorage/HaxballLab/Remotes/StadiumEvent"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,

@@ -121,10 +121,12 @@
     "ServerScriptService/HaxballLab/ClassicReference230",
     "ServerScriptService/HaxballLab/LocalMatch2D",
     "ServerScriptService/HaxballLab/NetServer",
-    "ServerScriptService/HaxballLab/DebugState"
+    "ServerScriptService/HaxballLab/DebugState",
+    "ServerScriptService/HaxballLab/MatchAudioEvents"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,
