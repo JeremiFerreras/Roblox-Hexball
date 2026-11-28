@@ -150,7 +150,22 @@ local function setController(player)
 	end
 end
 
-local function assignMatchSlot(player)
+-- Menu clients read the team sizes from replicated attributes; they own no slot yet.
+local function publishRoster()
+	local red, blue = 0, 0
+	for slot in pairs(slotUserIds) do
+		if slot <= StadiumProfile2D.PlayersPerTeam then
+			red += 1
+		else
+			blue += 1
+		end
+	end
+	lab:SetAttribute("RosterRed", red)
+	lab:SetAttribute("RosterBlue", blue)
+end
+publishRoster()
+
+local function assignMatchSlot(player, preferredTeam)
 	local existing = playerUserSlots[player.UserId]
 	if existing then
 		return existing
@@ -158,7 +173,8 @@ local function assignMatchSlot(player)
 	local slot = RosterAllocator.nextSlot(
 		slotUserIds,
 		StadiumProfile2D.PlayerCount,
-		StadiumProfile2D.PlayersPerTeam
+		StadiumProfile2D.PlayersPerTeam,
+		preferredTeam
 	)
 	if not slot then
 		return nil
@@ -168,6 +184,7 @@ local function assignMatchSlot(player)
 	if state.players and state.players[slot] then
 		RosterAllocator.activate(state.players[slot], player.UserId)
 	end
+	publishRoster()
 	return slot
 end
 Players.PlayerAdded:Connect(setController)
@@ -181,6 +198,7 @@ Players.PlayerRemoving:Connect(function(player)
 		network:release(slot)
 		playerUserSlots[player.UserId] = nil
 		slotUserIds[slot] = nil
+		publishRoster()
 		currentInputs[slot] = { x = 0, y = 0, kick = false }
 		lastCoreKickInputs[slot] = nil
 		touchingCoreBall[slot] = nil
@@ -607,8 +625,12 @@ controlRemote.OnServerEvent:Connect(function(player, kind, nonce)
 		return
 	end
 	if kind == "join" then
+		-- The second argument is the side picked in the menu; anything else is rejected.
+		if nonce ~= nil and nonce ~= "red" and nonce ~= "blue" then
+			return
+		end
 		controlRequests[player.UserId] = state.tick
-		local slot = assignMatchSlot(player)
+		local slot = assignMatchSlot(player, nonce)
 		if not slot then
 			controlRemote:FireClient(player, "full")
 			return

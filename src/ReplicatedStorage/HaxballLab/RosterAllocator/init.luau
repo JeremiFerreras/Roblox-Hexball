@@ -2,7 +2,13 @@
 -- Pure deterministic 4v4 slot allocation. No Roblox services or instances.
 local Allocator = {}
 
-function Allocator.nextSlot(slotUserIds: { [number]: number? }, playerCount: number, playersPerTeam: number): number?
+-- preferredTeam ("red"/"blue") restricts the search to that side; nil keeps the automatic balance.
+function Allocator.nextSlot(
+    slotUserIds: { [number]: number? },
+    playerCount: number,
+    playersPerTeam: number,
+    preferredTeam: string?
+): number?
     assert(type(slotUserIds) == "table", "slot ownership table is required")
     assert(type(playerCount) == "number" and playerCount > 0 and playerCount % 1 == 0, "player count must be a positive integer")
     assert(type(playersPerTeam) == "number" and playersPerTeam > 0 and playersPerTeam % 1 == 0, "team size must be a positive integer")
@@ -21,7 +27,12 @@ function Allocator.nextSlot(slotUserIds: { [number]: number? }, playerCount: num
 
     local firstTeam = redCount <= blueCount and "red" or "blue"
     local secondTeam = firstTeam == "red" and "blue" or "red"
-    for _, teamName in ipairs({ firstTeam, secondTeam }) do
+    local order = { firstTeam, secondTeam }
+    if preferredTeam ~= nil then
+        assert(preferredTeam == "red" or preferredTeam == "blue", "preferred team must be red or blue")
+        order = { preferredTeam }
+    end
+    for _, teamName in ipairs(order) do
         local firstSlot = teamName == "red" and 1 or playersPerTeam + 1
         local lastSlot = firstSlot + playersPerTeam - 1
         for slot = firstSlot, lastSlot do
