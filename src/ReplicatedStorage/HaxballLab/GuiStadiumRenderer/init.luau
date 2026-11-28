@@ -62,10 +62,11 @@ local function makeCircle(ui, parent, name, zIndex, fill, stroke, strokeWidth)
         ZIndex = zIndex,
     })
     create(ui, "UICorner", frame, { CornerRadius = ui.circleCorner })
+    local border = nil
     if stroke then
-        makeStroke(ui, frame, stroke, strokeWidth or 2)
+        border = makeStroke(ui, frame, stroke, strokeWidth or 2)
     end
-    return frame
+    return frame, border
 end
 
 local function makeLine(ui, parent, name, color, zIndex)
@@ -204,7 +205,7 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi, hostFrame)
 
     for slot = 1, scene.playerCount do
         local team = slot <= scene.playersPerTeam and "red" or "blue"
-        local frame = makeCircle(ui, self.root, "Player" .. slot, 20,
+        local frame, border = makeCircle(ui, self.root, "Player" .. slot, 20,
             colorFrom(ui, scene.palette, team),
             colorFrom(ui, scene.palette, "goal"), 2.4)
         local avatar = create(ui, "ImageLabel", frame, {
@@ -235,7 +236,7 @@ function Renderer.new(playerGui, scene, ui, legacyField, sceneApi, hostFrame)
             Font = ui.boldFont,
             ZIndex = 22,
         })
-        self.playerTokens[slot] = { frame = frame, avatar = avatar, label = label }
+        self.playerTokens[slot] = { frame = frame, border = border, avatar = avatar, label = label }
     end
 
     self.ballToken = makeCircle(ui, self.root, "Ball", 22,
@@ -310,6 +311,11 @@ function Renderer:render(frame, focus)
     end
 
     local layout = self.sceneApi.fit(width, height)
+    if self.fitWholePitch then
+        -- Spectator panels show the complete stadium instead of the match camera crop.
+        local bounds = self.scene.bounds
+        layout.scale = math.min(width / (bounds.maxX - bounds.minX), height / (bounds.maxY - bounds.minY))
+    end
     -- The requested focus is clamped so the view never leaves the stadium.
     local camera = self.sceneApi.clampCamera(layout, self.scene.bounds, {
         x = focus and type(focus.x) == "number" and focus.x or 0,
@@ -343,6 +349,13 @@ function Renderer:render(frame, focus)
                 token.frame.Size = self.ui.offset(diameter, diameter)
             end
             local team = actor.team == "blue" and "blue" or "red"
+            local kicking = actor.kicking == true
+            if token.kicking ~= kicking and token.border then
+                token.kicking = kicking
+                local key = kicking and "ball" or "goal"
+                token.border.Color = colorFrom(self.ui, self.scene.palette, key)
+                token.border.Thickness = kicking and 3.6 or 2.4
+            end
             if token.team ~= team then
                 token.team = team
                 token.frame.BackgroundColor3 = colorFrom(self.ui, self.scene.palette, team)
@@ -381,6 +394,8 @@ function Renderer:render(frame, focus)
         end
     end
 
+    self:_renderTrail(frame.trail, layout, camera)
+
     local debug = frame.debugLines or {}
     for index, lineFrame in ipairs(self.debugLines) do
         local line = debug[index]
@@ -395,6 +410,33 @@ function Renderer:render(frame, focus)
         end
     end
     return true
+end
+
+-- Fading dots behind the ball. Created only for views that supply a trail.
+function Renderer:_renderTrail(trail, layout, camera)
+    if not trail then
+        return
+    end
+    self.trailTokens = self.trailTokens or {}
+    for index, dot in ipairs(trail) do
+        local token = self.trailTokens[index]
+        if not token then
+            token = makeCircle(self.ui, self.root, "BallTrail" .. index, 18,
+                colorFrom(self.ui, self.scene.palette, "ball"))
+            self.trailTokens[index] = token
+        end
+        local visible = dot.visible == true
+        if token.Visible ~= visible then
+            token.Visible = visible
+        end
+        if visible then
+            local x, y = self.sceneApi.toViewport(dot.x, dot.y, layout, camera)
+            local diameter = math.max(2, (4 + 8 * dot.strength) * layout.scale)
+            token.Position = self.ui.offset(x, y)
+            token.Size = self.ui.offset(diameter, diameter)
+            token.BackgroundTransparency = 1 - 0.55 * dot.strength
+        end
+    end
 end
 
 function Renderer:destroy()

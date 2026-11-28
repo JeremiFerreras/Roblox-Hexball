@@ -1,7 +1,6 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
-local TweenService = game:GetService("TweenService")
 
 local player = Players.LocalPlayer
 local lab = ReplicatedStorage:WaitForChild("SimpleSoccerGame", 20)
@@ -126,15 +125,7 @@ if not moveAction or not kickAction then
 end
 local ClassicReference230 = require(lab:WaitForChild("ClassicReference230"))
 local stadiumRenderer = nil
-local menuRenderer = nil
-local menuGui = nil
-local previewReplay = nil
-local previewStartedAt = 0
-local menuOpen = false
-local joinPending = false
-local joinRequestedAt = 0
-local playButton = nil
-local menuStatusLabel = nil
+local mainMenu = nil
 local matchHud = nil
 local firstRenderReady = false
 
@@ -489,17 +480,12 @@ processControlEvent = function(kind, nonce)
         networkMetrics:add("rttMs", sample * 1000)
         rtt = rtt == 0 and sample or rtt * 0.8 + sample * 0.2
     elseif kind == "joined" then
-        if menuStatusLabel then
-            menuStatusLabel.Text = "ENTRANDO A LA CANCHA..."
+        if mainMenu then
+            mainMenu:onJoined()
         end
     elseif kind == "full" then
-        joinPending = false
-        if playButton then
-            playButton.Active = true
-            playButton.Text = "REINTENTAR"
-        end
-        if menuStatusLabel then
-            menuStatusLabel.Text = "NO HAY PLAZAS DISPONIBLES EN ESTE MOMENTO"
+        if mainMenu then
+            mainMenu:onFull()
         end
     end
 end
@@ -523,7 +509,6 @@ setBootStage("BUILDING_PITCH", "Preparando cancha, simulación local y menú 4v4
 local GuiStadiumScene = require(lab:WaitForChild("GuiStadiumScene"))
 local GuiStadiumRenderer = require(lab:WaitForChild("GuiStadiumRenderer"))
 local PhysicsCore2D = require(lab:WaitForChild("PhysicsCore2D"))
-local MenuPreview = require(lab:WaitForChild("MenuPreview"))
 local stadiumScene = GuiStadiumScene.build(StadiumProfile2D, ClassicReference230)
 local visualOk, visualError = pcall(function()
     -- Optional presentation leftover: the GUI pitch must never depend on a 3D model.
@@ -538,252 +523,22 @@ else
     if stadiumRenderer.gui then
         stadiumRenderer.gui.Enabled = false
     end
-    local playerGui = player:WaitForChild("PlayerGui")
-    menuGui = Instance.new("ScreenGui")
-    menuGui.Name = "SimpleSoccerMainMenu"
-    menuGui.ResetOnSpawn = false
-    menuGui.IgnoreGuiInset = true
-    menuGui.DisplayOrder = 15
-    menuGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    menuGui.Parent = playerGui
-
-    local backdrop = Instance.new("Frame")
-    backdrop.Name = "Backdrop"
-    backdrop.Size = UDim2.fromScale(1, 1)
-    backdrop.BackgroundColor3 = Color3.fromRGB(22, 34, 27)
-    backdrop.BorderSizePixel = 0
-    backdrop.Parent = menuGui
-    local backdropGradient = Instance.new("UIGradient")
-    backdropGradient.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(19, 31, 25)),
-        ColorSequenceKeypoint.new(0.55, Color3.fromRGB(31, 49, 36)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 29, 24)),
+    local MainMenu = require(lab:WaitForChild("MainMenu"))
+    mainMenu = MainMenu.new({
+        playerGui = player:WaitForChild("PlayerGui"),
+        lab = lab,
+        scene = stadiumScene,
+        sceneApi = GuiStadiumScene,
+        Renderer = GuiStadiumRenderer,
+        Preview = require(lab:WaitForChild("MenuPreview")),
+        Plays = require(lab:WaitForChild("ShowcasePlays")),
+        Core = PhysicsCore2D,
+        Profile = StadiumProfile2D,
+        Reference = ClassicReference230,
+        onJoin = function(team)
+            controlRemote:FireServer("join", team)
+        end,
     })
-    backdropGradient.Rotation = 12
-    backdropGradient.Parent = backdrop
-
-    local leftPanel = Instance.new("Frame")
-    leftPanel.Name = "MenuPanel"
-    leftPanel.Size = UDim2.fromScale(0.365, 1)
-    leftPanel.BackgroundColor3 = Color3.fromRGB(17, 28, 22)
-    leftPanel.BackgroundTransparency = 0.08
-    leftPanel.BorderSizePixel = 0
-    leftPanel.Parent = backdrop
-    local panelGradient = Instance.new("UIGradient")
-    panelGradient.Color = ColorSequence.new(Color3.fromRGB(16, 27, 21), Color3.fromRGB(31, 47, 34))
-    panelGradient.Rotation = 90
-    panelGradient.Parent = leftPanel
-
-    local accent = Instance.new("Frame")
-    accent.Name = "Accent"
-    accent.AnchorPoint = Vector2.new(1, 0)
-    accent.Position = UDim2.fromScale(1, 0)
-    accent.Size = UDim2.new(0, 3, 1, 0)
-    accent.BackgroundColor3 = Color3.fromRGB(148, 190, 111)
-    accent.BorderSizePixel = 0
-    accent.Parent = leftPanel
-
-    local eyebrow = Instance.new("TextLabel")
-    eyebrow.Name = "Eyebrow"
-    eyebrow.AnchorPoint = Vector2.new(0.5, 0)
-    eyebrow.Position = UDim2.fromScale(0.5, 0.205)
-    eyebrow.Size = UDim2.fromScale(0.82, 0.035)
-    eyebrow.BackgroundTransparency = 1
-    eyebrow.Text = "FÚTBOL 2D  /  4 CONTRA 4"
-    eyebrow.TextColor3 = Color3.fromRGB(157, 190, 132)
-    eyebrow.Font = Enum.Font.GothamBold
-    eyebrow.TextSize = 12
-    eyebrow.TextXAlignment = Enum.TextXAlignment.Center
-    eyebrow.Parent = leftPanel
-
-    local title = Instance.new("TextLabel")
-    title.Name = "GameTitle"
-    title.AnchorPoint = Vector2.new(0.5, 0)
-    title.Position = UDim2.fromScale(0.5, 0.255)
-    title.Size = UDim2.fromScale(0.86, 0.16)
-    title.BackgroundTransparency = 1
-    title.Text = "SIMPLE\nSOCCER GAME"
-    title.TextColor3 = Color3.fromRGB(239, 241, 222)
-    title.Font = Enum.Font.GothamBlack
-    title.TextScaled = true
-    title.TextWrapped = true
-    title.TextXAlignment = Enum.TextXAlignment.Center
-    title.Parent = leftPanel
-    local titleConstraint = Instance.new("UITextSizeConstraint")
-    titleConstraint.MinTextSize = 28
-    titleConstraint.MaxTextSize = 58
-    titleConstraint.Parent = title
-
-    local divider = Instance.new("Frame")
-    divider.AnchorPoint = Vector2.new(0.5, 0)
-    divider.Position = UDim2.fromScale(0.5, 0.435)
-    divider.Size = UDim2.fromScale(0.22, 0)
-    divider.Size = UDim2.new(0.22, 0, 0, 2)
-    divider.BackgroundColor3 = Color3.fromRGB(143, 184, 106)
-    divider.BorderSizePixel = 0
-    divider.Parent = leftPanel
-
-    playButton = Instance.new("TextButton")
-    playButton.Name = "PlayButton"
-    playButton.AnchorPoint = Vector2.new(0.5, 0)
-    playButton.Position = UDim2.fromScale(0.5, 0.49)
-    playButton.Size = UDim2.new(0.72, 0, 0, 62)
-    playButton.BackgroundColor3 = Color3.fromRGB(144, 184, 105)
-    playButton.BorderSizePixel = 0
-    playButton.AutoButtonColor = false
-    playButton.Active = true
-    playButton.Selectable = true
-    playButton.Text = "Jugar"
-    playButton.TextColor3 = Color3.fromRGB(21, 34, 25)
-    playButton.Font = Enum.Font.GothamBold
-    playButton.TextSize = 21
-    playButton.Parent = leftPanel
-    local buttonCorner = Instance.new("UICorner")
-    buttonCorner.CornerRadius = UDim.new(0, 13)
-    buttonCorner.Parent = playButton
-    local buttonStroke = Instance.new("UIStroke")
-    buttonStroke.Color = Color3.fromRGB(209, 226, 183)
-    buttonStroke.Transparency = 0.38
-    buttonStroke.Thickness = 1.2
-    buttonStroke.Parent = playButton
-    local buttonGradient = Instance.new("UIGradient")
-    buttonGradient.Color = ColorSequence.new(Color3.fromRGB(170, 205, 126), Color3.fromRGB(126, 169, 91))
-    buttonGradient.Rotation = 90
-    buttonGradient.Parent = playButton
-    local buttonScale = Instance.new("UIScale")
-    buttonScale.Scale = 1
-    buttonScale.Parent = playButton
-    local hoverTween = nil
-    local function animateButton(scale, color)
-        if hoverTween then hoverTween:Cancel() end
-        hoverTween = TweenService:Create(buttonScale, TweenInfo.new(0.17, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            Scale = scale,
-        })
-        hoverTween:Play()
-        TweenService:Create(playButton, TweenInfo.new(0.17, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            BackgroundColor3 = color,
-        }):Play()
-    end
-    playButton.MouseEnter:Connect(function()
-        animateButton(1.075, Color3.fromRGB(174, 207, 133))
-    end)
-    playButton.MouseLeave:Connect(function()
-        animateButton(1, Color3.fromRGB(144, 184, 105))
-    end)
-    playButton.SelectionGained:Connect(function()
-        animateButton(1.075, Color3.fromRGB(174, 207, 133))
-    end)
-    playButton.SelectionLost:Connect(function()
-        animateButton(1, Color3.fromRGB(144, 184, 105))
-    end)
-    playButton.MouseButton1Down:Connect(function()
-        animateButton(0.97, Color3.fromRGB(126, 169, 91))
-    end)
-    playButton.MouseButton1Up:Connect(function()
-        if not joinPending then
-            animateButton(1.075, Color3.fromRGB(174, 207, 133))
-        end
-    end)
-
-    menuStatusLabel = Instance.new("TextLabel")
-    menuStatusLabel.Name = "MenuStatus"
-    menuStatusLabel.AnchorPoint = Vector2.new(0.5, 0)
-    menuStatusLabel.Position = UDim2.fromScale(0.5, 0.585)
-    menuStatusLabel.Size = UDim2.fromScale(0.84, 0.055)
-    menuStatusLabel.BackgroundTransparency = 1
-    menuStatusLabel.Text = "OCHO JUGADORES  ·  DOS EQUIPOS"
-    menuStatusLabel.TextColor3 = Color3.fromRGB(166, 185, 155)
-    menuStatusLabel.Font = Enum.Font.GothamMedium
-    menuStatusLabel.TextSize = 11
-    menuStatusLabel.TextWrapped = true
-    menuStatusLabel.Parent = leftPanel
-
-    local footer = Instance.new("TextLabel")
-    footer.Name = "Footer"
-    footer.AnchorPoint = Vector2.new(0.5, 1)
-    footer.Position = UDim2.fromScale(0.5, 0.95)
-    footer.Size = UDim2.fromScale(0.84, 0.03)
-    footer.BackgroundTransparency = 1
-    footer.Text = "SIMPLE SOCCER GAME  /  4V4"
-    footer.TextColor3 = Color3.fromRGB(119, 143, 113)
-    footer.Font = Enum.Font.GothamMedium
-    footer.TextSize = 9
-    footer.Parent = leftPanel
-
-    local previewHeading = Instance.new("TextLabel")
-    previewHeading.Name = "PreviewHeading"
-    previewHeading.AnchorPoint = Vector2.new(0.5, 0)
-    previewHeading.Position = UDim2.fromScale(0.69, 0.145)
-    previewHeading.Size = UDim2.fromScale(0.48, 0.045)
-    previewHeading.BackgroundTransparency = 1
-    previewHeading.Text = "TIKI-TAKA"
-    previewHeading.TextColor3 = Color3.fromRGB(231, 238, 215)
-    previewHeading.Font = Enum.Font.GothamBold
-    previewHeading.TextSize = 17
-    previewHeading.TextXAlignment = Enum.TextXAlignment.Center
-    previewHeading.Parent = backdrop
-
-    local pitchFrame = Instance.new("Frame")
-    pitchFrame.Name = "PhysicsPreviewPitch"
-    pitchFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    pitchFrame.Position = UDim2.fromScale(0.685, 0.53)
-    pitchFrame.Size = UDim2.fromScale(0.585, 0.66)
-    pitchFrame.BackgroundColor3 = Color3.fromRGB(112, 156, 93)
-    pitchFrame.BorderSizePixel = 0
-    pitchFrame.ClipsDescendants = true
-    pitchFrame.Parent = backdrop
-    local pitchAspect = Instance.new("UIAspectRatioConstraint")
-    pitchAspect.AspectRatio = 2.1
-    pitchAspect.DominantAxis = Enum.DominantAxis.Width
-    pitchAspect.Parent = pitchFrame
-    local pitchCorner = Instance.new("UICorner")
-    pitchCorner.CornerRadius = UDim.new(0, 12)
-    pitchCorner.Parent = pitchFrame
-    local pitchStroke = Instance.new("UIStroke")
-    pitchStroke.Color = Color3.fromRGB(194, 219, 172)
-    pitchStroke.Transparency = 0.35
-    pitchStroke.Thickness = 1.4
-    pitchStroke.Parent = pitchFrame
-
-    local previewInfo = Instance.new("TextLabel")
-    previewInfo.Name = "PreviewInfo"
-    previewInfo.AnchorPoint = Vector2.new(0.5, 0)
-    previewInfo.Position = UDim2.fromScale(0.69, 0.885)
-    previewInfo.Size = UDim2.fromScale(0.58, 0.035)
-    previewInfo.BackgroundTransparency = 1
-    previewInfo.Text = "MOVIMIENTO CALCULADO CON LA FÍSICA DE PARTIDA"
-    previewInfo.TextColor3 = Color3.fromRGB(166, 185, 155)
-    previewInfo.Font = Enum.Font.GothamMedium
-    previewInfo.TextSize = 10
-    previewInfo.TextXAlignment = Enum.TextXAlignment.Center
-    previewInfo.Parent = backdrop
-
-    local previewBuilt, previewError = pcall(function()
-        previewReplay = MenuPreview.getReplay(PhysicsCore2D, StadiumProfile2D, ClassicReference230)
-        menuRenderer = GuiStadiumRenderer.new(playerGui, stadiumScene, nil, nil, GuiStadiumScene, pitchFrame)
-        local pitchViewportCorner = Instance.new("UICorner")
-        pitchViewportCorner.CornerRadius = UDim.new(0, 12)
-        pitchViewportCorner.Parent = menuRenderer.root
-    end)
-    if not previewBuilt then
-        menuStatusLabel.Text = "NO SE PUDO PREPARAR LA VISTA PREVIA"
-        warn("Simple Soccer menu preview initialization failed: " .. tostring(previewError))
-    end
-
-    playButton.Activated:Connect(function()
-        if joinPending or not menuOpen then
-            return
-        end
-        joinPending = true
-        joinRequestedAt = os.clock()
-        playButton.Active = false
-        playButton.Text = "CONECTANDO..."
-        menuStatusLabel.Text = "SOLICITANDO PLAZA EN LA PARTIDA 4V4"
-        controlRemote:FireServer("join")
-    end)
-
-    previewStartedAt = os.clock()
-    menuOpen = true
     firstRenderReady = true
     setBootStage("READY", "Menú principal listo · simulación local preparada")
     lab:SetAttribute("ClientBootReady", true)
@@ -848,37 +603,20 @@ RunService.RenderStepped:Connect(function(dt)
 	end
 	local kick = readAction(kickAction, false) == true
 	local now = os.clock()
-	if menuOpen and not ownSlot then
-		if menuRenderer and previewReplay then
-			menuRenderer:render(MenuPreview.sample(previewReplay, now - previewStartedAt), { x = 0, y = 0 })
-		end
-		if joinPending and now - joinRequestedAt > 10 then
-			joinPending = false
-			if playButton then
-				playButton.Active = true
-				playButton.Text = "REINTENTAR"
-			end
-			if menuStatusLabel then
-				menuStatusLabel.Text = "LA CONEXIÓN TARDÓ DEMASIADO · INTÉNTALO DE NUEVO"
-			end
-		end
+	if mainMenu and not ownSlot then
+		mainMenu:update(dt)
 		return
-	elseif menuOpen and ownSlot then
-		menuOpen = false
-		if menuRenderer then
-			menuRenderer:destroy()
-			menuRenderer = nil
-		end
-		if menuGui then
-			menuGui:Destroy()
-			menuGui = nil
-		end
-		if stadiumRenderer and stadiumRenderer.gui then
-			stadiumRenderer.gui.Enabled = true
-		end
-		if matchHud then
-			matchHud.Enabled = true
-		end
+	elseif mainMenu then
+		local closingMenu = mainMenu
+		mainMenu = nil
+		closingMenu:close(function()
+			if stadiumRenderer and stadiumRenderer.gui then
+				stadiumRenderer.gui.Enabled = true
+			end
+			if matchHud then
+				matchHud.Enabled = true
+			end
+		end)
 		setBootStage("READY", "Conectado · partida 4v4 sincronizada")
 	end
 	snapshotAge = latest and math.max(0, now - lastAuthorityAt) or 0
