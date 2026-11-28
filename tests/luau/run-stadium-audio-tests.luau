@@ -1,5 +1,6 @@
 local Catalog = require("../../src/ReplicatedStorage/HaxballLab/StadiumAudioCatalog")
 local MatchAudioEvents = require("../../src/ServerScriptService/HaxballLab/MatchAudioEvents")
+local KickoffTimer = require("../../src/ServerScriptService/HaxballLab/KickoffPossessionTimer")
 local ChantDirector = require("../../src/ReplicatedStorage/HaxballLab/CrowdChantDirector")
 local Profile = require("../../src/ReplicatedStorage/HaxballLab/StadiumReference2D")
 
@@ -49,6 +50,42 @@ local quiet = MatchAudioEvents.new(Profile):Step({
 check("ordinary midfield movement creates no crowd event", #quiet == 0)
 check("non-playing phase clears pressure tracking",
     #classifier:Step({ x = 280, y = 0, vx = 5.1, vy = 0 }, "kickoff", 190) == 0)
+
+local shotClassifier = MatchAudioEvents.new(Profile)
+local onTarget = shotClassifier:ObserveKick(
+    { x = 200, y = 0, vx = 5.2, vy = 0 },
+    { id = 3, team = "red" },
+    100
+)
+check("a real kick projected inside the goal is registered as a shot on target",
+    hasKind(onTarget, "shotOnTarget"))
+check("shot event includes its shooter and target side",
+    onTarget[1] ~= nil and onTarget[1].shooterId == 3 and onTarget[1].targetSide == "right")
+check("same shooter cannot spam duplicate shot reactions inside the cooldown",
+    #shotClassifier:ObserveKick({ x = 205, y = 0, vx = 5.0, vy = 0 }, { id = 3, team = "red" }, 101) == 0)
+
+local boxThreat = MatchAudioEvents.new(Profile):Step({
+    x = 300, y = 0, vx = 3.2, vy = 0,
+}, "playing", 20)
+check("a fast ball entering the goalmouth danger area creates a box threat",
+    hasKind(boxThreat, "boxThreat"))
+
+local kickoff = {}
+KickoffTimer.Start(kickoff, "blue")
+local expiredTeam = nil
+for _ = 1, 419 do
+    expiredTeam = KickoffTimer.Advance(kickoff, 420)
+end
+check("kickoff owner retains possession restriction for the first 419 ticks",
+    expiredTeam == nil and kickoff.kickoffTeam == "blue" and kickoff.kickoffWaitTicks == 419)
+expiredTeam = KickoffTimer.Advance(kickoff, 420)
+check("kickoff expires exactly at 420 ticks (7 seconds at 60 Hz)", expiredTeam == "blue")
+check("opponent is allowed to take the ball after timeout",
+    kickoff.kickoffTeam == nil and kickoff.kickoffWaitTicks == 0)
+KickoffTimer.Start(kickoff, "red")
+KickoffTimer.Clear(kickoff)
+check("taking the kickoff early clears the timeout counter",
+    kickoff.kickoffTeam == nil and kickoff.kickoffWaitTicks == 0)
 
 local fakeAudio = {
     calls = 0,

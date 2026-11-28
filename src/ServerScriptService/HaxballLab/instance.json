@@ -122,10 +122,12 @@
     "ServerScriptService/HaxballLab/LocalMatch2D",
     "ServerScriptService/HaxballLab/NetServer",
     "ServerScriptService/HaxballLab/DebugState",
-    "ServerScriptService/HaxballLab/MatchAudioEvents"
+    "ServerScriptService/HaxballLab/MatchAudioEvents",
+    "ServerScriptService/HaxballLab/KickoffPossessionTimer"
   ],
   "layout": [
     false,
+    true,
     true,
     true,
     true,

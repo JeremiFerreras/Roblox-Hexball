@@ -139,8 +139,17 @@ local CrowdChantDirector = require(lab:WaitForChild("CrowdChantDirector"))
 local stadiumAudio = StadiumAudio.new()
 local chantDirector = CrowdChantDirector.new(stadiumAudio)
 processStadiumEvent = function(kind, payload)
-    stadiumAudio:HandleEvent(kind, payload)
-    chantDirector:HandleEvent(kind)
+    lab:SetAttribute("LastStadiumEventReceived", tostring(kind))
+    local ok, failure = pcall(function()
+        stadiumAudio:HandleEvent(kind, payload)
+        chantDirector:HandleEvent(kind)
+    end)
+    if not ok then
+        lab:SetAttribute("LastStadiumAudioError", tostring(failure))
+        warn("Stadium audio event failed: " .. tostring(kind) .. " | " .. tostring(failure))
+    else
+        lab:SetAttribute("LastStadiumAudioError", nil)
+    end
 end
 local stadiumRenderer = nil
 local mainMenu = nil

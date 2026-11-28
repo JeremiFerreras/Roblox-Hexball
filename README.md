@@ -60,3 +60,11 @@ The soundtrack is client-rendered from six uploaded audio assets. The server rem
 Playback uses Sound.PlaybackRegionsEnabled and Sound.PlaybackRegion, so each curated region is played from its uploaded ID without a separate asset for every moment. The client applies fades, event cooldowns and region variation to avoid abrupt changes or repetitive crowd bursts.
 
 The whistle asset is treated as a set of whistle-like candidates, not certified referee-only recordings. Crowd reactions and sustained swells are contextual crowd sounds, not goal-specific recordings.
+
+## Stadium reactions and kickoff possession
+
+The match server publishes confirmed goal, kickoff and final-phase events, plus contextual shot-on-target, shot-attempt, box-threat, near-miss, fast-break and sustained-pressure cues. Shot classification is based on accepted ball-kick events and a projected ball path; it is a presentation hint, not a claim that a goal was scored.
+
+A goal has a dedicated priority audio channel so it cannot be silently blocked by an overlapping near-miss or crowd-reaction clip. Cue assets are preloaded before playback, the playback region is re-applied after loading, and SoundService attributes record the last event/cue state to help diagnose permission or load failures.
+
+Kickoff possession is restricted to the assigned team until it takes the first touch that moves the ball. If it does not do so within 420 playing ticks (7 seconds at the 60 Hz simulation rate), the server clears the kickoff restriction and permits the opponent to kick/take the ball. The countdown does not run during the goal pause or the pre-kickoff phase. The existing whistle-like and transition assets cover the timeout; no seventh upload is required.

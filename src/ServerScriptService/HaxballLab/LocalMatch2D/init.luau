@@ -1,6 +1,7 @@
 -- Local match orchestration. No Roblox services, scheduler, rendering or transport.
 local Core = require(script.Parent:WaitForChild("PhysicsCore2D"))
 local Rules = require(script.Parent:WaitForChild("MatchRules2D"))
+local KickoffTimer = require(script.Parent:WaitForChild("KickoffPossessionTimer"))
 local Match = {}
 Match.__index = Match
 
@@ -35,8 +36,10 @@ function Match.attach(state, options)
 	)
 	self.goalPauseTicks = duration(options.goalPauseTicks, Rules.GoalPauseTicks)
 	self.kickoffTicks = duration(options.kickoffTicks, Rules.KickoffTicks)
+	self.kickoffWaitTicks = duration(options.kickoffWaitTicks, Rules.KickoffPossessionTimeoutTicks)
 	self.scoreLimit = duration(options.scoreLimit, 0)
-	assert(self.goalPauseTicks > 0 and self.kickoffTicks > 0, "pause and kickoff durations must be at least one tick")
+	assert(self.goalPauseTicks > 0 and self.kickoffTicks > 0 and self.kickoffWaitTicks > 0,
+		"pause, kickoff and kickoff possession durations must be at least one tick")
 	self.startingTeam = options.startingTeam or "red"
 	assert(self.startingTeam == "red" or self.startingTeam == "blue", "starting team must be red or blue")
 	if options.startWithKickoff ~= false then
@@ -62,7 +65,8 @@ function Match:_resetRound(team)
 	stop(s)
 	self.round += 1
 	m.lastTouch = nil
-	m.phase, m.remainingTicks, m.kickoffTeam = "kickoff", self.kickoffTicks, team
+	m.phase, m.remainingTicks = "kickoff", self.kickoffTicks
+	KickoffTimer.Start(m, team)
 	-- A kick held across a reset must be released; movement remains an input state.
 	for slot in ipairs(s.players) do
 		self.needsKickRelease[slot] = true
@@ -161,9 +165,18 @@ function Match:step(rawInputs)
 			if p then
 				Rules.recordTouch(m, p.id, p.team, s.coreWorld.tick, kind)
 				if (s.ball.vx ~= 0 or s.ball.vy ~= 0) and Rules.completeKickoff(m, p.team) then
+					KickoffTimer.Clear(m)
 					event("kickoffTaken", { playerId = p.id, team = p.team })
 				end
 			end
+		end
+		local expiredKickoffTeam = KickoffTimer.Advance(m, self.kickoffWaitTicks)
+		if expiredKickoffTeam then
+			event("kickoffTimeout", {
+				teamThatHadKickoff = expiredKickoffTeam,
+				waitedTicks = self.kickoffWaitTicks,
+				opponentCanTake = true,
+			})
 		end
 		local goal = Rules.findGoalCrossing(s.coreWorld.motionSegments, s.ball.id)
 		if goal then
@@ -171,7 +184,7 @@ function Match:step(rawInputs)
 			local lastTouch = copyTouch(m.lastTouch)
 			Rules.beginGoalPause(m, s.score, goal, s.ball, s.players, self.goalPauseTicks)
 			m.lastGoal.lastTouch = lastTouch
-			m.kickoffTeam = nil
+			KickoffTimer.Clear(m)
 			stop(s)
 			for slot in ipairs(s.players) do
 				self.needsKickRelease[slot] = true

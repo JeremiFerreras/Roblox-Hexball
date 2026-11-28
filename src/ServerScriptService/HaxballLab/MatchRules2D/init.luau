@@ -9,9 +9,10 @@ Rules.GoalLines = {
 Rules.GoalHalfHeight = Profile.Goals.halfHeight
 Rules.GoalPauseTicks = 90
 Rules.KickoffTicks = 30
+Rules.KickoffPossessionTimeoutTicks = 7 * 60
 
 function Rules.newMatch()
-	return { phase = "playing", remainingTicks = 0, lastGoal = nil, kickoffTeam = nil }
+	return { phase = "playing", remainingTicks = 0, lastGoal = nil, kickoffTeam = nil, kickoffWaitTicks = 0 }
 end
 
 function Rules.findGoalCrossing(motionSegments, ballId)
@@ -87,6 +88,7 @@ function Rules.beginKickoff(match, team, ticks)
 	assert(match.phase == "goalPause", "kickoff can only follow a goal pause")
 	assert(team == "red" or team == "blue", "kickoff team is invalid")
 	match.phase, match.remainingTicks, match.kickoffTeam = "kickoff", ticks or Rules.KickoffTicks, team
+	match.kickoffWaitTicks = 0
 end
 
 function Rules.advanceKickoff(match)
@@ -132,6 +134,7 @@ function Rules.completeKickoff(match, playerTeam)
 		return false
 	end
 	match.kickoffTeam = nil
+	match.kickoffWaitTicks = 0
 	return true
 end
 

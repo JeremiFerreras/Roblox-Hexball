@@ -109,6 +109,7 @@ local SOUND_RULE_EVENTS = {
     goalScored = true,
     kickoffReset = true,
     kickoffComplete = true,
+    kickoffTimeout = true,
     matchFinished = true,
 }
 
@@ -880,6 +881,13 @@ RunService.Heartbeat:Connect(function(dt)
 						normalX = event.normalX,
 						normalY = event.normalY,
 					}, state.tick)
+					if event.targetId == "ball" and matchAudioEvents then
+						local shooter = state.players[event.playerId]
+						for _, audioEvent in ipairs(matchAudioEvents:ObserveKick(b, shooter, state.tick)) do
+							logEvent(audioEvent.kind, table.clone(audioEvent), audioEvent.tick)
+							publishStadiumEvent(audioEvent.kind, audioEvent, audioEvent.tick)
+						end
+					end
 				elseif event.kind == "boundaryContact" then
 					local count = event.count or 1
 					if event.discId == "ball" then

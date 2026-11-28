@@ -26,6 +26,8 @@ on:
       - "src/ReplicatedStorage/HaxballLab/CrowdChantDirector/**"
       - "src/ReplicatedStorage/HaxballLab/Remotes/StadiumEvent/**"
       - "src/ServerScriptService/HaxballLab/MatchAudioEvents/**"
+      - "src/ServerScriptService/HaxballLab/LocalMatch2D/**"
+      - "src/ServerScriptService/HaxballLab/KickoffPossessionTimer/**"
       - "tests/luau/run-stadium-audio-tests.luau"
       - "src/ServerScriptService/HaxballLab/LabServer/**"
       - "src/ServerScriptService/HaxballLab/NetServer/**"
